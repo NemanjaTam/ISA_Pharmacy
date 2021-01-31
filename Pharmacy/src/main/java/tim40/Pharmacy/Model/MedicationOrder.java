@@ -1,4 +1,6 @@
 package tim40.Pharmacy.Model;
 
-public class MedicationOrder {
+import java.io.Serializable;
+
+public class MedicationOrder implements Serializable {
 }

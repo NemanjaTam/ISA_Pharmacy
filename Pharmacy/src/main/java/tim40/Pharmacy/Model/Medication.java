@@ -1,5 +1,6 @@
 package tim40.Pharmacy.Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 enum MedicationShape
@@ -11,7 +12,7 @@ enum PublicationIssue {
 }
 
 
-public class Medication {
+public class Medication implements Serializable {
     private int id;
     private String name;
     private String type;

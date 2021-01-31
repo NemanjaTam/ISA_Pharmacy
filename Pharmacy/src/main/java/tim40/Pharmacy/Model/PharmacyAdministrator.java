@@ -1,8 +1,12 @@
 package tim40.Pharmacy.Model;
+
+import javax.persistence.ManyToOne;
+import java.io.Serializable;
+
 //dodati konstruktor s parametrima i jos podataka o administratoru
 //vezu izmedju apoteke i admina
-public class PharmacyAdministrator extends Person {
-
+public class PharmacyAdministrator extends Person implements Serializable {
+    @ManyToOne
     private Pharmacy administratedPharmacy;
 
     public Pharmacy getAdministratedPharmacy() {

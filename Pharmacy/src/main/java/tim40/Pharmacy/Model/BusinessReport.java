@@ -1,8 +1,9 @@
 package tim40.Pharmacy.Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class BusinessReport {
+public class BusinessReport implements Serializable {
     private double averagePharmacyRating;
     private ArrayList<Double> averagePharmacistRatings;
     private ArrayList<Double> averageDermatologistRatings;
