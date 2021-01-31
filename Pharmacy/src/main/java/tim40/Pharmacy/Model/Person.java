@@ -41,7 +41,7 @@ public class Person implements Serializable, UserDetails {
     public String getEmail() {
         return email;
     }
-
+//metode za security koje moram override ::pogledati::
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
