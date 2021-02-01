@@ -1,17 +1,27 @@
 package tim40.Pharmacy.Model;
 
-import org.springframework.data.annotation.Id;
-
+import javax.persistence.*;
 import java.io.Serializable;
-
+@Entity
 public class Address implements Serializable {
-
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name ="address_id",nullable = false, unique = true)
     private long id;
+
+    @Column(nullable = false)
     private String state;
+
+    @Column(nullable = false)
     private String city;
+
+    @Column(nullable = false)
     private String street;
+
+    @Column(nullable = false)
     private String number;
+
+    @Column(nullable = false)
     private String postalCode;
 
     public Address() {

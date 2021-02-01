@@ -1,7 +1,9 @@
 package tim40.Pharmacy.Model;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 enum MedicationShape
 {
@@ -11,25 +13,45 @@ enum PublicationIssue {
     NA_RECEPT,BEZ_RECEPTA;
 }
 
-
+@Entity
 public class Medication implements Serializable {
-    private int id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name ="medication_id",nullable = false, unique = true)
+    private long id;
+
+    @Column(name = "medication_name",nullable = false)
     private String name;
+
+    @Column(nullable = false)
     private String type;
+
+    @Column(nullable = false)
     private MedicationShape medicationShape;
+
+    @Column(nullable = false)
     private PublicationIssue publicationIssue;
+
+    @Column(nullable = false)
     private String ingredients;
+
+    @Column(nullable = false)
     private String manufacturer;
-    private ArrayList<Integer> alternativeMedicationIds;
+
+     //OVO TREBA DRUGACIJE-> KAKO CE SE PRIKAZATI U BAZI?
+    private List<Long> alternativeMedicationIds = new ArrayList<Long>();
+
+    @Column(nullable = false)
     private String additionalInfo;
 
     public Medication() {
 
     }
 
-    public Medication(int id, String name, String type, MedicationShape medicationShape, PublicationIssue publicationIssue,
+    public Medication(long id, String name, String type, MedicationShape medicationShape, PublicationIssue publicationIssue,
                       String ingredients, String manufacturer,
-                      ArrayList<Integer> alternativeMedicationIds, String additionalInfo) {
+                      List<Long> alternativeMedicationIds, String additionalInfo) {
         this.id = id;
         this.name = name;
         this.type = type;
@@ -41,7 +63,7 @@ public class Medication implements Serializable {
         this.additionalInfo = additionalInfo;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -69,7 +91,7 @@ public class Medication implements Serializable {
         return manufacturer;
     }
 
-    public ArrayList<Integer> getAlternativeMedicationIds() {
+    public List<Long> getAlternativeMedicationIds() {
         return alternativeMedicationIds;
     }
 
@@ -105,7 +127,7 @@ public class Medication implements Serializable {
         this.manufacturer = manufacturer;
     }
 
-    public void setAlternativeMedicationIds(ArrayList<Integer> alternativeMedicationIds) {
+    public void setAlternativeMedicationIds(List<Long> alternativeMedicationIds) {
         this.alternativeMedicationIds = alternativeMedicationIds;
     }
 

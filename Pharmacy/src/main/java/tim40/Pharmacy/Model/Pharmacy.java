@@ -1,110 +1,118 @@
 package tim40.Pharmacy.Model;
 
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
-
+//KONSTUKTOR S PARAMETRIMA KADA SE DODAJU OSTALI CLANOVI KLASE
+//DODATI I VEZE KA NJIMA OBAVEZNO
+//OTKOMENTARISATI GETTERE I SETTERE
+@Entity
 public class Pharmacy implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //generisu se
+    @Column(name ="pharmacy_id",nullable = false, unique = true)
+    private long pharmacyId;
 
+    @Column(nullable = false)
     private String namePharmacy;
+    //dodati veze ovde jer je tip kompleksan
+    @ManyToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name = "addressPharmacy", referencedColumnName = "address_id", nullable = false)
     private Address addressPharmacy;
+
+    @Column(nullable = false)
     private String descriptionPharmacy;
-    //  private List<Dermatologist> dermatologists;
-    //  private List<Pharmacist> pharmacists;
-    //  private List<Medicine> medicines;
-    //private List<Appointment> availableDermatologistAppointments;
-    // private List<PriceList> priceListMedicines;
-    @OneToMany
-    private List<PharmacyAdministrator> pharmacyAdministrators;
+
+//    @OneToMany(mappedBy = "", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    private List<Dermatologist> dermatologists = new ArrayList<>();
+//
+//    @OneToMany(mappedBy = "", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    private List<Pharmacist> pharmacists = new ArrayList<>();
+//
+//    @OneToMany(mappedBy = "", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    private List<Medication> medicationList = new ArrayList<>();
+//
+    @OneToMany(mappedBy = "appointment_pharmacy", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Appointment> availableDermatologistAppointments = new ArrayList<>();
+
+    //nasledjivanje
+    @OneToMany(mappedBy = "administrated_pharmacy",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<PharmacyAdministrator> pharmacyAdministrators = new ArrayList<>();
+   // private List<PriceList> priceListMedicines = new ArrayList<>();
+
     public Pharmacy() {
     }
 
+    public long getPharmacyIdId() {
+        return pharmacyId;
+    }
 
-
-
+    public void setPharmacyIdId(long pharmacyId) {
+        this.pharmacyId = pharmacyId;
+    }
 
     public String getNamePharmacy() {
         return namePharmacy;
     }
-    public String getDescriptionPharmacy() {
-        return descriptionPharmacy;
+
+    public void setNamePharmacy(String namePharmacy) {
+        this.namePharmacy = namePharmacy;
     }
 
     public Address getAddressPharmacy() {
         return addressPharmacy;
     }
 
-
-    public List<PharmacyAdministrator> getPharmacyAdministrators() {
-        return pharmacyAdministrators;
+    public void setAddressPharmacy(Address addressPharmacy) {
+        this.addressPharmacy = addressPharmacy;
     }
-    //    public ArrayList<Dermatologist> getDermatologists() {
+
+    public String getDescriptionPharmacy() {
+        return descriptionPharmacy;
+    }
+
+    public void setDescriptionPharmacy(String descriptionPharmacy) {
+        this.descriptionPharmacy = descriptionPharmacy;
+    }
+
+//    public List<Dermatologist> getDermatologists() {
 //        return dermatologists;
+//    }
+//
+//    public void setDermatologists(List<Dermatologist> dermatologists) {
+//        this.dermatologists = dermatologists;
 //    }
 //
 //    public List<Pharmacist> getPharmacists() {
 //        return pharmacists;
 //    }
 //
+//    public void setPharmacists(List<Pharmacist> pharmacists) {
+//        this.pharmacists = pharmacists;
+//    }
+//
 //    public List<Medicine> getMedicines() {
 //        return medicines;
+//    }
+//
+//    public void setMedicines(List<Medicine> medicines) {
+//        this.medicines = medicines;
 //    }
 //
 //    public List<Appointment> getAvailableDermatologistAppointments() {
 //        return availableDermatologistAppointments;
 //    }
 //
+//    public void setAvailableDermatologistAppointments(List<Appointment> availableDermatologistAppointments) {
+//        this.availableDermatologistAppointments = availableDermatologistAppointments;
+//    }
+//
 //    public List<PriceList> getPriceListMedicines() {
 //        return priceListMedicines;
-//    }
-//
-//    public List<PriceList> getPriceListAppointments() {
-//        return priceListAppointments;
-//    }
-
-
-    public void setNamePharmacy(String namePharmacy) {
-        this.namePharmacy = namePharmacy;
-    }
-
-
-    public void setDescriptionPharmacy(String descriptionPharmacy) {
-        this.descriptionPharmacy = descriptionPharmacy;
-    }
-
-    public void setAddressPharmacy(Address addressPharmacy) {
-        this.addressPharmacy = addressPharmacy;
-    }
-
-    public void setPharmacyAdministrators(List<PharmacyAdministrator> pharmacyAdministrators) {
-        this.pharmacyAdministrators = pharmacyAdministrators;
-    }
-
-    //    public void setDermatologists(ArrayList<Dermatologist> dermatologists) {
-//        this.dermatologists = dermatologists;
-//    }
-//
-//    public void setPharmacists(ArrayList<Pharmacist> pharmacists) {
-//        this.pharmacists = pharmacists;
-//    }
-//
-//    public void setMedicines(ArrayList<Medicine> medicines) {
-//        this.medicines = medicines;
-//    }
-//
-//    public void setAvailableDermatologistAppointments(ArrayList<Appointment> availableDermatologistAppointments) {
-//        this.availableDermatologistAppointments = availableDermatologistAppointments;
 //    }
 //
 //    public void setPriceListMedicines(List<PriceList> priceListMedicines) {
 //        this.priceListMedicines = priceListMedicines;
 //    }
-//
-//    public void setPriceListAppointments(List<PriceList> priceListAppointments) {
-//        this.priceListAppointments = priceListAppointments;
-//    }
-//
-//    private List<PriceList> priceListAppointments;
-//
-//}
 }

@@ -3,25 +3,52 @@ package tim40.Pharmacy.Model;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.security.Timestamp;
 import java.util.Collection;
 
+
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE) //single table svi su u jednoj
+@DiscriminatorColumn(name = "ROLE",discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorValue(value = "PERSONA")
 public class Person implements Serializable, UserDetails {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name ="peron_id",nullable = false, unique = true)
     private long id;
+
+    @Column(nullable = false,unique = true)
     private String email;
+
+    @Column(nullable = false)
     private String password;
+
+    @Column(nullable = false)
     private String name;
+
+    @Column(nullable = false)
     private String surname;
+
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "address", referencedColumnName = "address_id", nullable = false)
     private Address address;
+
+    @Column(nullable = false)
     private String phoneNumber;
+
+    @Column(name = "last_changed_password_date")
     private Timestamp passwordResetDate;
+
+    @Column(nullable = false, name="change_password", columnDefinition = "false")
     private boolean mustChangePassword;
 
     public Person() {
     }
 
-    public Person(long id, String email, String password, String name, String surname, Address address,
+    public Person(long  id, String email, String password, String name, String surname, Address address,
                   String phoneNumber, Timestamp passwordResetDate, boolean mustChangePassword) {
         this.id = id;
         this.email = email;
