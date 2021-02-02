@@ -8,10 +8,10 @@ import java.io.Serializable;
 @Entity
 @DiscriminatorValue("PHARM_ADMIN")
 public class PharmacyAdministrator extends Person implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name ="administrator_id",nullable = false, unique = true)
-    private long id;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Column(name ="administrator_id",nullable = false, unique = true)
+//    private long id;
 
     @ManyToOne
     @JoinColumn(name = "administrated_pharmacy", referencedColumnName = "pharmacy_id", nullable = true)

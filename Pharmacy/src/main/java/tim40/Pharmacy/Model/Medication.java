@@ -40,6 +40,7 @@ public class Medication implements Serializable {
     private String manufacturer;
 
      //OVO TREBA DRUGACIJE-> KAKO CE SE PRIKAZATI U BAZI?
+    @ManyToMany
     private List<Long> alternativeMedicationIds = new ArrayList<Long>();
 
     @Column(nullable = false)
