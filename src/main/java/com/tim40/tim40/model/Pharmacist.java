@@ -23,7 +23,7 @@ import lombok.Setter;
 @EqualsAndHashCode
 public class Pharmacist extends User {
 	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "pharmacy_id", nullable = false)
+    @JoinColumn(name = "pharmacy_id", nullable = true)
     private Pharmacy pharmacy;
 
     public Pharmacist(String name, String surname, String email, String password, Address address, UserType userType, Pharmacy pharmacy, boolean isFirstTimeLogging)

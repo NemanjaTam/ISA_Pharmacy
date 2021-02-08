@@ -25,6 +25,9 @@ public class Consultation {
 	@Embedded
 	private Period period;
 	
+	@Column(nullable = false)
+	private boolean isFinished; 
+	
 	@ManyToOne
     @JoinColumn(name = "pharmacy_id", nullable = false)
     private Pharmacy pharmacy;

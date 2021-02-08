@@ -9,8 +9,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -41,6 +42,14 @@ public class Medication {
     @ManyToOne
     @JoinColumn(name = "pharmacy_id", nullable = false)
     private Pharmacy pharmacy;
-    @OneToMany
+    @ManyToMany(mappedBy = "allergedOnMedications")
+    private final Set<Patient> patients = new HashSet<Patient>();
+    @ManyToMany
+    @JoinTable(
+    		name = "replacement_medications",
+            joinColumns = @JoinColumn(name = "medication_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "replacement_medication_id", referencedColumnName = "id")
+    )
 	private Set<Medication> replacementMedications = new HashSet<Medication>();
+   
 }

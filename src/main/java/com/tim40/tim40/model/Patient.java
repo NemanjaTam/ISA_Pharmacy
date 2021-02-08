@@ -6,6 +6,9 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import lombok.AllArgsConstructor;
@@ -21,7 +24,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Patient extends User {
 	
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private Long penalties;
 	
 	@OneToMany(mappedBy = "patient")
@@ -30,6 +33,12 @@ public class Patient extends User {
 	@OneToMany(mappedBy = "patient")
 	private Set<Appointment> appointments = new HashSet<Appointment>();
 	
-	@OneToMany
+	@ManyToMany
+    @JoinTable
+    (
+        name = "patient_allerged_on_medications",
+        joinColumns = @JoinColumn(name = "patient_id"),
+        inverseJoinColumns = @JoinColumn(name = "medication_id")
+    )
 	private Set<Medication> allergedOnMedications = new HashSet<Medication>();
 }

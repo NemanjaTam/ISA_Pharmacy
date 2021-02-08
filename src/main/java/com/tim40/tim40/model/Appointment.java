@@ -33,11 +33,14 @@ public class Appointment {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name = "report", nullable = false)
+	@Column(name = "report", nullable = true)
 	private String report;
 	
 	@Embedded
 	private Period period;
+	
+	@Column(nullable = false)
+	private boolean isFinished; 
 	
 	@ManyToOne
     @JoinColumn(name = "pharmacy_id", nullable = false)

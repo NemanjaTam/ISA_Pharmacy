@@ -1,6 +1,6 @@
 package com.tim40.tim40.model;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -8,34 +8,34 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class Period {
 	@Column(name = "starttime", nullable = false)
-	private LocalDate startTime;
+	private LocalDateTime startTime;
 	
 	@Column(name = "endtime", nullable = false)
-	private LocalDate endTime;
+	private LocalDateTime endTime;
 	
 	public Period() {
 		super();
 	}
 	
-	public Period(LocalDate startTime, LocalDate endTime) {
+	public Period(LocalDateTime startTime, LocalDateTime endTime) {
 		super();
 		this.startTime = startTime;
 		this.endTime = endTime;
 	}
 
-	public LocalDate getStart() {
+	public LocalDateTime getStart() {
 		return startTime;
 	}
 
-	public void setStart(LocalDate startTime) {
+	public void setStart(LocalDateTime startTime) {
 		this.startTime = startTime;
 	}
 
-	public LocalDate getEnd() {
+	public LocalDateTime getEnd() {
 		return endTime;
 	}
 
-	public void setEnd(LocalDate endTime) {
+	public void setEnd(LocalDateTime endTime) {
 		this.endTime = endTime;
 	}
 }
