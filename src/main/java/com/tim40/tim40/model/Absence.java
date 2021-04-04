@@ -27,7 +27,7 @@ public class Absence {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Embedded
+	@Embedded  				//jedno oduststvo ima jedan period vazenja,a za jedan period vazenja se vezuje jedno odsustvo
 	private Period period;
 	
 	@ManyToOne
