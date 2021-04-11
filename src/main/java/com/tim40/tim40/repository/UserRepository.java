@@ -6,4 +6,5 @@ import com.tim40.tim40.model.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
+	
 }

@@ -26,6 +26,8 @@ public class Pharmacist extends User {
     @JoinColumn(name = "pharmacy_id", nullable = true)
     private Pharmacy pharmacy;
 
+	public Pharmacist() {}
+	
     public Pharmacist(String name, String surname, String email, String password, Address address, UserType userType, Pharmacy pharmacy, boolean isFirstTimeLogging)
     {
         super(name, surname, email, password, address, userType, isFirstTimeLogging);

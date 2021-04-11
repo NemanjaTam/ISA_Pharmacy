@@ -29,7 +29,7 @@ public class UserService implements IUserService {
 	}
 
 	@Override
-	public User create(User user) throws Exception {
+	public User register(User user) throws Exception {
 		return userRepository.save(user);
 	}
 
@@ -42,5 +42,7 @@ public class UserService implements IUserService {
 	public void delete(Long id) {
 		userRepository.deleteById(id);
 	}
+	
+	
 
 }
