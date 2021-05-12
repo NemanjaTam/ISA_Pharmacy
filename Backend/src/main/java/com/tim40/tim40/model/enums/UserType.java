@@ -1,7 +1,8 @@
 package com.tim40.tim40.model.enums;
 
 public enum UserType {
-	DERMATOLOGIST,
+	  DERMATOLOGIST,
     PHARMACIST,
-    PATIENT
+    PATIENT,
+    PHARMACY_ADMINISTRATOR
 }

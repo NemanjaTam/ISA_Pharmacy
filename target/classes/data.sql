@@ -30,21 +30,22 @@ insert into medications(description,name,price,quantity,pharmacy_id) values ('so
 insert into medications(description,name,price,quantity,pharmacy_id) values ('something', 'Neoangin', 400, 50, 5)
 insert into medications(description,name,price,quantity,pharmacy_id) values ('something', 'Majcinadusica', 400, 50, 5)
 
+insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, surname, usertype, penalties, pharmacy_id) values ('Pharmacist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic0@gmail.com', true, 'Nikola', 'kinzo', 'Antonic', 'DERMATOLOGIST', null, 1)
 insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, surname, usertype, penalties, pharmacy_id) values ('Pharmacist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic1@gmail.com', true, 'Nikola', 'kinzo', 'Antonic', 'DERMATOLOGIST', null, 1)
-insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, surname, usertype, penalties, pharmacy_id) values ('Pharmacist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic2@gmail.com', true, 'Nikola', 'kinzo', 'Antonic', 'DERMATOLOGIST', null, 1)
-insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, surname, usertype, penalties, pharmacy_id) values ('Dermatologist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic3@gmail.com', true, 'Nikola', 'kinzo', 'Antonic', 'DERMATOLOGIST', null, 1)
+insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, surname, usertype, penalties, pharmacy_id) values ('Dermatologist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic2@gmail.com', true, 'Nikola', 'kinzo', 'Antonic', 'DERMATOLOGIST', null, 1)
+insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, surname, usertype, penalties, pharmacy_id) values ('Pharmacist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic3@gmail.com', true, 'Nikola', 'kinzo', 'Antonic', 'DERMATOLOGIST', null, 2)
 insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, surname, usertype, penalties, pharmacy_id) values ('Pharmacist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic4@gmail.com', true, 'Nikola', 'kinzo', 'Antonic', 'DERMATOLOGIST', null, 2)
-insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, surname, usertype, penalties, pharmacy_id) values ('Pharmacist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic5@gmail.com', true, 'Nikola', 'kinzo', 'Antonic', 'DERMATOLOGIST', null, 2)
-insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, surname, usertype, penalties, pharmacy_id) values ('Dermatologist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic6@gmail.com', true, 'Nikola', 'kinzo', 'Antonic', 'DERMATOLOGIST', null, 2)
+insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, surname, usertype, penalties, pharmacy_id) values ('Dermatologist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic5@gmail.com', true, 'Nikola', 'kinzo', 'Antonic', 'DERMATOLOGIST', null, 2)
+insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, surname, usertype, penalties, pharmacy_id) values ('Pharmacist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic6@gmail.com', true, 'Nikola', 'kinzo', 'Antonic', 'DERMATOLOGIST', null, 3)
 insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, surname, usertype, penalties, pharmacy_id) values ('Pharmacist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic7@gmail.com', true, 'Nikola', 'kinzo', 'Antonic', 'DERMATOLOGIST', null, 3)
-insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, surname, usertype, penalties, pharmacy_id) values ('Pharmacist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic8@gmail.com', true, 'Nikola', 'kinzo', 'Antonic', 'DERMATOLOGIST', null, 3)
-insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, surname, usertype, penalties, pharmacy_id) values ('Dermatologist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic9@gmail.com', true, 'Nikola', 'kinzo', 'Antonic', 'DERMATOLOGIST', null, 3)
+insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, surname, usertype, penalties, pharmacy_id) values ('Dermatologist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic8@gmail.com', true, 'Nikola', 'kinzo', 'Antonic', 'DERMATOLOGIST', null, 3)
+insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, surname, usertype, penalties, pharmacy_id) values ('Pharmacist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic9@gmail.com', true, 'Nikola', 'kinzo', 'Antonic', 'DERMATOLOGIST', null, 4)
 insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, surname, usertype, penalties, pharmacy_id) values ('Pharmacist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic10@gmail.com', true, 'Nikola', 'kinzo', 'Antonic', 'DERMATOLOGIST', null, 4)
-insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, surname, usertype, penalties, pharmacy_id) values ('Pharmacist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic11@gmail.com', true, 'Nikola', 'kinzo', 'Antonic', 'DERMATOLOGIST', null, 4)
-insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, surname, usertype, penalties, pharmacy_id) values ('Dermatologist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic12@gmail.com', true, 'Nikola', 'kinzo', 'Antonic', 'DERMATOLOGIST', null, 4)
-insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, surname, usertype, penalties, pharmacy_id) values ('Pharmacist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic13@gmail.com', true, 'Nikola', 'kinzo', 'Antonic', 'DERMATOLOGIST', null, 5)
-insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, surname, usertype, penalties, pharmacy_id) values ('Pharmacist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic14@gmail.com', true, 'Nikola', 'kinzo', 'Antonic', 'DERMATOLOGIST', null, 5)
-insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, surname, usertype, penalties, pharmacy_id) values ('Dermatologist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic15@gmail.com', true, 'Nikola', 'kinzo', 'Antonic', 'DERMATOLOGIST', null, 5)
+insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, surname, usertype, penalties, pharmacy_id) values ('Dermatologist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic11@gmail.com', true, 'Nikola', 'kinzo', 'Antonic', 'DERMATOLOGIST', null, 4)
+insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, surname, usertype, penalties, pharmacy_id) values ('Pharmacist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic12@gmail.com', true, 'Nikola', 'kinzo', 'Antonic', 'DERMATOLOGIST', null, 5)
+insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, surname, usertype, penalties, pharmacy_id) values ('Pharmacist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic123@gmail.com', true, 'Nikola', 'kinzo', 'Antonic', 'DERMATOLOGIST', null, 5)
+insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, surname, usertype, penalties, pharmacy_id) values ('Dermatologist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic14@gmail.com', true, 'Nikola', 'kinzo', 'Antonic', 'DERMATOLOGIST', null, 5)
+insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, surname, usertype, penalties, pharmacy_id) values ('Patient', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic15@gmail.com', true, 'Nikola', 'kinzo', 'Antonic', 'PATIENT', 0, null)
 insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, surname, usertype, penalties, pharmacy_id) values ('Patient', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic16@gmail.com', true, 'Nikola', 'kinzo', 'Antonic', 'PATIENT', 0, null)
 insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, surname, usertype, penalties, pharmacy_id) values ('Patient', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic17@gmail.com', true, 'Nikola', 'kinzo', 'Antonic', 'PATIENT', 0, null)
 insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, surname, usertype, penalties, pharmacy_id) values ('Patient', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic18@gmail.com', true, 'Nikola', 'kinzo', 'Antonic', 'PATIENT', 0, null)
@@ -227,22 +228,22 @@ insert into dermatologist_pharmacy(pharmacy_id, dermatologist_id) values (4,12)
 insert into dermatologist_pharmacy(pharmacy_id, dermatologist_id) values (4,15)
 
 insert into patient_allerged_on_medications(patient_id, medication_id) values (16, 1)
-insert into patient_allerged_on_medications(patient_id, medication_id) values (16, 2)
-insert into patient_allerged_on_medications(patient_id, medication_id) values (16, 10)
-insert into patient_allerged_on_medications(patient_id, medication_id) values (16, 12)
-insert into patient_allerged_on_medications(patient_id, medication_id) values (16, 5)
+insert into patient_allerged_on_medications(patient_id, medication_id) values (16, 2) 
+insert into patient_allerged_on_medications(patient_id, medication_id) values (16, 10) 
+insert into patient_allerged_on_medications(patient_id, medication_id) values (16, 12) 
+insert into patient_allerged_on_medications(patient_id, medication_id) values (16, 5) 
 insert into patient_allerged_on_medications(patient_id, medication_id) values (16, 6)
 
-insert into patient_allerged_on_medications(patient_id, medication_id) values (17, 25)
-insert into patient_allerged_on_medications(patient_id, medication_id) values (17, 20)
-insert into patient_allerged_on_medications(patient_id, medication_id) values (17, 15)
+insert into patient_allerged_on_medications(patient_id, medication_id) values (17, 25) 
+insert into patient_allerged_on_medications(patient_id, medication_id) values (17, 20) 
+insert into patient_allerged_on_medications(patient_id, medication_id) values (17, 15) 
 
-insert into patient_allerged_on_medications(patient_id, medication_id) values (18, 11)
-insert into patient_allerged_on_medications(patient_id, medication_id) values (18, 13)
-insert into patient_allerged_on_medications(patient_id, medication_id) values (18, 21)
+insert into patient_allerged_on_medications(patient_id, medication_id) values (18, 11) 
+insert into patient_allerged_on_medications(patient_id, medication_id) values (18, 13) 
+insert into patient_allerged_on_medications(patient_id, medication_id) values (18, 21) 
 
-insert into patient_allerged_on_medications(patient_id, medication_id) values (19, 23)
-insert into patient_allerged_on_medications(patient_id, medication_id) values (19, 14)
+insert into patient_allerged_on_medications(patient_id, medication_id) values (19, 23) 
+insert into patient_allerged_on_medications(patient_id, medication_id) values (19, 14) 
 insert into patient_allerged_on_medications(patient_id, medication_id) values (19, 16)
 
 insert into patient_allerged_on_medications(patient_id, medication_id) values (20, 16)
@@ -278,3 +279,45 @@ insert into replacement_medications(medication_id, replacement_medication_id) va
 insert into replacement_medications(medication_id, replacement_medication_id) values (4,25)
 insert into replacement_medications(medication_id, replacement_medication_id) values (4,23)
 insert into replacement_medications(medication_id, replacement_medication_id) values (4,16)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
