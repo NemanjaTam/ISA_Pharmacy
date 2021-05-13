@@ -9,6 +9,9 @@ public class PriceList {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@Column(nullable = false)
+	private boolean active;
  
 	@Embedded
 	private Period durationPeriod;
@@ -24,9 +27,10 @@ public class PriceList {
 		
 	}
 
-	public PriceList(Long id, Period durationPeriod, List<Price> medicationPrices, Pharmacy pharmacy) {
+	public PriceList(Long id, boolean active, Period durationPeriod, List<Price> medicationPrices, Pharmacy pharmacy) {
 		super();
 		this.id = id;
+		this.active = active;
 		this.durationPeriod = durationPeriod;
 		this.medicationPrices = medicationPrices;
 		this.pharmacy = pharmacy;
@@ -38,6 +42,14 @@ public class PriceList {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 
 	public Period getDurationPeriod() {
@@ -63,7 +75,6 @@ public class PriceList {
 	public void setPharmacy(Pharmacy pharmacy) {
 		this.pharmacy = pharmacy;
 	}
+
 	
-	
-	//priceList se nalazi negde - verovatno u farmaciji ili negde drugde gde cu ih vezati
 }

@@ -36,9 +36,9 @@ public class Medication {
     @Column(nullable = false) 
     private String description;
     @Column(nullable = false)
-    private int quantity; 
-    @Column(nullable = false)
-    private double price;
+    private int quantity;  //vrlo verovatno mora biti zaseban entitet
+//    @Column(nullable = false)   //ne moze da stoji u medication jer se onda ne cuva info
+//    private double price;         o starim cenama, mora cenovnik - stavka(cena) - lek
     @ManyToOne
     @JoinColumn(name = "pharmacy_id", nullable = false)
     private Pharmacy pharmacy;
