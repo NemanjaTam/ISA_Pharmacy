@@ -51,16 +51,25 @@ public class Pharmacy {
         inverseJoinColumns = @JoinColumn(name = "dermatologist_id")
     )
     private final Set<Dermatologist> dermatologists = new HashSet<Dermatologist>();
+    
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "pharmacy")
     private final Set<Pharmacist> pharmacists = new HashSet<Pharmacist>();
+    
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "pharmacy")
     private final Set<Consultation> consultations = new HashSet<Consultation>();
+    
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "pharmacy")
     private final Set<Appointment> appointments = new HashSet<Appointment>();
+    
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "pharmacy")
     private final Set<Medication> medications = new HashSet<Medication>();
-	@OneToMany(fetch = FetchType.LAZY,mappedBy="pharmacy")
+	
+    @OneToMany(fetch = FetchType.LAZY,mappedBy="pharmacy")
 	private final Set<PharmacyAdministrator> pharmacyAdministrators = new HashSet<PharmacyAdministrator>();
+	
+    //mozda ce morati lista ipak
+    @OneToMany(fetch = FetchType.LAZY,mappedBy="pharmacy")
+	private final Set<PriceList> priceLists = new HashSet<PriceList>();
 
     public Pharmacy() {}
 
