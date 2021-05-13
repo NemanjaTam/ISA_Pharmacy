@@ -33,13 +33,16 @@ public class Pharmacy {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+	
     @Column(nullable = false)
     private String name;
+    
     @Embedded
     private Address address;
 
     @Column(name = "avg_rating", nullable = false)
     private double avgRating;
+    
     @ManyToMany
     @JoinTable
     (
@@ -56,8 +59,8 @@ public class Pharmacy {
     private final Set<Appointment> appointments = new HashSet<Appointment>();
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "pharmacy")
     private final Set<Medication> medications = new HashSet<Medication>();
-		@OneToMany(fetch = FetchType.LAZY,mappedBy="pharmacy")
-		private final Set<PharmacyAdministrator> pharmacyAdministrators = new HashSet<PharmacyAdministrator>();
+	@OneToMany(fetch = FetchType.LAZY,mappedBy="pharmacy")
+	private final Set<PharmacyAdministrator> pharmacyAdministrators = new HashSet<PharmacyAdministrator>();
 
     public Pharmacy() {}
 
