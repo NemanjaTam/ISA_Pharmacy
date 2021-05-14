@@ -19,7 +19,7 @@ public class PharmacyService implements IPharmacyService {
 	
 	public PharmacyDTO createPharmacy (PharmacyDTO pharmacyDTO) {
 		Pharmacy pharmacy = new Pharmacy(pharmacyDTO.getName(), pharmacyDTO.getAddress());
-		Pharmacy createdPharmacy = pharmacyRepository.save(pharmacy);
+		Pharmacy createdPharmacy = pharmacyRepository.save(pharmacy); 
 		return new PharmacyDTO(createdPharmacy);
 	}
 	
