@@ -54,6 +54,7 @@
   background-image: url("medicine.jpg");
   background-size: cover;
   overflow: auto;
+   min-height: 100vh;
 }
 .card {
   box-shadow: 10px 4px 8px 0 rgba(0, 0, 0, 0.2);
