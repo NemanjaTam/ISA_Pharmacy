@@ -1,4 +1,4 @@
-package com.tim40.tim40.model;
+/*package com.tim40.tim40.model;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -34,4 +34,4 @@ public class Supplier extends User {
 	    {
 	    	super(id, name, surname, email, password, address, userType, isFirstTimeLogging);
 	    }
-}
+*/
