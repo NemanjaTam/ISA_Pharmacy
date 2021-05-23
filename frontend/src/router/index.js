@@ -1,45 +1,34 @@
+import Vue from 'vue'
 import VueRouter from 'vue-router'
+import RegistrationPage from '../views/RegistrationPage.vue'
 import Home from '../views/Home.vue'
-import RegistrationPage from '../views/RegistrationPage'
-import Login from '../views/Login'
-import AdminPage from '../views/AdminPage'
-import AddPharmacy from '../views/AddPharmacy'
-import AddMedication from '../views/AddMedication'
+import LoginPage from '../views/LoginPage.vue'
+
+Vue.use(VueRouter)
+
 const routes = [
+  
   {
     path: '/',
     name: 'Home',
     component: Home
   },
   {
-    path: '/registration',
+    path: '/registrationPage',
     name: 'RegistrationPage',
     component: RegistrationPage
-  }, 
-  {
-    path: '/login',
-    name: 'Login',
-    component: Login
   },
   {
-  path: '/pharmacies',
-  name: 'AdminPage',
-  component: AdminPage
-  },
-  {
-    path: '/addPharmacy',
-    name: 'AddPharmacy',
-    component: AddPharmacy
-  },
-  {
-    path: '/addMedication',
-    name: 'AddMedication',
-    component: AddMedication
+    path: '/loginPage',
+    name: 'LoginPage',
+    component: LoginPage
   }
 ]
 
 const router = new VueRouter({
-  routes // short for `routes: routes`
+  mode: 'history',
+  base: process.env.BASE_URL,
+  routes
 })
 
 export default router
