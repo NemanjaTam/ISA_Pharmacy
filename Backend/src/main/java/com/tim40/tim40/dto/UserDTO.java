@@ -25,12 +25,11 @@ public class UserDTO {
 	}
 	
 	public UserDTO(User u) {
-		this(u.getId(),u.getName(),u.getSurname(),u.getEmail(),u.getPassword(),u.getAddress(),u.getUserType(), u.getPhone());
+		this(u.getName(),u.getSurname(),u.getEmail(),u.getPassword(),u.getAddress(),u.getUserType(), u.getPhone());
 	}
 	
-	public UserDTO(Long id, String name, String surname, String email, String password, Address address,
+	public UserDTO( String name, String surname, String email, String password, Address address,
 			UserType userType, String phone) {
-		this.id = id;
 		this.name = name;
 		this.surname = surname;
 		this.email = email;
