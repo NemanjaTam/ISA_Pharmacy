@@ -34,9 +34,5 @@ public class Pharmacist extends User {
         this.pharmacy = pharmacy;
     }
 
-    public Pharmacist(long id, String name, String surname, String email, String password, Address address, UserType userType, Pharmacy pharmacy, boolean isFirstTimeLogging)
-    {
-        super(id, name, surname, email, password, address, userType, isFirstTimeLogging);
-        this.pharmacy = pharmacy;
-    }
+
 }

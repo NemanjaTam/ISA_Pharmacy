@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.tim40.tim40.dto.UserDTO;
 import com.tim40.tim40.model.enums.UserType;
 
 @Entity
@@ -31,6 +32,9 @@ public class User {
 	@Column(name = "password", nullable = false)
 	private String password;
 	
+	@Column(name = "phone", nullable = false)
+	private String phone;
+	
 	@Column(name = "address", nullable = false)
 	@Embedded
 	private Address address;
@@ -44,19 +48,6 @@ public class User {
 
 	public User() {
 		super();
-	}
-	
-	public User(Long id, String name, String surname, String email, String password, Address address, UserType userType,
-			boolean isFirstTimeLogging) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.surname = surname;
-		this.email = email;
-		this.password = password;
-		this.address = address;
-		this.userType = userType;
-		this.isFirstTimeLogging = isFirstTimeLogging;
 	}
 	
 	public User(String name, String surname, String email, String password, Address address,
@@ -133,6 +124,14 @@ public class User {
 
 	public void setFirstTimeLogging(boolean isFirstTimeLogging) {
 		this.isFirstTimeLogging = isFirstTimeLogging;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 	
 }

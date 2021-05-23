@@ -2,8 +2,8 @@ package com.tim40.tim40.dto;
 
 import java.util.HashSet;
 import java.util.Set;
+
 import com.tim40.tim40.model.Medication;
-import com.tim40.tim40.model.Pharmacy;
 
 public class MedicationDTO {
 
@@ -14,11 +14,11 @@ public class MedicationDTO {
     private String structure;
     private String contraindications;
     private String recommendedIntake; 
-    private Pharmacy pharmacy;
+    private Long pharmacyID;
+    private Set<Long> replacementMedicationsIDs = new HashSet<Long>();
  
   // private final Set<Patient> patients = new HashSet<Patient>();
-	private Set<Medication> replacementMedications = new HashSet<Medication>();
-   
+
     public MedicationDTO() { }
     
     public MedicationDTO (Medication medication) {
@@ -29,8 +29,11 @@ public class MedicationDTO {
     	this.structure = medication.getStructure();
     	this.contraindications = medication.getContraindications();
     	this.recommendedIntake = medication.getRecommendedIntake();
-    	this.pharmacy = medication.getPharmacy();
-    	this.replacementMedications = medication.getReplacementMedications();
+    	this.pharmacyID = medication.getPharmacy().getId();
+    	
+    	for(Medication m : medication.getReplacementMedications()) {
+    		this.replacementMedicationsIDs.add(m.getId());
+    	}
     }
 
 	public Long getId() {
@@ -89,19 +92,20 @@ public class MedicationDTO {
 		this.recommendedIntake = recommendedIntake;
 	}
 
-	public Pharmacy getPharmacy() {
-		return pharmacy;
+
+	public Long getPharmacyID() {
+		return pharmacyID;
 	}
 
-	public void setPharmacy(Pharmacy pharmacy) {
-		this.pharmacy = pharmacy;
+	public void setPharmacyID(Long pharmacyID) {
+		this.pharmacyID = pharmacyID;
 	}
 
-	public Set<Medication> getReplacementMedications() {
-		return replacementMedications;
+	public Set<Long> getReplacementMedicationsIDs() {
+		return replacementMedicationsIDs;
 	}
 
-	public void setReplacementMedications(Set<Medication> replacementMedications) {
-		this.replacementMedications = replacementMedications;
+	public void setReplacementMedicationsIDs(Set<Long> replacementMedicationsIDs) {
+		this.replacementMedicationsIDs = replacementMedicationsIDs;
 	}
 }
