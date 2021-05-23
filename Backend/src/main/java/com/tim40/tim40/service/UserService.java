@@ -1,10 +1,10 @@
 package com.tim40.tim40.service;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import com.tim40.tim40.dto.UserDTO;
+import com.tim40.tim40.model.Address;
 import com.tim40.tim40.model.User;
 import com.tim40.tim40.repository.UserRepository;
 
@@ -29,8 +29,13 @@ public class UserService implements IUserService {
 	}
 
 	@Override
-	public User register(User user) throws Exception {
-		return userRepository.save(user);
+	public UserDTO register(UserDTO userDTO) throws Exception {
+		Address address = new Address(userDTO.getAddress().getState(), userDTO.getAddress().getCity(),
+				userDTO.getAddress().getStreet(), userDTO.getAddress().getNumber(), userDTO.getAddress().getPostalCode());
+		
+		User user = new User(userDTO.getName(), userDTO.getSurname(), userDTO.getEmail(), userDTO.getPassword(), address, userDTO.getUserType(),true);
+		user = this.userRepository.save(user);
+		return new UserDTO (user);
 	}
 
 	@Override

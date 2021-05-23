@@ -1,10 +1,8 @@
 <template>
-  
-  <div class = "background">
-    <NavBar/>
+  <div>
   <div class = "card"  >
   
-    <p class="title">Sign up with us</p>
+    <p class="title">Registration system administrator </p>
     <b-form @submit="onSubmit" @reset="onReset" v-if="show">   <!--forma ce se prikazati samo ukoliko je show = true -->
       <b-form-group  
         class = "foo"
@@ -17,7 +15,7 @@
           id="input-1"
           v-model="user.email"
           type="email"
-          placeholder= "Enter email"
+          placeholder= "Enter system admin email"
           style="font-style:italic"
           label-cols-lg="7"
           label-cols="4"
@@ -30,7 +28,7 @@
           id="input-2"
           type = "password"
           v-model="user.password"
-          placeholder="Enter password"
+          placeholder="Enter system admin password"
           style="font-style:italic"
           :state= validation
           aria-describedby="input-live-help input-live-feedback"
@@ -47,7 +45,7 @@
           id="input-2.2"
           type = "password" 
           v-model="user.confirmPassword"
-          placeholder="Confirm password"
+          placeholder="Confirm system admin password"
           style="font-style:italic"
           required
         ></b-form-input>
@@ -57,7 +55,7 @@
         <b-form-input
           id="input-3"
           v-model="user.name"
-          placeholder="Enter name"
+          placeholder="Enter system admin name"
           style="font-style:italic"
           required
         ></b-form-input>
@@ -67,7 +65,7 @@
         <b-form-input
           id="input-4"
           v-model="user.surname"
-          placeholder="Enter surname"
+          placeholder="Enter system admin surname"
           style="font-style:italic"
           required
         ></b-form-input>
@@ -77,7 +75,7 @@
         <b-form-input
           id="input-5"
           v-model="user.state"
-          placeholder="Enter state"
+          placeholder="Enter system admin state"
           style="font-style:italic"
           required
         ></b-form-input>
@@ -87,7 +85,7 @@
         <b-form-input
           id="input-6"
           v-model="user.city"
-          placeholder="Enter city"
+          placeholder="Enter system admin city"
           style="font-style:italic"
           required
         ></b-form-input>
@@ -97,7 +95,7 @@
         <b-form-input
           id="input-7"
           v-model="user.postalCode"
-          placeholder="Enter postal code"
+          placeholder="Enter system admin postal code"
           style="font-style:italic"
           required
         ></b-form-input>
@@ -107,7 +105,7 @@
         <b-form-input
           id="input-8"
           v-model="user.street"
-          placeholder="Enter street"
+          placeholder="Enter system admin street"
           style="font-style:italic"
           required
         ></b-form-input>
@@ -117,7 +115,7 @@
         <b-form-input
           id="input-9"
           v-model="user.houseNumber"
-          placeholder="Enter number of house/building"
+          placeholder="Enter system admin number of house/building"
           style="font-style:italic"
           required
         ></b-form-input>
@@ -127,7 +125,7 @@
         <b-form-input
           id="input-10"
           v-model="user.phone"
-          placeholder="Enter phone number"
+          placeholder="Enter system admin phone number"
           style="font-style:italic"
           required
         ></b-form-input>
@@ -142,12 +140,6 @@
 
 <style scoped>
 
-.background{
-  background-image: url("medicine.jpg");
-  background-size: cover;
-  overflow: auto;
-   min-height: 100vh;
-}
 .card {
 
   box-shadow: 10px 4px 8px 0 rgba(0,0,0,0.2);
@@ -158,7 +150,7 @@
   margin-bottom: 50px; 
   margin-right: 500px;
   margin-left: 500px;
-  width: 570px;
+  width: 530px;
 }
 
 .foo{
@@ -191,12 +183,9 @@
 
 <script>
 import axios from 'axios';
-import NavBar from '../components/NavBar'
+
 export default {
-  name: "RegistrationPage",
-  components: {
-    NavBar
-  },
+  name: "RegistrationSystemAdmin",
   data() {
     return {
       user: {

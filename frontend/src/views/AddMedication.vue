@@ -104,6 +104,7 @@
   background-image: url("medicine.jpg");
   background-size: cover;
   overflow: auto;
+   min-height: 100vh;
 }
 .card {
 
