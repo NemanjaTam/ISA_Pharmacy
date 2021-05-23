@@ -1,9 +1,15 @@
 package com.tim40.tim40.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tim40.tim40.dto.PharmacyDTO;
 import com.tim40.tim40.service.PharmacyService;
 
 @RestController
@@ -17,4 +23,10 @@ public class PharmacyController {
 		this.pharmacyService = pharmacyService;
 	}
 	
+	@PostMapping(value = "/add", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> addPharmacy(@RequestBody PharmacyDTO pharmacyDTO ) 
+	{
+		PharmacyDTO createdPharmacy = pharmacyService.createPharmacy(pharmacyDTO);
+		return new ResponseEntity<> (createdPharmacy, HttpStatus.OK);
+	}
 }
