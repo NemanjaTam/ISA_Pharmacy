@@ -37,6 +37,7 @@
 
 <style scoped>
 
+<<<<<<< HEAD
 .cls{
   margin-bottom: 40px;
 }
@@ -58,6 +59,7 @@
     padding: 0;
     font-family: sans-serif;
     background: linear-gradient(to right, #b92b27, #1565c0)
+
 }
 
 .card {

@@ -58,7 +58,16 @@ public class Pharmacy {
     private final Set<Medication> medications = new HashSet<Medication>();
 		@OneToMany(fetch = FetchType.LAZY,mappedBy="pharmacy")
 		private final Set<PharmacyAdministrator> pharmacyAdministrators = new HashSet<PharmacyAdministrator>();
-
+	
+	/*	@ManyToMany
+	    @JoinTable
+	    (
+	        name = "pharmacy_suppliers",
+	        joinColumns = @JoinColumn(name = "pharmacy_id"),
+	        inverseJoinColumns = @JoinColumn(name = "supplier_id")
+	    )
+		private final Set<Supplier> suppliers = new HashSet<Supplier>();*/
+		
     public Pharmacy() {}
 
 
@@ -127,4 +136,10 @@ public class Pharmacy {
 	public Set<Medication> getMedications() {
 		return medications;
 	}
+
+
+	public Set<PharmacyAdministrator> getPharmacyAdministrators() {
+		return pharmacyAdministrators;
+	}
+
 }

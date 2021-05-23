@@ -28,8 +28,5 @@ public class Dermatologist extends User {
         super(name, surname, email, password, address, userType, isFirstTimeLogging);
     }
     
-    public Dermatologist(Long id, String name, String surname, String email, String password, Address address, UserType userType, boolean isFirstTimeLogging)
-    {
-    	super(id, name, surname, email, password, address, userType, isFirstTimeLogging);
-    }
+   
 }
