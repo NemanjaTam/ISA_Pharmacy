@@ -1,7 +1,7 @@
 <template>
   <div >
         <!-- <AdminPage/> -->
-     <AddMedication/>
+     <RegistrationPage/>
      <p>
     <!-- use router-link component for navigation. -->
     <!-- specify the link by passing the `to` prop. -->
@@ -15,19 +15,19 @@
 </template>
 
 <script>
-import AddMedication from './views/AddMedication'
+//import AddMedication from './views/AddMedication'
 //import AddPharmacy from './views/AddPharmacy'
 //import AdminRegistration from './views/AdminRegistration'
-//import RegistrationPage from './views/RegistrationPage.vue'
-//import Login from './views/Login'
+import RegistrationPage from './views/RegistrationPage.vue'
 //import NavBar from './components/NavBar'
-
+//import LoginPage from './views/LoginPage.vue'
+//import Home from './views/Home.vue'
 
 export default {
   name: 'App',
   components: {
    //AddPharmacy
-    AddMedication
+    RegistrationPage
   }
 }
 </script>
