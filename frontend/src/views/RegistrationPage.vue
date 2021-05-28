@@ -1,11 +1,10 @@
 <template>
 <div class = "background">
-    <Home/>
  <div class="container">
     <div class="row">
         <div class="col-md-6">
             <div class="card">
-                <form onsubmit="event.preventDefault()" class="box">
+                <form class="box">
                     <div class = "cls">
                         <h1 class = "title" style="color:#4d4d4d ">Sign up with us</h1>
                     </div>
@@ -21,11 +20,10 @@
                     <b-form-input type="text" v-model="user.address.citty" placeholder="enter city" style="font-style:italic" required/>
                     <b-form-input type="text" v-model="user.address.postalCode" placeholder="enter postal code" style="font-style:italic" required/>
                     <b-form-input type="text" v-model="user.address.street" placeholder="enter street" style="font-style:italic" required/>
-                    <b-form-input type="text" v-model="user.address.state" placeholder="enter state" style="font-style:italic" required/>
                     <b-form-input type="text" v-model="user.address.number" placeholder="enter number of house/building" style="font-style:italic" required/>
                     <b-form-input type="text" v-model="user.phone" placeholder="enter phone number" style="font-style:italic" required/>
 
-                    <input type="submit" style="color: white" name="" value="Register" href="#">
+                    <input type="submit" v-on:click="onSubmit" style="color: white" name="" value="Register">
                     
                 </form>
             </div>
@@ -37,7 +35,6 @@
 
 <style scoped>
 
-<<<<<<< HEAD
 .cls{
   margin-bottom: 40px;
 }
@@ -154,7 +151,7 @@ export default {
        confirmPassword: "",
        name: "",
        surname: "",
-       usertype: "PATIENT",
+       userType: "PATIENT",
        address: {
             state: "",
             city: "",
@@ -176,7 +173,12 @@ export default {
         alert("Passwords don't match!");
         return;
       }
-      axios.post("http://localhost:9005/api/user/register", this.user);
+      console.log(this.user);
+      const userForSend = {...this.user};
+      delete userForSend["confirmPassword"];
+      axios.post("http://localhost:9005/api/user/register", userForSend);
+
+      this.$router.push({path:'login'})
 
     },
     onReset(event) {

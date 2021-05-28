@@ -28,9 +28,9 @@ public class Pharmacist extends User {
 
 	public Pharmacist() {}
 	
-    public Pharmacist(String name, String surname, String email, String password, Address address, UserType userType, Pharmacy pharmacy, boolean isFirstTimeLogging)
+    public Pharmacist(String name, String surname, String email, String password, Address address, UserType userType, Pharmacy pharmacy, boolean isFirstTimeLogging, String phone)
     {
-        super(name, surname, email, password, address, userType, isFirstTimeLogging);
+        super(name, surname, email, password, address, userType, isFirstTimeLogging, phone);
         this.pharmacy = pharmacy;
     }
 

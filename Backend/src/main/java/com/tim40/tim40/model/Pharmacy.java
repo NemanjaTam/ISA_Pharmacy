@@ -59,14 +59,14 @@ public class Pharmacy {
 		@OneToMany(fetch = FetchType.LAZY,mappedBy="pharmacy")
 		private final Set<PharmacyAdministrator> pharmacyAdministrators = new HashSet<PharmacyAdministrator>();
 	
-	/*	@ManyToMany
+		@ManyToMany
 	    @JoinTable
 	    (
 	        name = "pharmacy_suppliers",
 	        joinColumns = @JoinColumn(name = "pharmacy_id"),
 	        inverseJoinColumns = @JoinColumn(name = "supplier_id")
 	    )
-		private final Set<Supplier> suppliers = new HashSet<Supplier>();*/
+		private final Set<Supplier> suppliers = new HashSet<Supplier>();
 		
     public Pharmacy() {}
 

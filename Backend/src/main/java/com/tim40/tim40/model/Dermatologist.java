@@ -23,9 +23,9 @@ public class Dermatologist extends User {
 
 	public Dermatologist() {}
 	
-    public Dermatologist(String name, String surname, String email, String password, Address address, UserType userType, boolean isFirstTimeLogging)
+    public Dermatologist(String name, String surname, String email, String password, Address address, UserType userType, boolean isFirstTimeLogging, String phone)
     {
-        super(name, surname, email, password, address, userType, isFirstTimeLogging);
+        super(name, surname, email, password, address, userType, isFirstTimeLogging, phone);
     }
     
    

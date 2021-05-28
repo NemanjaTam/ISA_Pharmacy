@@ -3,6 +3,8 @@ package com.tim40.tim40.service;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.tim40.tim40.dto.ChangePasswordDTO;
 import com.tim40.tim40.dto.UserDTO;
 import com.tim40.tim40.model.Address;
 import com.tim40.tim40.model.User;
@@ -33,7 +35,7 @@ public class UserService implements IUserService {
 		Address address = new Address(userDTO.getAddress().getState(), userDTO.getAddress().getCity(),
 				userDTO.getAddress().getStreet(), userDTO.getAddress().getNumber(), userDTO.getAddress().getPostalCode());
 		
-		User user = new User(userDTO.getName(), userDTO.getSurname(), userDTO.getEmail(), userDTO.getPassword(), address, userDTO.getUserType(),true);
+		User user = new User(userDTO.getName(), userDTO.getSurname(), userDTO.getEmail(), userDTO.getPassword(), address, userDTO.getUserType(),true, userDTO.getPhone());
 		user = this.userRepository.save(user);
 		return new UserDTO (user);
 	}
@@ -46,6 +48,14 @@ public class UserService implements IUserService {
 	@Override
 	public void delete(Long id) {
 		userRepository.deleteById(id);
+	}
+
+	public boolean changePassword(ChangePasswordDTO cpDTO) {
+		User user = userRepository.findById(cpDTO.getId()).orElseGet(null);
+		user.setPassword(cpDTO.getPassword());
+		user.setFirstTimeLogging(false);
+		userRepository.save(user);
+		return true;
 	}
 	
 	

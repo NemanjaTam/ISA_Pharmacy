@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.tim40.tim40.model.Medication;
+import com.tim40.tim40.model.enums.MedicationForm;
+import com.tim40.tim40.model.enums.MedicinePublishingType;
 
 public class MedicationDTO {
 
@@ -14,7 +16,11 @@ public class MedicationDTO {
     private String structure;
     private String contraindications;
     private String recommendedIntake; 
+    private MedicationForm medicationForm; 
+    private String producer;
     private Long pharmacyID;
+    private MedicinePublishingType publishingType;
+    private String notes; 
     private Set<Long> replacementMedicationsIDs = new HashSet<Long>();
  
   // private final Set<Patient> patients = new HashSet<Patient>();
@@ -29,7 +35,11 @@ public class MedicationDTO {
     	this.structure = medication.getStructure();
     	this.contraindications = medication.getContraindications();
     	this.recommendedIntake = medication.getRecommendedIntake();
+    	this.medicationForm = medication.getMedicationForm();
+    	this.producer = medication.getProducer();
     	this.pharmacyID = medication.getPharmacy().getId();
+    	this.publishingType = medication.getPublishingType();
+    	this.notes = medication.getNotes();
     	
     	for(Medication m : medication.getReplacementMedications()) {
     		this.replacementMedicationsIDs.add(m.getId());
@@ -107,5 +117,37 @@ public class MedicationDTO {
 
 	public void setReplacementMedicationsIDs(Set<Long> replacementMedicationsIDs) {
 		this.replacementMedicationsIDs = replacementMedicationsIDs;
+	}
+
+	public MedicationForm getMedicationForm() {
+		return medicationForm;
+	}
+
+	public void setMedicationForm(MedicationForm medicationForm) {
+		this.medicationForm = medicationForm;
+	}
+
+	public String getProducer() {
+		return producer;
+	}
+
+	public void setProducer(String producer) {
+		this.producer = producer;
+	}
+
+	public MedicinePublishingType getPublishingType() {
+		return publishingType;
+	}
+
+	public void setPublishingType(MedicinePublishingType publishingType) {
+		this.publishingType = publishingType;
+	}
+
+	public String getNotes() {
+		return notes;
+	}
+
+	public void setNotes(String notes) {
+		this.notes = notes;
 	}
 }

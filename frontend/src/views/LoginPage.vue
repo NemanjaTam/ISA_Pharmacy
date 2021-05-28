@@ -1,19 +1,18 @@
 <template>
 <div class = "background">
-    <Home/>
  <div class="container">
     <div class="row">
         <div class="col-md-6">
             <div class="card">
-                <form onsubmit="event.preventDefault()" class="box">
+                <form class="box">
                     <div class = "cls">
                         <h1 class = "title" style="color:#4d4d4d ">Log in</h1>
                         <p class="text-muted"> Please enter your email and password!</p>
                     </div>
-                    <input type="text" name="" placeholder="email" style="font-style:italic" required> 
-                    <input type="password" name="" placeholder="password" style="font-style:italic" required> 
+                    <input type="text" name="" v-model="user.email" placeholder="email" style="font-style:italic" required> 
+                    <input type="password" name="" v-model="user.password" placeholder="password" style="font-style:italic" required> 
                     <a class="forgot text-muted" href="#">Forgot password?</a>
-                    <input type="submit"  style="color: white" name="" value="Log in" href="#">
+                    <input type="submit"  style="color: white" name="" value="Log in">
                     
                 </form>
             </div>
@@ -29,7 +28,7 @@
 }
  .background {
   background-image: url("../assets/img/medicine.jpg");
-  position: fixed; 
+  position: cover; 
   top: 0; 
   left: 0; 
   min-width: 100%;
@@ -122,31 +121,14 @@
 </style>
 
 <script>
-import axios from 'axios'
-import Home from './Home.vue'
 
 export default {
   name: "LoginPage",
-  components: {
-      Home
-  },
   data() {
     return {
       user: {
        email: "",
-       password: "",
-       confirmPassword: "",
-       name: "",
-       surname: "",
-       usertype: "PATIENT",
-       address: {
-            state: "",
-            city: "",
-            postalCode: "",
-            street: "",
-            number: ""
-       },
-       isFirstTimeLogging: false
+       password: ""
       },
   
       show: true,
@@ -160,7 +142,7 @@ export default {
         alert("Passwords don't match!");
         return;
       }
-      axios.post("http://localhost:9005/api/user/register", this.user);
+ //     axios.post("http://localhost:9005/api/user/register", this.user);
 
     },
     onReset(event) {

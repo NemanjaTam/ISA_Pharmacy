@@ -24,9 +24,10 @@ public class MedicationController {
 	}
 	
 	@PostMapping(value = "/add", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	 public ResponseEntity<?> addMedication(@RequestBody MedicationDTO medicationDTO)
+	 public ResponseEntity<MedicationDTO> addMedication(@RequestBody MedicationDTO medicationDTO) throws Exception
 	{
+		System.out.println(medicationDTO);
 		MedicationDTO createdMedication = medicationService.createMedication(medicationDTO);
-		return new ResponseEntity<> (createdMedication, HttpStatus.OK);
+		return new ResponseEntity<MedicationDTO> (createdMedication, HttpStatus.OK);
  	}
 }

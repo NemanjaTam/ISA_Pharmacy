@@ -2,8 +2,11 @@ package com.tim40.tim40.model;
 
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,6 +15,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.tim40.tim40.model.enums.MedicationForm;
+import com.tim40.tim40.model.enums.MedicinePublishingType;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -41,7 +47,17 @@ public class Medication {
     @Column (nullable = false)
     private String contraindications;
     @Column (nullable = false)
+    @Enumerated(EnumType.STRING)
+    private MedicationForm medicationForm;   // prasak, kapsula, gel..
+    @Column (nullable = false)
+    private String producer;   	
+    @Column (nullable = false)
+    @Enumerated(EnumType.STRING)
+    private MedicinePublishingType publishingType;  	// sa receptom ili bez
+    @Column (nullable = false)
     private String recommendedIntake;  // preporučeni unos terapije na dnevnom nivou
+    @Column (nullable = false)
+    private String notes; 			//dodatne napomene 
     @ManyToOne
     @JoinColumn(name = "pharmacy_id", nullable = false)
     private Pharmacy pharmacy;
@@ -59,8 +75,9 @@ public class Medication {
     	super();
     }
     
-    public Medication (Long id, String name, String code, String typeOfMedicine, String structure, String contraindications,
-    		String recommendedIntake, Pharmacy pharmacy, Set<Medication> replacementMedications)
+    public Medication (Long id, String name, String code, String typeOfMedicine, String structure, String contraindications, MedicationForm medicationForm,
+    		MedicinePublishingType publishingType, String producer, String recommendedIntake, Pharmacy pharmacy, String notes,
+    		Set<Medication> replacementMedications)
     {
     	super();
     	this.id = id;
@@ -69,13 +86,18 @@ public class Medication {
     	this.typeOfMedicine = typeOfMedicine;
     	this.structure = structure;
     	this.contraindications = contraindications;
+    	this.medicationForm = medicationForm;
+    	this.publishingType = publishingType;
+    	this.producer = producer;
     	this.recommendedIntake = recommendedIntake;
     	this.pharmacy = pharmacy; 
+    	this.notes = notes;
     	this.replacementMedications = replacementMedications;
     }
     
-    public Medication (String name, String code, String typeOfMedicine, String structure, String contraindications,
-    		String recommendedIntake, Pharmacy pharmacy, Set<Medication> replacementMedications)
+    public Medication (String name, String code, String typeOfMedicine, String structure, String contraindications, MedicationForm medicationForm,
+    		MedicinePublishingType publishingType, String producer, String recommendedIntake, Pharmacy pharmacy, String notes,
+    		Set<Medication> replacementMedications)
     {
     	super();
     	this.name = name;
@@ -83,11 +105,14 @@ public class Medication {
     	this.typeOfMedicine = typeOfMedicine;
     	this.structure = structure;
     	this.contraindications = contraindications;
+    	this.medicationForm = medicationForm;
+    	this.publishingType = publishingType;
+    	this.producer = producer;
     	this.recommendedIntake = recommendedIntake;
     	this.pharmacy = pharmacy; 
+    	this.notes = notes;
     	this.replacementMedications = replacementMedications;
     }
-
 	public Long getId() {
 		return id;
 	}
@@ -162,5 +187,37 @@ public class Medication {
 
 	public Set<Patient> getPatients() {
 		return patients;
+	}
+
+	public MedicationForm getMedicationForm() {
+		return medicationForm;
+	}
+
+	public void setMedicationForm(MedicationForm medicationForm) {
+		this.medicationForm = medicationForm;
+	}
+
+	public String getProducer() {
+		return producer;
+	}
+
+	public void setProducer(String producer) {
+		this.producer = producer;
+	}
+
+	public MedicinePublishingType getPublishingType() {
+		return publishingType;
+	}
+
+	public void setPublishingType(MedicinePublishingType publishingType) {
+		this.publishingType = publishingType;
+	}
+
+	public String getNotes() {
+		return notes;
+	}
+
+	public void setNotes(String notes) {
+		this.notes = notes;
 	}
 }

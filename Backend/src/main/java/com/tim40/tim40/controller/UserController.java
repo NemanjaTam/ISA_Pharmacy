@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tim40.tim40.dto.ChangePasswordDTO;
 import com.tim40.tim40.dto.UserDTO;
 import com.tim40.tim40.model.User;
 import com.tim40.tim40.service.UserService;
@@ -44,8 +45,18 @@ public class UserController {
 	@PostMapping(value = "/register", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserDTO> register(@RequestBody UserDTO userDTO) throws Exception
 	{
+		System.out.println(userDTO);
 		UserDTO registeredUser = userService.register(userDTO);
 		
 		return new ResponseEntity<UserDTO>(registeredUser, HttpStatus.OK);
+	}
+	
+	@PostMapping(value = "/change-password", produces = MediaType.TEXT_PLAIN_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> changePassword(@RequestBody ChangePasswordDTO cpDTO) throws Exception
+	{
+		boolean succeess = userService.changePassword(cpDTO);
+		String msg = succeess ? "Success" : "Fail";
+		
+		return new ResponseEntity<String>(msg, HttpStatus.OK);
 	}
 }

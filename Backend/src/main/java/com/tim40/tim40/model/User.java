@@ -51,14 +51,17 @@ public class User {
 	}
 	
 	public User(String name, String surname, String email, String password, Address address,
-			UserType userType, boolean isFirstTimeLogging) {
+			UserType userType, boolean isFirstTimeLogging, String phone) {
 		super();
 		this.name = name;
 		this.surname = surname;
 		this.email = email;
 		this.password = password;
 		this.address = address;
+	
 		this.userType = userType;
+		System.out.println(userType + " " + this.userType);
+		this.phone = phone;
 		this.isFirstTimeLogging = isFirstTimeLogging;
 	}
 

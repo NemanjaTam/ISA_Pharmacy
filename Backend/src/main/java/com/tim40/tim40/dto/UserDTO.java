@@ -103,4 +103,10 @@ public class UserDTO {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+
+	@Override
+	public String toString() {
+		return "UserDTO [id=" + id + ", name=" + name + ", surname=" + surname + ", email=" + email + ", password="
+				+ password + ", address=" + address + ", phone=" + phone + ", userType=" + userType + "]";
+	}
 }
