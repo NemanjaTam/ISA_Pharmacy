@@ -22,6 +22,10 @@ import RegistrationPage from './views/RegistrationPage.vue'
 import NavBar from './components/NavBar.vue'
 import LoginPage from './views/LoginPage.vue'
 //import Home from './views/Home.vue'
+import RegistrationPharmacyAdmin from './components/RegistrationPharmacyAdmin.vue'
+import RegistrationDermatologist from './components/RegistrationDermatologist.vue'
+import RegistrationSupplier from './components/RegistrationSupplier.vue'
+import RegistrationSystemAdmin from './components/RegistrationSystemAdmin.vue'
 
 export default {
   name: 'App',
@@ -29,7 +33,11 @@ export default {
    NavBar,
     RegistrationPage,
     LoginPage,
-    AddMedication
+    AddMedication,
+    RegistrationPharmacyAdmin,
+    RegistrationDermatologist,
+    RegistrationSupplier,
+    RegistrationSystemAdmin
   }
 }
 </script>

@@ -159,6 +159,7 @@ export default {
             street: "",
             number: ""
        },
+       phone: "",
        isFirstTimeLogging: false
       },
   

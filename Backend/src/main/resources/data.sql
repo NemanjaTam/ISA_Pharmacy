@@ -5,9 +5,34 @@ insert into pharmacies(city, number, postalcode, state, street, avg_rating, name
 insert into pharmacies(city, number, postalcode, state, street, avg_rating, name) values ('Novi Sad', '15', 21241, 'Srbija', 'Stefana Nemanje', 9, 'Pharmacy 5') 
 
 insert into medications(code, contraindications, medication_form, name, notes, recommended_intake, structure, type_of_medicine, pharmacy_id, publishing_type, producer) values ('1000', 'Lek izaziva blagu sedaciju.', 'CAPSULE', 'Brufen', 'Nema dodatnih napomena.', '3x1 u razmaku od najmanje 6h', '600mg ipobrufena', 'anestetik', 1, 'WITH_RECIPE', 'IrishFarm')
-insert into medications(code, contraindications, medication_form, name, notes, recommended_intake, structure, type_of_medicine, pharmacy_id, publishing_type, producer) values ('1001', 'Lek izaziva blagu sedaciju.', 'CAPSULE', 'Brufen', 'Nema dodatnih napomena.', '3x1 u razmaku od najmanje 6h', '600mg ipobrufena', 'anestetik', 2, 'WITH_RECIPE', 'IrishFarm')
+insert into medications(code, contraindications, medication_form, name, notes, recommended_intake, structure, type_of_medicine, pharmacy_id, publishing_type, producer) values ('1001', 'Nema.', 'CAPSULE', 'Panadol', 'Lek uzeti nakon jela.', '6x1', '600mg ipobrufena', 'anestetik', 2, 'WITHOUT_RECIPE', 'Apoteka Jankovic')
 insert into medications(code, contraindications, medication_form, name, notes, recommended_intake, structure, type_of_medicine, pharmacy_id, publishing_type, producer) values ('1002', 'Lek izaziva blagu sedaciju.', 'CAPSULE', 'Brufen', 'Nema dodatnih napomena.', '3x1 u razmaku od najmanje 6h', '600mg ipobrufena', 'anestetik', 1, 'WITH_RECIPE', 'IrishFarm')
 insert into medications(code, contraindications, medication_form, name, notes, recommended_intake, structure, type_of_medicine, pharmacy_id, publishing_type, producer) values ('1003', 'Lek izaziva blagu sedaciju.', 'CAPSULE', 'Brufen', 'Nema dodatnih napomena.', '3x1 u razmaku od najmanje 6h', '600mg ipobrufena', 'anestetik', 2, 'WITH_RECIPE', 'IrishFarm')
+insert into medications(code, contraindications, medication_form, name, notes, recommended_intake, structure, type_of_medicine, pharmacy_id, publishing_type, producer) values ('1004', 'Lek izaziva blagu sedaciju.', 'CAPSULE', 'Brufen', 'Nema dodatnih napomena.', '3x1 u razmaku od najmanje 6h', '600mg ipobrufena', 'anestetik', 1, 'WITH_RECIPE', 'IrishFarm')
+insert into medications(code, contraindications, medication_form, name, notes, recommended_intake, structure, type_of_medicine, pharmacy_id, publishing_type, producer) values ('1000', 'Lek izaziva blagu sedaciju.', 'CAPSULE', 'Brufen', 'Nema dodatnih napomena.', '3x1 u razmaku od najmanje 6h', '600mg ipobrufena', 'anestetik', 1, 'WITH_RECIPE', 'IrishFarm')
+insert into medications(code, contraindications, medication_form, name, notes, recommended_intake, structure, type_of_medicine, pharmacy_id, publishing_type, producer) values ('1001', 'Nema.', 'CAPSULE', 'Panadol', 'Lek uzeti nakon jela.', '6x1', '600mg ipobrufena', 'anestetik', 2, 'WITHOUT_RECIPE', 'Apoteka Jankovic')
+insert into medications(code, contraindications, medication_form, name, notes, recommended_intake, structure, type_of_medicine, pharmacy_id, publishing_type, producer) values ('1002', 'Lek izaziva blagu sedaciju.', 'CAPSULE', 'Brufen', 'Nema dodatnih napomena.', '3x1 u razmaku od najmanje 6h', '600mg ipobrufena', 'anestetik', 1, 'WITH_RECIPE', 'IrishFarm')
+insert into medications(code, contraindications, medication_form, name, notes, recommended_intake, structure, type_of_medicine, pharmacy_id, publishing_type, producer) values ('1003', 'Lek izaziva blagu sedaciju.', 'CAPSULE', 'Brufen', 'Nema dodatnih napomena.', '3x1 u razmaku od najmanje 6h', '600mg ipobrufena', 'anestetik', 2, 'WITH_RECIPE', 'IrishFarm')
+insert into medications(code, contraindications, medication_form, name, notes, recommended_intake, structure, type_of_medicine, pharmacy_id, publishing_type, producer) values ('1004', 'Lek izaziva blagu sedaciju.', 'CAPSULE', 'Brufen', 'Nema dodatnih napomena.', '3x1 u razmaku od najmanje 6h', '600mg ipobrufena', 'anestetik', 1, 'WITH_RECIPE', 'IrishFarm')
+insert into medications(code, contraindications, medication_form, name, notes, recommended_intake, structure, type_of_medicine, pharmacy_id, publishing_type, producer) values ('1000', 'Lek izaziva blagu sedaciju.', 'CAPSULE', 'Brufen', 'Nema dodatnih napomena.', '3x1 u razmaku od najmanje 6h', '600mg ipobrufena', 'anestetik', 1, 'WITH_RECIPE', 'IrishFarm')
+insert into medications(code, contraindications, medication_form, name, notes, recommended_intake, structure, type_of_medicine, pharmacy_id, publishing_type, producer) values ('1001', 'Nema.', 'CAPSULE', 'Panadol', 'Lek uzeti nakon jela.', '6x1', '600mg ipobrufena', 'anestetik', 2, 'WITHOUT_RECIPE', 'Apoteka Jankovic')
+insert into medications(code, contraindications, medication_form, name, notes, recommended_intake, structure, type_of_medicine, pharmacy_id, publishing_type, producer) values ('1002', 'Lek izaziva blagu sedaciju.', 'CAPSULE', 'Brufen', 'Nema dodatnih napomena.', '3x1 u razmaku od najmanje 6h', '600mg ipobrufena', 'anestetik', 1, 'WITH_RECIPE', 'IrishFarm')
+insert into medications(code, contraindications, medication_form, name, notes, recommended_intake, structure, type_of_medicine, pharmacy_id, publishing_type, producer) values ('1003', 'Lek izaziva blagu sedaciju.', 'CAPSULE', 'Brufen', 'Nema dodatnih napomena.', '3x1 u razmaku od najmanje 6h', '600mg ipobrufena', 'anestetik', 2, 'WITH_RECIPE', 'IrishFarm')
+insert into medications(code, contraindications, medication_form, name, notes, recommended_intake, structure, type_of_medicine, pharmacy_id, publishing_type, producer) values ('1004', 'Lek izaziva blagu sedaciju.', 'CAPSULE', 'Brufen', 'Nema dodatnih napomena.', '3x1 u razmaku od najmanje 6h', '600mg ipobrufena', 'anestetik', 1, 'WITH_RECIPE', 'IrishFarm')
+insert into medications(code, contraindications, medication_form, name, notes, recommended_intake, structure, type_of_medicine, pharmacy_id, publishing_type, producer) values ('1000', 'Lek izaziva blagu sedaciju.', 'CAPSULE', 'Brufen', 'Nema dodatnih napomena.', '3x1 u razmaku od najmanje 6h', '600mg ipobrufena', 'anestetik', 1, 'WITH_RECIPE', 'IrishFarm')
+insert into medications(code, contraindications, medication_form, name, notes, recommended_intake, structure, type_of_medicine, pharmacy_id, publishing_type, producer) values ('1001', 'Nema.', 'CAPSULE', 'Panadol', 'Lek uzeti nakon jela.', '6x1', '600mg ipobrufena', 'anestetik', 2, 'WITHOUT_RECIPE', 'Apoteka Jankovic')
+insert into medications(code, contraindications, medication_form, name, notes, recommended_intake, structure, type_of_medicine, pharmacy_id, publishing_type, producer) values ('1002', 'Lek izaziva blagu sedaciju.', 'CAPSULE', 'Brufen', 'Nema dodatnih napomena.', '3x1 u razmaku od najmanje 6h', '600mg ipobrufena', 'anestetik', 4, 'WITH_RECIPE', 'IrishFarm')
+insert into medications(code, contraindications, medication_form, name, notes, recommended_intake, structure, type_of_medicine, pharmacy_id, publishing_type, producer) values ('1003', 'Lek izaziva blagu sedaciju.', 'CAPSULE', 'Brufen', 'Nema dodatnih napomena.', '3x1 u razmaku od najmanje 6h', '600mg ipobrufena', 'anestetik', 5, 'WITH_RECIPE', 'IrishFarm')
+insert into medications(code, contraindications, medication_form, name, notes, recommended_intake, structure, type_of_medicine, pharmacy_id, publishing_type, producer) values ('1004', 'Lek izaziva blagu sedaciju.', 'CAPSULE', 'Brufen', 'Nema dodatnih napomena.', '3x1 u razmaku od najmanje 6h', '600mg ipobrufena', 'anestetik', 3, 'WITH_RECIPE', 'IrishFarm')
+insert into medications(code, contraindications, medication_form, name, notes, recommended_intake, structure, type_of_medicine, pharmacy_id, publishing_type, producer) values ('1000', 'Lek izaziva blagu sedaciju.', 'CAPSULE', 'Brufen', 'Nema dodatnih napomena.', '3x1 u razmaku od najmanje 6h', '600mg ipobrufena', 'anestetik', 1, 'WITH_RECIPE', 'IrishFarm')
+insert into medications(code, contraindications, medication_form, name, notes, recommended_intake, structure, type_of_medicine, pharmacy_id, publishing_type, producer) values ('1001', 'Nema.', 'CAPSULE', 'Panadol', 'Lek uzeti nakon jela.', '6x1', '600mg ipobrufena', 'anestetik', 2, 'WITHOUT_RECIPE', 'Apoteka Jankovic')
+insert into medications(code, contraindications, medication_form, name, notes, recommended_intake, structure, type_of_medicine, pharmacy_id, publishing_type, producer) values ('1002', 'Lek izaziva blagu sedaciju.', 'CAPSULE', 'Brufen', 'Nema dodatnih napomena.', '3x1 u razmaku od najmanje 6h', '600mg ipobrufena', 'anestetik', 1, 'WITH_RECIPE', 'IrishFarm')
+insert into medications(code, contraindications, medication_form, name, notes, recommended_intake, structure, type_of_medicine, pharmacy_id, publishing_type, producer) values ('1003', 'Lek izaziva blagu sedaciju.', 'CAPSULE', 'Brufen', 'Nema dodatnih napomena.', '3x1 u razmaku od najmanje 6h', '600mg ipobrufena', 'anestetik', 4, 'WITH_RECIPE', 'IrishFarm')
+insert into medications(code, contraindications, medication_form, name, notes, recommended_intake, structure, type_of_medicine, pharmacy_id, publishing_type, producer) values ('1004', 'Lek izaziva blagu sedaciju.', 'CAPSULE', 'Brufen', 'Nema dodatnih napomena.', '3x1 u razmaku od najmanje 6h', '600mg ipobrufena', 'anestetik', 4, 'WITH_RECIPE', 'IrishFarm')
+insert into medications(code, contraindications, medication_form, name, notes, recommended_intake, structure, type_of_medicine, pharmacy_id, publishing_type, producer) values ('1000', 'Lek izaziva blagu sedaciju.', 'CAPSULE', 'Brufen', 'Nema dodatnih napomena.', '3x1 u razmaku od najmanje 6h', '600mg ipobrufena', 'anestetik', 2, 'WITH_RECIPE', 'IrishFarm')
+insert into medications(code, contraindications, medication_form, name, notes, recommended_intake, structure, type_of_medicine, pharmacy_id, publishing_type, producer) values ('1001', 'Nema.', 'CAPSULE', 'Panadol', 'Lek uzeti nakon jela.', '6x1', '600mg ipobrufena', 'anestetik', 2, 'WITHOUT_RECIPE', 'Apoteka Jankovic')
+insert into medications(code, contraindications, medication_form, name, notes, recommended_intake, structure, type_of_medicine, pharmacy_id, publishing_type, producer) values ('1002', 'Lek izaziva blagu sedaciju.', 'CAPSULE', 'Brufen', 'Nema dodatnih napomena.', '3x1 u razmaku od najmanje 6h', '600mg ipobrufena', 'anestetik', 1, 'WITH_RECIPE', 'IrishFarm')
+insert into medications(code, contraindications, medication_form, name, notes, recommended_intake, structure, type_of_medicine, pharmacy_id, publishing_type, producer) values ('1003', 'Lek izaziva blagu sedaciju.', 'CAPSULE', 'Brufen', 'Nema dodatnih napomena.', '3x1 u razmaku od najmanje 6h', '600mg ipobrufena', 'anestetik', 3, 'WITH_RECIPE', 'IrishFarm')
 insert into medications(code, contraindications, medication_form, name, notes, recommended_intake, structure, type_of_medicine, pharmacy_id, publishing_type, producer) values ('1004', 'Lek izaziva blagu sedaciju.', 'CAPSULE', 'Brufen', 'Nema dodatnih napomena.', '3x1 u razmaku od najmanje 6h', '600mg ipobrufena', 'anestetik', 1, 'WITH_RECIPE', 'IrishFarm')
 
 insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, surname, phone, usertype, penalties, pharmacy_id) values ('Pharmacist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic1@gmail.com', true, 'Nikola', 'kinzo', 'Antonic', '062123654', 'DERMATOLOGIST', null, 1)
@@ -187,6 +212,59 @@ insert into reservations(is_done, starttime, endtime, medication_id, patient_id,
 insert into reservations(is_done, starttime, endtime, medication_id, patient_id, pharmacy_id) values (false, '2021-02-08 07:00:00-13', '2021-02-13 15:00:00-08', 5, 22, 1)
 
 
+insert into patient_allerged_on_medications(patient_id, medication_id) values (16, 1)
+insert into patient_allerged_on_medications(patient_id, medication_id) values (16, 2)
+insert into patient_allerged_on_medications(patient_id, medication_id) values (16, 1)
+insert into patient_allerged_on_medications(patient_id, medication_id) values (16, 1)
+insert into patient_allerged_on_medications(patient_id, medication_id) values (16, 5)
+insert into patient_allerged_on_medications(patient_id, medication_id) values (16, 4)
+
+insert into patient_allerged_on_medications(patient_id, medication_id) values (17, 1)
+insert into patient_allerged_on_medications(patient_id, medication_id) values (17, 2)
+insert into patient_allerged_on_medications(patient_id, medication_id) values (17, 5)
+
+insert into patient_allerged_on_medications(patient_id, medication_id) values (18, 1)
+insert into patient_allerged_on_medications(patient_id, medication_id) values (18, 3)
+insert into patient_allerged_on_medications(patient_id, medication_id) values (18, 2)
+
+insert into patient_allerged_on_medications(patient_id, medication_id) values (19, 2)
+insert into patient_allerged_on_medications(patient_id, medication_id) values (19, 4)
+insert into patient_allerged_on_medications(patient_id, medication_id) values (19, 1)
+
+insert into patient_allerged_on_medications(patient_id, medication_id) values (20, 1)
+insert into patient_allerged_on_medications(patient_id, medication_id) values (20, 2)
+insert into patient_allerged_on_medications(patient_id, medication_id) values (20, 5)
+
+insert into patient_allerged_on_medications(patient_id, medication_id) values (21, 1)
+insert into patient_allerged_on_medications(patient_id, medication_id) values (21, 2)
+insert into patient_allerged_on_medications(patient_id, medication_id) values (21, 3)
+insert into patient_allerged_on_medications(patient_id, medication_id) values (21, 5)
+
+insert into patient_allerged_on_medications(patient_id, medication_id) values (22, 1)
+insert into patient_allerged_on_medications(patient_id, medication_id) values (22, 5)
+insert into patient_allerged_on_medications(patient_id, medication_id) values (22, 0)
+insert into patient_allerged_on_medications(patient_id, medication_id) values (22, 5)
+insert into patient_allerged_on_medications(patient_id, medication_id) values (22, 4)
+
+
+insert into replacement_medications(medication_id, replacement_medication_id) values (1,2)
+insert into replacement_medications(medication_id, replacement_medication_id) values (1,5)
+insert into replacement_medications(medication_id, replacement_medication_id) values (1,10)
+insert into replacement_medications(medication_id, replacement_medication_id) values (1,15)
+insert into replacement_medications(medication_id, replacement_medication_id) values (1,19)
+
+insert into replacement_medications(medication_id, replacement_medication_id) values (2,1)
+insert into replacement_medications(medication_id, replacement_medication_id) values (2,10)
+insert into replacement_medications(medication_id, replacement_medication_id) values (2,13)
+
+insert into replacement_medications(medication_id, replacement_medication_id) values (3,1)
+insert into replacement_medications(medication_id, replacement_medication_id) values (3,2)
+insert into replacement_medications(medication_id, replacement_medication_id) values (3,14)
+
+insert into replacement_medications(medication_id, replacement_medication_id) values (4,10)
+insert into replacement_medications(medication_id, replacement_medication_id) values (4,25)
+insert into replacement_medications(medication_id, replacement_medication_id) values (4,23)
+insert into replacement_medications(medication_id, replacement_medication_id) values (4,16)
 
 insert into dermatologist_pharmacy(pharmacy_id, dermatologist_id) values (1,3)
 insert into dermatologist_pharmacy(pharmacy_id, dermatologist_id) values (2,3)
@@ -205,6 +283,5 @@ insert into dermatologist_pharmacy(pharmacy_id, dermatologist_id) values (3,12)
 insert into dermatologist_pharmacy(pharmacy_id, dermatologist_id) values (4,12)
 
 insert into dermatologist_pharmacy(pharmacy_id, dermatologist_id) values (4,15)
-
 
 

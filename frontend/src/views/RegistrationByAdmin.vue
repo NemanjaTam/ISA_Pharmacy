@@ -1,10 +1,10 @@
 <template>
   <nav class="skew-menu">
     <ul>
-      <li> <router-link to="/" class="routerlink">Registration pharmacy admin</router-link></li>
-      <li> <router-link to="/" class="routerlink">Registration dermatologist</router-link></li>
-      <li> <router-link to="/" class="routerlink">Registration supplier</router-link></li>
-      <li> <router-link to="/" class="routerlink">Registration system admin</router-link></li>
+      <li> <router-link to="/registration-pharmacy-admin" class="routerlink">Registration pharmacy admin</router-link></li>
+      <li> <router-link to="/registration-dermatologist" class="routerlink">Registration dermatologist</router-link></li>
+      <li> <router-link to="/registration-supplier" class="routerlink">Registration supplier</router-link></li>
+      <li> <router-link to="/registration-system-admin" class="routerlink">Registration system admin</router-link></li>
     </ul>
   </nav>
 </template>

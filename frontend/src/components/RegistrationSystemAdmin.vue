@@ -1,205 +1,159 @@
 <template>
-  <div>
-  <div class = "card"  >
-  
-    <p class="title">Registration system administrator </p>
-    <b-form @submit="onSubmit" @reset="onReset" v-if="show">   <!--forma ce se prikazati samo ukoliko je show = true -->
-      <b-form-group  
-        class = "foo"
-        id="input-group-1"
-        label-for="input-1"
-        description="We'll never share your email with anyone else."
-        
-      >
-         <b-form-input 
-          id="input-1"
-          v-model="user.email"
-          type="email"
-          placeholder= "Enter system admin email"
-          style="font-style:italic"
-          label-cols-lg="7"
-          label-cols="4"
-          required
-        ></b-form-input> 
-      </b-form-group>
+<div class = "background">
+ <div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <form class="box">
+                    <div class = "cls">
+                        <h1 class = "title" style="color:#4d4d4d ">System admin registration</h1>
+                    </div>
+                    <b-form-input type="text" v-model="user.email" placeholder="enter email" style="font-style:italic" required/> 
+                    <b-form-input type="text" v-model="user.name" placeholder="enter name" style="font-style:italic" required/>
+                    <b-form-input type="text" v-model="user.surname" placeholder="enter surname" style="font-style:italic" required/>
+                    <b-form-input type="text" v-model="user.address.state" placeholder="enter state" style="font-style:italic" required/>
+                    <b-form-input type="text" v-model="user.address.citty" placeholder="enter city" style="font-style:italic" required/>
+                    <b-form-input type="text" v-model="user.address.postalCode" placeholder="enter postal code" style="font-style:italic" required/>
+                    <b-form-input type="text" v-model="user.address.street" placeholder="enter street" style="font-style:italic" required/>
+                    <b-form-input type="text" v-model="user.address.number" placeholder="enter number of house/building" style="font-style:italic" required/>
+                    <b-form-input type="text" v-model="user.phone" placeholder="enter phone number" style="font-style:italic" required/>
 
-      <b-form-group class = "foo2" id="input-group-2" label-for="input-2">
-        <b-form-input
-          id="input-2"
-          type = "password"
-          v-model="user.password"
-          placeholder="Enter system admin password"
-          style="font-style:italic"
-          :state= validation
-          aria-describedby="input-live-help input-live-feedback"
-          trim
-          required
-        ></b-form-input>
-        <b-form-invalid-feedback id="input-live-feedback">
-      Enter at least 7 characters.
-    </b-form-invalid-feedback>
-      </b-form-group>
-
-    <b-form-group class = "foo2" id="input-group-2" label-for="input-2">
-        <b-form-input
-          id="input-2.2"
-          type = "password" 
-          v-model="user.confirmPassword"
-          placeholder="Confirm system admin password"
-          style="font-style:italic"
-          required
-        ></b-form-input>
-      </b-form-group>
-
-  <b-form-group class = "foo2"  id="input-group-3" label-for="input-3">
-        <b-form-input
-          id="input-3"
-          v-model="user.name"
-          placeholder="Enter system admin name"
-          style="font-style:italic"
-          required
-        ></b-form-input>
-      </b-form-group>
-
-  <b-form-group class = "foo2"  id="input-group-4" label-for="input-4">
-        <b-form-input
-          id="input-4"
-          v-model="user.surname"
-          placeholder="Enter system admin surname"
-          style="font-style:italic"
-          required
-        ></b-form-input>
-      </b-form-group>
-
-  <b-form-group class = "foo2" id="input-group-5" label-for="input-5">
-        <b-form-input
-          id="input-5"
-          v-model="user.state"
-          placeholder="Enter system admin state"
-          style="font-style:italic"
-          required
-        ></b-form-input>
-      </b-form-group>
-
-  <b-form-group class = "foo2" id="input-group-6" label-for="input-6">
-        <b-form-input
-          id="input-6"
-          v-model="user.city"
-          placeholder="Enter system admin city"
-          style="font-style:italic"
-          required
-        ></b-form-input>
-      </b-form-group>
-
-      <b-form-group class = "foo2"  id="input-group-7" label-for="input-7">
-        <b-form-input
-          id="input-7"
-          v-model="user.postalCode"
-          placeholder="Enter system admin postal code"
-          style="font-style:italic"
-          required
-        ></b-form-input>
-      </b-form-group>
-
-  <b-form-group class = "foo2" id="input-group-8" label-for="input-8">
-        <b-form-input
-          id="input-8"
-          v-model="user.street"
-          placeholder="Enter system admin street"
-          style="font-style:italic"
-          required
-        ></b-form-input>
-   </b-form-group>
-
- <b-form-group class = "foo2"  id="input-group-9" label-for="input-9">
-        <b-form-input
-          id="input-9"
-          v-model="user.houseNumber"
-          placeholder="Enter system admin number of house/building"
-          style="font-style:italic"
-          required
-        ></b-form-input>
-   </b-form-group>
-
-  <b-form-group class = "foo2"  id="input-group-10" label-for="input-10">
-        <b-form-input
-          id="input-10"
-          v-model="user.phone"
-          placeholder="Enter system admin phone number"
-          style="font-style:italic"
-          required
-        ></b-form-input>
-      </b-form-group>
-
-      <b-button class = "foo3" type="submit" variant="primary">Register</b-button>
-      <b-button class = "foo4" type="reset" variant="danger">Cancel</b-button>
-    </b-form>
-  </div>
-  </div>
+                    <input type="submit" v-on:click="onSubmit" style="color: white" name="" value="Register">
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+ </div>
+</div>
 </template>
 
 <style scoped>
 
-.card {
-
-  box-shadow: 10px 4px 8px 0 rgba(0,0,0,0.2);
-  transition: 15s;
-  width: 50%;
-  border-radius: 20px; 
-  margin-top: 40px; 
-  margin-bottom: 50px; 
-  margin-right: 500px;
-  margin-left: 500px;
-  width: 530px;
+.cls{
+  margin-bottom: 40px;
 }
-
-.foo{
-  padding-top: 5px;
-  padding-left: 70px;
-  padding-right: 90px;
-     }
-.foo2{
-  padding-left: 70px;
-  padding-right: 90px;
-     }
-.foo3 {
-  margin-left: 330px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-.foo4 {
-  margin-left: 10px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-.title{
-  text-align: center;
+ .background {
+  background-image: url("../assets/img/medicine.jpg");
+  position: cover; 
+  top: 0; 
+  left: 0; 
+  min-width: 100%;
+  min-height: 100%;
+} 
+.title {
   font-family: fantasy;
   font-size: 30px;
-  margin-top: 10px;
+  color: black;
+}
+.body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background: linear-gradient(to right, #b92b27, #1565c0)
+
+}
+
+.card {
+    margin-bottom: 20px;
+    border: none;
+   
+}
+
+.box {
+    width: 450px;
+    padding: 40px;
+    position:absolute;
+    top: 50%;
+    left: 50%;
+    background: #ffffff;
+    box-shadow: 10px 4px 8px 0 rgba(0,0,0,0.2);
+    text-align: center;
+    transition: 0.25s;
+    margin-top: 100px;
+    border-radius: 20px; 
+}
+
+.box input[type="text"],
+.box input[type="password"] {
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #3498db;
+    padding: 10px 10px;
+    width: 250px;
+    outline: none;
+    color: rgb(0, 0, 0);
+    border-radius: 24px;
+    transition: 0.25s
+}
+
+.box h1 {
+    color: white;
+    text-transform: uppercase;
+    font-weight: 500
+}
+
+.box input[type="text"]:focus,
+.box input[type="password"]:focus {
+    width: 300px;
+    background-color:#ffffff;
+}
+
+.box input[type="submit"] {
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #7e7e7e;
+    background-color: #7e7e7e;
+    padding: 14px 40px;
+    outline: none;
+    color: rgb(0, 0, 0);
+    border-radius: 24px;
+    transition: 0.25s;
+    cursor: pointer
+}
+
+.box input[type="submit"]:hover {
+    background: #595959;
+    border: 2px solid #595959;
+}
+
+.forgot {
+    text-decoration: underline
 }
 
 </style>
 
 <script>
-import axios from 'axios';
+//import axios from 'axios';
+import Home from '../views/Home.vue'
 
 export default {
   name: "RegistrationSystemAdmin",
+  components: {
+      Home
+  },
   data() {
     return {
-      user: {
+       user: {
        email: "",
-       password: "",
-       confirmPassword: "",
        name: "",
        surname: "",
-       state: "",
-       city: "",
-       postalCode: "",
-       street: "",
-       houseNumber: "",
-       phone: ""
+       userType: "SYSTEM_ADMIN",
+       address: {
+            state: "",
+            city: "",
+            postalCode: "",
+            street: "",
+            number: ""
+       },
+       phone: "",
+       isFirstTimeLogging: false
       },
   
       show: true,
@@ -208,12 +162,6 @@ export default {
   methods: {
     onSubmit(event) {
       event.preventDefault();
-      if(this.user.password !== this.user.confirmPassword)
-      {
-        alert("Passwords don't match!");
-        return;
-      }
-      console.log(this.user);
 
     },
     onReset(event) {
@@ -223,19 +171,14 @@ export default {
 
 
   },
-  computed: {
-      validation() {
-        return this.user.password.length > 7 ? true : false
-      }
-    },
 
   mounted() {
-    axios.get("http://localhost:9005/api/user/all").then((response)=>{
-      console.log(response);
-      return response.json();
-    }).then((responseJSON)=>{
-      console.log(responseJSON);
-    })
+   // axios.get("http://localhost:9005/api/user/all").then((response)=>{
+  //    console.log(response);
+ //     return response.json();
+ //   }).then((responseJSON)=>{
+ //     console.log(responseJSON);
+ //   })
   }
 };
 </script>
