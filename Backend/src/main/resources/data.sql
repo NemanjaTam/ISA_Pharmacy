@@ -57,6 +57,9 @@ insert into users(dtype, city, number, postalcode, state, street, email, is_firs
 insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, surname, phone, usertype, penalties, pharmacy_id) values ('Patient', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic20@gmail.com', true, 'Nikola', 'kinzo', 'Antonic', '069587740','PATIENT', 0, null)
 insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, surname, phone, usertype, penalties, pharmacy_id) values ('Patient', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic21@gmail.com', true, 'Nikola', 'kinzo', 'Antonic', '069587740','PATIENT', 0, null)
 insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, surname, phone, usertype, penalties, pharmacy_id) values ('Pharmacy_administrator', 'Novi Sad', '24', 212431, 'Srbija', 'Stefana Nemanje', 'pjevalica@gmail.com', true, 'Bojana', 'bole123', 'Pjevalica', '06333521','PHARMACY_ADMINISTRATOR', null, 1)
+insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, surname, phone, usertype, penalties, pharmacy_id) values ('Supplier', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'joksi@gmail.com', true, 'Nikola', 'kinzo', 'Antonic', '069587740','SUPPLIER', 0, 3)
+insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, surname, phone, usertype, penalties, pharmacy_id) values ('System_admin', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'joksi2@gmail.com', true, 'Nikola', 'kinzo', 'Antonic', '069587740','SYSTEM_ADMIN', 0, 2)
+insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, surname, phone, usertype, penalties, pharmacy_id) values ('Pharmacy_administrator', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'joksi3@gmail.com', true, 'Nikola', 'kinzo', 'Antonic', '069587740','PHARMACY_ADMINISTRATOR', 0, 1)
 
 insert into appointments(is_finished, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (false, '2021-02-13 09:00:00-08', '2021-02-13 09:30:00-08', '', 3, 16, 1)
 insert into appointments(is_finished, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (false, '2021-02-13 09:30:00-08', '2021-02-13 10:00:00-08', '', 3, 17, 1)
@@ -214,8 +217,8 @@ insert into reservations(is_done, starttime, endtime, medication_id, patient_id,
 
 insert into patient_allerged_on_medications(patient_id, medication_id) values (16, 1)
 insert into patient_allerged_on_medications(patient_id, medication_id) values (16, 2)
-insert into patient_allerged_on_medications(patient_id, medication_id) values (16, 1)
-insert into patient_allerged_on_medications(patient_id, medication_id) values (16, 1)
+insert into patient_allerged_on_medications(patient_id, medication_id) values (16, 3)
+insert into patient_allerged_on_medications(patient_id, medication_id) values (16, 6)
 insert into patient_allerged_on_medications(patient_id, medication_id) values (16, 5)
 insert into patient_allerged_on_medications(patient_id, medication_id) values (16, 4)
 
@@ -242,8 +245,8 @@ insert into patient_allerged_on_medications(patient_id, medication_id) values (2
 
 insert into patient_allerged_on_medications(patient_id, medication_id) values (22, 1)
 insert into patient_allerged_on_medications(patient_id, medication_id) values (22, 5)
-insert into patient_allerged_on_medications(patient_id, medication_id) values (22, 0)
-insert into patient_allerged_on_medications(patient_id, medication_id) values (22, 5)
+insert into patient_allerged_on_medications(patient_id, medication_id) values (22, 10)
+insert into patient_allerged_on_medications(patient_id, medication_id) values (22, 6)
 insert into patient_allerged_on_medications(patient_id, medication_id) values (22, 4)
 
 
@@ -284,4 +287,5 @@ insert into dermatologist_pharmacy(pharmacy_id, dermatologist_id) values (4,12)
 
 insert into dermatologist_pharmacy(pharmacy_id, dermatologist_id) values (4,15)
 
+insert into pharmacy_suppliers(pharmacy_id, supplier_id) values (3, 25)
 

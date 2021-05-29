@@ -26,6 +26,7 @@ import RegistrationPharmacyAdmin from './components/RegistrationPharmacyAdmin.vu
 import RegistrationDermatologist from './components/RegistrationDermatologist.vue'
 import RegistrationSupplier from './components/RegistrationSupplier.vue'
 import RegistrationSystemAdmin from './components/RegistrationSystemAdmin.vue'
+import ChangePassword from './components/ChangePassword.vue'
 
 export default {
   name: 'App',
@@ -37,7 +38,8 @@ export default {
     RegistrationPharmacyAdmin,
     RegistrationDermatologist,
     RegistrationSupplier,
-    RegistrationSystemAdmin
+    RegistrationSystemAdmin,
+    ChangePassword
   }
 }
 </script>

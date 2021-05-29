@@ -10,6 +10,7 @@ import RegistrationPharmacyAdmin from '../components/RegistrationPharmacyAdmin.v
 import RegistrationDermatologist from '../components/RegistrationDermatologist.vue'
 import RegistrationSupplier from '../components/RegistrationSupplier.vue'
 import RegistrationSystemAdmin from '../components/RegistrationSystemAdmin.vue'
+import ChangePassword from '../components/ChangePassword.vue'
 
 Vue.use(VueRouter)
 
@@ -64,6 +65,11 @@ const routes = [
     path: '/registration-system-admin',
     name: 'RegistrationSystemAdmin',
     component: RegistrationSystemAdmin
+  },
+  { 
+    path: '/change-password',
+    name: 'ChangePassword',
+    component: ChangePassword
   }
   
 

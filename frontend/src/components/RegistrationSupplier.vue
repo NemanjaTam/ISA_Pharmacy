@@ -1,7 +1,7 @@
 <template>
-<div class = "background">
+<div class = "background"> <RegistrationByAdmin/>
  <div class="container">
-    <div class="row">  <RegistrationByAdmin/>
+    <div class="row">  
         <div class="col-md-6">
             <div class="card">
                 <form class="box">
@@ -55,7 +55,7 @@
 }
 
 .card {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     border: none;
    
 }
@@ -70,7 +70,7 @@
     box-shadow: 10px 4px 8px 0 rgba(0,0,0,0.2);
     text-align: center;
     transition: 0.25s;
-    margin-top: 100px;
+    margin-top: 30px;
     border-radius: 20px; 
 }
 

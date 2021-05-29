@@ -6,24 +6,15 @@
             <div class="card">
                 <form class="box">
                     <div class = "cls">
-                        <h1 class = "title" style="color:#4d4d4d ">Sign up with us</h1>
+                        <h1 class = "title" style="color:#4d4d4d ">Change password</h1>
+                        <p class="text-muted"> Because it's your first log in, please change your password!</p>
                     </div>
-                    <b-form-input type="text" v-model="user.email" placeholder="enter email" style="font-style:italic" required/> 
                     <b-form-input type="password" v-model="user.password" placeholder="enter password" style="font-style:italic"  aria-describedby="input-live-help input-live-feedback" :state= validation trim required/> 
                       <b-form-invalid-feedback id="input-live-feedback" style="font-style:italic">
                            Enter at least 7 characters. 
                       </b-form-invalid-feedback>
-                    <b-form-input type="password" v-model="user.confirmPassword" placeholder="confirm password" style="font-style:italic" required/> 
-                    <b-form-input type="text" v-model="user.name" placeholder="enter name" style="font-style:italic" required/>
-                    <b-form-input type="text" v-model="user.surname" placeholder="enter surname" style="font-style:italic" required/>
-                    <b-form-input type="text" v-model="user.address.state" placeholder="enter state" style="font-style:italic" required/>
-                    <b-form-input type="text" v-model="user.address.citty" placeholder="enter city" style="font-style:italic" required/>
-                    <b-form-input type="text" v-model="user.address.postalCode" placeholder="enter postal code" style="font-style:italic" required/>
-                    <b-form-input type="text" v-model="user.address.street" placeholder="enter street" style="font-style:italic" required/>
-                    <b-form-input type="text" v-model="user.address.number" placeholder="enter number of house/building" style="font-style:italic" required/>
-                    <b-form-input type="text" v-model="user.phone" placeholder="enter phone number" style="font-style:italic" required/>
-
-                    <input type="submit" v-on:click="onSubmit" style="color: white" name="" value="Register">
+                    <b-form-input type="password" v-model="user.confirmPassword" placeholder="confirm password" style="font-style:italic" required/>  
+                    <input type="submit"  style="color: white" name="" value="Save">
                     
                 </form>
             </div>
@@ -34,7 +25,6 @@
 </template>
 
 <style scoped>
-
 .cls{
   margin-bottom: 40px;
 }
@@ -56,7 +46,6 @@
     padding: 0;
     font-family: sans-serif;
     background: linear-gradient(to right, #b92b27, #1565c0)
-
 }
 
 .card {
@@ -131,36 +120,17 @@
 .forgot {
     text-decoration: underline
 }
-
 </style>
 
 <script>
-import axios from 'axios'
-import Home from './Home.vue'
 
 export default {
-  name: "RegistrationPage",
-  components: {
-      Home
-  },
+  name: "ChangePassword",
   data() {
     return {
       user: {
-       email: "",
        password: "",
-       confirmPassword: "",
-       name: "",
-       surname: "",
-       userType: "PATIENT",
-       address: {
-            state: "",
-            city: "",
-            postalCode: "",
-            street: "",
-            number: ""
-       },
-       phone: "",
-       isFirstTimeLogging: true
+       confirmPassword: ""
       },
   
       show: true,
@@ -174,22 +144,9 @@ export default {
         alert("Passwords don't match!");
         return;
       }
-      console.log(this.user);
-      const userForSend = {...this.user};
-      delete userForSend["confirmPassword"];
-      axios.post("http://localhost:9005/api/user/register", userForSend);
-
-      if(this.user.isFirstTimeLogging == true) {
-        this.$router.push({path:'change-password'})
-      } else {
+      axios.post("http://localhost:9005/api/user/change-password", this.user);
       this.$router.push({path:'login'})
-      }
-    },
-    onReset(event) {
-      event.preventDefault();
-      console.log("reset");
     }
-
 
   },
   computed: {

@@ -1,5 +1,5 @@
 <template>
-<div class = "background">
+<div class = "background"> <RegistrationByAdmin/>
  <div class="container">
     <div class="row">
         <div class="col-md-6">
@@ -70,7 +70,7 @@
     box-shadow: 10px 4px 8px 0 rgba(0,0,0,0.2);
     text-align: center;
     transition: 0.25s;
-    margin-top: 100px;
+    margin-top: 30px;
     border-radius: 20px; 
 }
 
@@ -132,11 +132,13 @@
 <script>
 //import axios from 'axios';
 import Home from '../views/Home.vue'
+import RegistrationByAdmin from '../views/RegistrationByAdmin.vue'
 
 export default {
   name: "RegistrationDermatologist",
   components: {
-      Home
+      Home,
+      RegistrationByAdmin
   },
   data() {
     return {
