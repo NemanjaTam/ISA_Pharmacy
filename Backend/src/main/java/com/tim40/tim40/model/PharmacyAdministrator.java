@@ -1,7 +1,9 @@
 package com.tim40.tim40.model;
 import javax.persistence.*;
+
 import com.tim40.tim40.model.enums.UserType;
-import lombok.EqualsAndHashCode;
+import lombok.*;
+import lombok.NoArgsConstructor;
 
 @Entity
 @EqualsAndHashCode

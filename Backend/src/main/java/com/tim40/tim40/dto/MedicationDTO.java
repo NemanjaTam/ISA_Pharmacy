@@ -1,10 +1,16 @@
 package com.tim40.tim40.dto;
 
 import java.util.HashSet;
+
 import java.util.Set;
 
 import com.tim40.tim40.model.Medication;
 
+import lombok.*;
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class MedicationDTO {
 
 	private Long id; 
@@ -19,7 +25,7 @@ public class MedicationDTO {
  
   // private final Set<Patient> patients = new HashSet<Patient>();
 
-    public MedicationDTO() { }
+
     
     public MedicationDTO (Medication medication) {
     	this.id = medication.getId();
@@ -36,76 +42,5 @@ public class MedicationDTO {
     	}
     }
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
-	}
-
-	public String getTypeOfMedicine() {
-		return typeOfMedicine;
-	}
-
-	public void setTypeOfMedicine(String typeOfMedicine) {
-		this.typeOfMedicine = typeOfMedicine;
-	}
-
-	public String getStructure() {
-		return structure;
-	}
-
-	public void setStructure(String structure) {
-		this.structure = structure;
-	}
-
-	public String getContraindications() {
-		return contraindications;
-	}
-
-	public void setContraindications(String contraindications) {
-		this.contraindications = contraindications;
-	}
-
-	public String getRecommendedIntake() {
-		return recommendedIntake;
-	}
-
-	public void setRecommendedIntake(String recommendedIntake) {
-		this.recommendedIntake = recommendedIntake;
-	}
-
-
-	public Long getPharmacyID() {
-		return pharmacyID;
-	}
-
-	public void setPharmacyID(Long pharmacyID) {
-		this.pharmacyID = pharmacyID;
-	}
-
-	public Set<Long> getReplacementMedicationsIDs() {
-		return replacementMedicationsIDs;
-	}
-
-	public void setReplacementMedicationsIDs(Set<Long> replacementMedicationsIDs) {
-		this.replacementMedicationsIDs = replacementMedicationsIDs;
-	}
+	
 }

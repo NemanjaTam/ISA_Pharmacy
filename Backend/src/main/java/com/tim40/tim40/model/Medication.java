@@ -54,7 +54,9 @@ public class Medication {
     @Enumerated(EnumType.STRING)
     private PrescriptionRegime prescriptionRegime;
 
-    @Column (nullable = false)
+
+
+	@Column (nullable = false)
     private String code;
     @Column (nullable = false)
     private String typeOfMedicine;		// antibiotik, anestetik, antihistaminik..
@@ -79,6 +81,40 @@ public class Medication {
             inverseJoinColumns = @JoinColumn(name = "replacement_medication_id", referencedColumnName = "id")
     )
 	private Set<Medication> replacementMedications = new HashSet<Medication>();
+    
+    public Medication (String name, String code, String typeOfMedicine, String structure, String contraindications,
+            String recommendedIntake, Pharmacy pharmacy, Set<Medication> replacementMedications)
+    {
+        super();
+        this.name = name;
+        this.code = code;
+        this.typeOfMedicine = typeOfMedicine;
+        this.structure = structure;
+        this.contraindications = contraindications;
+        this.recommendedIntake = recommendedIntake;
+        this.pharmacy = pharmacy; 
+        this.replacementMedications = replacementMedications;
+    }
+    
+//    public Medication( String name, String description, String manufacturer, MedicationForm medicationForm,
+//			PrescriptionRegime prescriptionRegime, String code, String typeOfMedicine, String structure,
+//			String contraindications, String recommendedIntake, Pharmacy pharmacy,
+//			Set<Medication> replacementMedications) {
+//		super();
+//	
+//		this.name = name;
+//		this.description = description;
+//		this.manufacturer = manufacturer;
+//		this.medicationForm = medicationForm;
+//		this.prescriptionRegime = prescriptionRegime;
+//		this.code = code;
+//		this.typeOfMedicine = typeOfMedicine;
+//		this.structure = structure;
+//		this.contraindications = contraindications;
+//		this.recommendedIntake = recommendedIntake;
+//		this.pharmacy = pharmacy;
+//		this.replacementMedications = replacementMedications;
+//	}
 
 
 }

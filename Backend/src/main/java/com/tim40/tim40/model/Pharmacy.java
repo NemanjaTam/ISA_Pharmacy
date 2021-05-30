@@ -75,5 +75,14 @@ public class Pharmacy {
 
     @OneToMany(fetch = FetchType.LAZY,mappedBy="pharmacy")
 	private final Set<PriceListConsultation> priceListConsultation = new HashSet<PriceListConsultation>();
+    
+    public Pharmacy(String name, Address address)
+    {
+        this.name = name;
+        this.address = address;
+        this.avgRating = 0.0;
+    }
+    
+    
 
 }
