@@ -67,24 +67,13 @@ public class Pharmacy {
     @OneToMany(fetch = FetchType.LAZY,mappedBy="pharmacy")
 	private final Set<PharmacyAdministrator> pharmacyAdministrators = new HashSet<PharmacyAdministrator>();
 	
-    //mozda ce morati lista ipak
     @OneToMany(fetch = FetchType.LAZY,mappedBy="pharmacy")
-	private final Set<PriceList> priceLists = new HashSet<PriceList>();
+	private final Set<PriceListMedication> priceListMedication = new HashSet<PriceListMedication>();
+    
+    @OneToMany(fetch = FetchType.LAZY,mappedBy="pharmacy")
+	private final Set<PriceListAppointment> priceListAppointment = new HashSet<PriceListAppointment>();
 
-    public Pharmacy() {}
+    @OneToMany(fetch = FetchType.LAZY,mappedBy="pharmacy")
+	private final Set<PriceListConsultation> priceListConsultation = new HashSet<PriceListConsultation>();
 
-
-    public Pharmacy(String name, Address address)
-    {
-        this.name = name;
-        this.address = address;
-        this.avgRating = 0.0;
-    }
-
-    public Pharmacy(Long id, String name, Address address)
-    {
-        this.id = id;
-        this.address = address;
-        this.name = name;
-    }
 }

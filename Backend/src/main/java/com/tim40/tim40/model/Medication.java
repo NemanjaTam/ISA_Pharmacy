@@ -5,6 +5,8 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,6 +15,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.tim40.tim40.model.enums.MedicationForm;
+import com.tim40.tim40.model.enums.PrescriptionRegime;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -31,19 +36,34 @@ public class Medication {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; 
+	
     @Column(nullable = false)
     private String name;
+    
     @Column(nullable = false) 
     private String description;
+      
     @Column(nullable = false)
-    private int quantity;  //vrlo verovatno mora biti zaseban entitet
-//    @Column(nullable = false)   //ne moze da stoji u medication jer se onda ne cuva info
-//    private double price;         o starim cenama, mora cenovnik - stavka(cena) - lek
+    private String manufacturer; //moze biti entitet ali komplikujemo 
+    
+    @Column(nullable = false) //enum
+    private String medicationType;
+    
+	@Column(name = "medication_form", nullable = false)
+	@Enumerated(EnumType.STRING)
+    private MedicationForm medicationForm;
+    
+	@Column(name = "prescription_regime", nullable = false)
+	@Enumerated(EnumType.STRING)
+    private PrescriptionRegime prescriptionRegime;
+    
     @ManyToOne
     @JoinColumn(name = "pharmacy_id", nullable = false)
     private Pharmacy pharmacy;
+    
     @ManyToMany(mappedBy = "allergedOnMedications")
     private final Set<Patient> patients = new HashSet<Patient>();
+    
     @ManyToMany
     @JoinTable(
     		name = "replacement_medications",
