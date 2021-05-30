@@ -2,7 +2,6 @@ package com.tim40.tim40.model;
 
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -36,34 +35,43 @@ public class Medication {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; 
-	
+
     @Column(nullable = false)
     private String name;
-    
-    @Column(nullable = false) 
-    private String description;
-      
+
+
     @Column(nullable = false)
-    private String manufacturer; //moze biti entitet ali komplikujemo 
-    
-    @Column(nullable = false) //enum
-    private String medicationType;
-    
-	@Column(name = "medication_form", nullable = false)
-	@Enumerated(EnumType.STRING)
+    private String description;
+
+    @Column(nullable = false)
+    private String manufacturer; //moze biti entitet ali komplikujemo
+
+	 @Column(name = "medication_form", nullable = false)
+	 @Enumerated(EnumType.STRING)
     private MedicationForm medicationForm;
-    
-	@Column(name = "prescription_regime", nullable = false)
-	@Enumerated(EnumType.STRING)
+
+  	@Column(name = "prescription_regime", nullable = false)
+    @Enumerated(EnumType.STRING)
     private PrescriptionRegime prescriptionRegime;
-    
+
+    @Column (nullable = false)
+    private String code;
+    @Column (nullable = false)
+    private String typeOfMedicine;		// antibiotik, anestetik, antihistaminik..
+    @Column(nullable = false)
+    private String structure; //ne znam sta je ovo?
+    @Column (nullable = false)
+    private String contraindications;
+    @Column (nullable = false)
+    private String recommendedIntake;  // preporučeni unos terapije na dnevnom nivou
+
     @ManyToOne
     @JoinColumn(name = "pharmacy_id", nullable = false)
     private Pharmacy pharmacy;
-    
+
     @ManyToMany(mappedBy = "allergedOnMedications")
     private final Set<Patient> patients = new HashSet<Patient>();
-    
+
     @ManyToMany
     @JoinTable(
     		name = "replacement_medications",
@@ -71,5 +79,6 @@ public class Medication {
             inverseJoinColumns = @JoinColumn(name = "replacement_medication_id", referencedColumnName = "id")
     )
 	private Set<Medication> replacementMedications = new HashSet<Medication>();
-   
+
+
 }

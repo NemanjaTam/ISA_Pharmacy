@@ -33,16 +33,16 @@ public class Pharmacy {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-	
+
     @Column(nullable = false)
     private String name;
-    
+
     @Embedded
     private Address address;
 
     @Column(name = "avg_rating", nullable = false)
     private double avgRating;
-    
+
     @ManyToMany
     @JoinTable
     (
@@ -51,25 +51,25 @@ public class Pharmacy {
         inverseJoinColumns = @JoinColumn(name = "dermatologist_id")
     )
     private final Set<Dermatologist> dermatologists = new HashSet<Dermatologist>();
-    
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "pharmacy")
     private final Set<Pharmacist> pharmacists = new HashSet<Pharmacist>();
     
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "pharmacy")
     private final Set<Consultation> consultations = new HashSet<Consultation>();
-    
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "pharmacy")
     private final Set<Appointment> appointments = new HashSet<Appointment>();
-    
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "pharmacy")
     private final Set<Medication> medications = new HashSet<Medication>();
-	
+
     @OneToMany(fetch = FetchType.LAZY,mappedBy="pharmacy")
 	private final Set<PharmacyAdministrator> pharmacyAdministrators = new HashSet<PharmacyAdministrator>();
-	
+
     @OneToMany(fetch = FetchType.LAZY,mappedBy="pharmacy")
 	private final Set<PriceListMedication> priceListMedication = new HashSet<PriceListMedication>();
-    
+
     @OneToMany(fetch = FetchType.LAZY,mappedBy="pharmacy")
 	private final Set<PriceListAppointment> priceListAppointment = new HashSet<PriceListAppointment>();
 
