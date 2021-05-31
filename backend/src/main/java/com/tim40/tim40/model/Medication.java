@@ -19,9 +19,9 @@ import javax.persistence.Table;
 
 import com.tim40.tim40.model.enums.MedicationForm;
 import com.tim40.tim40.model.enums.PrescriptionRegime;
+import com.tim40.tim40.model.enums.TypeOfMedication;
 
 import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -32,7 +32,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
 public class Medication {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,7 +39,6 @@ public class Medication {
 
     @Column(nullable = false)
     private String name;
-
 
     @Column(nullable = false)
     private String description;
@@ -56,16 +54,19 @@ public class Medication {
     @Enumerated(EnumType.STRING)
     private PrescriptionRegime prescriptionRegime;
 
-
-
 	@Column (nullable = false)
     private String code;
-    @Column (nullable = false)
-    private String typeOfMedicine;		// antibiotik, anestetik, antihistaminik..
+	
+	@Column(name = "medication_type", nullable = false)
+	@Enumerated(EnumType.STRING)
+    private TypeOfMedication typeOfMedication;		// antibiotik, anestetik, antihistaminik..
+	
     @Column(nullable = false)
     private String structure; //ne znam sta je ovo?
+    
     @Column (nullable = false)
     private String contraindications;
+    
     @Column (nullable = false)
     private String recommendedIntake;  // preporučeni unos terapije na dnevnom nivou
 
@@ -87,39 +88,17 @@ public class Medication {
     )
 	private Set<Medication> replacementMedications = new HashSet<Medication>();
     
-    public Medication (String name, String code, String typeOfMedicine, String structure, String contraindications,
+    public Medication (String name, String code, TypeOfMedication typeOfMedication, String structure, String contraindications,
             String recommendedIntake, Pharmacy pharmacy, Set<Medication> replacementMedications)
     {
         super();
         this.name = name;
         this.code = code;
-        this.typeOfMedicine = typeOfMedicine;
+        this.typeOfMedication = typeOfMedication;
         this.structure = structure;
         this.contraindications = contraindications;
         this.recommendedIntake = recommendedIntake;
         this.pharmacy = pharmacy; 
         this.replacementMedications = replacementMedications;
     }
-    
-//    public Medication( String name, String description, String manufacturer, MedicationForm medicationForm,
-//			PrescriptionRegime prescriptionRegime, String code, String typeOfMedicine, String structure,
-//			String contraindications, String recommendedIntake, Pharmacy pharmacy,
-//			Set<Medication> replacementMedications) {
-//		super();
-//	
-//		this.name = name;
-//		this.description = description;
-//		this.manufacturer = manufacturer;
-//		this.medicationForm = medicationForm;
-//		this.prescriptionRegime = prescriptionRegime;
-//		this.code = code;
-//		this.typeOfMedicine = typeOfMedicine;
-//		this.structure = structure;
-//		this.contraindications = contraindications;
-//		this.recommendedIntake = recommendedIntake;
-//		this.pharmacy = pharmacy;
-//		this.replacementMedications = replacementMedications;
-//	}
-
-
 }

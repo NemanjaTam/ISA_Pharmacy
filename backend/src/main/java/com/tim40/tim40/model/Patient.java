@@ -48,6 +48,9 @@ public class Patient extends User {
 	@OneToMany(mappedBy = "patient")
     private Set<DermatologistRating> dermatologistRatings = new HashSet<DermatologistRating>();
 	
+	@OneToMany(mappedBy = "patient")
+    private Set<PharmacistRating> pharmacistRatings = new HashSet<PharmacistRating>();
+	
 	@ManyToMany
     @JoinTable
     (

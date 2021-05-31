@@ -22,8 +22,8 @@ public class Dermatologist extends User {
 	@ManyToMany(mappedBy = "dermatologists")
     private final Set<Pharmacy> pharmacies = new HashSet<Pharmacy>();
 	
-	@OneToMany(fetch = FetchType.LAZY,mappedBy="dermatologists")
-    private Set<DermatologistRating> ratings;
+	@OneToMany(fetch = FetchType.LAZY,mappedBy="dermatologist")
+    private Set<DermatologistRating> ratings = new HashSet<DermatologistRating>();
 
 	public Dermatologist() {}
 	

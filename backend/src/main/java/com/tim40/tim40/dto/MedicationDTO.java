@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.tim40.tim40.model.Medication;
+import com.tim40.tim40.model.enums.TypeOfMedication;
 
 import lombok.*;
 @Getter
@@ -16,7 +17,7 @@ public class MedicationDTO {
 	private Long id; 
     private String name;
     private String code;
-    private String typeOfMedicine;		
+    private TypeOfMedication typeOfMedication;		
     private String structure;
     private String contraindications;
     private String recommendedIntake; 
@@ -24,14 +25,12 @@ public class MedicationDTO {
     private Set<Long> replacementMedicationsIDs = new HashSet<Long>();
  
   // private final Set<Patient> patients = new HashSet<Patient>();
-
-
-    
+  
     public MedicationDTO (Medication medication) {
     	this.id = medication.getId();
     	this.name = medication.getName();
     	this.code = medication.getCode();
-    	this.typeOfMedicine = medication.getTypeOfMedicine();
+    	this.typeOfMedication = medication.getTypeOfMedication();
     	this.structure = medication.getStructure();
     	this.contraindications = medication.getContraindications();
     	this.recommendedIntake = medication.getRecommendedIntake();
