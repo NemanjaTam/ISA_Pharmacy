@@ -1,33 +1,17 @@
 <template>
   <div >
-        <!-- <AdminPage/> -->
-     <RegistrationPage/>
-     <p>
-    <!-- use router-link component for navigation. -->
-    <!-- specify the link by passing the `to` prop. -->
-    <!-- `<router-link>` will be rendered as an `<a>` tag by default -->
-   
-  </p>
-  <!-- route outlet -->
-  <!-- component matched by the route will render here -->
-  
+    <router-view>
+
+    </router-view>
   </div>
 </template>
 
 <script>
-//import AddMedication from './views/AddMedication'
-//import AddPharmacy from './views/AddPharmacy'
-//import AdminRegistration from './views/AdminRegistration'
-import RegistrationPage from './views/RegistrationPage.vue'
-//import NavBar from './components/NavBar'
-//import LoginPage from './views/LoginPage.vue'
-//import Home from './views/Home.vue'
 
 export default {
   name: 'App',
   components: {
-   //AddPharmacy
-    RegistrationPage
+   
   }
 }
 </script>
