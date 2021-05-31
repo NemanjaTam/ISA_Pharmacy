@@ -24,7 +24,7 @@ public class PriceListMedication {
 	private Period durationPeriod;
 	
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "priceListMedication")
+	@OneToMany(fetch = FetchType.LAZY)
 	private Set<PriceMedication> medicationPrices = new HashSet<PriceMedication>();
 	
 	@ManyToOne
