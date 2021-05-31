@@ -33,6 +33,21 @@ public class Patient extends User {
 	@OneToMany(mappedBy = "patient")
 	private Set<Appointment> appointments = new HashSet<Appointment>();
 	
+	@OneToMany(mappedBy = "patient")
+	private Set<Eprescription> perscriptions = new HashSet<Eprescription>();
+	
+	@OneToMany(mappedBy = "patient")
+	private Set<Reservation> reservations = new HashSet<Reservation>();
+	
+	@OneToMany(mappedBy = "patient")
+    private Set<PharmacyRating> pharmacyRatings = new HashSet<PharmacyRating>();
+	
+	@OneToMany(mappedBy = "patient")
+    private Set<MedicationRating> medicationRatings = new HashSet<MedicationRating>();
+	
+	@OneToMany(mappedBy = "patient")
+    private Set<DermatologistRating> dermatologistRatings = new HashSet<DermatologistRating>();
+	
 	@ManyToMany
     @JoinTable
     (

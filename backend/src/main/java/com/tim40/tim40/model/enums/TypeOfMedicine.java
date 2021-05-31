@@ -1,0 +1,16 @@
+package com.tim40.tim40.model.enums;
+
+public enum TypeOfMedicine {
+	ANTIPYRETIC,
+    ANALGESIC,
+    ANTIBIOTIC,
+    ANTISEPTIC,
+    ANTIDEPRESSANT,
+    ANTIALERGIC,
+    ANTIPSYCHOTIC,
+    BARBITURATE,
+    HORMONE,
+    CONTRACEPTIVE,
+    PROBIOTIC,
+    TRANQUILIZER
+}
