@@ -86,7 +86,8 @@ export default {
       validation() {
         return this.user.password.length > 7 ? true : false
       }
-  }}
+  }
+}
 </script>
 
 <style scoped>
