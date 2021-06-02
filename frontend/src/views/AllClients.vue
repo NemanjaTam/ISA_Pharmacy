@@ -165,7 +165,7 @@ export default {
 <style scoped>
     .background {
         background-image: url("../assets/img/medicine.jpg");
-        position: fixed; 
+        position: absolute; 
         top: 0; 
         left: 0; 
         min-width: 100%;
