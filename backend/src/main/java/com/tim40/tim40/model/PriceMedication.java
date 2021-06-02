@@ -22,9 +22,9 @@ public class PriceMedication {
 	@JoinColumn(name = "medication_id", nullable = false)  //unidirekciona veza
 	private Medication medication; 
 
-	@ManyToOne //vlasnik veze ima i strani kljuc
-	@JoinColumn(name = "price_list_medication_id", nullable = false)
-	private PriceListMedication priceListMedication;
+//	@ManyToOne //vlasnik veze ima i strani kljuc
+//	@JoinColumn(name = "price_list_medication_id", nullable = false)
+//	private PriceListMedication priceListMedication;
 		
 	
 }
