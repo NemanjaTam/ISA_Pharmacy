@@ -1,19 +1,33 @@
 package com.tim40.tim40.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.tim40.tim40.model.enums.UserType;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Entity
 @Table(name = "users")
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,10 +58,12 @@ public class User {
 	
 	@Column(nullable = false)
 	private boolean isFirstTimeLogging;
-
-	public User() {
-		super();
-	}
+	
+	@OneToMany(fetch = FetchType.LAZY,mappedBy="userReceiver")
+	private Set<Email> inbox = new HashSet<Email>();
+	
+	@OneToMany(fetch = FetchType.LAZY,mappedBy="userSender")
+	private Set<Email> send = new HashSet<Email>();
 	
 	public User(String name, String surname, String email, String password, Address address,
 			UserType userType, boolean isFirstTimeLogging) {
@@ -59,78 +75,6 @@ public class User {
 		this.address = address;
 		this.userType = userType;
 		this.isFirstTimeLogging = isFirstTimeLogging;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getSurname() {
-		return surname;
-	}
-
-	public void setSurname(String surname) {
-		this.surname = surname;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public Address getAddress() {
-		return address;
-	}
-
-	public void setAddress(Address address) {
-		this.address = address;
-	}
-
-	public UserType getUserType() {
-		return userType;
-	}
-
-	public void setUserType(UserType userType) {
-		this.userType = userType;
-	}
-	
-	public boolean isFirstTimeLogging() {
-		return isFirstTimeLogging;
-	}
-
-	public void setFirstTimeLogging(boolean isFirstTimeLogging) {
-		this.isFirstTimeLogging = isFirstTimeLogging;
-	}
-
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
 	}
 	
 }

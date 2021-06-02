@@ -37,6 +37,9 @@ public class Appointment {
 	@Embedded
 	private Period period;
 	
+	@Column
+	private boolean isTaken;
+	
 	@Column(nullable = false)
 	private boolean isFinished; 
 	
