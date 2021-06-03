@@ -1,0 +1,47 @@
+<template>
+<div>
+  <b-navbar type="light" variant="light">
+    <b-navbar-nav>
+      <b-nav-item href="#">Home</b-nav-item>
+
+      <!-- Navbar dropdowns -->
+     <b-nav-item-dropdown text="Pharmacy" left>
+        <b-dropdown-item href="#">Appointments</b-dropdown-item>
+        <b-dropdown-item href="#">Dermatologist</b-dropdown-item>
+        <b-dropdown-item href="#">Pharmacists</b-dropdown-item>
+        <b-dropdown-item href="#">Pharmacists</b-dropdown-item>
+      </b-nav-item-dropdown>
+
+     <b-nav-item-dropdown text="More" left>
+        <b-dropdown-item href="#">PURCHASE ORDER</b-dropdown-item>
+        <b-dropdown-item href="#">SALE</b-dropdown-item>
+     </b-nav-item-dropdown>
+
+      <b-nav-item-dropdown text="User" class="ml-auto" right>
+        <b-dropdown-item href="#">Settings</b-dropdown-item>
+        <b-dropdown-item href="#">Log out</b-dropdown-item>
+      </b-nav-item-dropdown>
+<!-- 
+     <b-nav-item class="ml-auto"> <b-nav-form>
+      <b-form-input class="mr-sm-2" placeholder="Search"></b-form-input>
+      <b-button variant="outline-success" class="my-2 my-sm-0" type="submit">Search</b-button>
+      </b-nav-form></b-nav-item> -->
+    </b-navbar-nav>
+  </b-navbar>``
+  <div>
+
+</div>
+</div>
+</template>
+
+<script>
+
+export default {
+    name: "NavbarAdmin"
+}
+</script>
+<style lang="scss" scoped>
+
+</style>
+
+

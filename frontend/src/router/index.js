@@ -14,6 +14,7 @@ import PerscriptionMedication from '../views/PerscriptionMedication.vue'
 import ExaminationProcess from '../views/ExaminationProcess.vue'
 import MedicationTherapy from '../components/MedicationTherapy.vue'
 import Calendar from '../components/Calendar.vue'
+import PharmacyAdmin from '../views/PharmacyAdmin.vue'
 
 Vue.use(VueRouter)
 
@@ -88,6 +89,10 @@ const routes = [
     path: '/calendar',
     name: 'Calendar',
     component: Calendar
+  },{
+    path:'/pharmacyAdminPage',
+    name:'/PharmacyAdminPage',
+    component: PharmacyAdmin
   }
 ]
 
