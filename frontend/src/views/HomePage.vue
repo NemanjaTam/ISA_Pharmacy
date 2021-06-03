@@ -1,0 +1,272 @@
+<template>
+  <div class="background">
+    <TopMenuForDP/>
+    <div class="container">
+      <div class="container-child-1">
+        <b-form>
+            <label class="labelBox"><b>Name:</b></label>
+            <b-form-input class="textBox"></b-form-input>
+            <label class="labelBox"><b>Surname:</b></label>
+            <b-form-input class="textBox"></b-form-input>
+            <label class="labelBox"><b>Email:</b></label>
+            <b-form-input class="textBox" type="email"></b-form-input>
+            <label class="labelBox"><b>Phone number:</b></label>
+            <b-form-input class="textBox"></b-form-input>
+            <label class="labelBox"><b>State:</b></label>
+            <b-form-input class="textBox"></b-form-input>
+            <label class="labelBox"><b>City:</b></label>
+            <b-form-input class="textBox"></b-form-input>
+            <label class="labelBox"><b>Street:</b></label>
+            <b-form-input class="textBox"></b-form-input>
+            <label class="labelBox"><b>Number of house:</b></label>
+            <b-form-input class="textBox"></b-form-input>
+            <label class="labelBox"><b>Postal code:</b></label>
+            <b-form-input class="textBox"></b-form-input>
+        </b-form>
+      </div>
+      <div class="container-child-2">
+        <table class="table table-hover boxTable">
+                <thead class="thead-dark topLeft topRight">
+                    <tr>
+                        <th style="text-align: center" class="topLeft" scope="col">Type</th>
+                        <th style="text-align: center" scope="col">Name of patient</th>
+                        <th style="text-align: center" scope="col">Start time</th>
+                        <th style="text-align: center" scope="col">End time</th>
+                        <th class="topRight" style="text-align: center" scope="col">Start</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="table-light" style="text-align: center">
+                        <td>Dark</td>
+                        <td>Column content</td>
+                        <td>Column content</td>
+                        <td>Column content</td>
+                        <td style="width: 180px">
+                            <router-link to="/examinationCheck" class="routerlink">
+                                <b-button class="button">Start examination</b-button>
+                            </router-link>
+                        </td>
+                    </tr>
+                    <tr class="table-dark" style="text-align: center">
+                        <td>Dark</td>
+                        <td>Column content</td>
+                        <td>Column content</td>
+                        <td>Column content</td>
+                        <td>
+                            <b-button class="button">Start examination</b-button>
+                        </td>
+                    </tr>
+                    <tr class="table-light" style="text-align: center">
+                        <td>Dark</td>
+                        <td>Column content</td>
+                        <td>Column content</td>
+                        <td>Column content</td>
+                        <td style="width: 180px">
+                            <b-button class="button">Start examination</b-button>
+                        </td>
+                    </tr>
+                    <tr class="table-dark" style="text-align: center">
+                        <td>Column content</td>
+                        <td>Column content</td>
+                        <td>Column content</td>
+                        <td>Column content</td>
+                        <td style="width: 180px">
+                            <b-button class="button">Start examination</b-button>
+                        </td>
+                    </tr>
+                    <tr class="table-light" style="text-align: center">
+                        <td>Dark</td>
+                        <td>Column content</td>
+                        <td>Column content</td>
+                        <td>Column content</td>
+                        <td style="width: 180px">
+                            <b-button class="button">Start examination</b-button>
+                        </td>
+                    </tr>
+                    <tr class="table-dark" style="text-align: center">
+                        <td>Dark</td>
+                        <td>Column content</td>
+                        <td>Column content</td>
+                        <td>Column content</td>
+                        <td style="width: 180px">
+                            <b-button class="button">Start examination</b-button>
+                        </td>
+                    </tr>
+                    <tr class="table-light" style="text-align: center">
+                        <td>Dark</td>
+                        <td>Column content</td>
+                        <td>Column content</td>
+                        <td>Column content</td>
+                        <td style="width: 180px">
+                            <b-button class="button">Start examination</b-button>
+                        </td>
+                    </tr>
+                    <tr class="table-dark" style="text-align: center">
+                        <td>Dark</td>
+                        <td>Column content</td>
+                        <td>Column content</td>
+                        <td>Column content</td>
+                        <td style="width: 180px">
+                            <b-button class="button">Start examination</b-button>
+                        </td>
+                    </tr>
+                    <tr class="table-light" style="text-align: center">
+                        <td>Dark</td>
+                        <td>Column content</td>
+                        <td>Column content</td>
+                        <td>Column content</td>
+                        <td style="width: 180px">
+                            <b-button class="button">Start examination</b-button>
+                        </td>
+                    </tr>                    
+                    <tr class="table-dark" style="text-align: center">
+                        <td>Dark</td>
+                        <td>Column content</td>
+                        <td>Column content</td>
+                        <td>Column content</td>
+                        <td style="width: 180px">
+                            <b-button class="button">Start examination</b-button>
+                        </td>
+                    </tr>
+                    <tr class="table-light" style="text-align: center">
+                        <td>Dark</td>
+                        <td>Column content</td>
+                        <td>Column content</td>
+                        <td>Column content</td>
+                        <td style="width: 180px">
+                            <b-button class="button">Start examination</b-button>
+                        </td>
+                    </tr>
+                    <tr class="table-dark bottomRight bottomLeft" style="text-align: center">
+                        <td class="bottomLeft">Dark</td>
+                        <td>Column content</td>
+                        <td>Column content</td>
+                        <td>Column content</td>
+                        <td class="bottomRight" style="width: 180px">
+                            <b-button class="button">Start examination</b-button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+      </div>
+    </div>
+    <div class="container-1">
+        <div class="container-child">
+          <b-form-datepicker class="boxDatePicker" placeholder="Select absence beggining"></b-form-datepicker>
+        </div>
+        <div class="container-child">
+          <b-button class="button">Request holiday or absence</b-button>
+        </div>
+        <div class="container-child">
+          <b-form-datepicker class="boxDatePicker" placeholder="Select absence ending"></b-form-datepicker>
+          </div>
+    </div>
+  </div>
+</template>
+
+<script>
+
+import TopMenuForDP from '../components/TopMenuForPD.vue'
+
+export default {
+    name: "HomePage",
+    components: {
+        TopMenuForDP
+    }
+}
+</script>
+
+<style scoped>
+  .background {
+    background-image: url("../assets/img/medicine.jpg");
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    min-width: 100%;
+    min-height: 100%;
+  }
+
+  .labelBox {
+    /* margin-top:20px; */
+    margin-left: 15px;
+  }
+
+  .textBox {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    transition: 0.25s;
+    border-radius: 20px;
+    margin-bottom: 20px;
+  }
+
+  .container {
+        display: flex;
+        flex-direction: row;
+        min-width: 100%;
+        min-height: 100%;
+        justify-content:flex-center;
+    }
+
+  .container-1 {
+        display: flex;
+        flex-direction: row;
+        min-width: 100%;
+        min-height: 100%;
+        justify-content:flex-center;
+    }
+
+    .container-child {
+        margin: 20px;
+        /* flex: 2; */
+    }
+
+    .container-child-1 {
+        margin: 20px;
+        flex: 1;
+    }
+
+    .container-child-2 {
+        margin: 20px;
+        flex: 2;
+    }
+
+    .boxDatePicker {
+        max-width: 30vw;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        text-align: center;
+        transition: 0.25s;
+        border-radius: 20px;
+    }
+
+    .button {
+        width: 300px;
+        transition: 0.25s;
+        border-radius: 20px;
+    }
+
+    .boxTable {
+        /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
+        border-style:hidden;
+        border-radius: 20px;
+    }
+
+    .bottomLeft {
+        border-bottom-left-radius: 20px;
+    }
+
+    .bottomRight {
+        border-bottom-right-radius: 20px;
+    }
+
+    .topRight {
+        border-top-right-radius: 20px;
+    }
+
+    .topLeft {
+        border-top-left-radius: 20px;
+    }
+
+    .buttonColumn {
+        width: 180px;
+        
+    }
+</style>

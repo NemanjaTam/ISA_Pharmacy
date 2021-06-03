@@ -1,45 +1,98 @@
+import Vue from 'vue'
 import VueRouter from 'vue-router'
+import RegistrationPage from '../views/RegistrationPage.vue'
 import Home from '../views/Home.vue'
-import RegistrationPage from '../views/RegistrationPage'
-import Login from '../views/Login'
-import AdminPage from '../views/AdminPage'
-import AddPharmacy from '../views/AddPharmacy'
-import AddMedication from '../views/AddMedication'
+import LoginPage from '../views/LoginPage.vue'
+import HomePage from '../views/HomePage.vue'
+import UpdateBasicInformation from '../views/UpdateBasicInformation'
+import FirstTimeLogging from '../views/FirstTimeLogging.vue'
+import WorkCalendar from '../views/WorkCalendar.vue'
+import AllClients from '../views/AllClients.vue'
+import ExaminationCheck from '../views/ExaminationCheck.vue'
+import ScheduleExamination from '../views/ScheduleExamination.vue'
+import PerscriptionMedication from '../views/PerscriptionMedication.vue'
+import ExaminationProcess from '../views/ExaminationProcess.vue'
+import MedicationTherapy from '../components/MedicationTherapy.vue'
+import Calendar from '../components/Calendar.vue'
+
+Vue.use(VueRouter)
+
 const routes = [
+  
   {
     path: '/',
     name: 'Home',
     component: Home
   },
   {
-    path: '/registration',
+    path: '/registrationPage',
     name: 'RegistrationPage',
     component: RegistrationPage
-  }, 
-  {
-    path: '/login',
-    name: 'Login',
-    component: Login
   },
   {
-  path: '/pharmacies',
-  name: 'AdminPage',
-  component: AdminPage
+    path: '/loginPage',
+    name: 'LoginPage',
+    component: LoginPage
   },
   {
-    path: '/addPharmacy',
-    name: 'AddPharmacy',
-    component: AddPharmacy
+    path: '/homePage',
+    name: 'HomePage',
+    component: HomePage
   },
   {
-    path: '/addMedication',
-    name: 'AddMedication',
-    component: AddMedication
+    path: '/updateBasicInformation',
+    name: 'UpdateBasicInformation',
+    component: UpdateBasicInformation
+  },
+  {
+    path: '/firstTimeLogging',
+    name: 'FirstTimeLogging',
+    component: FirstTimeLogging
+  },
+  {
+    path: '/workCalendar',
+    name: 'WorkCalendar',
+    component: WorkCalendar
+  },
+  {
+    path: '/allClients',
+    name: 'AllClients',
+    component: AllClients
+  },
+  {
+    path: '/examinationCheck',
+    name: 'ExaminationChcek',
+    component: ExaminationCheck
+  },
+  {
+    path: '/scheduleExamination',
+    name: 'ScheduleExamination',
+    component: ScheduleExamination
+  },
+  {
+    path: '/perscriptionMedication',
+    name: 'PerscriptionMedication',
+    component: PerscriptionMedication
+  },
+  {
+    path: '/examinationProcess',
+    name: 'ExaminationProcess',
+    component: ExaminationProcess
+  },
+  {
+    path: '/medicationTherapy',
+    name: 'MedicationTherapy',
+    component: MedicationTherapy
+  },
+  {
+    path: '/calendar',
+    name: 'Calendar',
+    component: Calendar
   }
 ]
 
-const router = new VueRouter({
-  routes // short for `routes: routes`
+export const router = new VueRouter({
+  mode: 'history',
+  base: process.env.BASE_URL,
+  routes
 })
-
-export default router

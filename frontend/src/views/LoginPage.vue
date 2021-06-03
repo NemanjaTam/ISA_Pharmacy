@@ -1,30 +1,19 @@
 <template>
   <div class = "background">
-      <Navbar/>
+      <navbar/>
       <div class="container">
           <div class="row">
               <div class="col-md-6">
                   <div class="card">
                       <form onsubmit="event.preventDefault()" class="box">
                           <div class = "cls">
-                              <h1 class = "title" style="color:#4d4d4d ">Sign up with us</h1>
+                              <h1 class = "title" style="color:#4d4d4d ">Log in</h1>
+                              <p class="text-muted"> Please enter your email and password!</p>
                           </div>
-                          <b-form-input type="text" v-model="user.email" placeholder="enter email" style="font-style:italic" required/> 
-                          <b-form-input type="password" v-model="user.password" placeholder="enter password" style="font-style:italic"  aria-describedby="input-live-help input-live-feedback" :state= validation trim required/> 
-                            <b-form-invalid-feedback id="input-live-feedback" style="font-style:italic">
-                                Enter at least 7 characters. 
-                            </b-form-invalid-feedback>
-                          <b-form-input type="password" v-model="user.confirmPassword" placeholder="confirm password" style="font-style:italic" required/> 
-                          <b-form-input type="text" v-model="user.name" placeholder="enter name" style="font-style:italic" required/>
-                          <b-form-input type="text" v-model="user.surname" placeholder="enter surname" style="font-style:italic" required/>
-                          <b-form-input type="text" v-model="user.address.state" placeholder="enter state" style="font-style:italic" required/>
-                          <b-form-input type="text" v-model="user.address.citty" placeholder="enter city" style="font-style:italic" required/>
-                          <b-form-input type="text" v-model="user.address.postalCode" placeholder="enter postal code" style="font-style:italic" required/>
-                          <b-form-input type="text" v-model="user.address.street" placeholder="enter street" style="font-style:italic" required/>
-                          <b-form-input type="text" v-model="user.address.state" placeholder="enter state" style="font-style:italic" required/>
-                          <b-form-input type="text" v-model="user.address.number" placeholder="enter number of house/building" style="font-style:italic" required/>
-                          <b-form-input type="text" v-model="user.phone" placeholder="enter phone number" style="font-style:italic" required/>
-                          <input type="submit" style="color: white" name="" value="Register" href="#">
+                          <input type="text" name="" placeholder="email" style="font-style:italic" required> 
+                          <input type="password" name="" placeholder="password" style="font-style:italic" required> 
+                          <a class="forgot text-muted" href="#">Forgot password?</a>
+                          <input type="submit"  style="color: white" name="" value="Log in" href="#">
                       </form>
                   </div>
               </div>
@@ -38,9 +27,9 @@ import axios from 'axios'
 import Navbar from '../components/Navbar.vue';
 
 export default {
-  name: "RegistrationPage",
+  name: "LoginPage",
   components: {
-    Navbar
+      Navbar
   },
   data() {
     return {
@@ -86,27 +75,29 @@ export default {
       validation() {
         return this.user.password.length > 7 ? true : false
       }
-  }
-}
+  }}
 </script>
 
 <style scoped>
   .cls{
-      margin-bottom: 40px;
+    margin-bottom: 40px;
   }
-  .background {
-      background-image: url("../assets/img/medicine.jpg");
-      position: fixed; 
-      top: 0; 
-      left: 0; 
-      min-width: 100%;
-      min-height: 100%;
-  } 
+
+ .background {
+    background-image: url("../assets/img/medicine.jpg");
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    min-width: 100%;
+    min-height: 100%;
+  }
+
   .title {
-      font-family: fantasy;
-      font-size: 30px;
-      color: black;
+    font-family: fantasy;
+    font-size: 30px;
+    color: black;
   }
+
   .body {
       margin: 0;
       padding: 0;
@@ -185,5 +176,4 @@ export default {
   .forgot {
       text-decoration: underline
   }
-
 </style>

@@ -1,0 +1,37 @@
+package com.tim40.tim40.model;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+
+@Entity
+@DiscriminatorValue("Dermatologist")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class Dermatologist extends User {
+	@ManyToMany(mappedBy = "dermatologists")
+    private final Set<Pharmacy> pharmacies = new HashSet<Pharmacy>();
+	
+	@OneToMany(mappedBy = "dermatologist")
+	private Set<Appointment> appointments = new HashSet<Appointment>();
+	
+	@OneToMany(fetch = FetchType.LAZY,mappedBy="dermatologist")
+    private Set<DermatologistRating> ratings = new HashSet<DermatologistRating>();
+	
+	@OneToMany(fetch = FetchType.LAZY)
+	private Set<Patient> allPatients = new HashSet<Patient>();
+	
+}
