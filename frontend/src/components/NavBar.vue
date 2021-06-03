@@ -66,10 +66,10 @@
 <style scoped>
 .background {
   background-image: url("../assets/img/medicine.jpg");
-  position:absolute;
+  position:fixed;
   top: 0; 
   left: 0; 
-
+  background-repeat:repeat-y;
 	
   /* Preserve aspet ratio */
   min-width: 100%;
@@ -78,6 +78,9 @@
 .routerlink {
   display: block;
   color: rgb(255, 255, 255);
+} 
+.b-navbar {
+  z-index: -10000 !important;
 }
 </style>
 

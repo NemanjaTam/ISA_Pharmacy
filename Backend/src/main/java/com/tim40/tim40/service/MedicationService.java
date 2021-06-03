@@ -1,6 +1,8 @@
 package com.tim40.tim40.service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,4 +39,14 @@ public class MedicationService implements IMedicationService{
 		Medication createdMedication = medicationRepository.save(medication);
 		return new MedicationDTO(createdMedication);
 	}
+	
+	public List<MedicationDTO> getAllMedications() {
+		List<Medication> medications = medicationRepository.findAll();
+		List<MedicationDTO> medicationDTOs = new ArrayList<MedicationDTO>();
+		for(Medication m : medications) {
+			medicationDTOs.add(new MedicationDTO(m));
+		}
+		return medicationDTOs;
+	}
+	
 }

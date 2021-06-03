@@ -179,11 +179,8 @@ export default {
       delete userForSend["confirmPassword"];
       axios.post("http://localhost:9005/api/user/register", userForSend);
 
-      if(this.user.isFirstTimeLogging == true) {
-        this.$router.push({path:'change-password'})
-      } else {
       this.$router.push({path:'login'})
-      }
+      
     },
     onReset(event) {
       event.preventDefault();

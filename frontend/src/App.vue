@@ -15,33 +15,15 @@
 </template>
 
 <script>
-import AddMedication from './components/AddMedication.vue'
-//import AddPharmacy from './views/AddPharmacy'
-//import AdminRegistration from './views/AdminRegistration'
-import RegistrationPage from './views/RegistrationPage.vue'
 import NavBar from './components/NavBar.vue'
-import LoginPage from './views/LoginPage.vue'
-//import Home from './views/Home.vue'
-import RegistrationPharmacyAdmin from './components/RegistrationPharmacyAdmin.vue'
-import RegistrationDermatologist from './components/RegistrationDermatologist.vue'
-import RegistrationSupplier from './components/RegistrationSupplier.vue'
-import RegistrationSystemAdmin from './components/RegistrationSystemAdmin.vue'
-import ChangePassword from './components/ChangePassword.vue'
 
 export default {
   name: 'App',
   components: {
-   NavBar,
-    RegistrationPage,
-    LoginPage,
-    AddMedication,
-    RegistrationPharmacyAdmin,
-    RegistrationDermatologist,
-    RegistrationSupplier,
-    RegistrationSystemAdmin,
-    ChangePassword
+   NavBar
   }
 }
+
 </script>
 
 <style>
