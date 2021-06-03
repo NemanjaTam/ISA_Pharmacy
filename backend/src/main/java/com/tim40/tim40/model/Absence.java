@@ -1,5 +1,6 @@
 package com.tim40.tim40.model;
 
+import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,6 +25,12 @@ public class Absence {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@Column
+	private boolean isApproved;
+	
+	@Column
+	private boolean isFinished;
 	
 	@Embedded  				//jedno oduststvo ima jedan period vazenja,a za jedan period vazenja se vezuje jedno odsustvo
 	private Period period;
