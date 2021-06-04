@@ -1,11 +1,11 @@
 <template>
 <div>
-  <b-navbar type="light" variant="light">
+  <b-navbar class="first" toggleable="lg" type="dark" variant="dark">
     <b-navbar-nav>
       <b-nav-item href="#">Home</b-nav-item>
-
+ 
       <!-- Navbar dropdowns -->
-     <b-nav-item-dropdown text="Pharmacy" left>
+     <b-nav-item-dropdown class="dropdaun"  text="Pharmacy" left>
         <b-dropdown-item href="#">Appointments</b-dropdown-item>
         <b-dropdown-item href="#">Dermatologist</b-dropdown-item>
         <b-dropdown-item href="#">Pharmacists</b-dropdown-item>
@@ -32,6 +32,7 @@
 
 </div>
 </div>
+
 </template>
 
 <script>
@@ -40,8 +41,10 @@ export default {
     name: "NavbarAdmin"
 }
 </script>
-<style lang="scss" scoped>
-
+<style  scoped>
+.dropdaun{
+  border: 2px solid #343a40;
+}
 </style>
 
 
