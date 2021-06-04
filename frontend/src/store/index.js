@@ -10,22 +10,31 @@ export const store = new Vuex.Store({
   state: {
     user: {
       id: null,
-      name: "",
-      surname: "",
-      email: "",
-      phoneNumber: null,
-      gender: null,
-      birthdayDate: null,
-      website: "",
-      biography: "",
-      username: "",
-      password: ""
-   }
+      name: '',
+      surname: '',
+      email: '',
+      password: '',
+      phone: '',
+      address: {
+        state: '',
+        city: '',
+        street: '',
+        number: '',
+        postalCode: null
+      },
+      userType: null,
+      firstTimeLogging: null,
+      inbox: [],
+      send: []
+    }
   },
   //methods that return data (state)
   getters: {
+    getUser(state) {
+        return state.user
+    },
     getFullName(state) {
-      return state.user.name + " " + state.user.surname
+       return state.user.name + " " + state.user.surname
     },
     isUserLogged(state) {
       if(state.user.id != null) {
@@ -34,18 +43,56 @@ export const store = new Vuex.Store({
       else {
         return false
       }
+    },
+    getUserType(state) {
+      return state.user.userType
+    },
+    isDermatologist(state) {
+      if(state.user.userType == "DERMATOLOGIST") return true
+      else return false
     }
   },
   //methods for changing date (state)
   mutations: {
-    updateUser(state, {user}) {
+    updateUser(state, user) {
       state.user = user;
+    },
+    updatePassword(state, password) {
+      state.user.password = password;
+      if(state.user.firstTimeLogging) {
+        state.user.firstTimeLogging = false
+      }
     }
   },
   //always on components dispatch action which commit some mutations. Never commit mutations from component because of async
   actions: {
-    updateUser(context, {user}) {
-      context.commit('updateUser', {user})
+    updateUser(context, user) {
+      context.commit('updateUser', user)
+    },
+    updatePassword(context, password) {
+      context.commit('updatePassword', password)
+    },
+    logout(context) {
+      var user = {
+        id: null,
+        name: '',
+        surname: '',
+        email: '',
+        password: '',
+        phone: '',
+        address: {
+          state: '',
+          city: '',
+          street: '',
+          number: '',
+          postalCode: null
+        },
+        userType: null,
+        firstTimeLogging: null,
+        inbox: [],
+        send: []
+      }
+      context.commit('updateUser', user)
     }
   }
 })

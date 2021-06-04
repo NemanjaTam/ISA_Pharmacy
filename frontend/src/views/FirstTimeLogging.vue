@@ -8,12 +8,12 @@
                         <div class = "cls">
                             <h1 class = "title" style="color:#4d4d4d ">Please change your password</h1>
                         </div>
-                        <b-form-input type="password" placeholder="enter new password" style="font-style:italic" required/> 
-                        <b-form-input type="password" placeholder="confirm new password" style="font-style:italic"  aria-describedby="input-live-help input-live-feedback" :state= validation trim required/> 
-                        <b-form-invalid-feedback id="input-live-feedback" style="font-style:italic">
-                                Enter at least 7 characters. 
-                        </b-form-invalid-feedback>
-                        <b-button>Change password</b-button>
+                        <b-form-input v-model="password" type="password" placeholder="enter new password" style="font-style:italic" required/> 
+                        <b-form-input v-model="passwordConfirm" type="password" placeholder="confirm new password" style="font-style:italic"  aria-describedby="input-live-help input-live-feedback" trim required/> 
+                        <br>
+                        <label v-if="this.show" style="color:red"><b>{{message}}</b></label>
+                        <br>
+                        <b-button v-on:click="changePassword">Change password</b-button>
                       </form>
                   </div>
               </div>
@@ -23,14 +23,42 @@
 </template>
 
 <script>
+
+import axios from 'axios'
+
 export default {
     name: 'FirstTimeLogging',
     computed: {
-      validation() {
-        // return this.user.password.length > 7 ? true : false
-      }
+        User() {
+            return this.$store.getters.getUser
+        }
     },
-    updated() {
+    data() {
+        return {
+            password: '',
+            passwordConfirm: '',
+            show: false,
+            message: 'Passwords do not match'
+        }
+    },
+    methods: {
+        changePassword() {
+            if(this.password == '') {
+                this.show = true
+            }
+            else if(this.password != this.passwordConfirm) {
+                this.show = true
+            }
+            else {
+                this.show = false
+                this.$store.dispatch('updatePassword', this.password)
+                console.log(this.User)
+                axios.post("http://localhost:9005/api/user/update-user", this.User)
+                this.$router.push({name: 'HomePage'})
+            }
+        }
+    },
+    mounted() {
         alert("This is the first time you loged in. Please update your password to continue.")
     }
     
