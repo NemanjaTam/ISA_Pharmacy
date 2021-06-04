@@ -25,7 +25,7 @@ public class Address {
 	}
 
 	public Address(String state, String city, String street, String number, int postalCode) {
-		super();
+		
 		this.state = state;
 		this.city = city;
 		this.street = street;

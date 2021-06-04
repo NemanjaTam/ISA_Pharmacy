@@ -88,4 +88,9 @@ public class UserService implements IUserService {
 			return new ResponseEntity<String>("taken", HttpStatus.OK);
 		}
 	}
+
+	@Override
+	public User findByEmail(String email) {
+		return userRepository.findByEmail(email).orElse(null);
+	}
 }

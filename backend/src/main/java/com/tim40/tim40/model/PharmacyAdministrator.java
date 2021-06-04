@@ -19,5 +19,5 @@ public class PharmacyAdministrator extends User{
 	private Pharmacy pharmacy;
 	
 	@OneToMany(fetch = FetchType.LAZY,mappedBy="adminPharmacy")
-	private final Set<PurchaseOrder> purchaseOrderMade = new HashSet<PurchaseOrder>();
+	private  Set<PurchaseOrder> purchaseOrderMade = new HashSet<PurchaseOrder>();
 }

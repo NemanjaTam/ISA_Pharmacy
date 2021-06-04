@@ -91,5 +91,6 @@ public class User {
 		this.send = userDTO.getSend();
 	}
 	
+	
 }
 
