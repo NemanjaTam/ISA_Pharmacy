@@ -152,13 +152,13 @@
     </div>
     <div class="container-1">
         <div class="container-child">
-          <b-form-datepicker class="boxDatePicker" placeholder="Select absence beggining"></b-form-datepicker>
+          <b-form-datepicker v-model="absence.period.startTime" class="boxDatePicker" placeholder="Select absence beggining"></b-form-datepicker>
         </div>
         <div class="container-child">
-          <b-button class="button">Request holiday or absence</b-button>
+          <b-button v-on:click="requestAbsence" class="button">Request holiday or absence</b-button>
         </div>
         <div class="container-child">
-          <b-form-datepicker class="boxDatePicker" placeholder="Select absence ending"></b-form-datepicker>
+          <b-form-datepicker v-model="absence.period.endTime" class="boxDatePicker" placeholder="Select absence ending"></b-form-datepicker>
           </div>
     </div>
   </div>
@@ -166,6 +166,7 @@
 
 <script>
 
+import axios from 'axios'
 import TopMenuForDP from '../components/TopMenuForPD.vue'
 
 export default {
@@ -178,6 +179,37 @@ export default {
             return this.$store.getters.getUser
         }
     },
+    data() {
+        return {
+            absence: {
+                isApproved: false,
+                isFinished: false,
+                period: {
+                    startTime: null,
+                    endTime: null
+                },
+                user: null
+            }
+        }
+    },
+    methods: {
+        requestAbsence() {
+            this.absence.user = this.User
+            if(this.absence.period.startTime == null || this.absence.period.endTime == null) {
+                alert("Please select dates for Absence/Holiday")
+                return
+            }
+            if(this.absence.period.startTime > this.absence.period.endTime) {
+                alert("Selected dates are invalid")
+                return
+            }
+            console.log(this.absence)
+            axios.post("http://localhost:9005/api/absence/request-absence", this.absence)
+                .then(r => {
+                    console.log(r.data)
+                })
+        }
+    }
 }
 </script>
 
