@@ -17,4 +17,5 @@ public interface IUserService {
 	
 	ResponseEntity<UserDTO> login(LoginDTO loginDTO);
 	ResponseEntity<UserDTO> updateUser(UserDTO userDTO);
+	ResponseEntity<String> checkIsEmailTaken(String email);
 }

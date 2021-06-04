@@ -9,9 +9,11 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tim40.tim40.dto.LoginDTO;
@@ -59,4 +61,11 @@ public class UserController {
 	public ResponseEntity<UserDTO> updateUser(@RequestBody UserDTO userDTO) throws Exception{
 		return userService.updateUser(userDTO);
 	}
+	
+	@RequestMapping(value = "/check-email/{email}", method = RequestMethod.GET)
+	public ResponseEntity<String> checkIsEmailTaken(@PathVariable("email") String email) {
+		return userService.checkIsEmailTaken(email);
+	}
+	
+	
 }
