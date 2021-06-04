@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tim40.tim40.dto.LoginDTO;
 import com.tim40.tim40.dto.UserDTO;
 import com.tim40.tim40.model.User;
 import com.tim40.tim40.service.UserService;
@@ -47,5 +48,15 @@ public class UserController {
 		UserDTO registeredUser = userService.register(userDTO);
 		
 		return new ResponseEntity<UserDTO>(registeredUser, HttpStatus.OK);
+	}
+	
+	@PostMapping(value = "/login-user", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<UserDTO> login(@RequestBody LoginDTO loginDTO) throws Exception{
+		return userService.login(loginDTO);
+	}
+	
+	@PostMapping(value = "/update-user", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<UserDTO> updateUser(@RequestBody UserDTO userDTO) throws Exception{
+		return userService.updateUser(userDTO);
 	}
 }

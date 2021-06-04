@@ -10,10 +10,14 @@
                               <h1 class = "title" style="color:#4d4d4d ">Log in</h1>
                               <p class="text-muted"> Please enter your email and password!</p>
                           </div>
-                          <input type="text" name="" placeholder="email" style="font-style:italic" required> 
-                          <input type="password" name="" placeholder="password" style="font-style:italic" required> 
+                          <input type="text" v-model="Login.email" placeholder="email" style="font-style:italic" required> 
+                          <input type="password" v-model="Login.password" placeholder="password" style="font-style:italic" required> 
                           <a class="forgot text-muted" href="#">Forgot password?</a>
-                          <input type="submit"  style="color: white" name="" value="Log in" href="#">
+                          <br>
+                          <label v-if="show" style="color: red;">{{message}}</label>
+                          <label v-else style="color: green;">{{message}}</label>
+                          <br>
+                          <b-button v-on:click="login">Log in</b-button>
                       </form>
                   </div>
               </div>
@@ -33,49 +37,54 @@ export default {
   },
   data() {
     return {
-      user: {
-       email: "",
-       password: "",
-       confirmPassword: "",
-       name: "",
-       surname: "",
-       usertype: "PATIENT",
-       address: {
-            state: "",
-            city: "",
-            postalCode: "",
-            street: "",
-            number: ""
-       },
-       isFirstTimeLogging: false
+      Login: {
+        email: '',
+        password: ''
       },
-  
-      show: true,
+      show: false,
+      message: '',
     };
   },
   methods: {
-    onSubmit(event) {
-      event.preventDefault();
-      if(this.user.password !== this.user.confirmPassword)
-      {
-        alert("Passwords don't match!");
-        return;
-      }
-      axios.post("http://localhost:9005/api/user/register", this.user);
-
+    login() {
+        axios.post("http://localhost:9005/api/user/login-user", this.Login)
+          .then(r => {
+            var user = JSON.parse(JSON.stringify(r.data))
+            if(user.id == -2) {
+              this.show = true
+              this.message = 'Email is not valid'
+              return
+            }
+            else if(user.id == -1) {
+              this.show = true
+              this.message = 'Password is not valid'
+            }
+            else {
+              this.show = false
+              this.message = ''
+              if(user.userType == "DERMATOLOGIST") {
+                if(user.firstTimeLogging) {
+                  this.$store.dispatch('updateUser', user)
+                  this.$router.push({name: 'FirstTimeLogging'})
+                }
+                else {
+                  this.$store.dispatch('updateUser', user)
+                  this.$router.push({name: 'HomePage'})
+                }
+              }
+              else {
+                alert("Pharmacist profile is still under development!")
+                return
+              }
+            }
+          })
     },
     onReset(event) {
       event.preventDefault();
       console.log("reset");
     }
-
-
-  },
-  computed: {
-      validation() {
-        return this.user.password.length > 7 ? true : false
-      }
-  }}
+  }
+}
 </script>
 
 <style scoped>

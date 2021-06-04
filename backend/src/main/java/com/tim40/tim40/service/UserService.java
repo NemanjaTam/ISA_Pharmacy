@@ -2,7 +2,11 @@ package com.tim40.tim40.service;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import com.tim40.tim40.dto.LoginDTO;
 import com.tim40.tim40.dto.UserDTO;
 import com.tim40.tim40.model.Address;
 import com.tim40.tim40.model.User;
@@ -47,7 +51,30 @@ public class UserService implements IUserService {
 	public void delete(Long id) {
 		userRepository.deleteById(id);
 	}
-	
-	
 
+	@Override
+	public ResponseEntity<UserDTO> login(LoginDTO loginDTO) {
+		List<User> users = userRepository.findAll();
+		for(User user : users) {
+			if(user.getEmail().equals(loginDTO.getEmail())) {
+				if(user.getPassword().equals(loginDTO.getPassword())) {
+					return new ResponseEntity<UserDTO>(new UserDTO(user),HttpStatus.OK);
+				}
+				UserDTO userDTO = new UserDTO();
+				userDTO.setId((long) -1);
+				return new ResponseEntity<UserDTO>(userDTO,HttpStatus.OK);
+			}
+		}
+		UserDTO userDTO = new UserDTO();
+		userDTO.setId((long) -2);
+		return new ResponseEntity<UserDTO>(userDTO,HttpStatus.OK);
+	}
+
+	@Override
+	public ResponseEntity<UserDTO> updateUser(UserDTO userDTO) {
+		User user = userRepository.getById(userDTO.getId());
+		user.update(userDTO);
+		userRepository.save(user);
+		return new ResponseEntity<UserDTO>(new UserDTO(user), HttpStatus.OK);
+	}
 }

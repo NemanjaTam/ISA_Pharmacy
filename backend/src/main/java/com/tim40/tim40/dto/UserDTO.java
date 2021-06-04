@@ -1,9 +1,22 @@
 package com.tim40.tim40.dto;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import com.tim40.tim40.model.Address;
+import com.tim40.tim40.model.Email;
 import com.tim40.tim40.model.User;
 import com.tim40.tim40.model.enums.UserType;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserDTO {
 	private Long id;
 
@@ -21,86 +34,25 @@ public class UserDTO {
 	
 	private UserType userType;
 	
-	public UserDTO() {
+	private boolean isFirstTimeLogging;
+
+	private Set<Email> inbox = new HashSet<Email>();
+	
+	private Set<Email> send = new HashSet<Email>();
+
+	public UserDTO(User user) {
+		super();
+		this.id = user.getId();
+		this.name = user.getName();
+		this.surname = user.getSurname();
+		this.email = user.getEmail();
+		this.password = user.getPassword();
+		this.address = user.getAddress();
+		this.phone = user.getPhone();
+		this.userType = user.getUserType();
+		this.isFirstTimeLogging = user.isFirstTimeLogging();
+		this.inbox = user.getInbox();
+		this.send = user.getSend();
 	}
 	
-	public UserDTO(User u) {
-		this(u.getId(),u.getName(),u.getSurname(),u.getEmail(),u.getPassword(),u.getAddress(),u.getUserType(), u.getPhone());
-	}
-	
-	public UserDTO(Long id, String name, String surname, String email, String password, Address address,
-			UserType userType, String phone) {
-		this.id = id;
-		this.name = name;
-		this.surname = surname;
-		this.email = email;
-		this.password = password;
-		this.address = address;
-		this.userType = userType;
-		this.phone = phone;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getSurname() {
-		return surname;
-	}
-
-	public void setSurname(String surname) {
-		this.surname = surname;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public Address getAddress() {
-		return address;
-	}
-
-	public void setAddress(Address address) {
-		this.address = address;
-	}
-
-	public UserType getUserType() {
-		return userType;
-	}
-
-	public void setUserType(UserType userType) {
-		this.userType = userType;
-	}
-
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
 }

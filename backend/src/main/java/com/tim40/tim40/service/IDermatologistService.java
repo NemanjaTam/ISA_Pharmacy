@@ -1,5 +1,7 @@
 package com.tim40.tim40.service;
 
-public interface IDermatologistService {
+import com.tim40.tim40.dto.DermatologistDTO;
 
+public interface IDermatologistService {
+	DermatologistDTO getDermatologistByEmail(String email);
 }
