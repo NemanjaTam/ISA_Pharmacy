@@ -77,4 +77,15 @@ public class UserService implements IUserService {
 		userRepository.save(user);
 		return new ResponseEntity<UserDTO>(new UserDTO(user), HttpStatus.OK);
 	}
+
+	@Override
+	public ResponseEntity<String> checkIsEmailTaken(String email) {
+		User user = userRepository.findByEmail(email).orElse(null);
+		if(user == null) {
+			return new ResponseEntity<String>("not_taken", HttpStatus.OK);
+		}
+		else {
+			return new ResponseEntity<String>("taken", HttpStatus.OK);
+		}
+	}
 }
