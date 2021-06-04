@@ -5,23 +5,23 @@
       <div class="container-child-1">
         <b-form>
             <label class="labelBox"><b>Name:</b></label>
-            <b-form-input class="textBox"></b-form-input>
+            <b-form-input v-model="User.name" class="textBox" disabled></b-form-input>
             <label class="labelBox"><b>Surname:</b></label>
-            <b-form-input class="textBox"></b-form-input>
+            <b-form-input v-model="User.surname" class="textBox" disabled></b-form-input>
             <label class="labelBox"><b>Email:</b></label>
-            <b-form-input class="textBox" type="email"></b-form-input>
+            <b-form-input v-model="User.email" class="textBox" type="email" disabled></b-form-input>
             <label class="labelBox"><b>Phone number:</b></label>
-            <b-form-input class="textBox"></b-form-input>
+            <b-form-input v-model="User.phone" class="textBox" disabled></b-form-input>
             <label class="labelBox"><b>State:</b></label>
-            <b-form-input class="textBox"></b-form-input>
+            <b-form-input v-model="User.address.state" class="textBox" disabled></b-form-input>
             <label class="labelBox"><b>City:</b></label>
-            <b-form-input class="textBox"></b-form-input>
+            <b-form-input v-model="User.address.city" class="textBox" disabled></b-form-input>
             <label class="labelBox"><b>Street:</b></label>
-            <b-form-input class="textBox"></b-form-input>
+            <b-form-input v-model="User.address.street" class="textBox" disabled></b-form-input>
             <label class="labelBox"><b>Number of house:</b></label>
-            <b-form-input class="textBox"></b-form-input>
+            <b-form-input v-model="User.address.number" class="textBox" disabled></b-form-input>
             <label class="labelBox"><b>Postal code:</b></label>
-            <b-form-input class="textBox"></b-form-input>
+            <b-form-input v-model="User.address.postalCode" class="textBox" disabled></b-form-input>
         </b-form>
       </div>
       <div class="container-child-2">
@@ -172,7 +172,12 @@ export default {
     name: "HomePage",
     components: {
         TopMenuForDP
-    }
+    },
+    computed: {
+        User() {
+            return this.$store.getters.getUser
+        }
+    },
 }
 </script>
 

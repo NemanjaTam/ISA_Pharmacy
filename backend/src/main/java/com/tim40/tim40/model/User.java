@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.tim40.tim40.dto.UserDTO;
 import com.tim40.tim40.model.enums.UserType;
 
 import lombok.AllArgsConstructor;
@@ -75,6 +76,19 @@ public class User {
 		this.address = address;
 		this.userType = userType;
 		this.isFirstTimeLogging = isFirstTimeLogging;
+	}
+
+	public void update(UserDTO userDTO) {
+		this.name = userDTO.getName();
+		this.surname = userDTO.getSurname();
+		this.email = userDTO.getEmail();
+		this.password = userDTO.getPassword();
+		this.phone = userDTO.getPhone();
+		this.address = userDTO.getAddress();
+		this.userType = userDTO.getUserType();
+		this.isFirstTimeLogging = userDTO.isFirstTimeLogging();
+		this.inbox = userDTO.getInbox();
+		this.send = userDTO.getSend();
 	}
 	
 }
