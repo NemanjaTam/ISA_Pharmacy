@@ -1,9 +1,7 @@
 <template>
     <div>
         <b-navbar toggleable="lg" type="dark" variant="dark">
-            <b-navbar-brand>
-                <router-link to="/homePage" class="routerlink">Dermatologist</router-link>
-            </b-navbar-brand>
+             <b-form class="routerlink">{{userType}}</b-form >
             <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
             <b-collapse id="nav-collapse" is-nav>
                 <b-navbar-nav>
@@ -27,7 +25,7 @@
                         <router-link to="/workCalendar" class="routerlink">Work Calendar</router-link>
                     </b-nav-item>
                 </b-navbar-nav>
-                <b-navbar-nav v-if="false">
+                <b-navbar-nav v-if="!isDermatologist">
                     <b-nav-item> 
                         <router-link to="/perscriptionMedication" class="routerlink">Prescription Medication</router-link>
                     </b-nav-item>
@@ -46,9 +44,18 @@
 
 export default {
     name: "TopMenuForPD",
+    computed: {
+        userType() {
+            return this.$store.getters.getUserType
+        },
+        isDermatologist() {
+            return this.$store.getters.isDermatologist
+        }
+    },
     methods: {
         logout(){
-
+            this.$store.dispatch('logout')
+            this.$router.push('LoginPage')
         }
     }
 }
@@ -58,5 +65,6 @@ export default {
 .routerlink {
   display: block;
   color: rgb(255, 255, 255);
+  font-size: 18px;
 }
 </style>

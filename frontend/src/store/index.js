@@ -43,6 +43,13 @@ export const store = new Vuex.Store({
       else {
         return false
       }
+    },
+    getUserType(state) {
+      return state.user.userType
+    },
+    isDermatologist(state) {
+      if(state.user.userType == "DERMATOLOGIST") return true
+      else return false
     }
   },
   //methods for changing date (state)
@@ -64,6 +71,28 @@ export const store = new Vuex.Store({
     },
     updatePassword(context, password) {
       context.commit('updatePassword', password)
+    },
+    logout(context) {
+      var user = {
+        id: null,
+        name: '',
+        surname: '',
+        email: '',
+        password: '',
+        phone: '',
+        address: {
+          state: '',
+          city: '',
+          street: '',
+          number: '',
+          postalCode: null
+        },
+        userType: null,
+        firstTimeLogging: null,
+        inbox: [],
+        send: []
+      }
+      context.commit('updateUser', user)
     }
   }
 })
