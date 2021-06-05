@@ -29,7 +29,7 @@
                         <b-form-input v-model="user.address.postalCode" type="text" placeholder="enter postal code" style="font-style:italic" required trim/>
                         <b-form v-if="!formValid" style="color:red">
                                 {{this.formMessage}}
-                            </b-form >
+                        </b-form >
                         <b-button v-on:click="updateProfile">Update</b-button>
                       </form>
                   </div>

@@ -26,11 +26,11 @@ public class Pharmacist extends User {
     @JoinColumn(name = "pharmacy_id", nullable = true)
     private Pharmacy pharmacy;
 	
-	@OneToMany(mappedBy = "pharmacist")
-	private Set<Consultation> consultations = new HashSet<Consultation>();
+//	@OneToMany(mappedBy = "pharmacist")
+//	private Set<Consultation> consultations = new HashSet<Consultation>();
 	
-	@OneToMany(fetch = FetchType.LAZY)
-	private Set<Patient> allPatients = new HashSet<Patient>();
+//	@OneToMany(fetch = FetchType.LAZY)
+//	private Set<Patient> allPatients = new HashSet<Patient>();
 	
 	@OneToMany(fetch = FetchType.LAZY,mappedBy="pharmacist")
     private Set<PharmacistRating> ratings = new HashSet<PharmacistRating>();
