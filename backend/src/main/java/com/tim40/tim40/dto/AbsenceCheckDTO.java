@@ -1,9 +1,6 @@
-package com.tim40.tim40.model;
+package com.tim40.tim40.dto;
 
 import java.time.LocalDateTime;
-
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.tim40.tim40.UnixToLocalDateTimeConverter;
@@ -13,18 +10,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Embeddable
-@Getter
 @Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Period {
+public class AbsenceCheckDTO {
+	
+	private Long userId;
 	
 	@JsonDeserialize(using = UnixToLocalDateTimeConverter.class)
-	@Column(name = "starttime", nullable = true)
-	private LocalDateTime startTime;
+	private LocalDateTime selectedDate;
 	
-	@JsonDeserialize(using = UnixToLocalDateTimeConverter.class)
-	@Column(name = "endtime", nullable = true)
-	private LocalDateTime endTime;
 }

@@ -2,8 +2,11 @@
     <div class="background">
         <TopMenuForPD/>
         <div>
-            <b-form-datepicker class="boxDatePicker" placeholder="Please select date"></b-form-datepicker>
-            <div class="table-responsive">
+            <b-form-datepicker v-model="selectedDate" v-on:input="dateSelected" class="boxDatePicker" placeholder="Please select date"></b-form-datepicker>
+            <div v-if="this.show" style="text-align: center;">
+                <label style="color: green;font-size:30px;"><b>{{this.showMessage}}</b></label>
+            </div>
+            <div v-else class="table-responsive">
                 <table class="table table-hover boxTable">
                 <thead class="thead-dark topLeft topRight">
                     <tr>
@@ -134,12 +137,69 @@
 
 <script>
 
+import axios from 'axios'
 import TopMenuForPD from '../components/TopMenuForPD'
 
 export default {
     name: 'WorkCalendar',
     components: {
         TopMenuForPD
+    },
+    computed: {
+        user() {
+            return this.$store.getters.getUser
+        }
+    },
+    data() {
+        return {
+            Check: {
+                selectedDate: null,
+                userId: 1
+            },
+            selectedDate: null,
+            show: false,
+            showMessage: ''
+        }
+    },
+    methods: {
+        dateSelected() {
+            console.log(this.selectedDate);
+            if(this.selectedDate == null) return
+            //this.Check.userId = this.user.id
+            var date = this.getDateTimeFromString(this.selectedDate, "00:00").getTime()
+            this.Check.selectedDate = date
+            console.log(this.Check)
+            axios.post("http://localhost:9005/api/absence/check-is-user-on-absence", this.Check)
+                .then(r => {
+                    if(r.data == "on_absence") {
+                        this.showMessage = 'You are on vacation!'
+                        this.show = true
+                        return
+                    }
+                    else {
+                        axios.post("http://localhost:9005/api/workday/check-is-user-working", this.Check)
+                            .then(r => {
+                                if(r.data == "not_working") {
+                                    this.showMessage = 'You are not working today!'
+                                    this.show = true
+                                    return
+                                }
+                                else {
+                                    this.showMessage = ''
+                                    this.show = false
+                                }
+                            })
+                    }
+                    
+                })
+        },
+        // Expected yy-mm-dd and HH:mm format
+        getDateTimeFromString: function(dstr, tstr) {
+            let dparts = dstr.split('-');
+            let tparts = tstr.split(':');
+            // -1 because js counts months from 0
+            return new Date(dparts[0], dparts[1] - 1, dparts[2], tparts[0], tparts[1]);
+        }
     }
 }
 </script>

@@ -152,13 +152,13 @@
     </div>
     <div class="container-1">
         <div class="container-child">
-          <b-form-datepicker v-model="absence.period.startTime" class="boxDatePicker" placeholder="Select absence beggining"></b-form-datepicker>
+          <b-form-datepicker v-model="startTime" class="boxDatePicker" placeholder="Select absence beggining"></b-form-datepicker>
         </div>
         <div class="container-child">
           <b-button v-on:click="requestAbsence" class="button">Request holiday or absence</b-button>
         </div>
         <div class="container-child">
-          <b-form-datepicker v-model="absence.period.endTime" class="boxDatePicker" placeholder="Select absence ending"></b-form-datepicker>
+          <b-form-datepicker v-model="endTime" class="boxDatePicker" placeholder="Select absence ending"></b-form-datepicker>
           </div>
     </div>
   </div>
@@ -189,25 +189,39 @@ export default {
                     endTime: null
                 },
                 user: null
-            }
+            },
+            startTime: null,
+            endTime: null
         }
     },
     methods: {
         requestAbsence() {
             this.absence.user = this.User
-            if(this.absence.period.startTime == null || this.absence.period.endTime == null) {
+            if(this.startTime == null || this.endTime == null) {
                 alert("Please select dates for Absence/Holiday")
                 return
             }
-            if(this.absence.period.startTime > this.absence.period.endTime) {
+            if(this.startTime > this.endTime) {
                 alert("Selected dates are invalid")
                 return
             }
-            console.log(this.absence)
+            console.log(this.startTime + " - " + this.endTime)
+            var start = this.getDateTimeFromString(this.startTime, '00:00').getTime()
+            var end = this.getDateTimeFromString(this.endTime, '00:00').getTime()
+            console.log(start + " - " + end)
+            this.absence.period.startTime = start
+            this.absence.period.endTime = end
             axios.post("http://localhost:9005/api/absence/request-absence", this.absence)
                 .then(r => {
                     console.log(r.data)
                 })
+        },
+        // Expected yy-mm-dd and HH:mm format
+        getDateTimeFromString: function(dstr, tstr) {
+            let dparts = dstr.split('-');
+            let tparts = tstr.split(':');
+            // -1 because js counts months from 0
+            return new Date(dparts[0], dparts[1] - 1, dparts[2], tparts[0], tparts[1]);
         }
     }
 }

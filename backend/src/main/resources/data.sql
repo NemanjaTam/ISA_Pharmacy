@@ -410,34 +410,36 @@ insert into reservations (is_done, endtime, starttime, medication_id, patient_id
 insert into reservations (is_done, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, '2021-07-03 00:00:00-08', '2021-07-21 00:00:00-08', 15,35,4)
 insert into reservations (is_done, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, '2021-07-03 00:00:00-08', '2021-07-04 00:00:00-08', 16,36,4)
 
-insert into workdays (endtime, starttime, user_id) values ('2021-07-13 07:00:00-08', '2021-07-13 14:00:00-08', 1)
-insert into workdays (endtime, starttime, user_id) values ('2021-07-13 07:00:00-08', '2021-07-13 14:00:00-08', 2)
-insert into workdays (endtime, starttime, user_id) values ('2021-07-13 07:00:00-08', '2021-07-13 14:00:00-08', 3)
-insert into workdays (endtime, starttime, user_id) values ('2021-07-13 07:00:00-08', '2021-07-13 14:00:00-08', 4)
-insert into workdays (endtime, starttime, user_id) values ('2021-07-13 07:00:00-08', '2021-07-13 14:00:00-08', 5)
-insert into workdays (endtime, starttime, user_id) values ('2021-07-13 14:00:00-08', '2021-07-13 22:00:00-08', 6)
-insert into workdays (endtime, starttime, user_id) values ('2021-07-13 14:00:00-08', '2021-07-13 22:00:00-08', 7)
-insert into workdays (endtime, starttime, user_id) values ('2021-07-13 14:00:00-08', '2021-07-13 22:00:00-08', 8)
-insert into workdays (endtime, starttime, user_id) values ('2021-07-13 14:00:00-08', '2021-07-13 22:00:00-08', 9)
-insert into workdays (endtime, starttime, user_id) values ('2021-07-13 14:00:00-08', '2021-07-13 22:00:00-08', 10)
+insert into workdays (endtime, starttime, user_id) values ('2021-06-13 07:00:00-08', '2021-06-13 14:00:00-08', 1)
+insert into workdays (endtime, starttime, user_id) values ('2021-06-13 07:00:00-08', '2021-06-13 14:00:00-08', 2)
+insert into workdays (endtime, starttime, user_id) values ('2021-06-13 07:00:00-08', '2021-06-13 14:00:00-08', 3)
+insert into workdays (endtime, starttime, user_id) values ('2021-06-13 07:00:00-08', '2021-06-13 14:00:00-08', 4)
+insert into workdays (endtime, starttime, user_id) values ('2021-06-13 07:00:00-08', '2021-06-13 14:00:00-08', 5)
+insert into workdays (endtime, starttime, user_id) values ('2021-06-13 14:00:00-08', '2021-06-13 22:00:00-08', 6)
+insert into workdays (endtime, starttime, user_id) values ('2021-06-13 14:00:00-08', '2021-06-13 22:00:00-08', 7)
+insert into workdays (endtime, starttime, user_id) values ('2021-06-13 14:00:00-08', '2021-06-13 22:00:00-08', 8)
+insert into workdays (endtime, starttime, user_id) values ('2021-06-13 14:00:00-08', '2021-06-13 22:00:00-08', 9)
+insert into workdays (endtime, starttime, user_id) values ('2021-06-13 14:00:00-08', '2021-06-13 22:00:00-08', 10)
 
-insert into workdays (endtime, starttime, user_id) values ('2021-07-13 07:00:00-08', '2021-07-13 14:00:00-08', 11)
-insert into workdays (endtime, starttime, user_id) values ('2021-07-13 07:00:00-08', '2021-07-13 14:00:00-08', 12)
-insert into workdays (endtime, starttime, user_id) values ('2021-07-13 07:00:00-08', '2021-07-13 14:00:00-08', 13)
-insert into workdays (endtime, starttime, user_id) values ('2021-07-13 07:00:00-08', '2021-07-13 14:00:00-08', 14)
-insert into workdays (endtime, starttime, user_id) values ('2021-07-13 07:00:00-08', '2021-07-13 14:00:00-08', 15)
-insert into workdays (endtime, starttime, user_id) values ('2021-07-13 14:00:00-08', '2021-07-13 22:00:00-08', 16)
-insert into workdays (endtime, starttime, user_id) values ('2021-07-13 14:00:00-08', '2021-07-13 22:00:00-08', 17)
-insert into workdays (endtime, starttime, user_id) values ('2021-07-13 14:00:00-08', '2021-07-13 22:00:00-08', 18)
-insert into workdays (endtime, starttime, user_id) values ('2021-07-13 14:00:00-08', '2021-07-13 22:00:00-08', 19)
-insert into workdays (endtime, starttime, user_id) values ('2021-07-13 14:00:00-08', '2021-07-13 22:00:00-08', 20)
+insert into workdays (endtime, starttime, user_id) values ('2021-06-13 07:00:00-08', '2021-06-13 14:00:00-08', 11)
+insert into workdays (endtime, starttime, user_id) values ('2021-06-13 07:00:00-08', '2021-06-13 14:00:00-08', 12)
+insert into workdays (endtime, starttime, user_id) values ('2021-06-13 07:00:00-08', '2021-06-13 14:00:00-08', 13)
+insert into workdays (endtime, starttime, user_id) values ('2021-06-13 07:00:00-08', '2021-06-13 14:00:00-08', 14)
+insert into workdays (endtime, starttime, user_id) values ('2021-06-13 07:00:00-08', '2021-06-13 14:00:00-08', 15)
+insert into workdays (endtime, starttime, user_id) values ('2021-06-13 14:00:00-08', '2021-06-13 22:00:00-08', 16)
+insert into workdays (endtime, starttime, user_id) values ('2021-06-13 14:00:00-08', '2021-06-13 22:00:00-08', 17)
+insert into workdays (endtime, starttime, user_id) values ('2021-06-13 14:00:00-08', '2021-06-13 22:00:00-08', 18)
+insert into workdays (endtime, starttime, user_id) values ('2021-06-13 14:00:00-08', '2021-06-13 22:00:00-08', 19)
+insert into workdays (endtime, starttime, user_id) values ('2021-06-13 14:00:00-08', '2021-06-13 22:00:00-08', 20)
 
 
 
 insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (false, false, '2021-07-13 09:00:00-08', '2021-08-13 09:30:00-08', '', 1, 21, 1)
 
-
 insert into consultations (is_finished, is_taken, endtime, starttime, report, patient_id, pharmacist_id, pharmacy_id) values (false, false, '2021-07-13 09:00:00-08', '2021-07-13 09:30:00-08', '', 22, 11, 1)
 
+
+
+insert into absences(is_approved, is_finished, endtime, starttime, user_id) values (true, false, '2021-07-20 00:00:00-08', '2021-07-10 00:00:00-08', 1)
 
 
