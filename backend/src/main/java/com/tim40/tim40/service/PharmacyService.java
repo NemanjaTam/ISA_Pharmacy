@@ -23,16 +23,5 @@ public class PharmacyService implements IPharmacyService {
 		Pharmacy createdPharmacy = pharmacyRepository.save(pharmacy); 
 		return new PharmacyDTO(createdPharmacy);
 	}
-
-	@Override
-	public Pharmacy getPharmacyById(Long id) {
-		Pharmacy pharmacy = pharmacyRepository.getById(id);
-		//Pharmacist pharmacist = pharmacy.getPharmacists().get(0);
-//		System.out.println(pharmacist.getUserType() + pharmacist.getId().toString());
-		for(Pharmacist pharmacist : pharmacy.getPharmacists()) {
-			System.out.println(pharmacist.getId().toString() + " - " + pharmacist.getUserType());
-		}
-		return pharmacy;
-	}
 	
 }

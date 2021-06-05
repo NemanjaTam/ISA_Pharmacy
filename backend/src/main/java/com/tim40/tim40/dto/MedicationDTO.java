@@ -34,7 +34,7 @@ public class MedicationDTO {
     	this.structure = medication.getStructure();
     	this.contraindications = medication.getContraindications();
     	this.recommendedIntake = medication.getRecommendedIntake();
-    	this.pharmacyID = medication.getPharmacy().getId();
+//    	this.pharmacyID = medication.getPharmacy().getId();
     	
     	for(Medication m : medication.getReplacementMedications()) {
     		this.replacementMedicationsIDs.add(m.getId());

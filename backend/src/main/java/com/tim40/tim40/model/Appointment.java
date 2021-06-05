@@ -55,7 +55,7 @@ public class Appointment {
     @JoinColumn(name = "patient_id", nullable = false)
     private Patient patient;
     
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "appointment")
-    private final Set<Therapy> therapies = new HashSet<Therapy>();
+    @OneToMany(fetch = FetchType.LAZY)
+    private Set<Therapy> therapies = new HashSet<Therapy>();
     
 }

@@ -17,6 +17,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.tim40.tim40.model.enums.MedicationForm;
 import com.tim40.tim40.model.enums.PrescriptionRegime;
 import com.tim40.tim40.model.enums.TypeOfMedication;
@@ -70,16 +72,17 @@ public class Medication {
     @Column (nullable = false)
     private String recommendedIntake;  // preporučeni unos terapije na dnevnom nivou
 
-    @ManyToOne
-    @JoinColumn(name = "pharmacy_id", nullable = false)
-    private Pharmacy pharmacy;
+//    @ManyToOne
+//    @JoinColumn(name = "pharmacy_id", nullable = false)
+//    private Pharmacy pharmacy;
 
-    @ManyToMany(mappedBy = "allergedOnMedications")
-    private final Set<Patient> patients = new HashSet<Patient>();
+//    @ManyToMany(mappedBy = "allergedOnMedications")
+//    private final Set<Patient> patients = new HashSet<Patient>();
     
     @OneToMany(fetch = FetchType.LAZY,mappedBy="medication")
     private Set<MedicationRating> ratings;
 
+    @JsonBackReference
     @ManyToMany
     @JoinTable(
     		name = "replacement_medications",
@@ -98,7 +101,7 @@ public class Medication {
         this.structure = structure;
         this.contraindications = contraindications;
         this.recommendedIntake = recommendedIntake;
-        this.pharmacy = pharmacy; 
+//        this.pharmacy = pharmacy; 
         this.replacementMedications = replacementMedications;
     }
 }

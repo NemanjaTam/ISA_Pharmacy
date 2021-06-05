@@ -6,6 +6,8 @@ import java.util.Set;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
@@ -22,16 +24,22 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Dermatologist extends User {
-	@ManyToMany(mappedBy = "dermatologists")
+    @ManyToMany
+	@JoinTable
+	(
+	    name = "dermatologist_pharmacy",
+	    joinColumns = @JoinColumn(name = "dermatologist_id"),
+	    inverseJoinColumns = @JoinColumn(name = "pharmacy_id")
+	)
     private final Set<Pharmacy> pharmacies = new HashSet<Pharmacy>();
 	
-	@OneToMany(mappedBy = "dermatologist")
-	private Set<Appointment> appointments = new HashSet<Appointment>();
+//	@OneToMany(mappedBy = "dermatologist")
+//	private Set<Appointment> appointments = new HashSet<Appointment>();
 	
 	@OneToMany(fetch = FetchType.LAZY,mappedBy="dermatologist")
     private Set<DermatologistRating> ratings = new HashSet<DermatologistRating>();
 	
-	@OneToMany(fetch = FetchType.LAZY)
-	private Set<Patient> allPatients = new HashSet<Patient>();
+//	@OneToMany(fetch = FetchType.LAZY)
+//	private Set<Patient> allPatients = new HashSet<Patient>();
 	
 }

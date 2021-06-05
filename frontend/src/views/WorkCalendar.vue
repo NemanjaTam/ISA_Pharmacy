@@ -18,114 +18,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="table-light" style="text-align: center">
-                        <td>Dark</td>
-                        <td>Column content</td>
-                        <td>Column content</td>
-                        <td>Column content</td>
-                        <td style="width: 180px">
+                    <tr v-for="appointment in appointments" :key="appointment.id" class="table-light" style="text-align: center">
+                        <td>{{getType}}</td>
+                        <td>{{appointment.patient.name}} {{appointment.patient.surname}} </td>
+                        <td>{{appointment.period.startTime}}</td>
+                        <td>{{appointment.period.endTime}}</td>
+                        <td style="width: 210px">
                             <router-link to="/examinationCheck" class="routerlink">
-                                <b-button class="button">Start examination</b-button>
+                                <b-button class="button" @click="start(appointment)">Start {{getType}}</b-button>
                             </router-link>
-                        </td>
-                    </tr>
-                    <tr class="table-dark" style="text-align: center">
-                        <td>Dark</td>
-                        <td>Column content</td>
-                        <td>Column content</td>
-                        <td>Column content</td>
-                        <td>
-                            <b-button class="button">Start examination</b-button>
-                        </td>
-                    </tr>
-                    <tr class="table-light" style="text-align: center">
-                        <td>Dark</td>
-                        <td>Column content</td>
-                        <td>Column content</td>
-                        <td>Column content</td>
-                        <td style="width: 180px">
-                            <b-button class="button">Start examination</b-button>
-                        </td>
-                    </tr>
-                    <tr class="table-dark" style="text-align: center">
-                        <td>Dark</td>
-                        <td>Column content</td>
-                        <td>Column content</td>
-                        <td>Column content</td>
-                        <td style="width: 180px">
-                            <b-button class="button">Start examination</b-button>
-                        </td>
-                    </tr>
-                    <tr class="table-light" style="text-align: center">
-                        <td>Dark</td>
-                        <td>Column content</td>
-                        <td>Column content</td>
-                        <td>Column content</td>
-                        <td style="width: 180px">
-                            <b-button class="button">Start examination</b-button>
-                        </td>
-                    </tr>
-                    <tr class="table-dark" style="text-align: center">
-                        <td>Dark</td>
-                        <td>Column content</td>
-                        <td>Column content</td>
-                        <td>Column content</td>
-                        <td style="width: 180px">
-                            <b-button class="button">Start examination</b-button>
-                        </td>
-                    </tr>
-                    <tr class="table-light" style="text-align: center">
-                        <td>Dark</td>
-                        <td>Column content</td>
-                        <td>Column content</td>
-                        <td>Column content</td>
-                        <td style="width: 180px">
-                            <b-button class="button">Start examination</b-button>
-                        </td>
-                    </tr>
-                    <tr class="table-dark" style="text-align: center">
-                        <td>Dark</td>
-                        <td>Column content</td>
-                        <td>Column content</td>
-                        <td>Column content</td>
-                        <td style="width: 180px">
-                            <b-button class="button">Start examination</b-button>
-                        </td>
-                    </tr>
-                    <tr class="table-light" style="text-align: center">
-                        <td>Dark</td>
-                        <td>Column content</td>
-                        <td>Column content</td>
-                        <td>Column content</td>
-                        <td style="width: 180px">
-                            <b-button class="button">Start examination</b-button>
-                        </td>
-                    </tr>                    
-                    <tr class="table-dark" style="text-align: center">
-                        <td>Dark</td>
-                        <td>Column content</td>
-                        <td>Column content</td>
-                        <td>Column content</td>
-                        <td style="width: 180px">
-                            <b-button class="button">Start examination</b-button>
-                        </td>
-                    </tr>
-                    <tr class="table-light" style="text-align: center">
-                        <td>Dark</td>
-                        <td>Column content</td>
-                        <td>Column content</td>
-                        <td>Column content</td>
-                        <td style="width: 180px">
-                            <b-button class="button">Start examination</b-button>
-                        </td>
-                    </tr>
-                    <tr class="table-dark bottomRight bottomLeft" style="text-align: center">
-                        <td class="bottomLeft">Dark</td>
-                        <td>Column content</td>
-                        <td>Column content</td>
-                        <td>Column content</td>
-                        <td class="bottomRight" style="width: 180px">
-                            <b-button class="button">Start examination</b-button>
                         </td>
                     </tr>
                 </tbody>
@@ -148,13 +49,20 @@ export default {
     computed: {
         user() {
             return this.$store.getters.getUser
+        },
+        getType() {
+            return this.$store.getters.getType
+        },
+        appointments() {
+            return this.$store.getters.getAppointments
         }
+
     },
     data() {
         return {
             Check: {
                 selectedDate: null,
-                userId: 1
+                userId: null
             },
             selectedDate: null,
             show: false,
@@ -163,12 +71,10 @@ export default {
     },
     methods: {
         dateSelected() {
-            console.log(this.selectedDate);
             if(this.selectedDate == null) return
-            //this.Check.userId = this.user.id
+            this.Check.userId = this.user.id
             var date = this.getDateTimeFromString(this.selectedDate, "00:00").getTime()
             this.Check.selectedDate = date
-            console.log(this.Check)
             axios.post("http://localhost:9005/api/absence/check-is-user-on-absence", this.Check)
                 .then(r => {
                     if(r.data == "on_absence") {
@@ -187,6 +93,11 @@ export default {
                                 else {
                                     this.showMessage = ''
                                     this.show = false
+                                    axios.post("http://localhost:9005/api/appointment/get-all-scheduled-appointments", this.Check)
+                                        .then(r => {
+                                            var appointments = JSON.parse(JSON.stringify(r.data))
+                                            this.$store.dispatch('updateAppointments', appointments)
+                                         })
                                 }
                             })
                     }
@@ -199,6 +110,9 @@ export default {
             let tparts = tstr.split(':');
             // -1 because js counts months from 0
             return new Date(dparts[0], dparts[1] - 1, dparts[2], tparts[0], tparts[1]);
+        },
+        start(appointment) {
+            this.$store.dispatch('updateCurrentAppointment', appointment)
         }
     }
 }
