@@ -15,6 +15,9 @@ import ExaminationProcess from '../views/ExaminationProcess.vue'
 import MedicationTherapy from '../components/MedicationTherapy.vue'
 import Calendar from '../components/Calendar.vue'
 import PharmacyAdmin from '../views/PharmacyAdmin.vue'
+import settingsPage from '../views/SettingsPage.vue'
+import PharmacyAdminHome from '../views/PharmacyAdminHome.vue'
+
 
 Vue.use(VueRouter)
 
@@ -92,7 +95,19 @@ const routes = [
   },{
     path:'/pharmacyAdminPage',
     name:'/PharmacyAdminPage',
-    component: PharmacyAdmin
+    component: PharmacyAdmin,
+    children:[
+      {
+        path:'settingsPage',
+        name: 'settingsPage',
+        component: settingsPage
+      },{
+        path:'homeAdmin',
+        name:'homeAdmin',
+        component: PharmacyAdminHome
+
+      }
+    ]
   }
 ]
 

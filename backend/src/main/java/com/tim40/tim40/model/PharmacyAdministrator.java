@@ -4,6 +4,8 @@ import java.util.Set;
 
 import javax.persistence.*;
 
+import org.apache.tomcat.jni.Address;
+
 import lombok.*;
 import lombok.NoArgsConstructor;
 
@@ -20,4 +22,6 @@ public class PharmacyAdministrator extends User{
 	
 	@OneToMany(fetch = FetchType.LAZY,mappedBy="adminPharmacy")
 	private  Set<PurchaseOrder> purchaseOrderMade = new HashSet<PurchaseOrder>();
+
+
 }

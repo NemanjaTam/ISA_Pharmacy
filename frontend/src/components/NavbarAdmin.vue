@@ -2,24 +2,24 @@
 <div>
   <b-navbar class="first" toggleable="lg" type="dark" variant="dark">
     <b-navbar-nav>
-      <b-nav-item href="#">Home</b-nav-item>
+      <b-nav-item ><router-link to="/pharmacyAdminPage/homeAdmin" class="routerlink">Home</router-link></b-nav-item>
  
       <!-- Navbar dropdowns -->
-     <b-nav-item-dropdown class="dropdaun"  text="Pharmacy" left>
-        <b-dropdown-item href="#">Appointments</b-dropdown-item>
-        <b-dropdown-item href="#">Dermatologist</b-dropdown-item>
-        <b-dropdown-item href="#">Pharmacists</b-dropdown-item>
-        <b-dropdown-item href="#">Pharmacists</b-dropdown-item>
+     <b-nav-item-dropdown class="dropdaun" text="Pharmacy" left>
+        <b-dropdown-item  class="dropdaun" href="#">Appointments</b-dropdown-item>
+        <b-dropdown-item class="dropdaun" href="#">Dermatologist</b-dropdown-item>
+        <b-dropdown-item class="dropdaun" href="#">Pharmacists</b-dropdown-item>
+        <b-dropdown-item  class="dropdaun" href="#">Pharmacists</b-dropdown-item>
       </b-nav-item-dropdown>
 
      <b-nav-item-dropdown text="More" left>
-        <b-dropdown-item href="#">PURCHASE ORDER</b-dropdown-item>
-        <b-dropdown-item href="#">SALE</b-dropdown-item>
+        <b-dropdown-item class="dropdaun" href="#">PURCHASE ORDER</b-dropdown-item>
+        <b-dropdown-item class="dropdaun" href="#">SALE</b-dropdown-item>
      </b-nav-item-dropdown>
 
       <b-nav-item-dropdown text="User" class="ml-auto" right>
-        <b-dropdown-item href="#">Settings</b-dropdown-item>
-        <b-dropdown-item href="#">Log out</b-dropdown-item>
+        <b-dropdown-item class="dropdaun"> <router-link to="/pharmacyAdminPage/settingsPage" class="routerlink">Settings</router-link></b-dropdown-item>
+        <b-dropdown-item class="dropdaun" href="#">Log out</b-dropdown-item>
       </b-nav-item-dropdown>
 <!-- 
      <b-nav-item class="ml-auto"> <b-nav-form>
@@ -29,7 +29,7 @@
     </b-navbar-nav>
   </b-navbar>``
   <div>
-
+  
 </div>
 </div>
 
@@ -44,6 +44,13 @@ export default {
 <style  scoped>
 .dropdaun{
   border: 2px solid #343a40;
+  background: #343a40;
+}
+
+.routerlink {
+  display: block;
+  color: rgb(255, 255, 255);
+  font-size: 18px;
 }
 </style>
 

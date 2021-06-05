@@ -1,14 +1,5 @@
 <template>
-<div>
-<div>
-<div class="grid-container">
-  <div class="header">
-     <NavbarAdmin/>
-  </div>
 
-  <div class="left"></div>
-  <div class="middle"><router-view></router-view></div>  
-  <div class="right">
       <div class="info">
         <ul style="list-style-type:none;">
             <li>Name</li>
@@ -23,23 +14,15 @@
             <li><label></label></li>
         </ul> 
       </div>
-  </div>
- 
-  
- 
-  <!-- <div class="footer">
-  </div> -->
-</div>
-</div>
-</div>
+
 </template>
 <script>
 
 import NavbarAdmin from '../components/NavbarAdmin.vue'
 export default({
- name: "PharmacyAdmin",
+ name: "PharmacyAdminHome",
  components:{
-   NavbarAdmin
+  
  }
 })
 </script>
@@ -60,11 +43,7 @@ export default({
     padding: 20px; 
 
 }
-.containerMiddle{
-   grid-area: middle;
-   height: 500px;
 
-}
 
 * {
   box-sizing: border-box;
@@ -103,7 +82,7 @@ body {
 .middle,
 .right {
   padding: 25px;
-  /*height: 500px; /* Should be removed. Only for demonstration */
+  height: 500px; /* Should be removed. Only for demonstration */
 }
 
 /* Style the left column */
