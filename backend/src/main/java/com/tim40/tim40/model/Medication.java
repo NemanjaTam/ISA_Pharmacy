@@ -1,6 +1,8 @@
 package com.tim40.tim40.model;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -84,12 +86,12 @@ public class Medication {
 
     @JsonBackReference
     @ManyToMany
-    @JoinTable(
-    		name = "replacement_medications",
-            joinColumns = @JoinColumn(name = "medication_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "replacement_medication_id", referencedColumnName = "id")
-    )
-	private Set<Medication> replacementMedications = new HashSet<Medication>();
+//    @JoinTable(
+//    		name = "replacement_medications",
+//            joinColumns = @JoinColumn(name = "replacement_medication_id", referencedColumnName = "id"),
+//            inverseJoinColumns = @JoinColumn(name = "medication_id", referencedColumnName = "id")
+//    )
+	private List<Medication> replacementMedications = new ArrayList<Medication>();
     
     public Medication (String name, String code, TypeOfMedication typeOfMedication, String structure, String contraindications,
             String recommendedIntake, Pharmacy pharmacy, Set<Medication> replacementMedications)
@@ -102,6 +104,6 @@ public class Medication {
         this.contraindications = contraindications;
         this.recommendedIntake = recommendedIntake;
 //        this.pharmacy = pharmacy; 
-        this.replacementMedications = replacementMedications;
+//        this.replacementMedications = replacementMedications;
     }
 }

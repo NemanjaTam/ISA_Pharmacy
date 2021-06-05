@@ -11,14 +11,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -58,7 +55,7 @@ public class Consultation {
     @JoinColumn(name = "patient_id", nullable = false)
     private Patient patient;
     
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "consultation")
+    @OneToMany(fetch = FetchType.LAZY)
     private final Set<Therapy> therapies = new HashSet<Therapy>();
     
 }

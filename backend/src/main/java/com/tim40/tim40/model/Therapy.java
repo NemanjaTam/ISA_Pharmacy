@@ -33,8 +33,4 @@ public class Therapy {
 	@ManyToOne
     @JoinColumn(name = "medication_id", nullable = false)
     private Medication medication;
-	
-	@ManyToOne
-    @JoinColumn(name = "consultation_id", nullable = true)
-    private Consultation consultation;
 }
