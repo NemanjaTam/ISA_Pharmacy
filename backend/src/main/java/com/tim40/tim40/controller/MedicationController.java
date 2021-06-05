@@ -1,5 +1,7 @@
 package com.tim40.tim40.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -10,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tim40.tim40.dto.MedicationDTO;
+import com.tim40.tim40.dto.PatientAllergedDTO;
+import com.tim40.tim40.model.Medication;
 import com.tim40.tim40.service.MedicationService;
 
 @RestController
@@ -29,4 +33,10 @@ public class MedicationController {
 		MedicationDTO createdMedication = medicationService.createMedication(medicationDTO);
 		return new ResponseEntity<> (createdMedication, HttpStatus.OK);
  	}
+	
+	@PostMapping(value = "/get-replacement-medications", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Medication>> getReplacementMedication(@RequestBody PatientAllergedDTO patientAllergedDTO ) 
+	{
+		return medicationService.getReplacementMedication(patientAllergedDTO.getPatientId(), patientAllergedDTO.getMedicationId());
+	}
 }

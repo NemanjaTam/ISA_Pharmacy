@@ -4,4 +4,5 @@ import org.springframework.http.ResponseEntity;
 
 public interface IPatientService {
 	ResponseEntity<String> addPenalty(Long id);
+	ResponseEntity<String> isAlergedOnMedication(Long patientId, Long medicationId);
 }

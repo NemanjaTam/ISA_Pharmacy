@@ -80,6 +80,12 @@ export const store = new Vuex.Store({
     },
     updateCurrentAppointment(state, appointment) {
       state.appointmentProcess = appointment;
+    },
+    addTherapy(state, therapy) {
+      state.appointmentProcess.therapies.push(therapy)
+    },
+    addReport(state, report) {
+      state.appointmentProcess.report = report
     }
   },
   //always on components dispatch action which commit some mutations. Never commit mutations from component because of async
@@ -95,6 +101,12 @@ export const store = new Vuex.Store({
     },
     updateCurrentAppointment(context, appointment) {
       context.commit('updateCurrentAppointment', appointment)
+    },
+    addTherapy(context, therapy) {
+      context.commit('addTherapy', therapy)
+    },
+    addReport(context, report) {
+      context.commit('addReport', report)
     },
     logout(context) {
       var user = {
