@@ -74,12 +74,17 @@ export default {
             }
         },
         finish() {
+            if(this.report === '') {
+                alert("Please fill some report!");
+                return
+            }
             var finish = {
                 appointmentId: this.appointment.id,
                 report: this.report,
                 therapies: this.appointment.therapies
             }
             axios.post("http://localhost:9005/api/appointment/finish-appointment", finish)
+            this.$router.push('HomePage')
         }
     }
 }
