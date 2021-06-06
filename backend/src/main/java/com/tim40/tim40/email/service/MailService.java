@@ -35,7 +35,7 @@ public class MailService implements IMailService {
             MimeMessageHelper mimeHelper = new MimeMessageHelper(mimeMessage, true);
 
             mimeHelper.setSubject(mail.getMailSubject());
-            mimeHelper.setFrom(mail.getMailFrom());
+            mimeHelper.setFrom(MAIL_FROM);
             mimeHelper.setTo(mail.getMailTo());
             mimeHelper.setText(mail.getMailContent());
             javaMailSender.send(mimeHelper.getMimeMessage());

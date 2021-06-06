@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.tim40.tim40.dto.PharmacyDTO;
+import com.tim40.tim40.email.service.MailService;
 import com.tim40.tim40.model.Medication;
 import com.tim40.tim40.model.Pharmacy;
 import com.tim40.tim40.model.QuantityMedication;
