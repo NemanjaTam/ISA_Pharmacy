@@ -87,9 +87,11 @@ export default {
                 alert("Termin is not valid!")
                 return
             }
+            var date = this.getDateTimeFromString(this.dateTo, "00:00");
+            date.setDate(date.getDate() + 1)
             var check = {
                 fromDate: this.getDateTimeFromString(this.dateFrom, "00:00").getTime(),
-                toDate: this.getDateTimeFromString(this.dateTo, "00:00").getTime(),
+                toDate: date.getTime(),
                 pharmacyId: this.Appointment.pharmacy.id,
                 patientId: this.Appointment.patient.id,
                 dermatologistId: this.User.id
@@ -103,7 +105,11 @@ export default {
                     })
             }
             else {
-                alert("TODO")
+                axios.post("http://localhost:9005/api/consultation/get-available-consultations", check)
+                    .then(r => {
+                        this.termins = JSON.parse(JSON.stringify(r.data))
+                        console.log(r.data)
+                    })
             }
 
 
@@ -125,7 +131,10 @@ export default {
                     })
             }
             else {
-                alert("TODO")
+                axios.post("http://localhost:9005/api/consultation/schedule-consultation", this.selectedTermin)
+                    .then(r => {
+                        console.log(r.data)
+                    })
             }
         },
         rowClick(termin, index) {

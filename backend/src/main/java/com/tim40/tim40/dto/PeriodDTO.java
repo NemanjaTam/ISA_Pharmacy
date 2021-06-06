@@ -1,6 +1,6 @@
 package com.tim40.tim40.dto;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,7 +13,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class PeriodDTO {
 	
-	private Date startTime;
+	private LocalDateTime startTime;
 	
-	private Date endTime;
+	private LocalDateTime endTime;
 }

@@ -484,17 +484,17 @@ insert into workdays (endtime, starttime, user_id) values ('2021-06-20 22:00:00-
 insert into workdays (endtime, starttime, user_id) values ('2021-06-21 22:00:00-08', '2021-06-21 14:00:00-08', 11)
 insert into workdays (endtime, starttime, user_id) values ('2021-06-22 22:00:00-08', '2021-06-22 14:00:00-08', 11)
 insert into workdays (endtime, starttime, user_id) values ('2021-07-13 14:00:00-08', '2021-07-13 07:00:00-08', 11)
-
-insert into workdays (endtime, starttime, user_id) values ('2021-06-13 07:00:00-08', '2021-06-13 14:00:00-08', 11)
-insert into workdays (endtime, starttime, user_id) values ('2021-06-13 07:00:00-08', '2021-06-13 14:00:00-08', 12)
-insert into workdays (endtime, starttime, user_id) values ('2021-06-13 07:00:00-08', '2021-06-13 14:00:00-08', 13)
-insert into workdays (endtime, starttime, user_id) values ('2021-06-13 07:00:00-08', '2021-06-13 14:00:00-08', 14)
-insert into workdays (endtime, starttime, user_id) values ('2021-06-13 07:00:00-08', '2021-06-13 14:00:00-08', 15)
-insert into workdays (endtime, starttime, user_id) values ('2021-06-13 14:00:00-08', '2021-06-13 22:00:00-08', 16)
-insert into workdays (endtime, starttime, user_id) values ('2021-06-13 14:00:00-08', '2021-06-13 22:00:00-08', 17)
-insert into workdays (endtime, starttime, user_id) values ('2021-06-13 14:00:00-08', '2021-06-13 22:00:00-08', 18)
-insert into workdays (endtime, starttime, user_id) values ('2021-06-13 14:00:00-08', '2021-06-13 22:00:00-08', 19)
-insert into workdays (endtime, starttime, user_id) values ('2021-06-13 14:00:00-08', '2021-06-13 22:00:00-08', 20)
+--
+--insert into workdays (endtime, starttime, user_id) values ('2021-06-13 07:00:00-08', '2021-06-13 14:00:00-08', 11)
+--insert into workdays (endtime, starttime, user_id) values ('2021-06-13 07:00:00-08', '2021-06-13 14:00:00-08', 12)
+--insert into workdays (endtime, starttime, user_id) values ('2021-06-13 07:00:00-08', '2021-06-13 14:00:00-08', 13)
+--insert into workdays (endtime, starttime, user_id) values ('2021-06-13 07:00:00-08', '2021-06-13 14:00:00-08', 14)
+--insert into workdays (endtime, starttime, user_id) values ('2021-06-13 07:00:00-08', '2021-06-13 14:00:00-08', 15)
+--insert into workdays (endtime, starttime, user_id) values ('2021-06-13 14:00:00-08', '2021-06-13 22:00:00-08', 16)
+--insert into workdays (endtime, starttime, user_id) values ('2021-06-13 14:00:00-08', '2021-06-13 22:00:00-08', 17)
+--insert into workdays (endtime, starttime, user_id) values ('2021-06-13 14:00:00-08', '2021-06-13 22:00:00-08', 18)
+--insert into workdays (endtime, starttime, user_id) values ('2021-06-13 14:00:00-08', '2021-06-13 22:00:00-08', 19)
+--insert into workdays (endtime, starttime, user_id) values ('2021-06-13 14:00:00-08', '2021-06-13 22:00:00-08', 20)
 
 
 

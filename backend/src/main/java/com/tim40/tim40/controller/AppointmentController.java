@@ -49,7 +49,7 @@ public class AppointmentController {
 	}
 	
 	@PostMapping(value = "/schedule-appointment", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Appointment> getAvailableAppointments(@RequestBody ScheduleDTO scheduleDTO) throws Exception{
+	public ResponseEntity<Appointment> scheduleAppointment(@RequestBody ScheduleDTO scheduleDTO) throws Exception{
 		return appointmentService.scheduleAppointment(scheduleDTO.getAppointmentId(), scheduleDTO.getPatientId(), scheduleDTO.getDermatologistId());
 	}
 }
