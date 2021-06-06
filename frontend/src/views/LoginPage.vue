@@ -73,7 +73,15 @@ export default {
                 }
               }
               else {
-                alert("Pharmacist profile is still under development!")
+                if(user.firstTimeLogging) {
+                  this.$store.dispatch('updateUser', user)
+                  this.$router.push({name: 'FirstTimeLogging'})
+                }
+                else {
+                  this.$store.dispatch('updateUser', user)
+                  this.$router.push({name: 'HomePage'})
+                }
+                // alert("Pharmacist profile is still under development!")
                 return
               }
             }

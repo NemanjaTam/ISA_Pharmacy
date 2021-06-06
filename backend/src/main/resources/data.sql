@@ -441,25 +441,25 @@ insert into medications_replacement_medications (medication_id, replacement_medi
 --insert into replacement_medications (medication_id, replacement_medication_id) values (19,18)
 --insert into replacement_medications (medication_id, replacement_medication_id) values (19,5)
 
-insert into reservations (is_done, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, '2021-07-03 00:00:00-08', '2021-07-21 00:00:00-08', 1,21,1)
-insert into reservations (is_done, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, '2021-07-03 00:00:00-08', '2021-07-21 00:00:00-08', 2,22,1)
-insert into reservations (is_done, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, '2021-07-03 00:00:00-08', '2021-07-21 00:00:00-08', 3,23,1)
-insert into reservations (is_done, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, '2021-07-03 00:00:00-08', '2021-07-04 00:00:00-08', 4,24,1)
+insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, 'SN1345', '2021-06-30 00:00:00-08', '2021-06-01 00:00:00-08', 1,21,1)
+insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, 'SN1315', '2021-06-30 00:00:00-08', '2021-06-01 00:00:00-08', 2,22,1)
+insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, 'SN1245', '2021-06-09 00:00:00-08', '2021-06-03 00:00:00-08', 3,23,1)
+insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, 'SN1465', '2021-06-06 00:00:00-08', '2021-06-03 00:00:00-08', 4,24,1)
 
-insert into reservations (is_done, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, '2021-07-03 00:00:00-08', '2021-07-21 00:00:00-08', 5,25,2)
-insert into reservations (is_done, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, '2021-07-03 00:00:00-08', '2021-07-21 00:00:00-08', 6,26,2)
-insert into reservations (is_done, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, '2021-07-03 00:00:00-08', '2021-07-21 00:00:00-08', 7,27,2)
-insert into reservations (is_done, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, '2021-07-03 00:00:00-08', '2021-07-04 00:00:00-08', 8,28,2)
-
-insert into reservations (is_done, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, '2021-07-03 00:00:00-08', '2021-07-21 00:00:00-08', 9,29,3)
-insert into reservations (is_done, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, '2021-07-03 00:00:00-08', '2021-07-21 00:00:00-08', 10,30,3)
-insert into reservations (is_done, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, '2021-07-03 00:00:00-08', '2021-07-21 00:00:00-08', 11,31,3)
-insert into reservations (is_done, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, '2021-07-03 00:00:00-08', '2021-07-04 00:00:00-08', 12,32,3)
-
-insert into reservations (is_done, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, '2021-07-03 00:00:00-08', '2021-07-21 00:00:00-08', 13,33,4)
-insert into reservations (is_done, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, '2021-07-03 00:00:00-08', '2021-07-21 00:00:00-08', 14,34,4)
-insert into reservations (is_done, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, '2021-07-03 00:00:00-08', '2021-07-21 00:00:00-08', 15,35,4)
-insert into reservations (is_done, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, '2021-07-03 00:00:00-08', '2021-07-04 00:00:00-08', 16,36,4)
+--insert into reservations (is_done, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, '2021-07-03 00:00:00-08', '2021-07-21 00:00:00-08', 5,25,2)
+--insert into reservations (is_done, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, '2021-07-03 00:00:00-08', '2021-07-21 00:00:00-08', 6,26,2)
+--insert into reservations (is_done, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, '2021-07-03 00:00:00-08', '2021-07-21 00:00:00-08', 7,27,2)
+--insert into reservations (is_done, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, '2021-07-03 00:00:00-08', '2021-07-04 00:00:00-08', 8,28,2)
+--
+--insert into reservations (is_done, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, '2021-07-03 00:00:00-08', '2021-07-21 00:00:00-08', 9,29,3)
+--insert into reservations (is_done, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, '2021-07-03 00:00:00-08', '2021-07-21 00:00:00-08', 10,30,3)
+--insert into reservations (is_done, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, '2021-07-03 00:00:00-08', '2021-07-21 00:00:00-08', 11,31,3)
+--insert into reservations (is_done, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, '2021-07-03 00:00:00-08', '2021-07-04 00:00:00-08', 12,32,3)
+--
+--insert into reservations (is_done, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, '2021-07-03 00:00:00-08', '2021-07-21 00:00:00-08', 13,33,4)
+--insert into reservations (is_done, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, '2021-07-03 00:00:00-08', '2021-07-21 00:00:00-08', 14,34,4)
+--insert into reservations (is_done, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, '2021-07-03 00:00:00-08', '2021-07-21 00:00:00-08', 15,35,4)
+--insert into reservations (is_done, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, '2021-07-03 00:00:00-08', '2021-07-04 00:00:00-08', 16,36,4)
 
 insert into workdays (endtime, starttime, user_id) values ('2021-06-13 07:00:00-08', '2021-06-13 14:00:00-08', 1)
 insert into workdays (endtime, starttime, user_id) values ('2021-06-14 07:00:00-08', '2021-06-14 14:00:00-08', 1)
@@ -471,6 +471,17 @@ insert into workdays (endtime, starttime, user_id) values ('2021-06-19 14:00:00-
 insert into workdays (endtime, starttime, user_id) values ('2021-06-20 14:00:00-08', '2021-06-20 22:00:00-08', 1)
 insert into workdays (endtime, starttime, user_id) values ('2021-06-21 14:00:00-08', '2021-06-21 22:00:00-08', 1)
 insert into workdays (endtime, starttime, user_id) values ('2021-06-22 14:00:00-08', '2021-06-22 22:00:00-08', 1)
+
+insert into workdays (endtime, starttime, user_id) values ('2021-06-13 07:00:00-08', '2021-06-13 14:00:00-08', 11)
+insert into workdays (endtime, starttime, user_id) values ('2021-06-14 07:00:00-08', '2021-06-14 14:00:00-08', 11)
+insert into workdays (endtime, starttime, user_id) values ('2021-06-15 07:00:00-08', '2021-06-15 14:00:00-08', 11)
+insert into workdays (endtime, starttime, user_id) values ('2021-06-16 07:00:00-08', '2021-06-16 14:00:00-08', 11)
+insert into workdays (endtime, starttime, user_id) values ('2021-06-17 07:00:00-08', '2021-06-17 14:00:00-08', 11)
+insert into workdays (endtime, starttime, user_id) values ('2021-06-18 14:00:00-08', '2021-06-18 22:00:00-08', 11)
+insert into workdays (endtime, starttime, user_id) values ('2021-06-19 14:00:00-08', '2021-06-19 22:00:00-08', 11)
+insert into workdays (endtime, starttime, user_id) values ('2021-06-20 14:00:00-08', '2021-06-20 22:00:00-08', 11)
+insert into workdays (endtime, starttime, user_id) values ('2021-06-21 14:00:00-08', '2021-06-21 22:00:00-08', 11)
+insert into workdays (endtime, starttime, user_id) values ('2021-06-22 14:00:00-08', '2021-06-22 22:00:00-08', 11)
 
 insert into workdays (endtime, starttime, user_id) values ('2021-06-13 07:00:00-08', '2021-06-13 14:00:00-08', 11)
 insert into workdays (endtime, starttime, user_id) values ('2021-06-13 07:00:00-08', '2021-06-13 14:00:00-08', 12)
@@ -495,7 +506,15 @@ insert into appointments (is_finished, is_taken, endtime, starttime, report, der
 insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (false, true, '2021-06-13 13:30:00-08', '2021-06-13 13:00:00-08', '', 1, 21, 1)
 
 
-insert into consultations (is_finished, is_taken, endtime, starttime, report, patient_id, pharmacist_id, pharmacy_id) values (false, false, '2021-07-13 09:00:00-08', '2021-07-13 09:30:00-08', '', 22, 11, 1)
+insert into consultations (is_finished, is_taken, endtime, starttime, report, patient_id, pharmacist_id, pharmacy_id) values (false, false, '2021-06-13 10:00:00-08', '2021-06-13 09:30:00-08', '', 22, 11, 1)
+insert into consultations (is_finished, is_taken, endtime, starttime, report, patient_id, pharmacist_id, pharmacy_id) values (false, false, '2021-06-13 10:30:00-08', '2021-06-13 10:00:00-08', '', 23, 11, 1)
+insert into consultations (is_finished, is_taken, endtime, starttime, report, patient_id, pharmacist_id, pharmacy_id) values (false, false, '2021-06-13 11:00:00-08', '2021-06-13 10:30:00-08', '', 24, 11, 1)
+insert into consultations (is_finished, is_taken, endtime, starttime, report, patient_id, pharmacist_id, pharmacy_id) values (false, false, '2021-06-13 11:30:00-08', '2021-06-13 11:00:00-08', '', 25, 11, 1)
+insert into consultations (is_finished, is_taken, endtime, starttime, report, patient_id, pharmacist_id, pharmacy_id) values (false, false, '2021-06-13 12:00:00-08', '2021-06-13 11:30:00-08', '', 26, 11, 1)
+insert into consultations (is_finished, is_taken, endtime, starttime, report, patient_id, pharmacist_id, pharmacy_id) values (false, false, '2021-06-13 12:30:00-08', '2021-06-13 12:00:00-08', '', 27, 11, 1)
+insert into consultations (is_finished, is_taken, endtime, starttime, report, patient_id, pharmacist_id, pharmacy_id) values (false, false, '2021-06-13 13:00:00-08', '2021-06-13 12:30:00-08', '', 28, 11, 1)
+insert into consultations (is_finished, is_taken, endtime, starttime, report, patient_id, pharmacist_id, pharmacy_id) values (false, false, '2021-06-13 13:30:00-08', '2021-06-13 13:00:00-08', '', 29, 11, 1)
+insert into consultations (is_finished, is_taken, endtime, starttime, report, patient_id, pharmacist_id, pharmacy_id) values (false, false, '2021-06-13 14:00:00-08', '2021-06-13 13:30:00-08', '', 22, 11, 1)
 
 
 

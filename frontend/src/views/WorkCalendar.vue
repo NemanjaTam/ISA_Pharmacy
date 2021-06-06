@@ -55,6 +55,9 @@ export default {
         },
         appointments() {
             return this.$store.getters.getAppointments
+        },
+        userType() {
+            return this.$store.getters.getUserType
         }
 
     },
@@ -93,11 +96,22 @@ export default {
                                 else {
                                     this.showMessage = ''
                                     this.show = false
-                                    axios.post("http://localhost:9005/api/appointment/get-all-scheduled-appointments", this.Check)
-                                        .then(r => {
-                                            var appointments = JSON.parse(JSON.stringify(r.data))
-                                            this.$store.dispatch('updateAppointments', appointments)
-                                         })
+                                    if(this.userType == "DERMATOLOGIST") {
+                                        axios.post("http://localhost:9005/api/appointment/get-all-scheduled-appointments", this.Check)
+                                            .then(r => {
+                                                var appointments = JSON.parse(JSON.stringify(r.data))
+                                                this.$store.dispatch('updateAppointments', appointments)
+                                            })
+                                    }
+                                    else {
+                                        axios.post("http://localhost:9005/api/consultation/get-all-scheduled-consultations", this.Check)
+                                            .then(r => {
+                                                console.log(r.data)
+                                                var appointments = JSON.parse(JSON.stringify(r.data))
+                                                this.$store.dispatch('updateAppointments', appointments)
+                                            })                                        
+                                    }
+
                                 }
                             })
                     }

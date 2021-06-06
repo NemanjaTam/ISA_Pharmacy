@@ -81,7 +81,10 @@ export default {
                 })
         }
         else {
-            alert("TODO")
+            axios.get("http://localhost:9005/api/pharmacist/get-all/" + this.User.id)
+                .then(r => {
+                    this.patients = JSON.parse(JSON.stringify(r.data))
+                })
         }
 
     }
