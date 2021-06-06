@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tim40.tim40.dto.AbsenceCheckDTO;
+import com.tim40.tim40.dto.AppointmentSchedulingDTO;
 import com.tim40.tim40.dto.FinishAppointmentDTO;
+import com.tim40.tim40.dto.ScheduleDTO;
 import com.tim40.tim40.model.Appointment;
 import com.tim40.tim40.service.AppointmentService;
 
@@ -34,5 +36,20 @@ public class AppointmentController {
 	@PostMapping(value = "/finish-appointment", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Appointment> finishAppointment(@RequestBody FinishAppointmentDTO finishAppointmentDTO) throws Exception{
 		return appointmentService.finishAppointment(finishAppointmentDTO.getAppointmentId(), finishAppointmentDTO.getReport(), finishAppointmentDTO.getTherapies());
+	}
+	
+	@PostMapping(value = "/get-available-appointments", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Appointment>> getAvailableAppointments(@RequestBody AppointmentSchedulingDTO appointmentSchedulingDTO) throws Exception{
+		return appointmentService.getAvailableAppointments(
+				appointmentSchedulingDTO.getFromDate(), 
+				appointmentSchedulingDTO.getToDate(), 
+				appointmentSchedulingDTO.getPharmacyId(), 
+				appointmentSchedulingDTO.getPatientId(), 
+				appointmentSchedulingDTO.getDermatologistId());
+	}
+	
+	@PostMapping(value = "/schedule-appointment", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Appointment> getAvailableAppointments(@RequestBody ScheduleDTO scheduleDTO) throws Exception{
+		return appointmentService.scheduleAppointment(scheduleDTO.getAppointmentId(), scheduleDTO.getPatientId(), scheduleDTO.getDermatologistId());
 	}
 }
