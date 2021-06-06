@@ -1,83 +1,152 @@
 <template>
-    <div>
+    <div class="container">
         <div>
-            <b-form-datepicker class="boxDatePicker" style="float:left" placeholder="Please select start date"></b-form-datepicker>
-            <b-form-datepicker class="boxDatePickerEnd" style="float:left" placeholder="Please select end date"></b-form-datepicker>
-            <b-button class="button" style="float:right">Search</b-button>
+            <b-form-datepicker v-model="dateFrom" class="boxDatePicker" style="float:left" placeholder="Please select start date"></b-form-datepicker>
+            <b-form-datepicker v-model="dateTo" class="boxDatePickerEnd" style="float:left" placeholder="Please select end date"></b-form-datepicker>
+            <b-button class="button" v-on:click="this.search" style="float:right">Search</b-button>
         </div>
-        <div class="table-responsive">
-                <table class="table table-hover boxTable">
+        <div >
+            <b-form-input
+                class="search"
+                type="search"
+                style="font-style:italic" 
+                required
+                id="filter-input"
+                v-model="filter"
+                placeholder="Type to search by time"
+            />
+        </div>
+        <div>
+                <!-- <table class="table table-hover boxTable">
                     <thead class="thead-dark topLeft topRight">
                         <tr>
                             <th style="text-align: center" class="topLeft" scope="col">Start time</th>
                             <th class="topRight" style="text-align: center" scope="col">End time</th>
                         </tr>
                     </thead>
-                <tbody>
-                    <tr class="table-light" style="text-align: center">
-                        <td>Column content</td>
-                        <td>Column content</td>
-                    </tr>
-                    <tr class="table-dark" style="text-align: center">
-                        <td>Columnn content</td>
-                        <td>Column content</td>
-                    </tr>
-                    <tr class="table-light" style="text-align: center">
-                        <td>Column content</td>
-                        <td>Column content</td>
-                    </tr>
-                    <tr class="table-dark" style="text-align: center">
-                        <td>Columnn content</td>
-                        <td>Column content</td>
-                    </tr>
-                    <tr class="table-light" style="text-align: center">
-                        <td>Column content</td>
-                        <td>Column content</td>
-                    </tr>
-                    <tr class="table-dark" style="text-align: center">
-                        <td>Columnn content</td>
-                        <td>Column content</td>
-                    </tr>
-                    <tr class="table-light" style="text-align: center">
-                        <td>Column content</td>
-                        <td>Column content</td>
-                    </tr>
-                    <tr class="table-dark" style="text-align: center">
-                        <td>Columnn content</td>
-                        <td>Column content</td>
-                    </tr>
-                    <tr class="table-light" style="text-align: center">
-                        <td>Column content</td>
-                        <td>Column content</td>
-                    </tr>
-                    <tr class="table-dark" style="text-align: center">
-                        <td>Columnn content</td>
-                        <td>Column content</td>
-                    </tr>
-                    <tr class="table-light" style="text-align: center">
-                        <td>Column content</td>
-                        <td>Column content</td>
-                    </tr>
-                    <tr class="table-dark bottomRight bottomLeft" style="text-align: center">
-                        <td class="bottomLeft">Columnn content</td>
-                        <td class="bottomRight" >Column content</td>
-                    </tr>
-                </tbody>
-            </table>
+                </table> -->
+                <b-table
+                class="table-light" 
+                style="margin:20px"
+                head-variant="dark"
+                selectable sticky-header="100%"
+                select-mode="single"
+                striped
+                hover
+                :items="termins"
+                :fields="fields"
+                :filter="filter"
+                :filter-included-fields="filterOn"
+                @row-clicked="rowClick"
+            ></b-table>
         </div>
         <div class="center">
-            <b-button class="boxDatePicker">Schedule Examination</b-button>
+            <b-button v-on:click="schedule" class="boxDatePicker">Schedule Examination</b-button>
         </div>
     </div>
 </template>
 
 <script>
+
+import axios from 'axios'
+
 export default {
-    
+    name: 'Scheduling',
+    computed: {
+        User() {
+            return this.$store.getters.getUser
+        },
+        Appointment() {
+            return this.$store.getters.getCurrentAppointment
+        },
+        userType() {
+            return this.$store.getters.getUserType
+        }
+    },
+    data() {
+        return {
+            dateFrom: null,
+            dateTo: null,
+            termins: [],
+            fields: [
+                {key: 'period.startTime', sortable: true, label: 'Start time'},
+                {key: 'period.endTime', sortable: true, label: 'End time'}
+            ],
+            filter: null,
+            filterOn: [],
+            selectedTermin: null
+        }
+    },
+    methods: {
+        search() {
+            if(this.dateTo == null || this.dateFrom == null) {
+                alert("Termin is not valid!")
+                return
+            }
+            if(this.dateFrom > this.dateTo) {
+                alert("Termin is not valid!")
+                return
+            }
+            var check = {
+                fromDate: this.getDateTimeFromString(this.dateFrom, "00:00").getTime(),
+                toDate: this.getDateTimeFromString(this.dateTo, "00:00").getTime(),
+                pharmacyId: this.Appointment.pharmacy.id,
+                patientId: this.Appointment.patient.id,
+                dermatologistId: this.User.id
+            }
+
+            if(this.userType == "DERMATOLOGIST") {
+                axios.post("http://localhost:9005/api/appointment/get-available-appointments", check)
+                    .then(r => {
+                        this.termins = JSON.parse(JSON.stringify(r.data))
+                        console.log(r.data)
+                    })
+            }
+            else {
+                alert("TODO")
+            }
+
+
+        },
+        schedule() {
+            if(this.selectedTermin == null) {
+                alert("Termin is not selected!")
+                return
+            }
+            if(this.userType == "DERMATOLOGIST") {
+                var schedule = {
+                    appointmentId: this.selectedTermin.id,
+                    patientId: this.Appointment.patient.id,
+                    dermatologistId: this.User.id
+                }
+                axios.post("http://localhost:9005/api/appointment/schedule-appointment", schedule)
+                    .then(r => {
+                        console.log(r.data)
+                    })
+            }
+            else {
+                alert("TODO")
+            }
+        },
+        rowClick(termin, index) {
+            this.selectedTermin = termin
+        },
+        getDateTimeFromString: function(dstr, tstr) {
+            let dparts = dstr.split('-');
+            let tparts = tstr.split(':');
+            // -1 because js counts months from 0
+            return new Date(dparts[0], dparts[1] - 1, dparts[2], tparts[0], tparts[1]);
+        }
+    },
+
 }
 </script>
 
 <style scoped>
+    .container {
+        display: flex;
+        flex-flow: column;
+    }
     .background {
         background-image: url("../assets/img/medicine.jpg");
         position: absolute; 
@@ -114,6 +183,15 @@ export default {
         margin-top: 20px;
         margin-left: 20px;
         box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        text-align: center;
+        transition: 0.25s;
+        border-radius: 20px;
+    }
+
+    .search {
+        max-width: 300px;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        margin-top: 20px;
         text-align: center;
         transition: 0.25s;
         border-radius: 20px;

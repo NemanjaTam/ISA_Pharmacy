@@ -49,11 +49,11 @@ public class Appointment {
     private Pharmacy pharmacy;
 	
     @ManyToOne
-    @JoinColumn(name = "dermatologist_id", nullable = false)
+    @JoinColumn(name = "dermatologist_id", nullable = true)
     private  Dermatologist dermatologist;
     
     @ManyToOne
-    @JoinColumn(name = "patient_id", nullable = false)
+    @JoinColumn(name = "patient_id", nullable = true)
     private Patient patient;
     
     @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
