@@ -39,7 +39,13 @@ public class Dermatologist extends User {
 //	@OneToMany(fetch = FetchType.LAZY,mappedBy="dermatologist")
 //    private Set<DermatologistRating> ratings = new HashSet<DermatologistRating>();
 	
-	@OneToMany(fetch = FetchType.LAZY)
+    @ManyToMany
+	@JoinTable
+	(
+	    name = "dermatologist_patient",
+	    joinColumns = @JoinColumn(name = "dermatologist_id"),
+	    inverseJoinColumns = @JoinColumn(name = "patient_id")
+	)
 	private Set<Patient> allPatients = new HashSet<Patient>();
 	
 }
