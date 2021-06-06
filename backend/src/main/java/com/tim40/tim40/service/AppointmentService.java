@@ -12,17 +12,22 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.tim40.tim40.model.Appointment;
+import com.tim40.tim40.model.Dermatologist;
+import com.tim40.tim40.model.Patient;
 import com.tim40.tim40.model.Therapy;
 import com.tim40.tim40.repository.AppointmentRepository;
+import com.tim40.tim40.repository.DermatologistRepository;
 
 @Service
 public class AppointmentService implements IAppointmentService {
 	
 	private AppointmentRepository appointmentRepository;
+	private DermatologistRepository dermatologistRepository;
 
 	@Autowired
-	public AppointmentService(AppointmentRepository appointmentRepository) {
+	public AppointmentService(AppointmentRepository appointmentRepository, DermatologistRepository dermatologistRepository) {
 		this.appointmentRepository = appointmentRepository;
+		this.dermatologistRepository = dermatologistRepository;
 	}
 
 	@Override
@@ -52,6 +57,13 @@ public class AppointmentService implements IAppointmentService {
 		appointment.setTherapies(therapies);
 		appointment.setFinished(true);
 		appointmentRepository.save(appointment);
+		if(!report.equals("")) addPatient(appointment.getPatient(), appointment.getDermatologist().getId());
 		return new ResponseEntity<Appointment>(appointment, HttpStatus.OK);
+	}
+	
+	public void addPatient(Patient patient, Long id) {
+		Dermatologist dermatologist = dermatologistRepository.findById(id).get();
+		dermatologist.getAllPatients().add(patient);
+		dermatologistRepository.save(dermatologist);
 	}
 }

@@ -36,10 +36,10 @@ public class Dermatologist extends User {
 //	@OneToMany(mappedBy = "dermatologist")
 //	private Set<Appointment> appointments = new HashSet<Appointment>();
 	
-	@OneToMany(fetch = FetchType.LAZY,mappedBy="dermatologist")
-    private Set<DermatologistRating> ratings = new HashSet<DermatologistRating>();
+//	@OneToMany(fetch = FetchType.LAZY,mappedBy="dermatologist")
+//    private Set<DermatologistRating> ratings = new HashSet<DermatologistRating>();
 	
-//	@OneToMany(fetch = FetchType.LAZY)
-//	private Set<Patient> allPatients = new HashSet<Patient>();
+	@OneToMany(fetch = FetchType.LAZY)
+	private Set<Patient> allPatients = new HashSet<Patient>();
 	
 }
