@@ -16,6 +16,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.tim40.tim40.dto.ConsultationDTO;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,7 +36,7 @@ public class Consultation {
 	
 	@Column(name = "report", nullable = true)
 	private String report;
-	
+
 	@Embedded
 	private Period period;
 	
@@ -59,4 +61,17 @@ public class Consultation {
     @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     private Set<Therapy> therapies = new HashSet<Therapy>();
     
+	public Consultation(ConsultationDTO consultationDTO) {
+		this.report = consultationDTO.getReport();
+		Period period = new Period();
+		period.setStartTime(consultationDTO.getPeriod().getStartTime());
+		period.setEndTime(consultationDTO.getPeriod().getEndTime());
+		this.period = period;
+		this.isTaken = consultationDTO.isTaken();
+		this.isFinished = consultationDTO.isFinished();
+		this.pharmacy = consultationDTO.getPharmacy();
+		this.pharmacist = consultationDTO.getPharmacist();
+		this.patient = consultationDTO.getPatient();
+		this.therapies = consultationDTO.getTherapies();
+	}
 }
