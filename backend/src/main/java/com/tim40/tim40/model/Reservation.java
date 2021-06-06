@@ -34,6 +34,9 @@ public class Reservation {
 	@Column(nullable = false)
 	private boolean isDone;
 	
+	@Column(nullable = false)
+	private String serialnumber;
+	
 	@ManyToOne
     @JoinColumn(name = "medication_id", nullable = false)
     private  Medication medication;

@@ -37,6 +37,9 @@ export default {
     computed: {
         appointment() {
             return this.$store.getters.getCurrentAppointment
+        },
+        userType() {
+            return this.$store.getters.getUserType
         }
     },
     data() {
@@ -83,7 +86,12 @@ export default {
                 report: this.report,
                 therapies: this.appointment.therapies
             }
-            axios.post("http://localhost:9005/api/appointment/finish-appointment", finish)
+            if(this.userType == "DERMATOLOGIST") {
+                axios.post("http://localhost:9005/api/appointment/finish-appointment", finish)
+            }
+            else {
+                axios.post("http://localhost:9005/api/consultation/finish-consultation", finish)
+            }
             this.$router.push('HomePage')
         }
     }

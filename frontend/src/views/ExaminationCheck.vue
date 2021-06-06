@@ -29,6 +29,9 @@ export default {
         },
         User() {
             return this.$store.getters.getUser
+        },
+        userType() {
+            return this.$store.getters.getUserType
         }
     },
     methods: {
@@ -38,7 +41,12 @@ export default {
                 report: '',
                 therapies: []
             }
-            axios.post("http://localhost:9005/api/appointment/finish-appointment", finish)
+            if(this.userType == "DERMATOLOGIST") {
+                axios.post("http://localhost:9005/api/appointment/finish-appointment", finish)
+            }
+            else {
+                axios.post("http://localhost:9005/api/consultation/finish-consultation", finish)
+            }
             axios.get("http://localhost:9005/api/patient/add-penalty/" + this.appointment.patient.id)
             this.$store.dispatch('updateAppointments', null)
             this.$store.dispatch('updateCurrentAppointment', null)
