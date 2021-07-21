@@ -32,6 +32,9 @@ public class PurchaseOrder {
 	@Enumerated(EnumType.STRING)
 	private PurchaseOrderStatus purchaseOrderStatus;
 	
+	 @OneToMany(fetch = FetchType.LAZY, mappedBy = "purchaseOrder")
+	 private final Set<PurchaseOrderOffer> purchaseOrderOffers = new HashSet<PurchaseOrderOffer>();
+	 
 	@Embedded
 	private Period period;
 }

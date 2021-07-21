@@ -42,6 +42,15 @@ public class Pharmacy {
 
     @Column(name = "avg_rating", nullable = false)
     private double avgRating;
+    
+    @ManyToMany
+    @JoinTable
+    (
+        name = "pharmacy_suppliers",
+        joinColumns = @JoinColumn(name = "pharmacy_id"),
+        inverseJoinColumns = @JoinColumn(name = "supplier_id")
+    )
+	private final Set<Supplier> suppliers = new HashSet<Supplier>();
 
 //    @ManyToMany
 //    @JoinTable

@@ -67,7 +67,7 @@ public class User {
 	private Set<Email> send = new HashSet<Email>();
 	
 	public User(String name, String surname, String email, String password, Address address,
-			UserType userType, boolean isFirstTimeLogging) {
+			UserType userType, boolean isFirstTimeLogging, String phone) {
 		super();
 		this.name = name;
 		this.surname = surname;
@@ -76,6 +76,7 @@ public class User {
 		this.address = address;
 		this.userType = userType;
 		this.isFirstTimeLogging = isFirstTimeLogging;
+		this.phone = phone;
 	}
 
 	public void update(UserDTO userDTO) {
@@ -89,6 +90,7 @@ public class User {
 		this.isFirstTimeLogging = userDTO.isFirstTimeLogging();
 		this.inbox = userDTO.getInbox();
 		this.send = userDTO.getSend();
+		this.phone = userDTO.getPhone();
 	}
 	
 }
