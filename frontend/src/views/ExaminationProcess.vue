@@ -4,7 +4,7 @@
         <div class="test">
             <div>
                 <label for="exampleTextarea" style="margin-left: 1vw" class="form-label mt-4">Description:</label>
-                <textarea class="form-control textBox" id="exampleTextarea" rows="3"></textarea>
+                <textarea v-model="report" class="form-control textBox" id="exampleTextarea" rows="3"></textarea>
             </div>
             <div>
                 <b-button class="button" v-on:click="showFormForScheduling">{{buttonSchedulingText}}</b-button>
@@ -15,7 +15,7 @@
            
         </div>
         <div>
-            <b-button class="buttonFinish" style="float:right">Finish examination</b-button>
+            <b-button class="buttonFinish" v-on:click="finish" style="float:right">Finish examination</b-button>
         </div>
     </div>
 </template>
@@ -25,6 +25,7 @@
 import TopMenuForPD from '../components/TopMenuForPD.vue'
 import Scheduling from '../components/Scheduling.vue'
 import MedicationTherapy from '../components/MedicationTherapy.vue'
+import axios from 'axios'
 
 export default {
     name: 'ExaminationProcess',
@@ -33,12 +34,21 @@ export default {
         Scheduling,
         MedicationTherapy
     },
+    computed: {
+        appointment() {
+            return this.$store.getters.getCurrentAppointment
+        },
+        userType() {
+            return this.$store.getters.getUserType
+        }
+    },
     data() {
         return {
             showScheduling: false,
             buttonSchedulingText: 'Schedule new examination',
             showMedication: false,
-            buttonMedicationText: 'Prescribe medication/therapy'
+            buttonMedicationText: 'Prescribe medication/therapy',
+            report: ''
         }
     },
     methods: {
@@ -65,6 +75,24 @@ export default {
                 this.showMedication = false,
                 this.buttonMedicationText = "Prescribe medication/therapy"
             }
+        },
+        finish() {
+            if(this.report === '') {
+                alert("Please fill some report!");
+                return
+            }
+            var finish = {
+                appointmentId: this.appointment.id,
+                report: this.report,
+                therapies: this.appointment.therapies
+            }
+            if(this.userType == "DERMATOLOGIST") {
+                axios.post("http://localhost:9005/api/appointment/finish-appointment", finish)
+            }
+            else {
+                axios.post("http://localhost:9005/api/consultation/finish-consultation", finish)
+            }
+            this.$router.push('HomePage')
         }
     }
 }

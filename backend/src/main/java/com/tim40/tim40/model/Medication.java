@@ -1,6 +1,8 @@
 package com.tim40.tim40.model;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,6 +19,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.tim40.tim40.model.enums.MedicationForm;
 import com.tim40.tim40.model.enums.PrescriptionRegime;
 import com.tim40.tim40.model.enums.TypeOfMedication;
@@ -70,23 +74,24 @@ public class Medication {
     @Column (nullable = false)
     private String recommendedIntake;  // preporučeni unos terapije na dnevnom nivou
 
-    @ManyToOne
-    @JoinColumn(name = "pharmacy_id", nullable = false)
-    private Pharmacy pharmacy;
+//    @ManyToOne
+//    @JoinColumn(name = "pharmacy_id", nullable = false)
+//    private Pharmacy pharmacy;
 
-    @ManyToMany(mappedBy = "allergedOnMedications")
-    private final Set<Patient> patients = new HashSet<Patient>();
+//    @ManyToMany(mappedBy = "allergedOnMedications")
+//    private final Set<Patient> patients = new HashSet<Patient>();
     
     @OneToMany(fetch = FetchType.LAZY,mappedBy="medication")
     private Set<MedicationRating> ratings;
 
+    @JsonBackReference
     @ManyToMany
-    @JoinTable(
-    		name = "replacement_medications",
-            joinColumns = @JoinColumn(name = "medication_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "replacement_medication_id", referencedColumnName = "id")
-    )
-	private Set<Medication> replacementMedications = new HashSet<Medication>();
+//    @JoinTable(
+//    		name = "replacement_medications",
+//            joinColumns = @JoinColumn(name = "replacement_medication_id", referencedColumnName = "id"),
+//            inverseJoinColumns = @JoinColumn(name = "medication_id", referencedColumnName = "id")
+//    )
+	private List<Medication> replacementMedications = new ArrayList<Medication>();
     
     public Medication (String name, String code, TypeOfMedication typeOfMedication, String structure, String contraindications,
             String recommendedIntake, Pharmacy pharmacy, Set<Medication> replacementMedications)
@@ -98,7 +103,7 @@ public class Medication {
         this.structure = structure;
         this.contraindications = contraindications;
         this.recommendedIntake = recommendedIntake;
-        this.pharmacy = pharmacy; 
-        this.replacementMedications = replacementMedications;
+//        this.pharmacy = pharmacy; 
+//        this.replacementMedications = replacementMedications;
     }
 }

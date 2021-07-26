@@ -2,22 +2,55 @@
     <div class="background">
         <TopMenuForPD/>
         <router-link to="/examinationProcess">
-            <b-button class="boxDatePicker">Start examination</b-button>
+            <b-button class="boxDatePicker">Start {{getType}}</b-button>
         </router-link>
         <router-link to="/homePage">
-            <b-button class="boxDatePicker">The patient didn't show up</b-button>
+            <b-button v-on:click="patientDidntShowUp" class="boxDatePicker">The patient didn't show up</b-button>
         </router-link>
     </div>
 </template>
 
 <script>
 
+import axios from 'axios'
 import TopMenuForPD from '../components/TopMenuForPD.vue'
 
 export default {
     name: 'ExaminationCheck',
     components: {
         TopMenuForPD
+    },
+    computed: {
+        getType() {
+            return this.$store.getters.getType
+        },
+        appointment() {
+            return this.$store.getters.getCurrentAppointment
+        },
+        User() {
+            return this.$store.getters.getUser
+        },
+        userType() {
+            return this.$store.getters.getUserType
+        }
+    },
+    methods: {
+        patientDidntShowUp() {
+            var finish = {
+                appointmentId: this.appointment.id,
+                report: '',
+                therapies: []
+            }
+            if(this.userType == "DERMATOLOGIST") {
+                axios.post("http://localhost:9005/api/appointment/finish-appointment", finish)
+            }
+            else {
+                axios.post("http://localhost:9005/api/consultation/finish-consultation", finish)
+            }
+            axios.get("http://localhost:9005/api/patient/add-penalty/" + this.appointment.patient.id)
+            this.$store.dispatch('updateAppointments', null)
+            this.$store.dispatch('updateCurrentAppointment', null)
+        }
     }
 }
 </script>

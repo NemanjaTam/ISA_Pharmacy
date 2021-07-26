@@ -9,7 +9,7 @@ export const store = new Vuex.Store({
   // this is like data:
   state: {
     user: {
-      id: null,
+      id: 1,
       name: '',
       surname: '',
       email: '',
@@ -26,7 +26,9 @@ export const store = new Vuex.Store({
       firstTimeLogging: null,
       inbox: [],
       send: []
-    }
+    },
+    appointments: [],
+    appointmentProcess: null
   },
   //methods that return data (state)
   getters: {
@@ -50,6 +52,16 @@ export const store = new Vuex.Store({
     isDermatologist(state) {
       if(state.user.userType == "DERMATOLOGIST") return true
       else return false
+    },
+    getType(state) {
+      if(state.user.userType == "DERMATOLOGIST") return "Examination"
+      else return "Consultation"
+    },
+    getAppointments(state) {
+      return state.appointments
+    },
+    getCurrentAppointment(state) {
+      return state.appointmentProcess
     }
   },
   //methods for changing date (state)
@@ -62,6 +74,18 @@ export const store = new Vuex.Store({
       if(state.user.firstTimeLogging) {
         state.user.firstTimeLogging = false
       }
+    },
+    updateAppointments(state, appointments) {
+      state.appointments = appointments;
+    },
+    updateCurrentAppointment(state, appointment) {
+      state.appointmentProcess = appointment;
+    },
+    addTherapy(state, therapy) {
+      state.appointmentProcess.therapies.push(therapy)
+    },
+    addReport(state, report) {
+      state.appointmentProcess.report = report
     }
   },
   //always on components dispatch action which commit some mutations. Never commit mutations from component because of async
@@ -71,6 +95,18 @@ export const store = new Vuex.Store({
     },
     updatePassword(context, password) {
       context.commit('updatePassword', password)
+    },
+    updateAppointments(context, appointments) {
+      context.commit('updateAppointments', appointments)
+    },
+    updateCurrentAppointment(context, appointment) {
+      context.commit('updateCurrentAppointment', appointment)
+    },
+    addTherapy(context, therapy) {
+      context.commit('addTherapy', therapy)
+    },
+    addReport(context, report) {
+      context.commit('addReport', report)
     },
     logout(context) {
       var user = {

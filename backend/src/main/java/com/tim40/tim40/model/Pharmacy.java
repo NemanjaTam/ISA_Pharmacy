@@ -43,41 +43,41 @@ public class Pharmacy {
     @Column(name = "avg_rating", nullable = false)
     private double avgRating;
 
-    @ManyToMany
-    @JoinTable
-    (
-        name = "dermatologist_pharmacy",
-        joinColumns = @JoinColumn(name = "pharmacy_id"),
-        inverseJoinColumns = @JoinColumn(name = "dermatologist_id")
-    )
-    private final Set<Dermatologist> dermatologists = new HashSet<Dermatologist>();
+//    @ManyToMany
+//    @JoinTable
+//    (
+//        name = "dermatologist_pharmacy",
+//        joinColumns = @JoinColumn(name = "pharmacy_id"),
+//        inverseJoinColumns = @JoinColumn(name = "dermatologist_id")
+//    )
+//    private final Set<Dermatologist> dermatologists = new HashSet<Dermatologist>();
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pharmacy")
-    private final Set<Pharmacist> pharmacists = new HashSet<Pharmacist>();
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pharmacy")
+//    private final Set<Pharmacist> pharmacists = new HashSet<Pharmacist>();
     
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pharmacy")
-    private final Set<Consultation> consultations = new HashSet<Consultation>();
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pharmacy")
+//    private final Set<Consultation> consultations = new HashSet<Consultation>();
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pharmacy")
-    private final Set<Appointment> appointments = new HashSet<Appointment>();
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pharmacy")
+//    private final Set<Appointment> appointments = new HashSet<Appointment>();
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pharmacy")
-    private final Set<Medication> medications = new HashSet<Medication>();
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pharmacy")
+//    private final Set<Medication> medications = new HashSet<Medication>();
 
 //    @OneToMany(fetch = FetchType.LAZY,mappedBy="pharmacy")
-//	private final Set<PharmacyAdministrator> pharmacyAdministrators = new HashSet<PharmacyAdministrator>();
+//	  private final Set<PharmacyAdministrator> pharmacyAdministrators = new HashSet<PharmacyAdministrator>();
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy="pharmacy")
-	private final Set<PriceListMedication> priceListMedication = new HashSet<PriceListMedication>();
-
-    @OneToMany(fetch = FetchType.LAZY,mappedBy="pharmacy")
-	private final Set<PriceListAppointment> priceListAppointment = new HashSet<PriceListAppointment>();
-
-    @OneToMany(fetch = FetchType.LAZY,mappedBy="pharmacy")
-	private final Set<PriceListConsultation> priceListConsultation = new HashSet<PriceListConsultation>();
-    
-    @OneToMany(fetch = FetchType.LAZY,mappedBy="pharmacy")
-    private Set<PharmacyRating> ratings = new HashSet<PharmacyRating>();
+//    @OneToMany(fetch = FetchType.LAZY,mappedBy="pharmacy")
+//	private final Set<PriceListMedication> priceListMedication = new HashSet<PriceListMedication>();
+//
+//    @OneToMany(fetch = FetchType.LAZY,mappedBy="pharmacy")
+//	private final Set<PriceListAppointment> priceListAppointment = new HashSet<PriceListAppointment>();
+//
+//    @OneToMany(fetch = FetchType.LAZY,mappedBy="pharmacy")
+//	private final Set<PriceListConsultation> priceListConsultation = new HashSet<PriceListConsultation>();
+//    
+//    @OneToMany(fetch = FetchType.LAZY,mappedBy="pharmacy")
+//    private Set<PharmacyRating> ratings = new HashSet<PharmacyRating>();
 
     @ManyToMany(fetch = FetchType.LAZY)
    	private final Set<QuantityMedication> medicationQuantity = new HashSet<QuantityMedication>();

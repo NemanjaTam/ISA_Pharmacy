@@ -1,14 +1,19 @@
 package com.tim40.tim40.service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.tim40.tim40.dto.MedicationDTO;
 import com.tim40.tim40.model.Medication;
 import com.tim40.tim40.model.Pharmacy;
+import com.tim40.tim40.model.QuantityMedication;
 import com.tim40.tim40.repository.MedicationRepository;
 import com.tim40.tim40.repository.PharmacyRepository;
 
@@ -35,5 +40,20 @@ public class MedicationService implements IMedicationService{
 				pharmacy, replacementMedications);
 		Medication createdMedication = medicationRepository.save(medication);
 		return new MedicationDTO(createdMedication);
+	}
+
+	@Override
+	public ResponseEntity<List<Medication>> getReplacementMedication(Long pharmacyId, Long medicationId) {
+		Medication medication = medicationRepository.findById(medicationId).get();
+		List<Medication> inPharmacy = new ArrayList<Medication>();
+		Pharmacy pharmacy = pharmacyRepository.findById(pharmacyId).get();
+		for(Medication m : medication.getReplacementMedications()) {
+			for(QuantityMedication qm : pharmacy.getMedicationQuantity()) {
+				if(qm.getMedication().getId() == m.getId()) {
+					inPharmacy.add(m);
+				}
+			}
+		}
+		return new ResponseEntity<List<Medication>>(medication.getReplacementMedications(), HttpStatus.OK);
 	}
 }

@@ -3,6 +3,7 @@ package com.tim40.tim40.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -48,14 +49,14 @@ public class Appointment {
     private Pharmacy pharmacy;
 	
     @ManyToOne
-    @JoinColumn(name = "dermatologist_id", nullable = false)
+    @JoinColumn(name = "dermatologist_id", nullable = true)
     private  Dermatologist dermatologist;
     
     @ManyToOne
-    @JoinColumn(name = "patient_id", nullable = false)
+    @JoinColumn(name = "patient_id", nullable = true)
     private Patient patient;
     
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "appointment")
-    private final Set<Therapy> therapies = new HashSet<Therapy>();
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    private Set<Therapy> therapies = new HashSet<Therapy>();
     
 }

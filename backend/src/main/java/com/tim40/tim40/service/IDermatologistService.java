@@ -1,7 +1,12 @@
 package com.tim40.tim40.service;
 
-import com.tim40.tim40.dto.DermatologistDTO;
+import java.util.Set;
+
+import org.springframework.http.ResponseEntity;
+
+import com.tim40.tim40.model.Patient;
+
 
 public interface IDermatologistService {
-	DermatologistDTO getDermatologistByEmail(String email);
+	ResponseEntity<Set<Patient>> getAllPatients(Long id);
 }

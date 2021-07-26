@@ -1,132 +1,36 @@
 <template>
     <div class="background">
         <TopMenuForPD/>
-        <div>
-            <b-form-input class="boxDatePicker" type="text" placeholder="type id of reservation" style="font-style:italic" required/>
+        <div style="text-align: center;">
+            <b-form-input class="boxDatePicker" type="text" v-model="input" v-on:input="search" placeholder="type id of reservation" style="font-style:italic" required trim/>
+            <label style="color:red;margin-top:20px;"><b>{{message}}</b></label>
         </div>
         <div class="table-responsive">
                 <table class="table table-hover boxTable">
-                <thead class="thead-dark topLeft topRight">
-                    <tr>
-                        <th style="text-align: center" class="topLeft" scope="col">Name</th>
-                        <th style="text-align: center" scope="col">Surname</th>
-                        <th style="text-align: center" scope="col">Medication name</th>
-                        <th style="text-align: center" scope="col">Pharmacy name</th>
-                        <th class="topRight" style="text-align: center" scope="col">Give medication</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="table-light" style="text-align: center">
-                        <td>Dark</td>
-                        <td>Column content</td>
-                        <td>Column content</td>
-                        <td>Column content</td>
-                        <td style="width: 210px">
-                            <router-link to="/scheduleExamination" class="routerlink">
-                                <b-button class="button">Give medication</b-button>
-                            </router-link>
-                        </td>
-                    </tr>
-                    <tr class="table-dark" style="text-align: center">
-                        <td>Dark</td>
-                        <td>Column content</td>
-                        <td>Column content</td>
-                        <td>Column content</td>
-                        <td>
-                            <b-button class="button">Give medication</b-button>
-                        </td>
-                    </tr>
-                    <tr class="table-light" style="text-align: center">
-                        <td>Dark</td>
-                        <td>Column content</td>
-                        <td>Column content</td>
-                        <td>Column content</td>
-                        <td style="width: 180px">
-                            <b-button class="button">Give medication</b-button>
-                        </td>
-                    </tr>
-                    <tr class="table-dark" style="text-align: center">
-                        <td>Dark</td>
-                        <td>Column content</td>
-                        <td>Column content</td>
-                        <td>Column content</td>
-                        <td style="width: 180px">
-                            <b-button class="button">Give medication</b-button>
-                        </td>
-                    </tr>
-                    <tr class="table-light" style="text-align: center">
-                        <td>Dark</td>
-                        <td>Column content</td>
-                        <td>Column content</td>
-                        <td>Column content</td>
-                        <td style="width: 180px">
-                            <b-button class="button">Give medication</b-button>
-                        </td>
-                    </tr>
-                    <tr class="table-dark" style="text-align: center">
-                        <td>Dark</td>
-                        <td>Column content</td>
-                        <td>Column content</td>
-                        <td>Column content</td>
-                        <td style="width: 180px">
-                            <b-button class="button">Give medication</b-button>
-                        </td>
-                    </tr>
-                    <tr class="table-light" style="text-align: center">
-                        <td>Dark</td>
-                        <td>Column content</td>
-                        <td>Column content</td>
-                        <td>Column content</td>
-                        <td style="width: 180px">
-                            <b-button class="button">Give medication</b-button>
-                        </td>
-                    </tr>
-                    <tr class="table-dark" style="text-align: center">
-                        <td>Dark</td>
-                        <td>Column content</td>
-                        <td>Column content</td>
-                        <td>Column content</td>
-                        <td style="width: 180px">
-                            <b-button class="button">Give medication</b-button>
-                        </td>
-                    </tr>
-                    <tr class="table-light" style="text-align: center">
-                        <td>Dark</td>
-                        <td>Column content</td>
-                        <td>Column content</td>
-                        <td>Column content</td>
-                        <td style="width: 180px">
-                            <b-button class="button">Give medication</b-button>
-                        </td>
-                    </tr>                    
-                    <tr class="table-dark" style="text-align: center">
-                        <td>Dark</td>
-                        <td>Column content</td>
-                        <td>Column content</td>
-                        <td>Column content</td>
-                        <td style="width: 180px">
-                            <b-button class="button">Give medication</b-button>
-                        </td>
-                    </tr>
-                    <tr class="table-light" style="text-align: center">
-                        <td>Dark</td>
-                        <td>Column content</td>
-                        <td>Column content</td>
-                        <td>Column content</td>
-                        <td style="width: 180px">
-                            <b-button class="button">Give medication</b-button>
-                        </td>
-                    </tr> 
-                    <tr class="table-dark bottomRight bottomLeft" style="text-align: center">
-                        <td class="bottomLeft">Dark</td>
-                        <td>Column content</td>
-                        <td>Column content</td>
-                        <td>Column content</td>
-                        <td class="bottomRight" style="width: 180px">
-                            <b-button class="button">Give medication</b-button>
-                        </td>
-                    </tr>
-                </tbody>
+                    <thead class="thead-dark topLeft topRight">
+                        <tr>
+                            <th style="text-align: center" class="topLeft" scope="col">Name</th>
+                            <th style="text-align: center" scope="col">Surname</th>
+                            <th style="text-align: center" scope="col">Medication name</th>
+                            <th style="text-align: center" scope="col">Pharmacy name</th>
+                            <th style="text-align: center" scope="col">Serial number</th>
+                            <th class="topRight" style="text-align: center" scope="col">Give medication</th>
+                        </tr>
+                    </thead>
+                    <tbody v-if="show">
+                        <tr class="table-light" style="text-align: center">
+                            <td>{{this.reservation.patient.name}}</td>
+                            <td>{{this.reservation.patient.surname}}</td>
+                            <td>{{this.reservation.medication.name}}</td>
+                            <td>{{this.reservation.pharmacy.name}}</td>
+                            <td>{{this.reservation.serialnumber}}</td>
+                            <td style="width: 210px">
+                                <router-link to="/scheduleExamination" class="routerlink">
+                                    <b-button class="button">Give medication</b-button>
+                                </router-link>
+                            </td>
+                        </tr>
+                    </tbody>
             </table>
             </div>
     </div>    
@@ -134,6 +38,7 @@
 
 <script>
 
+import axios from 'axios'
 import TopMenuForPD from '../components/TopMenuForPD.vue'
 
 export default {
@@ -141,9 +46,38 @@ export default {
     components: {
         TopMenuForPD
     },
+    computed: {
+        User() {
+            return this.$store.getters.getUser
+        }
+    },
     data() {
         return {
-
+            input: '',
+            show: false,
+            reservation: null,
+            message: ''
+        }
+    },
+    methods: {
+        search() {
+            if(this.input == '') return
+            var check = {
+                input: this.input,
+                id: this.User.id
+            }
+            axios.post("http://localhost:9005/api/reservation/get-reservations", check)
+                .then(r => {
+                    this.reservation = JSON.parse(JSON.stringify(r.data))
+                    if(this.reservation.id == null) {
+                        this.show = false;
+                        this.message = "Reservation with given serial number doesn not exists or it is expired"
+                    }
+                    else {
+                        this.show = true;
+                        this.message = ''
+                    }
+                })
         }
     }
 }

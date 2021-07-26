@@ -1,5 +1,9 @@
 package com.tim40.tim40.service;
 
-public interface IWorkDayService {
+import java.time.LocalDateTime;
 
+import org.springframework.http.ResponseEntity;
+
+public interface IWorkDayService {
+	ResponseEntity<String> checkIsUserWorking(LocalDateTime  date, Long userId);
 }

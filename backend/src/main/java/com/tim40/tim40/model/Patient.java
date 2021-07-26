@@ -27,17 +27,17 @@ public class Patient extends User {
 	@Column(nullable = true)
 	private Long penalties;
 	
-	@OneToMany(mappedBy = "patient")
-	private Set<Consultation> consultations = new HashSet<Consultation>();
+//	@OneToMany(mappedBy = "patient")
+//	private Set<Consultation> consultations = new HashSet<Consultation>();
 	
-	@OneToMany(mappedBy = "patient")
-	private Set<Appointment> appointments = new HashSet<Appointment>();
+//	@OneToMany(mappedBy = "patient")
+//	private Set<Appointment> appointments = new HashSet<Appointment>();
 	
-	@OneToMany(mappedBy = "patient")
-	private Set<Eprescription> perscriptions = new HashSet<Eprescription>();
+//	@OneToMany(mappedBy = "patient")
+//	private Set<Eprescription> perscriptions = new HashSet<Eprescription>();
 	
-	@OneToMany(mappedBy = "patient")
-	private Set<Reservation> reservations = new HashSet<Reservation>();
+//	@OneToMany(mappedBy = "patient")
+//	private Set<Reservation> reservations = new HashSet<Reservation>();
 	
 	@OneToMany(mappedBy = "patient")
     private Set<PharmacyRating> pharmacyRatings = new HashSet<PharmacyRating>();

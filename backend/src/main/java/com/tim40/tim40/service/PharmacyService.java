@@ -1,11 +1,18 @@
 package com.tim40.tim40.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.tim40.tim40.dto.PharmacyDTO;
-import com.tim40.tim40.model.Pharmacist;
+import com.tim40.tim40.email.service.MailService;
+import com.tim40.tim40.model.Medication;
 import com.tim40.tim40.model.Pharmacy;
+import com.tim40.tim40.model.QuantityMedication;
 import com.tim40.tim40.repository.PharmacyRepository;
 
 @Service
@@ -25,14 +32,24 @@ public class PharmacyService implements IPharmacyService {
 	}
 
 	@Override
-	public Pharmacy getPharmacyById(Long id) {
-		Pharmacy pharmacy = pharmacyRepository.getById(id);
-		//Pharmacist pharmacist = pharmacy.getPharmacists().get(0);
-//		System.out.println(pharmacist.getUserType() + pharmacist.getId().toString());
-		for(Pharmacist pharmacist : pharmacy.getPharmacists()) {
-			System.out.println(pharmacist.getId().toString() + " - " + pharmacist.getUserType());
+	public ResponseEntity<List<Medication>> getAllMedications(Long id) {
+		Pharmacy pharmacy = pharmacyRepository.findById(id).get();
+		List<Medication> medications = new ArrayList<Medication>();
+		for(QuantityMedication qm : pharmacy.getMedicationQuantity()) {
+			medications.add(qm.getMedication());
 		}
-		return pharmacy;
+		return new ResponseEntity<List<Medication>>(medications,HttpStatus.OK);
+	}
+
+	@Override
+	public ResponseEntity<String> isMedicationAvailable(Long pharmacyId, Long medicationId) {
+		Pharmacy pharmacy = pharmacyRepository.findById(pharmacyId).get();
+		for(QuantityMedication qm : pharmacy.getMedicationQuantity()) {
+			if(qm.getQuantity() == 0) {
+				return new ResponseEntity<String>("not_available", HttpStatus.OK);
+			}
+		}
+		return new ResponseEntity<String>("available", HttpStatus.OK);
 	}
 	
 }
