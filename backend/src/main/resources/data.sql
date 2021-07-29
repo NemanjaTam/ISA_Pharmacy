@@ -1,3 +1,7 @@
+
+
+
+
 insert into pharmacies(city, number, postalcode, state, street, avg_rating, name) values ('Novi Sad', '11', 21241, 'Srbija', 'Stefana Nemanje', 9, 'Pharmacy 1')
 insert into pharmacies(city, number, postalcode, state, street, avg_rating, name) values ('Sabac', '11', 21241, 'Srbija', 'Stefana Nemanje', 9, 'Pharmacy 2')
 insert into pharmacies(city, number, postalcode, state, street, avg_rating, name) values ('Nis', '11', 21241, 'Srbija', 'Stefana Nemanje', 9, 'Pharmacy 3')
@@ -528,7 +532,7 @@ insert into consultations (is_finished, is_taken, endtime, starttime, report, pa
 insert into consultations (is_finished, is_taken, endtime, starttime, report, patient_id, pharmacist_id, pharmacy_id) values (false, false, '2021-06-13 14:00:00-08', '2021-06-13 13:30:00-08', '', 22, 11, 1)
 
 
+insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Pharmacy_admin', 'Novi Sad', '23', 21242, 'Srbija', 'Stefana Nemanje1', 'pjevalica@gmail.com', true, 'Bojana', 'bobi','+381613238240', 'Pjevalica', 'PHARMACY_ADMINISTRATOR', null, 1)
+
 
 insert into absences(is_approved, is_finished, endtime, starttime, user_id) values (true, false, '2021-07-20 00:00:00-08', '2021-07-10 00:00:00-08', 1)
-
-

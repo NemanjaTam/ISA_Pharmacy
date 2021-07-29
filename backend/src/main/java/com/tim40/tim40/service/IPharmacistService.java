@@ -8,4 +8,5 @@ import com.tim40.tim40.model.Patient;
 
 public interface IPharmacistService {
 	ResponseEntity<Set<Patient>> getAllPatients(Long id);
+	
 }

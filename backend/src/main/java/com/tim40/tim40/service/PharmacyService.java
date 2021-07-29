@@ -51,5 +51,10 @@ public class PharmacyService implements IPharmacyService {
 		}
 		return new ResponseEntity<String>("available", HttpStatus.OK);
 	}
+
+	@Override
+	public Pharmacy getById(Long pharmacyID) {
+		return pharmacyRepository.getById(pharmacyID);
+	}
 	
 }

@@ -54,7 +54,10 @@ export default {
                 this.$store.dispatch('updatePassword', this.password)
                 console.log(this.User)
                 axios.post("http://localhost:9005/api/user/update-user", this.User)
-                this.$router.push({name: 'HomePage'})
+                if(this.User.userType == "PHARMACY_ADMINISTRATOR"){
+                    this.$router.push({name: 'PharmacyAdminPage'})
+                }else{
+                this.$router.push({name: 'HomePage'})}
             }
         }
     },

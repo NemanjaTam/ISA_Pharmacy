@@ -71,6 +71,18 @@ export default {
                   this.$store.dispatch('updateUser', user)
                   this.$router.push({name: 'HomePage'})
                 }
+              }            else {
+              this.show = false
+              this.message = ''
+              if(user.userType == "PHARMACY_ADMINISTRATOR") {
+                if(user.firstTimeLogging) {
+                  this.$store.dispatch('updateUser', user)
+                  this.$router.push({name: 'FirstTimeLogging'})
+                }
+                else {
+                  this.$store.dispatch('updateUser', user)
+                  this.$router.push({name: 'PharmacyAdminPage'})
+                }
               }
               else {
                 if(user.firstTimeLogging) {
@@ -85,7 +97,7 @@ export default {
                 return
               }
             }
-          })
+          }})
     },
     onReset(event) {
       event.preventDefault();

@@ -4,6 +4,7 @@ import java.security.Principal;
 
 
 
+
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,14 +30,14 @@ public class PharmacyAdministratorController {
 	public PharmacyAdministratorController(PharmacyAdministratorService pharmacyAdminService) {
 		this.pharmacyAdminService = pharmacyAdminService;
 	}
-	//EDIT PROFILE
+	
 	@RequestMapping(value="",method = RequestMethod.POST, consumes = "application/json")
-	public ResponseEntity<?> editPharmacyAdminData(@RequestBody PharmacyAdminDTO pharmacyAdminDTO, Principal p) {
+	public ResponseEntity<?> editPharmacyAdminData(@RequestBody PharmacyAdminDTO pharmacyAdminDTO, Principal p) throws Exception {
 	        PharmacyAdministrator pharmacyAdmin = (PharmacyAdministrator) userService.findByEmail(p.getName());
 
-//	        if (pharmacyAdmin == null) {
-//	            throw new ResourceConflictException("Pharmacy administrator not found.");
-//	        }
+	        if (pharmacyAdmin == null) {
+	            throw new Exception("Pharmacy administrator not found.");
+	        }
 
 	        pharmacyAdmin.setName(pharmacyAdminDTO.getName());
 	        pharmacyAdmin.setSurname(pharmacyAdminDTO.getSurname());
