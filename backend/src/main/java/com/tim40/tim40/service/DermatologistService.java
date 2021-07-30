@@ -1,5 +1,7 @@
 package com.tim40.tim40.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,13 @@ public class DermatologistService implements IDermatologistService {
 	public ResponseEntity<Set<Patient>> getAllPatients(Long id) {
 		Dermatologist dermatologist = dermatologistRepository.findById(id).get();
 		return new ResponseEntity<Set<Patient>>(dermatologist.getAllPatients(), HttpStatus.OK);
+	}
+
+	@Override
+	public ResponseEntity<List<Dermatologist>> getAllDermatologists(Long ID) {
+	   List<Dermatologist> dermatologist = dermatologistRepository.getAllByPharmacyId(ID);
+	   return new ResponseEntity<List<Dermatologist>>(dermatologist, HttpStatus.OK);
+		
 	}
 	
 }

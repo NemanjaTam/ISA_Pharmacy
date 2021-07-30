@@ -1,7 +1,11 @@
 <template>
 <div class="background">
     <!-- <TopMenuForDP/> -->
-    <div class="container">
+<div>
+  <b-card no-body>
+    <b-tabs card>
+      <b-tab title="Profile" active>
+        <div class="container">
       <div class="container-child-1">
         <b-form>
              <label class="labelBox"><b>Name:</b></label>
@@ -24,6 +28,15 @@
         </b-form>
       </div>
     </div>
+      </b-tab>
+      <b-tab title="Dermatogist">
+        <b-card-text>Tab contents 2</b-card-text>
+      </b-tab>
+    </b-tabs>
+  </b-card>
+</div>
+
+   
 </div>
 </template>
 <script>
@@ -47,6 +60,7 @@ data(){
         street:'',
         number:''
       },
+      dermatologists:[],
       message: '',
     };
 },
@@ -54,7 +68,7 @@ methods:{
     getPharmacyById(id){ 
      const headers = { "Content-Type": "application/json" };
      fetch(`http://localhost:9005/api/pharmacy/getpharmacy/${id}`, { headers })
-  .then(response => response.json())
+    .then(response => response.json())
     .then(data => (
       this.name = data.name,
       this.address.state = data.address.state,
@@ -64,7 +78,15 @@ methods:{
       this.address.postal = data.address.postalCode,
       this.avgRating = data.avgRating
     ));
-      
+    },
+
+    getDermatologists(id){
+     const headers = { "Content-Type": "application/json" };
+     fetch(`http://localhost:9005/api/dermatologist/getalldermatologist/${id}`, { headers })
+    .then(response => response.json())
+    .then(data => (
+      this.dermatologists =  data
+    ));
     }
 
 
@@ -72,6 +94,7 @@ methods:{
 mounted(){const id = this.$route.params.id;
 console.log(id)
 this.getPharmacyById(id)
+this.getDermatologists(id)
 }
 }
 
