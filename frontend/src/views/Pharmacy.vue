@@ -29,8 +29,28 @@
       </div>
     </div>
       </b-tab>
-      <b-tab title="Dermatogist">
-        <b-card-text>Tab contents 2</b-card-text>
+      <b-tab title="Dermatogists">
+         <p v-for="(listItem, index) in dermatologists" class="my-2 field" :key="index">
+           {{listItem.name + " " + listItem.surname}}
+        <!-- <input
+          type="text"
+           v-bind:value="listItem"
+          :key="index"
+    /> -->
+    <button @click.prevent="remove(index)">info</button>
+  </p>
+      </b-tab>
+
+            <b-tab title="Pharmacists">
+         <p v-for="(listItem, index) in pharmacists" class="my-2 field" :key="index">
+           {{listItem.name + " " + listItem.surname}}
+        <!-- <input
+          type="text"
+           v-bind:value="listItem"
+          :key="index"
+    /> -->
+    <button @click.prevent="remove(index)">info</button>
+  </p>
       </b-tab>
     </b-tabs>
   </b-card>
@@ -60,7 +80,18 @@ data(){
         street:'',
         number:''
       },
-      dermatologists:[],
+      dermatologists:[ {
+        id:'',
+        name:'',
+        surname:'',
+        email:''}
+        ],
+      pharmacists:[{
+        id:'',
+        name:'',
+        surname:'',
+        email:''
+      }],
       message: '',
     };
 },
@@ -85,9 +116,23 @@ methods:{
      fetch(`http://localhost:9005/api/dermatologist/getalldermatologist/${id}`, { headers })
     .then(response => response.json())
     .then(data => (
-      this.dermatologists =  data
+      this.dermatologists = data
+
+
     ));
-    }
+    },
+
+    getPharmacists(id){
+     const headers = { "Content-Type": "application/json" };
+     fetch(`http://localhost:9005/api/pharmacist/getallpharmacists/${id}`, { headers })
+    .then(response => response.json())
+    .then(data => (
+      this.pharmacists = data
+
+
+    ));
+    },
+    
 
 
 },
@@ -95,17 +140,11 @@ mounted(){const id = this.$route.params.id;
 console.log(id)
 this.getPharmacyById(id)
 this.getDermatologists(id)
+this.getPharmacists(id)
 }
 }
 
 </script>
-
-
-
-
-
-
-
 
 <style scoped>
 .background {
