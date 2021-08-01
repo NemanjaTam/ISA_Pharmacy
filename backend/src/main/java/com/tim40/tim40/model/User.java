@@ -1,8 +1,11 @@
 package com.tim40.tim40.model;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Collection;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import javax.persistence.JoinColumn;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -12,11 +15,17 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tim40.tim40.dto.UserDTO;
 import com.tim40.tim40.model.enums.UserType;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,7 +38,12 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class User{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -90,6 +104,16 @@ public class User {
 		this.inbox = userDTO.getInbox();
 		this.send = userDTO.getSend();
 	}
+
+
+//    @ManyToMany(fetch = FetchType.EAGER)
+//    @JoinTable(name = "user_authority",
+//            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+//            inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id"))
+//    private List<Authority> authorities;
+//	
+	
+	
 	
 }
 

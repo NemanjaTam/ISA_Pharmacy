@@ -6,16 +6,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tim40.tim40.dto.PatientAllergedDTO;
 import com.tim40.tim40.dto.PharmacyDTO;
+import com.tim40.tim40.dto.PharmacyProfileDTO;
 import com.tim40.tim40.model.Medication;
+import com.tim40.tim40.model.Pharmacy;
 import com.tim40.tim40.service.PharmacyService;
 
 @RestController
@@ -46,5 +50,18 @@ public class PharmacyController {
 	{
 		return pharmacyService.isMedicationAvailable(patientAllergedDTO.getPatientId(), patientAllergedDTO.getMedicationId());
 	}
+	
+	@GetMapping(value = "/getpharmacy/{id}",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    public PharmacyProfileDTO getPharmacyById(@PathVariable(name="id") String stringId){
+		long id = Long.valueOf(stringId);
+        PharmacyProfileDTO pharmacyDTO = new PharmacyProfileDTO();
+        Pharmacy pharmacy = pharmacyService.getById(id);
+        pharmacyDTO.setName(pharmacy.getName());
+        pharmacyDTO.setAvgRating(pharmacy.getAvgRating());
+        pharmacyDTO.setAddress(pharmacy.getAddress());
+
+        return pharmacyDTO;
+    }
 
 }

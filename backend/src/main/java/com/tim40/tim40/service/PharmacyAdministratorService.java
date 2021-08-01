@@ -18,8 +18,7 @@ public class PharmacyAdministratorService implements IPharmacyAdministratorServi
 
 	@Override
 	public PharmacyAdministrator save(PharmacyAdministrator pharmacyAdmin) {
-		//TO BE IMPLEMENTED
-		return null;
+		return pharmacyAdminRepository.save(pharmacyAdmin);
 	}
 	
 	@Override

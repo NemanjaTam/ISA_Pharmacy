@@ -4,6 +4,8 @@ import java.util.Set;
 
 import javax.persistence.*;
 
+import org.apache.tomcat.jni.Address;
+
 import lombok.*;
 import lombok.NoArgsConstructor;
 
@@ -12,12 +14,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Getter
 @Setter
-@DiscriminatorValue(value = "Pharmacy_administrator")
+@DiscriminatorValue(value = "Pharmacy_admin")
 public class PharmacyAdministrator extends User{
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "pharmacy_id", nullable = true)
 	private Pharmacy pharmacy;
 	
 	@OneToMany(fetch = FetchType.LAZY,mappedBy="adminPharmacy")
-	private final Set<PurchaseOrder> purchaseOrderMade = new HashSet<PurchaseOrder>();
+	private  Set<PurchaseOrder> purchaseOrderMade = new HashSet<PurchaseOrder>();
+
+
 }
