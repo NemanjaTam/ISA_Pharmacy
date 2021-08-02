@@ -14,6 +14,13 @@ import PerscriptionMedication from '../views/PerscriptionMedication.vue'
 import ExaminationProcess from '../views/ExaminationProcess.vue'
 import MedicationTherapy from '../components/MedicationTherapy.vue'
 import Calendar from '../components/Calendar.vue'
+import AddMedication from '../components/AddMedication.vue'
+import Medications from '../components/Medications.vue'
+import RegistrationByAdmin from '../views/RegistrationByAdmin.vue'
+import RegistrationPharmacyAdmin from '../components/RegistrationPharmacyAdmin.vue'
+import RegistrationDermatologist from '../components/RegistrationDermatologist.vue'
+import RegistrationSupplier from '../components/RegistrationSupplier.vue'
+import RegistrationSystemAdmin from '../components/RegistrationSystemAdmin.vue'
 
 Vue.use(VueRouter)
 
@@ -88,6 +95,41 @@ const routes = [
     path: '/calendar',
     name: 'Calendar',
     component: Calendar
+  },
+  {
+    path: '/add-medication',
+    name: 'AddMedication',
+    component: AddMedication
+  },
+  {
+    path: '/medications', 
+    name: 'Medications',
+    component: Medications
+  },
+  { 
+    path: '/registration-by-admin',
+    name: 'RegistrationByAdmin',
+    component: RegistrationByAdmin
+  }, 
+  { 
+    path: '/registration-pharmacy-admin',
+    name: 'RegistrationPharmacyAdmin',
+    component: RegistrationPharmacyAdmin
+  },
+  { 
+    path: '/registration-dermatologist',
+    name: 'RegistrationDermatologist',
+    component: RegistrationDermatologist
+  },
+  { 
+    path: '/registration-supplier',
+    name: 'RegistrationSupplier',
+    component: RegistrationSupplier
+  },
+  { 
+    path: '/registration-system-admin',
+    name: 'RegistrationSystemAdmin',
+    component: RegistrationSystemAdmin
   }
 ]
 

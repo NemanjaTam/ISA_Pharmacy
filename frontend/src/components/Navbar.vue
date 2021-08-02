@@ -20,6 +20,9 @@
                     <b-nav-item>
                         <router-link to="/registrationPage" class="routerlink">Registration</router-link>
                     </b-nav-item>
+                     <b-nav-item>
+                        <router-link to="/medications" class="routerlink">Medications</router-link>
+                    </b-nav-item>
                 </b-navbar-nav>
             </b-collapse>
         </b-navbar>     

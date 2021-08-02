@@ -9,6 +9,7 @@ public class PurchaseOrderOfferDTO {
 	private Long supplierId;
 	private Long purchaseOrderId;
 	private int offer;
+	private String status;
 	
 	public PurchaseOrderOfferDTO() { }
 	
@@ -17,7 +18,7 @@ public class PurchaseOrderOfferDTO {
 		this.supplierId = purchaseOrderOffer.getSupplier().getId();
 		this.purchaseOrderId = purchaseOrderOffer.getPurchaseOrder().getId();
 		this.offer = purchaseOrderOffer.getOffer();
-		
+		this.status = purchaseOrderOffer.getStatus();
 	}
 
 	public Long getId() {
@@ -50,5 +51,13 @@ public class PurchaseOrderOfferDTO {
 
 	public void setOffer(int offer) {
 		this.offer = offer;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 }

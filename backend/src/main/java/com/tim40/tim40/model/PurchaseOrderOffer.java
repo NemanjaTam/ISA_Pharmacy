@@ -32,7 +32,7 @@ public class PurchaseOrderOffer {
 	@JoinColumn(name = "purchase_order_id", nullable = false)
 	private PurchaseOrder purchaseOrder;
 	
-	 
+	private String status;
 	private int offer;
 	
 }

@@ -12,6 +12,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -65,6 +68,15 @@ public class User {
 	
 	@OneToMany(fetch = FetchType.LAZY,mappedBy="userSender")
 	private Set<Email> send = new HashSet<Email>();
+	
+	 @ManyToMany
+	    @JoinTable
+	    (
+	        name = "pharmacy_subscriptions",
+	        joinColumns = @JoinColumn(name = "user_id"),
+	        inverseJoinColumns = @JoinColumn(name = "pharmacy_id")
+	    )
+		private final Set<Pharmacy> subscriptions = new HashSet<Pharmacy>();
 	
 	public User(String name, String surname, String email, String password, Address address,
 			UserType userType, boolean isFirstTimeLogging, String phone) {

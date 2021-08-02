@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tim40.tim40.dto.OfferDTO;
+import com.tim40.tim40.dto.OfferFilterDTO;
 import com.tim40.tim40.dto.PurchaseOrderOfferDTO;
 import com.tim40.tim40.service.SupplierService;
 
@@ -33,5 +35,10 @@ public class SupplierController {
 	@GetMapping(value = "/all-offers/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<PurchaseOrderOfferDTO>> getPurchaseOrderOffers(@PathVariable("id") Long id) throws Exception{
 		return supplierService.getPurchaseOrderOffers(id);
+	}
+	
+	@PostMapping(value = "/{id}/offers", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<OfferDTO>> getSupplierOffers(@PathVariable("id") Long id, @RequestBody OfferFilterDTO offerFilterDTO) throws Exception{
+		return supplierService.getSupplierOffers(id, offerFilterDTO);
 	}
 }

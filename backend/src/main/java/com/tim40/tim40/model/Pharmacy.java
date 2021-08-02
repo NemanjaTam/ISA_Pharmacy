@@ -28,7 +28,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
 public class Pharmacy {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,6 +50,9 @@ public class Pharmacy {
         inverseJoinColumns = @JoinColumn(name = "supplier_id")
     )
 	private final Set<Supplier> suppliers = new HashSet<Supplier>();
+
+	@ManyToMany(mappedBy = "subscriptions")
+    private final Set<User> subscribedUsers = new HashSet<User>();
 
 //    @ManyToMany
 //    @JoinTable
