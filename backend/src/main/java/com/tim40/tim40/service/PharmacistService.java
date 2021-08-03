@@ -34,6 +34,10 @@ public class PharmacistService implements IPharmacistService {
 	public ResponseEntity<List<PharmacistProjection>> getAllPharamcists(Long ID) {
 		return new ResponseEntity<List<PharmacistProjection>>(pharmacistRepository.getAllByPharmacyId(ID,"PHARMACIST"), HttpStatus.OK);
 	}
+	
+	public ResponseEntity<List<PharmacistProjection>> getAllPharmacistData(Long ID) {
+		return new ResponseEntity<List<PharmacistProjection>>(pharmacistRepository.getAllByPharmacyId(ID,"PHARMACIST"), HttpStatus.OK);
+	}
 
 	@Override
 	public Long getPharmacy(Long id) {

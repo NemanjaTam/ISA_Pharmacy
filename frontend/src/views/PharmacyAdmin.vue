@@ -10,7 +10,7 @@
         <div class="middle"><router-view></router-view></div>
         <div class="right">
           <div class="info">
-            <ul style="list-style-type:none;">
+            <!-- <ul style="list-style-type:none;">
               <li>Name</li>
               <li>
                 <label></label>
@@ -21,7 +21,7 @@
               <li><label></label></li>
               <li>Date Of Birth</li>
               <li><label></label></li>
-            </ul>
+            </ul> -->
           </div>
         </div>
 

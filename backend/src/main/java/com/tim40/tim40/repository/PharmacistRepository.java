@@ -14,5 +14,6 @@ public interface PharmacistRepository extends JpaRepository<Pharmacist, Long> {
 			  nativeQuery = true)
 	public List<PharmacistProjection> getAllByPharmacyId(@Param("ID") Long id,@Param("type") String type);
 	
+	
   
 }

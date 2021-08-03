@@ -36,13 +36,12 @@ public class PharmacistController {
 	@RequestMapping(value="/getallpharmacists/{id}", method = RequestMethod.GET)
 	public ResponseEntity<List<PharmacistProjection>> getAllPharmacistByPharmacyId(@PathVariable("id") Long id){
 		return pharmacistService.getAllPharamcists(id);
-		
 	}
 	
-	@RequestMapping(value="/getpharmacybyidpharmacist/{idpharmacist}",method = RequestMethod.GET)
-	public Long getPharmacyByPharmacistID(@PathVariable("idpharmacist") Long idpharmacist){
-		return pharmacistService.getPharmacy(idpharmacist);
+	@RequestMapping(value="/getpharmacistdata/{id}", method = RequestMethod.GET)
+	public ResponseEntity<List<PharmacistProjection>> getPharmacistData(@PathVariable("id") Long id){
+		return pharmacistService.getAllPharamcists(id);
 	}
-    
+	
 	
 }
