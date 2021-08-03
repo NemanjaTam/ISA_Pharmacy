@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.tim40.tim40.model.Dermatologist;
 import com.tim40.tim40.model.Patient;
 import com.tim40.tim40.model.Pharmacist;
 import com.tim40.tim40.projections.PharmacistProjection;
@@ -32,6 +33,13 @@ public class PharmacistService implements IPharmacistService {
 	@Override
 	public ResponseEntity<List<PharmacistProjection>> getAllPharamcists(Long ID) {
 		return new ResponseEntity<List<PharmacistProjection>>(pharmacistRepository.getAllByPharmacyId(ID,"PHARMACIST"), HttpStatus.OK);
+	}
+
+	@Override
+	public Long getPharmacy(Long id) {
+		Pharmacist pharmacist = pharmacistRepository.findById(id).get();
+		return pharmacist.getPharmacy().getId();
+//		return null;
 	}
 	
 }

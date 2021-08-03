@@ -13,5 +13,6 @@ import com.tim40.tim40.projections.PharmacistProjection;
 public interface IPharmacistService {
 	ResponseEntity<Set<Patient>> getAllPatients(Long id);
 	ResponseEntity<List<PharmacistProjection>> getAllPharamcists(Long ID);
+	Long getPharmacy(Long id);
 	
 }

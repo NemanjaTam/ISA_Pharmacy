@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tim40.tim40.model.Patient;
 import com.tim40.tim40.model.Pharmacist;
 import com.tim40.tim40.projections.PharmacistProjection;
+import com.tim40.tim40.projections.PharmacyProjection;
 import com.tim40.tim40.service.PharmacistService;
+import com.tim40.tim40.service.PharmacyService;
 
 @RestController
 @RequestMapping(value = "api/pharmacist")
@@ -36,5 +38,11 @@ public class PharmacistController {
 		return pharmacistService.getAllPharamcists(id);
 		
 	}
+	
+	@RequestMapping(value="/getpharmacybyidpharmacist/{idpharmacist}",method = RequestMethod.GET)
+	public Long getPharmacyByPharmacistID(@PathVariable("idpharmacist") Long idpharmacist){
+		return pharmacistService.getPharmacy(idpharmacist);
+	}
     
+	
 }
