@@ -1,11 +1,14 @@
 <template>
   <b-card no-body>
     <b-tabs card>
+      <b-input v-model="filter" placeholder="Search"></b-input>
       <b-tab title="Pharmacists" active>
         <div>
           <b-table
             striped
             hover
+            :filter="filter"
+            :filter-included-fields="['name', 'surname', 'email']"
             :items="pharmacists"
             :fields="fields"
           ></b-table>
@@ -34,6 +37,7 @@ export default {
   },
   data() {
     return {
+      filter: "",
       pharmacy: null,
       pharmacists: [
         {
