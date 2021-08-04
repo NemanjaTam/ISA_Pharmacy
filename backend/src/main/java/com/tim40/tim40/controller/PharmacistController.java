@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tim40.tim40.model.Patient;
 import com.tim40.tim40.model.Pharmacist;
+import com.tim40.tim40.projections.PharmacistDetailsProjection;
 import com.tim40.tim40.projections.PharmacistProjection;
 import com.tim40.tim40.projections.PharmacyProjection;
 import com.tim40.tim40.service.PharmacistService;
@@ -37,19 +38,20 @@ public class PharmacistController {
 		return pharmacistService.getAllPatients(id);
 	}
 	@RequestMapping(value="/getallpharmacistsbyid/{id}", method = RequestMethod.GET)
-	public ResponseEntity<List<PharmacistProjection>> getAllPharmacistByPharmacyId(@PathVariable("id") Long id){
-		return pharmacistService.getAllPharamcists(id);	
+	public ResponseEntity<List<PharmacistDetailsProjection>> getAllPharmacistByPharmacyId(@PathVariable("id") Long id){
+		return pharmacistService.getAllPharamcistsById(id);	
 	}
 	
-	//authorization: pharmacy admin & registered user
-	@RequestMapping(value="/getallpharmacists/{id}", method = RequestMethod.GET)
-	public ResponseEntity<List<PharmacistProjection>> getAllPharmacist(@PathVariable("id") Long id,@RequestHeader("usertype") String type){
+	//authorization:PHARMACY ADMINISTRATOR AND REGISTERED USER
+	@RequestMapping(value={"/getallpharmacists","/getallpharmacists/{id}"}, method = RequestMethod.GET)
+	public ResponseEntity<List<PharmacistDetailsProjection>> getAllPharmacist(@PathVariable(required = false) Long id,@RequestHeader("usertype") String type){
 		if("PHARMACY_ADMINISTRATOR".equals(type)){
-		return pharmacistService.getAllPharamcists(id);
+		return pharmacistService.getAllPharamcistsById(id);
 		}
-		else {
-			System.out.println("NE VALJA");
-			return new ResponseEntity<List<PharmacistProjection>>(HttpStatus.UNAUTHORIZED);
+		else if("PATIENT".equals(type)) {
+			return pharmacistService.getAllPharamcists();
+		}else {
+			return new ResponseEntity<List<PharmacistDetailsProjection>>(HttpStatus.UNAUTHORIZED);
 		}
 	}
 	
@@ -58,9 +60,9 @@ public class PharmacistController {
 	
 	//moze samo pharmacy admin
 	@RequestMapping(value="/getpharmacistdata/{id}", method = RequestMethod.GET)
-	public ResponseEntity<List<PharmacistProjection>> getPharmacistData(@PathVariable("id") Long id){
+	public ResponseEntity<List<PharmacistDetailsProjection>> getPharmacistData(@PathVariable("id") Long id){
 		
-		return pharmacistService.getAllPharamcists(id);
+		return pharmacistService.getAllPharamcistsById(id);
 	
 	}
 

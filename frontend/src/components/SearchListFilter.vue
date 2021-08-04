@@ -15,7 +15,12 @@
               striped
               hover
               :filter="filter"
-              :filter-included-fields="['name', 'surname', 'email']"
+              :filter-included-fields="[
+                'name',
+                'surname',
+                'email',
+                'pharmacyName',
+              ]"
               :items="pharmacists"
               :fields="fields"
             ></b-table>
@@ -56,6 +61,7 @@ export default {
           name: "",
           surname: "",
           email: "",
+          pharmacyName: "",
         },
       ],
       fields: [
@@ -74,7 +80,7 @@ export default {
           sortable: true,
         },
         {
-          key: "pharmacy",
+          key: "pharmacyName",
           label: "Pharmacy",
           sortable: true,
           // Variant applies to the whole column, including the header and footer
@@ -96,8 +102,8 @@ export default {
         })
           .then((response) => response.json())
           .then((data) => (this.pharmacists = data));
-      } else {
-        fetch(`http://localhost:9005/api/pharmacist/getallpharmacists/${id}`, {
+      } else if (this.userType == "PATIENT") {
+        fetch(`http://localhost:9005/api/pharmacist/getallpharmacists/`, {
           headers,
         })
           .then((response) => response.json())
@@ -121,6 +127,10 @@ export default {
     if (this.userType == "PHARMACY_ADMINISTRATOR") {
       await this.getPharmacy(this.userId);
       await this.getPharmacists(this.pharmacy, this.userType);
+    } else if (this.userType == "PATIENT") {
+      this.getPharmacists(null, this.userType);
+    } else {
+      this.$router.push("loginPage");
     }
     // this.getPharmacists(this.pharmacy);
     console.log("pharmacy id:");
