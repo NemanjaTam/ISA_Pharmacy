@@ -39,7 +39,7 @@ public class PharmacyAdministratorService implements IPharmacyAdministratorServi
 	@Override
 	public Long getPharmacy(Long id) {
 		PharmacyAdministrator pharmacist = pharmacyAdminRepository.findById(id).get();
-		System.out.println(pharmacist);
+	
 		return pharmacist.getPharmacy().getId();
 	}
 

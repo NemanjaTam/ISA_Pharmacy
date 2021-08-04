@@ -1,22 +1,30 @@
 <template>
-  <b-card no-body>
-    <b-tabs card>
-      <b-input v-model="filter" placeholder="Search"></b-input>
-      <b-tab title="Pharmacists" active>
-        <div>
-          <b-table
-            striped
-            hover
-            :filter="filter"
-            :filter-included-fields="['name', 'surname', 'email']"
-            :items="pharmacists"
-            :fields="fields"
-          ></b-table>
-        </div>
-      </b-tab>
-      <b-tab title="Dermatologist"> </b-tab>
-    </b-tabs>
-  </b-card>
+  <div>
+    <div v-if="isRegisteredUser">
+      <Navbar />
+    </div>
+    <div v-else>
+      Now you don't
+    </div>
+    <b-card no-body>
+      <b-tabs card>
+        <b-input v-model="filter" placeholder="Search"></b-input>
+        <b-tab title="Pharmacists" active>
+          <div>
+            <b-table
+              striped
+              hover
+              :filter="filter"
+              :filter-included-fields="['name', 'surname', 'email']"
+              :items="pharmacists"
+              :fields="fields"
+            ></b-table>
+          </div>
+        </b-tab>
+        <b-tab title="Dermatologist"> </b-tab>
+      </b-tabs>
+    </b-card>
+  </div>
 </template>
 <script>
 export default {
@@ -33,6 +41,9 @@ export default {
     },
     Pharmacy() {
       return this.$store.getters.getPharmacy;
+    },
+    isRegisteredUser() {
+      return this.$store.getters.isRegistered;
     },
   },
   data() {
@@ -74,13 +85,24 @@ export default {
     };
   },
   methods: {
-    getPharmacists(id) {
-      const headers = { "Content-Type": "application/json" };
-      fetch(`http://localhost:9005/api/pharmacist/getallpharmacists/${id}`, {
-        headers,
-      })
-        .then((response) => response.json())
-        .then((data) => (this.pharmacists = data));
+    getPharmacists(id, type) {
+      const headers = {
+        "Content-Type": "application/json",
+      };
+      headers["usertype"] = type;
+      if (this.userType == "PHARMACY_ADMINISTRATOR") {
+        fetch(`http://localhost:9005/api/pharmacist/getallpharmacists/${id}`, {
+          headers,
+        })
+          .then((response) => response.json())
+          .then((data) => (this.pharmacists = data));
+      } else {
+        fetch(`http://localhost:9005/api/pharmacist/getallpharmacists/${id}`, {
+          headers,
+        })
+          .then((response) => response.json())
+          .then((data) => (this.pharmacists = data));
+      }
     },
     getPharmacy(id) {
       const headers = { "Content-Type": "application/json" };
@@ -98,7 +120,7 @@ export default {
   async created() {
     if (this.userType == "PHARMACY_ADMINISTRATOR") {
       await this.getPharmacy(this.userId);
-      await this.getPharmacists(this.pharmacy);
+      await this.getPharmacists(this.pharmacy, this.userType);
     }
     // this.getPharmacists(this.pharmacy);
     console.log("pharmacy id:");

@@ -51,6 +51,9 @@ export default {
     Pharmacy() {
       return this.$store.getters.getPharmacy;
     },
+    isRegistered() {
+      return this.$store.getters.isRegistered;
+    },
   },
   //   User() {
   //     return this.$store.getters.getUser;
