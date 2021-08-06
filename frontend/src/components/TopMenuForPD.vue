@@ -30,31 +30,7 @@
                         <router-link to="/perscriptionMedication" class="routerlink">Prescription Medication</router-link>
                     </b-nav-item>
                 </b-navbar-nav> 
-                <b-navbar-nav v-if="isSupplier">
-                    <b-nav-item> 
-                        <router-link to="/make-purchase-order-offer" class="routerlink">Add offer</router-link>
-                    </b-nav-item>
-                    <b-nav-item> 
-                        <router-link to="/updateBasicInformation" class="routerlink">Edit Profile</router-link>
-                    </b-nav-item>
-                </b-navbar-nav>
-                <b-navbar-nav v-if="isAdmin">
-                    <b-nav-item> 
-                        <router-link to="/pharmacies" class="routerlink">Pharmacies</router-link>
-                    </b-nav-item>
-                    <b-nav-item> 
-                        <router-link to="/add-pharmacy" class="routerlink">Add pharmacy</router-link>
-                    </b-nav-item>
-                    <b-nav-item> 
-                        <router-link to="/medications" class="routerlink">Medications</router-link> 
-                    </b-nav-item>
-                     <b-nav-item> 
-                        <router-link to="/add-medication" class="routerlink">Add Medication</router-link>
-                    </b-nav-item>
-                    <b-nav-item> 
-                        <router-link to="/registration-by-admin" class="routerlink">Registration</router-link>
-                    </b-nav-item>
-                </b-navbar-nav>
+                
                 <b-navbar-nav class="ml-auto">
                     <b-nav-item>
                         <b-button style="background-color:red" v-on:click="logout">Logout</b-button>
@@ -75,12 +51,6 @@ export default {
         },
         isDermatologist() {
             return this.$store.getters.isDermatologist
-        },
-        isSupplier() {
-            return this.$store.getters.isSupplier
-        },
-        isAdmin() {
-            return this.$store.getters.isAdmin
         }
     },
     methods: {

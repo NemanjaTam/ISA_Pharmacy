@@ -1,11 +1,7 @@
 package com.tim40.tim40.model;
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.*;
-
-import org.apache.tomcat.jni.Address;
-
 import lombok.*;
 import lombok.NoArgsConstructor;
 
@@ -21,8 +17,8 @@ public class PharmacyAdministrator extends User{
     @JoinColumn(name = "pharmacy_id", nullable = true)
 	private Pharmacy pharmacy;
 	
-	@OneToMany(fetch = FetchType.LAZY,mappedBy="adminPharmacy")
-	private  Set<PurchaseOrder> purchaseOrderMade = new HashSet<PurchaseOrder>();
+	/*@OneToMany(fetch = FetchType.LAZY,mappedBy="adminPharmacy")
+	private  Set<PurchaseOrder> purchaseOrderMade = new HashSet<PurchaseOrder>();*/
 
 
 }

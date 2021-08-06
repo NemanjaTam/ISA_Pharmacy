@@ -73,6 +73,10 @@ export const store = new Vuex.Store({
       if(state.user.userType == "PHARMACY_ADMINISTRATOR") return true
       else return false
     },
+    isSystemAdmin(state) {
+      if(state.user.userType == "SYSTEM_ADMINISTRATOR") return true
+      else return false
+    },
     getType(state) {
       if(state.user.userType == "DERMATOLOGIST") return "Examination"
       else return "Consultation"

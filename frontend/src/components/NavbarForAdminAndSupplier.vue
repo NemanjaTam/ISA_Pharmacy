@@ -16,7 +16,7 @@
                         <router-link to="/make-purchase-order-offer" class="routerlink">Add offer</router-link>
                     </b-nav-item>
                 </b-navbar-nav>
-                <b-navbar-nav v-if="isAdmin">
+                <b-navbar-nav v-if="isSystemAdmin">
                     <b-nav-item> 
                         <router-link to="/pharmacies" class="routerlink">Pharmacies</router-link>
                     </b-nav-item>
@@ -54,8 +54,8 @@ export default {
         isSupplier() {
             return this.$store.getters.isSupplier
         },
-        isAdmin() {
-            return this.$store.getters.isAdmin
+        isSystemAdmin() {
+            return this.$store.getters.isSystemAdmin
         }
     },
     methods: {

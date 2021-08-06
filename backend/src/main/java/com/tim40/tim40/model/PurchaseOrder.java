@@ -25,8 +25,8 @@ public class PurchaseOrder {
 	private final Set<QuantityMedication> quantityMedications = new HashSet<QuantityMedication>();
 	
 	@ManyToOne
-	@JoinColumn(name = "pharmacy_administrator_id", nullable = false)
-	private PharmacyAdministrator adminPharmacy;
+	@JoinColumn(name = "system_administrator_id", nullable = false)
+	private SystemAdministrator systemAdminPharmacy;
 	
 	@Column(name = "purchase_status", nullable = false)
 	@Enumerated(EnumType.STRING)

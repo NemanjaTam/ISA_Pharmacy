@@ -95,7 +95,7 @@ export default {
                   this.$router.push({name: 'NavbarForAdminAndSupplier'})
                 }
               }
-                else if(user.userType == "PHARMACY_ADMINISTRATOR") {
+                else if(user.userType == "SYSTEM_ADMINISTRATOR") {
                 if(user.firstTimeLogging) {
                   this.$store.dispatch('updateUser', user)
                   this.$router.push({name: 'FirstTimeLogging'})
