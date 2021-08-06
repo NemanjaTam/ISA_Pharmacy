@@ -10,7 +10,7 @@ import com.tim40.tim40.model.Pharmacist;
 import com.tim40.tim40.projections.PharmacistDetailsProjection;
 import com.tim40.tim40.projections.PharmacistProjection;
 
-public interface PharmacistRepository extends JpaRepository<Pharmacist, Long> {
+public interface PharmacistRepository extends JpaRepository<Pharmacist, Long> { //ne menjati nista
 	@Query(value = "SELECT p.name as pharmacyName,u.email,u.id,u.name,u.surname FROM USERS u INNER JOIN PHARMACIES p ON  p.id = u.pharmacy_id WHERE  u.pharmacy_id = :ID AND u.usertype= :type", 
 			  nativeQuery = true)
 	public List<PharmacistDetailsProjection> getAllByPharmacyId(@Param("ID") Long id,@Param("type") String type);

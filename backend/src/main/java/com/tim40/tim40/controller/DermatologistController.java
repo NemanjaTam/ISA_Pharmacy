@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tim40.tim40.dto.DermatologistDTO;
 import com.tim40.tim40.model.*;
+import com.tim40.tim40.projections.DermatologistDetailsProjection;
 import com.tim40.tim40.projections.DermatologistProjection;
 import com.tim40.tim40.service.DermatologistService;
 
@@ -32,10 +33,14 @@ public class DermatologistController {
 	public ResponseEntity<Set<Patient>> getAll(@PathVariable("id") Long id) {
 		return dermatologistService.getAllPatients(id);
 	}
-	
+	//ne menjati, cyberpoetry17
 	@RequestMapping(value="/getalldermatologist/{id}", method = RequestMethod.GET)
 	public ResponseEntity<List<DermatologistProjection>> getAllByPharmacyID(@PathVariable("id") Long id){
 	 return dermatologistService.getAllDermatologists(id);
 	}
-	
+	//ne menjati, cyberpoetry17
+		@RequestMapping(value="/getalldermatologist2/{id}", method = RequestMethod.GET)
+		public ResponseEntity<List<DermatologistDetailsProjection>> getAllByPharmacyID2(){
+		 return dermatologistService.getAllDermatologistsForAllPharmacies();
+		}
 }

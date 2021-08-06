@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import com.tim40.tim40.dto.DermatologistDTO;
 import com.tim40.tim40.model.Dermatologist;
 import com.tim40.tim40.model.Patient;
+import com.tim40.tim40.projections.DermatologistDetailsProjection;
 import com.tim40.tim40.projections.DermatologistProjection;
 import com.tim40.tim40.repository.DermatologistRepository;
 
@@ -35,19 +36,18 @@ public class DermatologistService implements IDermatologistService {
 		return new ResponseEntity<Set<Patient>>(dermatologist.getAllPatients(), HttpStatus.OK);
 	}
 
+	//ne menjati
 	@Override
 	public ResponseEntity<List<DermatologistProjection>> getAllDermatologists(Long ID) {
 	   List<DermatologistProjection> dermatologist = dermatologistRepository.getAllByPharmacyId(ID);
-//	    List<DermatologistDTO> dermatologistsDTO = dermatologist.stream()
-//	            .map(t -> new DermatologistDTO(
-//	                    t.get(0, Long.class), 
-//	                    t.get(1, String.class), 
-//	                    t.get(2, String.class),
-//	                    t.get(4, String.class)
-//	                    ))
-//	            .collect(Collectors.toList());
 	   return new ResponseEntity<List<DermatologistProjection>>(dermatologist, HttpStatus.OK);
 		
 	}
+	
+	public ResponseEntity<List<DermatologistDetailsProjection>> getAllDermatologistsForAllPharmacies() {
+		   List<DermatologistDetailsProjection> dermatologist = dermatologistRepository.getAllByPharmacyIdWithPharmacyList();
+		   return new ResponseEntity<List<DermatologistDetailsProjection>>(dermatologist, HttpStatus.OK);
+			
+		}
 	
 }

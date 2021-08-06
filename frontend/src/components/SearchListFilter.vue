@@ -8,8 +8,9 @@
     </div>
     <b-card no-body>
       <b-tabs card>
-        <b-input v-model="filter" placeholder="Search"></b-input>
+        <!-- <b-input v-model="filter" placeholder="Search"></b-input> -->
         <b-tab title="Pharmacists" active>
+          <b-input v-model="filter" placeholder="Search"></b-input>
           <div>
             <b-table
               striped
@@ -26,7 +27,19 @@
             ></b-table>
           </div>
         </b-tab>
-        <b-tab title="Dermatologist"> </b-tab>
+        <b-tab title="Dermatologists" active>
+          <b-input v-model="filter" placeholder="Search"></b-input>
+          <div>
+            <b-table
+              striped
+              hover
+              :filter="filter"
+              :filter-included-fields="['name', 'surname', 'email']"
+              :items="dermatologists"
+              :fields="fields"
+            ></b-table>
+          </div>
+        </b-tab>
       </b-tabs>
     </b-card>
   </div>
@@ -55,6 +68,15 @@ export default {
     return {
       filter: "",
       pharmacy: null,
+      dermatologists: [
+        {
+          id: "",
+          name: "",
+          surname: "",
+          email: "",
+          pharmacies: [],
+        },
+      ],
       pharmacists: [
         {
           id: "",
@@ -121,12 +143,35 @@ export default {
         .then((response) => response.json())
         .then((data) => ((this.pharmacy = data.id), console.log(data.id)));
     },
+    getDermatologist(id, type) {
+      const headers = {
+        "Content-Type": "application/json",
+      };
+      headers["usertype"] = type;
+      if (this.userType == "PHARMACY_ADMINISTRATOR") {
+        fetch(
+          `http://localhost:9005/api/dermatologist/getalldermatologist/${id}`,
+          {
+            headers,
+          }
+        )
+          .then((response) => response.json())
+          .then((data) => (this.dermatologists = data));
+      } else if (this.userType == "PATIENT") {
+        fetch(`http://localhost:9005/api/pharmacist/getallpharmacists/`, {
+          headers,
+        })
+          .then((response) => response.json())
+          .then((data) => (this.dermatologists = data));
+      }
+    },
   },
 
   async created() {
     if (this.userType == "PHARMACY_ADMINISTRATOR") {
       await this.getPharmacy(this.userId);
       await this.getPharmacists(this.pharmacy, this.userType);
+      await this.getDermatologist(this.pharmacy, this.userType);
     } else if (this.userType == "PATIENT") {
       this.getPharmacists(null, this.userType);
     } else {

@@ -50,7 +50,7 @@ public class PharmacyController {
 	{
 		return pharmacyService.isMedicationAvailable(patientAllergedDTO.getPatientId(), patientAllergedDTO.getMedicationId());
 	}
-	
+	//ne menjati koristi se za funkcionalnost 
 	@GetMapping(value = "/getpharmacy/{id}",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
     public PharmacyProfileDTO getPharmacyById(@PathVariable(name="id") String stringId){
