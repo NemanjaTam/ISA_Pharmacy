@@ -18,7 +18,7 @@ import PharmacyAdmin from "../views/PharmacyAdmin.vue";
 import settingsPage from "../views/SettingsPage.vue";
 import PharmacyAdminHome from "../views/PharmacyAdminHome.vue";
 import Pharmacy from "../views/Pharmacy.vue";
-
+import SearchListFilter from "../components/SearchListFilter.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -112,6 +112,11 @@ const routes = [
         name: "homeAdmin",
         component: PharmacyAdminHome,
       },
+      {
+        path: "list",
+        name: "list",
+        component: SearchListFilter,
+      },
     ],
   },
 ];
@@ -121,3 +126,15 @@ export const router = new VueRouter({
   base: process.env.BASE_URL,
   routes,
 });
+
+// router.beforeEach((to, from, next) => {
+//   if (to.matched.some((record) => record.meta.requiresAuth)) {
+//     if (store.getters.isAuthenticated) {
+//       next();
+//       return;
+//     }
+//     next("/login");
+//   } else {
+//     next();
+//   }
+// });
