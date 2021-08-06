@@ -7,6 +7,7 @@ import java.security.Principal;
 
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tim40.tim40.dto.PharmacyAdminDTO;
 import com.tim40.tim40.model.Address;
 import com.tim40.tim40.model.PharmacyAdministrator;
+import com.tim40.tim40.projections.PharmacyProjection;
 import com.tim40.tim40.service.DermatologistService;
 import com.tim40.tim40.service.PharmacyAdministratorService;
 import com.tim40.tim40.service.UserService;
@@ -59,6 +61,18 @@ public class PharmacyAdministratorController {
 
 	        return ResponseEntity.ok().build();
 	    }
+	
+
+//	@RequestMapping(value="/getpharmacybyidadmin/{id}",method = RequestMethod.GET)
+//	public Long getPharmacyByPharmacistID(@PathVariable("id") Long id){
+//		
+//		return pharmacyAdminService.getPharmacy(id);
+//	}
+	@RequestMapping(value="/getpharmacy/{id}", method = RequestMethod.GET)
+	public PharmacyProjection getPharmacyById(@PathVariable("id") Long id) {
+		return pharmacyAdminService.getPharmacyById(id, "PHARMACY_ADMINISTRATOR");
+	}
+    
 
    
 }

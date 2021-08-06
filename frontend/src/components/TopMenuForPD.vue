@@ -42,24 +42,24 @@
 </template>
 
 <script>
-
 export default {
-    name: "TopMenuForPD",
-    computed: {
-        userType() {
-            return this.$store.getters.getUserType
-        },
-        isDermatologist() {
-            return this.$store.getters.isDermatologist
-        }
+  name: "TopMenuForPD",
+  computed: {
+    userType() {
+      return this.$store.getters.getUserType;
     },
-    methods: {
-        logout(){
-            this.$store.dispatch('logout')
-            this.$router.push('LoginPage')
-        }
-    }
-}
+    isDermatologist() {
+      return this.$store.getters.isDermatologist;
+    },
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch("logout");
+      this.$router.push("LoginPage");
+      localStorage.setItem("user", null);
+    },
+  },
+};
 </script>
 
 <style scoped>

@@ -8,10 +8,15 @@ import org.springframework.http.ResponseEntity;
 import com.tim40.tim40.model.Patient;
 import com.tim40.tim40.model.Pharmacist;
 import com.tim40.tim40.projections.DermatologistProjection;
+import com.tim40.tim40.projections.PharmacistDetailsProjection;
 import com.tim40.tim40.projections.PharmacistProjection;
 
 public interface IPharmacistService {
 	ResponseEntity<Set<Patient>> getAllPatients(Long id);
-	ResponseEntity<List<PharmacistProjection>> getAllPharamcists(Long ID);
+	Long getPharmacy(Long id);
+	ResponseEntity<List<PharmacistDetailsProjection>> getAllPharamcistsNEW(Long ID);
+	ResponseEntity<List<PharmacistDetailsProjection>> getAllPharamcistsById(Long ID);
+	ResponseEntity<List<PharmacistDetailsProjection>> getAllPharamcists();
+	ResponseEntity<List<PharmacistDetailsProjection>> getAllPharmacistData(Long ID);
 	
 }
