@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Getter
 @Setter
-@DiscriminatorValue(value = "Pharmacy_administrator")
+@DiscriminatorValue(value = "PharmacyAdministrator")
 public class PharmacyAdministrator extends User{
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "pharmacy_id", nullable = true)

@@ -1,4 +1,5 @@
 <template>
+<div class = "background">  <NavbarForAdminAndSupplier/>
   <nav class="skew-menu">
     <ul>
       <li> <router-link to="/registration-pharmacy-admin" class="routerlink">Registration pharmacy admin</router-link></li>
@@ -7,17 +8,26 @@
       <li> <router-link to="/registration-system-admin" class="routerlink">Registration system admin</router-link></li>
     </ul>
   </nav>
+</div>
 </template>
 
 <style scoped>
+ .background {
+  background-image: url("../assets/img/medicine.jpg");
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  min-width: 100%;
+  min-height: 150%;
+} 
 body {
   font-family: Helvetica Neue, Helvetica, sans-serif;
-  background: tomato;
+  background:transparent;
 }
 .skew-menu {
   text-align: center;
-  margin-top: 5em;
-  margin-left: 20em;
+  margin-top: 3em;
+  margin-left: 0em;
 }
 .skew-menu ul {
   display: inline-block;
@@ -58,8 +68,11 @@ body {
 </style>
 
 <script>
-
+import NavbarForAdminAndSupplier from "../components/NavbarForAdminAndSupplier.vue"
 export default {
-  name: "RegistrationByAdmin"
+  name: "RegistrationByAdmin",
+  components: {
+    NavbarForAdminAndSupplier
+  }
   }
 </script>

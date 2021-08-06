@@ -100,7 +100,7 @@ export default {
       top: 0; 
       left: 0; 
       min-width: 100%;
-      min-height: 100%;
+      min-height: 150%;
   } 
   .title {
       font-family: fantasy;

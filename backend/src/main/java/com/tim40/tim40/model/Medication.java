@@ -45,16 +45,13 @@ public class Medication {
     private String name;
 
     @Column(nullable = false)
-    private String description;
-
-    @Column(nullable = false)
     private String manufacturer; //moze biti entitet ali komplikujemo
 
-	 @Column(name = "medication_form", nullable = false)
+	 @Column(name = "medication_form", nullable = true)
 	 @Enumerated(EnumType.STRING)
     private MedicationForm medicationForm;
 
-  	@Column(name = "prescription_regime", nullable = false)
+  	@Column(name = "prescription_regime", nullable = true)
     @Enumerated(EnumType.STRING)
     private PrescriptionRegime prescriptionRegime;
 
@@ -66,14 +63,17 @@ public class Medication {
     private TypeOfMedication typeOfMedication;		// antibiotik, anestetik, antihistaminik..
 	
     @Column(nullable = false)
-    private String structure; //ne znam sta je ovo?
+    private String structure; 
     
     @Column (nullable = false)
     private String contraindications;
     
     @Column (nullable = false)
-    private String recommendedIntake;  // preporučeni unos terapije na dnevnom nivou
+    private String recommendedIntake; 
 
+    @Column (nullable = false)
+    private String notes; 
+    
 //    @ManyToOne
 //    @JoinColumn(name = "pharmacy_id", nullable = false)
 //    private Pharmacy pharmacy;
@@ -93,8 +93,8 @@ public class Medication {
 //    )
 	private List<Medication> replacementMedications = new ArrayList<Medication>();
     
-    public Medication (String name, String code, TypeOfMedication typeOfMedication, String structure, String contraindications,
-            String recommendedIntake, Pharmacy pharmacy, Set<Medication> replacementMedications)
+    public Medication (String name, String code, String structure, String contraindications,
+            String recommendedIntake, Pharmacy pharmacy, Set<Medication> replacementMedications, String notes, String manufacturer,MedicationForm medicationForm ,TypeOfMedication typeOfMedication)
     {
         super();
         this.name = name;
@@ -103,6 +103,9 @@ public class Medication {
         this.structure = structure;
         this.contraindications = contraindications;
         this.recommendedIntake = recommendedIntake;
+        this.notes = notes;
+        this.manufacturer = manufacturer;
+        this.medicationForm = medicationForm;
 //        this.pharmacy = pharmacy; 
 //        this.replacementMedications = replacementMedications;
     }

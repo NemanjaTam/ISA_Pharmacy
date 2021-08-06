@@ -29,6 +29,7 @@
 <script>
 import axios from 'axios'
 import Navbar from '../components/Navbar.vue';
+import NavbarForAdminAndSupplier from '../components/NavbarForAdminAndSupplier.vue'
 
 export default {
   name: "LoginPage",
@@ -70,6 +71,26 @@ export default {
                 else {
                   this.$store.dispatch('updateUser', user)
                   this.$router.push({name: 'HomePage'})
+                }
+              }
+              else if(user.userType == "SUPPLIER") {
+                if(user.firstTimeLogging) {
+                  this.$store.dispatch('updateUser', user)
+                  this.$router.push({name: 'FirstTimeLogging'})
+                }
+                else {
+                  this.$store.dispatch('updateUser', user)
+                  this.$router.push({name: 'NavbarForAdminAndSupplier'})
+                }
+              }
+                else if(user.userType == "PHARMACY_ADMINISTRATOR") {
+                if(user.firstTimeLogging) {
+                  this.$store.dispatch('updateUser', user)
+                  this.$router.push({name: 'FirstTimeLogging'})
+                }
+                else {
+                  this.$store.dispatch('updateUser', user)
+                  this.$router.push({name: 'NavbarForAdminAndSupplier'})
                 }
               }
               else {

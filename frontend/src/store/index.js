@@ -29,7 +29,18 @@ export const store = new Vuex.Store({
       medications: []
     },
     appointments: [],
-    appointmentProcess: null
+    appointmentProcess: null,
+    pharmacy: {
+      id: 1,
+      name: '',
+      address: {
+        state: '',
+        city: '',
+        street: '',
+        number: '',
+        postalCode: null
+      }
+    }
   },
   //methods that return data (state)
   getters: {
@@ -54,6 +65,14 @@ export const store = new Vuex.Store({
       if(state.user.userType == "DERMATOLOGIST") return true
       else return false
     },
+    isSupplier(state) {
+      if(state.user.userType == "SUPPLIER") return true
+      else return false
+    },
+    isAdmin(state) {
+      if(state.user.userType == "PHARMACY_ADMINISTRATOR") return true
+      else return false
+    },
     getType(state) {
       if(state.user.userType == "DERMATOLOGIST") return "Examination"
       else return "Consultation"
@@ -63,7 +82,10 @@ export const store = new Vuex.Store({
     },
     getCurrentAppointment(state) {
       return state.appointmentProcess
-    }
+    },
+    getPharmacy(state) {
+      return state.pharmacy
+  }
   },
   //methods for changing date (state)
   mutations: {
@@ -90,7 +112,10 @@ export const store = new Vuex.Store({
     },
     setMedications(state, medications) {
       state.medications = medications;
-    }
+    },
+    updatePharmacy(state,pharmacy) {
+      state.pharmacy = pharmacy;
+    },
   },
   //always on components dispatch action which commit some mutations. Never commit mutations from component because of async
   actions: {

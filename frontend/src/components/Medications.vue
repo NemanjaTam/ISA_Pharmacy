@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Navbar/>
+    <NavbarForAdminAndSupplier/>
       <div class = "background"> 
         <div class="container">
             <div class="row" id="ads" v-if="medications">
@@ -219,15 +219,16 @@ h6 {
 
 <script>
 import axios from 'axios';
-import Navbar from '../components/Navbar.vue'
+import NavbarForAdminAndSupplier from '../components/NavbarForAdminAndSupplier.vue'
 
 export default {
   name: "Medications",
   components: {
-        Navbar
+        NavbarForAdminAndSupplier
     },
   computed: {
     medications () {
+      console.log(this.$store.state.medications)
       return this.$store.state.medications
     }
   },

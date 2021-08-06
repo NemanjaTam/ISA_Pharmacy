@@ -1,5 +1,5 @@
 <template>
-  <div>
+ <div class = "background"> <RegistrationByAdmin/>
   <div class = "card"  >
   
     <p class="title">Registration supplier </p>
@@ -139,14 +139,21 @@
 </template>
 
 <style scoped>
-
+ .background {
+  background-image: url("../assets/img/medicine.jpg");
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  min-width: 100%;
+  min-height: 100%;
+} 
 .card {
 
   box-shadow: 10px 4px 8px 0 rgba(0,0,0,0.2);
   transition: 15s;
   width: 50%;
   border-radius: 20px; 
-  margin-top: 40px; 
+  margin-top: 12em; 
   margin-bottom: 50px; 
   margin-right: 500px;
   margin-left: 500px;
@@ -183,9 +190,12 @@
 
 <script>
 import axios from 'axios';
-
+import RegistrationByAdmin from '../components/RegistrationByAdmin.vue'
 export default {
   name: "RegistrationSupplier",
+  components: {
+    RegistrationByAdmin
+  },
   data() {
     return {
       user: {

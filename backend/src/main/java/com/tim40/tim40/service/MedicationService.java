@@ -35,9 +35,9 @@ public class MedicationService implements IMedicationService{
 		for(Long med : medicationDTO.getReplacementMedicationsIDs()) {
 			replacementMedications.add(this.medicationRepository.findById(med).get());
 		}
-		Medication medication = new Medication(medicationDTO.getName(), medicationDTO.getCode(), medicationDTO.getTypeOfMedication(),
+		Medication medication = new Medication(medicationDTO.getName(), medicationDTO.getCode(),
 				medicationDTO.getStructure(), medicationDTO.getContraindications(), medicationDTO.getRecommendedIntake(), 
-				pharmacy, replacementMedications);
+				pharmacy, replacementMedications, medicationDTO.getNotes(), medicationDTO.getManufacturer(), medicationDTO.getMedicationForm(), medicationDTO.getTypeOfMedication());
 		Medication createdMedication = medicationRepository.save(medication);
 		return new MedicationDTO(createdMedication);
 	}

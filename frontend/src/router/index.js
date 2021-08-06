@@ -16,11 +16,15 @@ import MedicationTherapy from '../components/MedicationTherapy.vue'
 import Calendar from '../components/Calendar.vue'
 import AddMedication from '../components/AddMedication.vue'
 import Medications from '../components/Medications.vue'
-import RegistrationByAdmin from '../views/RegistrationByAdmin.vue'
-import RegistrationPharmacyAdmin from '../components/RegistrationPharmacyAdmin.vue'
-import RegistrationDermatologist from '../components/RegistrationDermatologist.vue'
-import RegistrationSupplier from '../components/RegistrationSupplier.vue'
-import RegistrationSystemAdmin from '../components/RegistrationSystemAdmin.vue'
+import RegistrationPharmacyAdmin from '../views/RegistrationPharmacyAdmin.vue'
+import RegistrationDermatologist from '../views/RegistrationDermatologist.vue'
+import RegistrationSupplier from '../views/RegistrationSupplier.vue'
+import RegistrationSystemAdmin from '../views/RegistrationSystemAdmin.vue'
+import RegistrationByAdmin from '../components/RegistrationByAdmin.vue'
+import AddPharmacy from '../components/AddPharmacy.vue'
+import MakePurchaseOrderOffer from '../components/MakePurchaseOrderOffer.vue'
+import NavbarForAdminAndSupplier from '../components/NavbarForAdminAndSupplier.vue'
+import EditProfileForAdminAndSupplier from '../views/EditProfileForAdminAndSupplier.vue'
 
 Vue.use(VueRouter)
 
@@ -107,11 +111,6 @@ const routes = [
     component: Medications
   },
   { 
-    path: '/registration-by-admin',
-    name: 'RegistrationByAdmin',
-    component: RegistrationByAdmin
-  }, 
-  { 
     path: '/registration-pharmacy-admin',
     name: 'RegistrationPharmacyAdmin',
     component: RegistrationPharmacyAdmin
@@ -130,7 +129,33 @@ const routes = [
     path: '/registration-system-admin',
     name: 'RegistrationSystemAdmin',
     component: RegistrationSystemAdmin
-  }
+  },
+  { 
+    path: '/registration-by-admin',
+    name: 'RegistrationByAdmin',
+    component: RegistrationByAdmin
+  },
+  {
+    path: '/add-pharmacy',
+    name: 'AddPharmacy',
+    component: AddPharmacy
+  },
+  {
+    path: '/make-purchase-order-offer',
+    name: 'MakePurchaseOrderOffer',
+    component: MakePurchaseOrderOffer
+  },
+  {
+    path: '/navbar-for-admin-and-supplier',
+    name: 'NavbarForAdminAndSupplier',
+    component: NavbarForAdminAndSupplier
+  },
+  {
+    path: '/edit-profile',
+    name: 'EditProfileForAdminAndSupplier',
+    component: EditProfileForAdminAndSupplier
+  },
+  
 ]
 
 export const router = new VueRouter({

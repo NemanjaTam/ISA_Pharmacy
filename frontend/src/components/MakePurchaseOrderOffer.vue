@@ -1,6 +1,5 @@
 <template>
-<div class = "background"> 
-  <NavbarForAdminAndSupplier/>
+<div class = "background">
  <div class="container">
     <div class="row">
         <div class="col-md-6">
@@ -11,36 +10,22 @@
                     </div>
                     <b-form-input type="text" v-model="medication.name" placeholder="enter name" style="font-style:italic" required/> 
                     <b-form-input type="text" v-model="medication.code" placeholder="enter code" style="font-style:italic"  aria-describedby="input-live-help input-live-feedback" :state= validation trim required/> 
+                    <b-form-input type="text" v-model="medication.typeOfMedicine" placeholder="enter type of medication" style="font-style:italic" required/> 
                     <b-form-input type="text" v-model="medication.structure" placeholder="enter medication structure" style="font-style:italic" required/>
                     <b-form-input type="text" v-model="medication.contraindications" placeholder="enter contraindications" style="font-style:italic" required/>
                     <b-form-input type="text" v-model="medication.recommendedIntake" placeholder="enter recommended intake" style="font-style:italic" required/>
-                    <b-form-select size="sm" v-model="medication.typeOfMedication" id="medicationForm" name="" style="font-style:italic" required>
-                                <option value="ANTIPYRETIC">ANTIPYRETIC</option>
-                                <option value="ANALGESIC">ANALGESIC</option>
-                                <option value="ANTIBIOTIC">ANTIBIOTIC</option>
-                                <option value="ANTISEPTIC">ANTISEPTIC</option>
-                                <option value="ANTIDEPRESSANT">ANTIDEPRESSANT</option>
-                                <option value="ANTIALERGIC">ANTIALERGIC</option>
-                                <option value="ANTIPSYCHOTIC">ANTIPSYCHOTIC</option>
-                                <option value="BARBITURATE">BARBITURATE</option>
-                                <option value="HORMONE">HORMONE</option>
-                               <option value="CONTRACEPTIVE">CONTRACEPTIVE</option>
-                               <option value="PROBIOTIC">PROBIOTIC</option>
-                               <option value="TRANQUILIZER">TRANQUILIZER</option>
+                    <b-form-select size="sm" v-model="medication.medicationForm" id="medicationForm" name="" style="font-style:italic" required>
+                                <option value="CAPSULE">Capsule</option>
+                                <option value="TABLET">Tablet</option>
+                                <option value="GREASE">Grease</option>
+                                <option value="GEL">Gel</option>
+                                <option value="PASTE">Paste</option>
+                                <option value="DILUTION">Dilution</option>
+                                <option value="SYRUP">Syrup</option>
                               </b-form-select>
-                     <b-form-select size="sm" v-model="medication.medicationForm" id="medicationType" name="" style="font-style:italic" required>
-                                <option value="POWDER">POWDER</option>
-                                <option value="CAPSULE">CAPSULE</option>
-                                <option value="TABLET">TABLET</option>
-                                <option value="GREASE">GREASE</option>
-                                <option value="GEL">GEL</option>
-                                <option value="DILUTION">DILUTION</option>
-                                <option value="SYRUP">SYRUP</option>
-                              </b-form-select>         
                     <b-form-input type="text" v-model="medication.producer" placeholder="enter producer" style="font-style:italic" required/>
                     <b-form-input type="text" v-model="medication.replacementMedicationsIDs" placeholder="enter replacement medications" style="font-style:italic"/>
                     <b-form-input type="text" v-model="medication.note" placeholder="enter note" style="font-style:italic" required/>
-                    <b-form-input type="text" v-model="medication.manufacturer" placeholder="enter manufacturer" style="font-style:italic" required/>
 
                     <input type="submit" v-on:click="onSubmit" style="color: white" name="" value="Add">
                     
@@ -59,11 +44,11 @@
 }
  .background {
   background-image: url("../assets/img/medicine.jpg");
-  position: absolute; 
+  position: cover; 
   top: 0; 
   left: 0; 
   min-width: 100%;
-  min-height: 130%;
+  min-height: 100%;
 } 
 .title {
   font-family: fantasy;
@@ -94,7 +79,7 @@
     box-shadow: 10px 4px 8px 0 rgba(0,0,0,0.2);
     text-align: center;
     transition: 0.25s;
-    margin-top: 20px;
+    margin-top: 100px;
     border-radius: 20px; 
 }
 
@@ -155,27 +140,19 @@
 
 <script>
 import axios from 'axios'
-import NavbarForAdminAndSupplier from "../components/NavbarForAdminAndSupplier.vue"
-
 export default {
-  name: "AddMedication",
-  components: {
-    NavbarForAdminAndSupplier
-  },
+  name: "MakePurchaseOrderOffer",
   data() {
     return {
-      medication: {
+      pharmacies: {
        name: "",
-       code: "",
-       medicationForm: "",
-       structure: "",
-       contraindications: "",
-       recommendedIntake: "",
-       typeOfMedication: "",
-       producer: "",
-       replacementMedicationsIDs: "",
-       manufacturer: "",
-       notes: ""
+       address: {
+           state: "",
+           city: "",
+           street: "",
+           number: "",
+           postalCode: ""
+       }
       },
   
       show: true,
@@ -184,26 +161,8 @@ export default {
   methods: {
     onSubmit(event) {
       event.preventDefault();
-      const replacementMedicationsStr = this.medication.replacementMedicationsIDs.split(",");
-      const replacementMedications = replacementMedicationsStr.map(rm => +rm);
-      const medicationForSend = {
-              name: this.medication.name,
-              code: this.medication.code,
-              medicationForm: this.medication.medicationForm,
-              structure: this.medication.structure,
-              contraindications: this.medication.contraindications,
-              recommendedIntake: this.medication.recommendedIntake,
-              typeOfMedication: this.medication.typeOfMedication,
-              pharmacyID: +this.medication.producer,
-              replacementMedicationsIDs: replacementMedications,
-              manufacturer: this.medication.manufacturer,
-              notes: this.medication.notes
-              };
-      axios.post("http://localhost:9005/api/medication/add", medicationForSend).then(res => {
-        console.log(res);
-         this.$store.dispatch('setMedications', res);
-      });
-      this.$router.push({path:'medications'})
+      axios.post("http://localhost:9005/api/pharmacy/add", this.pharmacies);
+      this.$router.push({path:'pharmacies'})
     }
 
 
@@ -211,11 +170,6 @@ export default {
   computed: {
       validation() {
        // return this.user.password.length > 7 ? true : false
-      },
-      exsistingMedications() {
-        //axios.get(medications).then(med=>{
-//          return med;
-    //    })
       }
   }}
 </script>

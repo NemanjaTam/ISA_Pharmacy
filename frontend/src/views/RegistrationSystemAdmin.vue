@@ -1,8 +1,8 @@
 <template>
-  <div>
+ <div class = "background"> <RegistrationByAdmin/>
   <div class = "card"  >
   
-    <p class="title">Registration dermatologist </p>
+    <p class="title">Registration system administrator </p>
     <b-form @submit="onSubmit" @reset="onReset" v-if="show">   <!--forma ce se prikazati samo ukoliko je show = true -->
       <b-form-group  
         class = "foo"
@@ -15,7 +15,7 @@
           id="input-1"
           v-model="user.email"
           type="email"
-          placeholder= "Enter dermatologist email"
+          placeholder= "Enter system admin email"
           style="font-style:italic"
           label-cols-lg="7"
           label-cols="4"
@@ -28,7 +28,7 @@
           id="input-2"
           type = "password"
           v-model="user.password"
-          placeholder="Enter dermatologist password"
+          placeholder="Enter system admin password"
           style="font-style:italic"
           :state= validation
           aria-describedby="input-live-help input-live-feedback"
@@ -45,7 +45,7 @@
           id="input-2.2"
           type = "password" 
           v-model="user.confirmPassword"
-          placeholder="Confirm dermatologist password"
+          placeholder="Confirm system admin password"
           style="font-style:italic"
           required
         ></b-form-input>
@@ -55,7 +55,7 @@
         <b-form-input
           id="input-3"
           v-model="user.name"
-          placeholder="Enter dermatologist name"
+          placeholder="Enter system admin name"
           style="font-style:italic"
           required
         ></b-form-input>
@@ -65,7 +65,7 @@
         <b-form-input
           id="input-4"
           v-model="user.surname"
-          placeholder="Enter dermatologist surname"
+          placeholder="Enter system admin surname"
           style="font-style:italic"
           required
         ></b-form-input>
@@ -75,7 +75,7 @@
         <b-form-input
           id="input-5"
           v-model="user.state"
-          placeholder="Enter dermatologist state"
+          placeholder="Enter system admin state"
           style="font-style:italic"
           required
         ></b-form-input>
@@ -85,7 +85,7 @@
         <b-form-input
           id="input-6"
           v-model="user.city"
-          placeholder="Enter dermatologist city"
+          placeholder="Enter system admin city"
           style="font-style:italic"
           required
         ></b-form-input>
@@ -95,7 +95,7 @@
         <b-form-input
           id="input-7"
           v-model="user.postalCode"
-          placeholder="Enter dermatologist postal code"
+          placeholder="Enter system admin postal code"
           style="font-style:italic"
           required
         ></b-form-input>
@@ -105,7 +105,7 @@
         <b-form-input
           id="input-8"
           v-model="user.street"
-          placeholder="Enter dermatologist street"
+          placeholder="Enter system admin street"
           style="font-style:italic"
           required
         ></b-form-input>
@@ -115,7 +115,7 @@
         <b-form-input
           id="input-9"
           v-model="user.houseNumber"
-          placeholder="Enter dermatologist number of house/building"
+          placeholder="Enter system admin number of house/building"
           style="font-style:italic"
           required
         ></b-form-input>
@@ -125,7 +125,7 @@
         <b-form-input
           id="input-10"
           v-model="user.phone"
-          placeholder="Enter dermatologist phone number"
+          placeholder="Enter system admin phone number"
           style="font-style:italic"
           required
         ></b-form-input>
@@ -139,14 +139,21 @@
 </template>
 
 <style scoped>
-
+ .background {
+  background-image: url("../assets/img/medicine.jpg");
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  min-width: 100%;
+  min-height: 100%;
+} 
 .card {
 
   box-shadow: 10px 4px 8px 0 rgba(0,0,0,0.2);
   transition: 15s;
   width: 50%;
   border-radius: 20px; 
-  margin-top: 40px; 
+  margin-top: 12em; 
   margin-bottom: 50px; 
   margin-right: 500px;
   margin-left: 500px;
@@ -183,9 +190,12 @@
 
 <script>
 import axios from 'axios';
-
+import RegistrationByAdmin from '../components/RegistrationByAdmin.vue'
 export default {
-  name: "RegistrationDermatologist",
+  name: "RegistrationSystemAdmin",
+  components: {
+    RegistrationByAdmin
+  },
   data() {
     return {
       user: {

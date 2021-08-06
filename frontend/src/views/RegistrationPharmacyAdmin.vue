@@ -1,8 +1,9 @@
 <template>
-  <div>
+<div> 
+ <div class = "background">  <RegistrationByAdmin/>
   <div class = "card"  >
   
-    <p class="title">Registration system administrator </p>
+    <p class="title">Registration pharmacy admin</p>
     <b-form @submit="onSubmit" @reset="onReset" v-if="show">   <!--forma ce se prikazati samo ukoliko je show = true -->
       <b-form-group  
         class = "foo"
@@ -15,7 +16,7 @@
           id="input-1"
           v-model="user.email"
           type="email"
-          placeholder= "Enter system admin email"
+          placeholder= "Enter pharmacy admin email"
           style="font-style:italic"
           label-cols-lg="7"
           label-cols="4"
@@ -28,7 +29,7 @@
           id="input-2"
           type = "password"
           v-model="user.password"
-          placeholder="Enter system admin password"
+          placeholder="Enter pharmacy admin password"
           style="font-style:italic"
           :state= validation
           aria-describedby="input-live-help input-live-feedback"
@@ -45,7 +46,7 @@
           id="input-2.2"
           type = "password" 
           v-model="user.confirmPassword"
-          placeholder="Confirm system admin password"
+          placeholder="Confirm pharmacy admin password"
           style="font-style:italic"
           required
         ></b-form-input>
@@ -55,7 +56,7 @@
         <b-form-input
           id="input-3"
           v-model="user.name"
-          placeholder="Enter system admin name"
+          placeholder="Enter pharmacy admin name"
           style="font-style:italic"
           required
         ></b-form-input>
@@ -65,7 +66,7 @@
         <b-form-input
           id="input-4"
           v-model="user.surname"
-          placeholder="Enter system admin surname"
+          placeholder="Enter pharmacy admin surname"
           style="font-style:italic"
           required
         ></b-form-input>
@@ -75,7 +76,7 @@
         <b-form-input
           id="input-5"
           v-model="user.state"
-          placeholder="Enter system admin state"
+          placeholder="Enter pharmacy admin state"
           style="font-style:italic"
           required
         ></b-form-input>
@@ -85,7 +86,7 @@
         <b-form-input
           id="input-6"
           v-model="user.city"
-          placeholder="Enter system admin city"
+          placeholder="Enter pharmacy admin city"
           style="font-style:italic"
           required
         ></b-form-input>
@@ -95,7 +96,7 @@
         <b-form-input
           id="input-7"
           v-model="user.postalCode"
-          placeholder="Enter system admin postal code"
+          placeholder="Enter pharmacy admin postal code"
           style="font-style:italic"
           required
         ></b-form-input>
@@ -105,7 +106,7 @@
         <b-form-input
           id="input-8"
           v-model="user.street"
-          placeholder="Enter system admin street"
+          placeholder="Enter pharmacy admin street"
           style="font-style:italic"
           required
         ></b-form-input>
@@ -115,7 +116,7 @@
         <b-form-input
           id="input-9"
           v-model="user.houseNumber"
-          placeholder="Enter system admin number of house/building"
+          placeholder="Enter pharmacy admin number of house/building"
           style="font-style:italic"
           required
         ></b-form-input>
@@ -125,7 +126,7 @@
         <b-form-input
           id="input-10"
           v-model="user.phone"
-          placeholder="Enter system admin phone number"
+          placeholder="Enter pharmacy admin phone number"
           style="font-style:italic"
           required
         ></b-form-input>
@@ -136,17 +137,25 @@
     </b-form>
   </div>
   </div>
+  </div>
 </template>
 
 <style scoped>
-
+ .background {
+  background-image: url("../assets/img/medicine.jpg");
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  min-width: 100%;
+  min-height: 100%;
+} 
 .card {
 
   box-shadow: 10px 4px 8px 0 rgba(0,0,0,0.2);
   transition: 15s;
   width: 50%;
   border-radius: 20px; 
-  margin-top: 40px; 
+  margin-top: 12em; 
   margin-bottom: 50px; 
   margin-right: 500px;
   margin-left: 500px;
@@ -183,9 +192,13 @@
 
 <script>
 import axios from 'axios';
+import RegistrationByAdmin from '../components/RegistrationByAdmin.vue'
 
 export default {
-  name: "RegistrationSystemAdmin",
+  name: "RegistrationPharmacyAdmin",
+  components: {
+    RegistrationByAdmin
+  },
   data() {
     return {
       user: {
@@ -194,12 +207,16 @@ export default {
        confirmPassword: "",
        name: "",
        surname: "",
-       state: "",
-       city: "",
-       postalCode: "",
-       street: "",
-       houseNumber: "",
-       phone: ""
+       address: 
+          {
+          state: "",
+          city: "",
+          postalCode: "",
+          street: "",
+          number: "",
+       },
+       phone: "",
+       userType: "PHARMACY_ADMINISTRATOR"
       },
   
       show: true,
@@ -213,7 +230,11 @@ export default {
         alert("Passwords don't match!");
         return;
       }
-      console.log(this.user);
+      
+      axios.post("http://localhost:9005/api/user/register", this.user).then(res => {
+          alert("Uspesno ste registrovani!")
+      })
+      this.$router.push({path:'medications'})
 
     },
     onReset(event) {
@@ -225,17 +246,8 @@ export default {
   },
   computed: {
       validation() {
-        return this.user.password.length > 7 ? true : false
+        return this.user.password.length > 6 ? true : false
       }
     },
-
-  mounted() {
-    axios.get("http://localhost:9005/api/user/all").then((response)=>{
-      console.log(response);
-      return response.json();
-    }).then((responseJSON)=>{
-      console.log(responseJSON);
-    })
-  }
 };
 </script>
