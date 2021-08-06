@@ -2,6 +2,7 @@ package com.tim40.tim40.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,7 +11,9 @@ import org.springframework.stereotype.Service;
 
 import com.tim40.tim40.dto.PharmacyDTO;
 import com.tim40.tim40.email.service.MailService;
+import com.tim40.tim40.model.Dermatologist;
 import com.tim40.tim40.model.Medication;
+import com.tim40.tim40.model.Patient;
 import com.tim40.tim40.model.Pharmacy;
 import com.tim40.tim40.model.QuantityMedication;
 import com.tim40.tim40.repository.PharmacyRepository;
@@ -51,5 +54,12 @@ public class PharmacyService implements IPharmacyService {
 		}
 		return new ResponseEntity<String>("available", HttpStatus.OK);
 	}
+
+	@Override
+	public Pharmacy getById(Long pharmacyID) {
+		return pharmacyRepository.getById(pharmacyID);
+	}
+
+
 	
 }

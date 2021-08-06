@@ -32,7 +32,12 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class User{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -104,6 +109,16 @@ public class User {
 		this.send = userDTO.getSend();
 		this.phone = userDTO.getPhone();
 	}
+
+
+//    @ManyToMany(fetch = FetchType.EAGER)
+//    @JoinTable(name = "user_authority",
+//            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+//            inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id"))
+//    private List<Authority> authorities;
+//	
+	
+	
 	
 }
 

@@ -1,0 +1,57 @@
+<template>
+<div>
+  <b-navbar class="first" toggleable="lg" type="dark" variant="dark">
+    <b-navbar-nav>
+      <b-nav-item ><router-link to="/pharmacyAdminPage/homeAdmin" class="routerlink">Home</router-link></b-nav-item>
+ 
+      <!-- Navbar dropdowns -->
+     <b-nav-item-dropdown class="dropdaun" text="Pharmacy" left>
+        <b-dropdown-item  class="dropdaun" href="#">Appointments</b-dropdown-item>
+        <b-dropdown-item class="dropdaun" href="#">Dermatologist</b-dropdown-item>
+        <b-dropdown-item class="dropdaun" href="#">Pharmacists</b-dropdown-item>
+        <b-dropdown-item  class="dropdaun" href="#">Pharmacists</b-dropdown-item>
+      </b-nav-item-dropdown>
+
+     <b-nav-item-dropdown text="More" left>
+        <b-dropdown-item class="dropdaun" href="#">PURCHASE ORDER</b-dropdown-item>
+        <b-dropdown-item class="dropdaun" href="#">SALE</b-dropdown-item>
+     </b-nav-item-dropdown>
+
+      <b-nav-item-dropdown text="User" class="ml-auto" right>
+        <b-dropdown-item class="dropdaun"> <router-link to="/pharmacyAdminPage/settingsPage" class="routerlink">Settings</router-link></b-dropdown-item>
+        <b-dropdown-item class="dropdaun" href="#">Log out</b-dropdown-item>
+      </b-nav-item-dropdown>
+<!-- 
+     <b-nav-item class="ml-auto"> <b-nav-form>
+      <b-form-input class="mr-sm-2" placeholder="Search"></b-form-input>
+      <b-button variant="outline-success" class="my-2 my-sm-0" type="submit">Search</b-button>
+      </b-nav-form></b-nav-item> -->
+    </b-navbar-nav>
+  </b-navbar>``
+  <div>
+  
+</div>
+</div>
+
+</template>
+
+<script>
+
+export default {
+    name: "NavbarAdmin"
+}
+</script>
+<style  scoped>
+.dropdaun{
+  border: 2px solid #343a40;
+  background: #343a40;
+}
+
+.routerlink {
+  display: block;
+  color: rgb(255, 255, 255);
+  font-size: 18px;
+}
+</style>
+
+

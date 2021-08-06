@@ -55,12 +55,16 @@ export default {
                 console.log(this.User)
                 axios.post("http://localhost:9005/api/user/update-user", this.User)
 
-                if(this.User.userType == "SUPPLIER" || this.User.userType == "PHARMACY_ADMINISTRATOR" ) {
+                if(this.User.userType == "SUPPLIER" || this.User.userType == "SYSTEM_ADMINISTRATOR" ) {
                   this.$router.push({name: 'NavbarForAdminAndSupplier'})
                 }
                 else {
                      this.$router.push({name: 'HomePage'})
                 }
+                if(this.User.userType == "PHARMACY_ADMINISTRATOR"){
+                    this.$router.push({name: 'PharmacyAdminPage'})
+                }else{
+                this.$router.push({name: 'HomePage'})}
             }
         }
     },

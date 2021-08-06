@@ -1,6 +1,8 @@
 package com.tim40.tim40.controller;
 
+import java.util.List;
 import java.util.Set;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tim40.tim40.model.Patient;
+import com.tim40.tim40.model.Pharmacist;
+import com.tim40.tim40.projections.PharmacistProjection;
 import com.tim40.tim40.service.PharmacistService;
 
 @RestController
@@ -26,6 +30,11 @@ public class PharmacistController {
 	@RequestMapping(value = "/get-all/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Set<Patient>> getAll(@PathVariable("id") Long id) {
 		return pharmacistService.getAllPatients(id);
+	}
+	@RequestMapping(value="/getallpharmacists/{id}", method = RequestMethod.GET)
+	public ResponseEntity<List<PharmacistProjection>> getAllPharmacistByPharmacyId(@PathVariable("id") Long id){
+		return pharmacistService.getAllPharamcists(id);
+		
 	}
     
 }
