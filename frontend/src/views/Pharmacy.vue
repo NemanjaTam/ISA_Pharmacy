@@ -90,11 +90,6 @@
               :key="index"
             >
               {{ listItem.name + " " + listItem.surname }}
-              <!-- <input
-          type="text"
-           v-bind:value="listItem"
-          :key="index"
-    /> -->
               <button @click.prevent="remove(index)">info</button>
             </p>
           </b-tab>

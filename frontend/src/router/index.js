@@ -19,6 +19,7 @@ import settingsPage from "../views/SettingsPage.vue";
 import PharmacyAdminHome from "../views/PharmacyAdminHome.vue";
 import Pharmacy from "../views/Pharmacy.vue";
 import SearchListFilter from "../components/SearchListFilter.vue";
+import Action from "../components/Action.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -116,6 +117,11 @@ const routes = [
         path: "list",
         name: "list",
         component: SearchListFilter,
+      },
+      {
+        path: "action",
+        name: "action",
+        component: Action,
       },
     ],
   },

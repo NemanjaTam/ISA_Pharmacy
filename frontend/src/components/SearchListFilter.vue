@@ -34,9 +34,14 @@
               striped
               hover
               :filter="filter"
-              :filter-included-fields="['name', 'surname', 'email']"
+              :filter-included-fields="[
+                'name',
+                'surname',
+                'email',
+                'pharmacies',
+              ]"
               :items="dermatologists"
-              :fields="fields"
+              :fields="fieldsDerm"
             ></b-table>
           </div>
         </b-tab>
@@ -74,7 +79,11 @@ export default {
           name: "",
           surname: "",
           email: "",
-          pharmacies: [],
+          pharmacies: [
+            {
+              pharmName: "",
+            },
+          ],
         },
       ],
       pharmacists: [
@@ -104,6 +113,30 @@ export default {
         {
           key: "pharmacyName",
           label: "Pharmacy",
+          sortable: true,
+          // Variant applies to the whole column, including the header and footer
+          variant: "danger",
+        },
+        ,
+      ],
+      fieldsDerm: [
+        {
+          key: "surname",
+          sortable: true,
+        },
+        {
+          key: "name",
+          sortable: false,
+          sortable: true,
+        },
+        {
+          key: "email",
+          label: "Email address",
+          sortable: true,
+        },
+        {
+          key: "pharmacies.pharmName",
+          label: "Pharmacies",
           sortable: true,
           // Variant applies to the whole column, including the header and footer
           variant: "danger",
@@ -148,7 +181,7 @@ export default {
         "Content-Type": "application/json",
       };
       headers["usertype"] = type;
-      if (this.userType == "PHARMACY_ADMINISTRATOR") {
+      if (this.userType == "PATIENT") {
         fetch(
           `http://localhost:9005/api/dermatologist/getalldermatologist/${id}`,
           {
@@ -157,12 +190,20 @@ export default {
         )
           .then((response) => response.json())
           .then((data) => (this.dermatologists = data));
-      } else if (this.userType == "PATIENT") {
-        fetch(`http://localhost:9005/api/pharmacist/getallpharmacists/`, {
-          headers,
-        })
+      } else if (this.userType == "PHARMACY_ADMINISTRATOR") {
+        fetch(
+          `http://localhost:9005/api/dermatologist/getdermatologistsandpharmacynames/`,
+          {
+            headers,
+          }
+        )
           .then((response) => response.json())
-          .then((data) => (this.dermatologists = data));
+          .then((data) => ((this.dermatologists = data), console.log(data)))
+          .catch((response) => {
+            console.log("proba");
+            // alert("You are not authorized!");
+            // this.$router.push("/loginPage");
+          });
       }
     },
   },
@@ -174,8 +215,9 @@ export default {
       await this.getDermatologist(this.pharmacy, this.userType);
     } else if (this.userType == "PATIENT") {
       this.getPharmacists(null, this.userType);
+      this.getDermatologist(null, this.userType);
     } else {
-      this.$router.push("loginPage");
+      this.$router.push("/loginPage");
     }
     // this.getPharmacists(this.pharmacy);
     console.log("pharmacy id:");
