@@ -21,6 +21,8 @@ insert into users(dtype, city, number, postalcode, state, street, email, is_firs
 
 insert into dermatologist_pharmacy(pharmacy_id, dermatologist_id) values (1,1)
 insert into dermatologist_pharmacy(pharmacy_id, dermatologist_id) values (1,2)
+insert into dermatologist_pharmacy(pharmacy_id, dermatologist_id) values (1,10)
+
 insert into dermatologist_pharmacy(pharmacy_id, dermatologist_id) values (1,3)
 insert into dermatologist_pharmacy(pharmacy_id, dermatologist_id) values (2,4)
 insert into dermatologist_pharmacy(pharmacy_id, dermatologist_id) values (2,5)

@@ -1,9 +1,12 @@
 package com.tim40.tim40.projections;
 
-public interface DermatologistProjection {
+import java.util.List;
+
+public interface DermatologistDetailsProjection {
+	  String getPharmaciesNames(); 
 	  Long getId();
 	  String getName();
 	  String getSurname();
 	  String getEmail();
-	  String getPharmacyName();
+	
 }

@@ -31,7 +31,8 @@ public class Sale {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-    
+    @Column
+    private String freeForm;
     @OneToOne
     private PharmacyAdministrator pharmacyAdmin;
     
