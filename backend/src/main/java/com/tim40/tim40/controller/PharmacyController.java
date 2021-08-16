@@ -63,5 +63,20 @@ public class PharmacyController {
 
         return pharmacyDTO;
     }
-
+	//ne menjati
+	@GetMapping(value = "/getsubscribersbypharmacyid/{id}",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseStatus(HttpStatus.OK)
+	public List<String> getAllSubscribers(@PathVariable(name="id") String stringId){
+		long id = Long.valueOf(stringId);
+		return this.pharmacyService.getAllSubscribers(id);
+	}
+	
+	//ne menjati
+	@GetMapping(value = "/getpharmacyidbyuser/{id}",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseStatus(HttpStatus.OK)
+	public Long getPharmacyIdbyUserId(@PathVariable(name="id") String stringId) {
+		long id = Long.valueOf(stringId);
+		return this.pharmacyService.getPharmacyIdByUserId(id);
+		
+	}
 }

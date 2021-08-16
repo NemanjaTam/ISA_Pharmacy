@@ -46,7 +46,7 @@ insert into users(dtype, city, number, postalcode, state, street, email, is_firs
 
 
 
-insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Patient', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic21@gmail.com', true, 'Nikola', 'kinzo','+381613238249', 'Antonic', 'PATIENT', 0, null)
+insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Patient', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic21@gmail.com', true, 'Nikola', 'kinzo','+381613238249', 'Antonic', 'PATIENT', 0, null) 
 insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Patient', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic22@gmail.com', true, 'Vuk', 'kinzo','+381613238249', 'Antonic', 'PATIENT', 0, null)
 insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Patient', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic23@gmail.com', true, 'Petar', 'kinzo','+381613238249', 'Antonic', 'PATIENT', 0, null)
 insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Patient', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic24@gmail.com', true, 'Perica', 'kinzo','+381613238249', 'Antonic', 'PATIENT', 0, null)
@@ -66,6 +66,8 @@ insert into users(dtype, city, number, postalcode, state, street, email, is_firs
 insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Patient', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic38@gmail.com', true, 'Izet', 'kinzo','+381613238249', 'Antonic', 'PATIENT', 0, null)
 insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Patient', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic39@gmail.com', true, 'Farok', 'kinzo','+381613238249', 'Antonic', 'PATIENT', 0, null)
 insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Patient', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic40@gmail.com', true, 'Radasin', 'kinzo','+381613238249', 'Antonic', 'PATIENT', 0, null)
+
+insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Patient', 'Novi Sad', '23', 11444,'Srbija', 'Stefana Nemanje', 'sweetbee0071@gmail.com', true, 'Bole', 'boki','+381613238249', 'Pj', 'PATIENT', 0, null)
 
 
 insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('', '', '', 'MedbayTech', 'PRASAK', 'Brufen', 'NA_RECEPT', '', '', 'ANTIPYRETIC')
@@ -535,6 +537,6 @@ insert into consultations (is_finished, is_taken, endtime, starttime, report, pa
 
 
 insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Pharmacy_admin', 'Novi Sad', '23', 21242, 'Srbija', 'Stefana Nemanje1', 'pjevalica@gmail.com', true, 'Bojana', 'bobi','+381613238240', 'Pjevalica', 'PHARMACY_ADMINISTRATOR', null, 1)
-
+insert into pharmacies_subscribers(pharmacy_id,subscribers_id) values(1,41)
 
 insert into absences(is_approved, is_finished, endtime, starttime, user_id) values (true, false, '2021-07-20 00:00:00-08', '2021-07-10 00:00:00-08', 1)
