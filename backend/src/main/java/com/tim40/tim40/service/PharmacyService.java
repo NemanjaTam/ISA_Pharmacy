@@ -16,6 +16,7 @@ import com.tim40.tim40.model.Medication;
 import com.tim40.tim40.model.Patient;
 import com.tim40.tim40.model.Pharmacy;
 import com.tim40.tim40.model.QuantityMedication;
+import com.tim40.tim40.model.User;
 import com.tim40.tim40.repository.PharmacyRepository;
 
 @Service
@@ -54,10 +55,28 @@ public class PharmacyService implements IPharmacyService {
 		}
 		return new ResponseEntity<String>("available", HttpStatus.OK);
 	}
-
+//ne menjati
 	@Override
 	public Pharmacy getById(Long pharmacyID) {
 		return pharmacyRepository.getById(pharmacyID);
+	}
+//ne menjati
+	@Override
+	public List<String> getAllSubscribers(Long pharmacyID) {
+		Pharmacy pharmacy = this.pharmacyRepository.getById(pharmacyID);
+		Set<User>subscribers = pharmacy.getSubscribers();
+		List<String> emails = new ArrayList<String>();
+		for(User sub: subscribers) {
+			System.out.println(sub.getEmail());
+			emails.add(sub.getEmail());
+		}
+		return emails;
+	}
+//ne menjati
+	@Override
+	public Long getPharmacyIdByUserId(Long id) {
+		return this.pharmacyRepository.getPharmacyIdByUserId(id);
+		
 	}
 
 

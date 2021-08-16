@@ -77,6 +77,17 @@ export default {
       minDatePicker_1: minDate,
       message_box: "",
       isActive: true,
+      pharmacy_id: 0,
+      message: {
+        mailFrom: "ursaminor1777@gmail.com",
+        mailTo: [],
+        mailCc: "",
+        mailBcc: "",
+        mailSubject: "Akcija/promocija",
+        mailContent: "",
+        contentType: "",
+        attachments: "",
+      },
     };
   },
   methods: {
@@ -85,7 +96,28 @@ export default {
       this.datepicker_1 = new Date();
       this.datepicker_2 = new Date();
     },
-    submitClick() {
+    getPharmacyIdbyUserId(id) {
+      fetch(`http://localhost:9005/api/pharmacy/getpharmacyidbyuser/${id}`, {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        method: "GET",
+      })
+        .then(function(response) {
+          if (response.ok) {
+            return response.json();
+          } else {
+            return Promise.reject(response);
+          }
+        })
+        .then((data) => (this.pharmacy_id = data))
+        .catch(function(error) {
+          console.warn(error);
+        });
+    },
+    async submitClick() {
+      const pharmacyID = { pharmacyID: this.pharmacy_id };
       const body = {
         adminId: this.userId,
         // pharmacyId: this.Pharmacy,
@@ -94,27 +126,88 @@ export default {
         endTime: this.datepicker_2,
         isActive: this.isActive,
       };
+      const message_info = {
+        mailFrom: "ursaminor1777@gmail.com",
+        mailTo: [],
+        mailCc: "a",
+        mailBcc: "a",
+        mailSubject: "Akcija/promocija",
+        mailContent: "",
+        contentType: "text",
+        attachments: [],
+      };
       if (this.message_box != "") {
+        message_info.mailContent = this.message_box
         const headers = {
           method: "POST",
           "Content-Type": "application/json",
 
           body: JSON.stringify(body),
         };
-        fetch(`http://localhost:9005/api/sales/create/`, {
+        await fetch(`http://localhost:9005/api/sales/create/`, {
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
           },
           method: "POST",
           body: JSON.stringify(body),
-        }).then((response) => response.json());
-      }else{
-        alert("Please insert text into text area")
+        })
+          .then(function(response) {
+            if (response.ok) {
+              return response.json();
+            } else {
+              return Promise.reject(response);
+            }
+          })
+          .catch(function(error) {
+            console.warn(error);
+          });
+
+        await fetch(`http://localhost:9005/api/pharmacy/getsubscribersbypharmacyid/${this.pharmacy_id}`, {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          method: "GET",
+        })
+          .then(function(response) {
+            if (response.ok) {
+              return response.json();
+            } else {
+              return Promise.reject(response);
+            }
+          }).then((data)=>(this.message.mailTo = data,message_info.mailTo = data))
+          .catch(function(error) {
+            console.warn(error);
+          });
+
+        await fetch(`http://localhost:9005/api/email/email_to_subscribers`, {
+          headers: {
+            
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            
+          },
+          body: JSON.stringify(message_info),
+          method: "POST",
+        })
+          .then(function(response) {
+            if (response.ok) {
+              return response.json();
+            } else {
+              return Promise.reject(response);
+            }
+          })
+          .catch(function(error) {
+            console.warn(error);
+          });
+      } else {
+        alert("Please insert text into text area");
       }
     },
   },
-  mounted() {
+  async mounted() {
+    await this.getPharmacyIdbyUserId(this.userId);
     console.log(this.userId);
   },
 };

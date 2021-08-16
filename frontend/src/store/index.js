@@ -4,6 +4,7 @@ import Vuex from "vuex";
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
+ 
   //states (data) can be edided only through mutations
   strict: true,
   // this is like data:
@@ -29,14 +30,14 @@ export const store = new Vuex.Store({
     },
     appointments: [],
     appointmentProcess: null,
-    pharmacy: null,
+    pharmacy: null, //ne menjati ovo se koristi vec!
   },
   //methods that return data (state)
   getters: {
     getUser(state) {
       return state.user;
     },
-    getPharmacy(state) {
+    getPharmacy(state) { //ne menjati ovo se koristi vec!
       return state.pharmacy;
     },
     getFullName(state) {
@@ -89,7 +90,7 @@ export const store = new Vuex.Store({
         state.user.firstTimeLogging = false;
       }
     },
-    updatePharamcy(state, pharmacy) {
+    updatePharamcy(state, pharmacy) { //ne menjati ovo se koristi vec!
       state.pharmacy = pharmacy;
     },
     updateAppointments(state, appointments) {
@@ -131,7 +132,7 @@ export const store = new Vuex.Store({
     addReport(context, report) {
       context.commit("addReport", report);
     },
-    updatePharmacy(context, pharmacy) {
+    updatePharmacy(context, pharmacy) { //ne menjati ovo se koristi vec!
       context.commit("updatePharmacy", pharmacy);
     },
     logout(context) {

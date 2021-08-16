@@ -28,7 +28,7 @@ public class SaleService implements ISalesService{
 	public ResponseEntity<String> createSale(String form,Long id,LocalDate startTime,LocalDate endTime,boolean isActive) {
 		 this.salesRepository.createSale(form, id, startTime, endTime, isActive);
 	
-		return new ResponseEntity<String>(HttpStatus.OK);
+		return new ResponseEntity<String>(HttpStatus.CREATED);
 	
 	}
 
