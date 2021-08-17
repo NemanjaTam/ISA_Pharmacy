@@ -1,10 +1,13 @@
 package com.tim40.tim40.model;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.tim40.tim40.UnixToLocalDateTimeConverter;
 import com.tim40.tim40.model.enums.PurchaseOrderStatus;
 
 import lombok.*;
@@ -32,6 +35,13 @@ public class PurchaseOrder {
 	@Enumerated(EnumType.STRING)
 	private PurchaseOrderStatus purchaseOrderStatus;
 	
-	@Embedded
-	private Period period;
+//	@Embedded
+//	private Period period;
+	@JsonDeserialize(using = UnixToLocalDateTimeConverter.class)
+	@Column(name = "starttime", nullable = true)
+	private LocalDate startTime;
+	
+	@JsonDeserialize(using = UnixToLocalDateTimeConverter.class)
+	@Column(name = "endtime", nullable = true)
+	private LocalDate endTime;
 }

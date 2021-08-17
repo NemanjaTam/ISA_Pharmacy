@@ -79,6 +79,10 @@ public class PharmacyService implements IPharmacyService {
 		
 	}
 
+	public boolean CreatePurchaseOrder(Pharmacy pharmacy) {
+		return false;
+		
+	}
 
 	
 }

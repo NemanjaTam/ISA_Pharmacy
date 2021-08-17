@@ -30,7 +30,7 @@ export const store = new Vuex.Store({
     },
     appointments: [],
     appointmentProcess: null,
-    pharmacy: null, //ne menjati ovo se koristi vec!
+    pharmacy: 0, //ne menjati ovo se koristi vec!
   },
   //methods that return data (state)
   getters: {
@@ -90,7 +90,7 @@ export const store = new Vuex.Store({
         state.user.firstTimeLogging = false;
       }
     },
-    updatePharamcy(state, pharmacy) { //ne menjati ovo se koristi vec!
+    updatePharmacy(state, pharmacy) { //ne menjati ovo se koristi vec!
       state.pharmacy = pharmacy;
     },
     updateAppointments(state, appointments) {
@@ -114,6 +114,9 @@ export const store = new Vuex.Store({
     updateUser(context, user) {
       context.commit("updateUser", user);
     },
+    updatePharmacy(context, pharmacy) { //ne menjati ovo se koristi vec!
+      context.commit("updatePharmacy", pharmacy);
+    },
     updatePassword(context, password) {
       context.commit("updatePassword", password);
     },
@@ -132,9 +135,7 @@ export const store = new Vuex.Store({
     addReport(context, report) {
       context.commit("addReport", report);
     },
-    updatePharmacy(context, pharmacy) { //ne menjati ovo se koristi vec!
-      context.commit("updatePharmacy", pharmacy);
-    },
+
     logout(context) {
       var user = {
         id: null,
@@ -156,6 +157,7 @@ export const store = new Vuex.Store({
         send: [],
       };
       context.commit("updateUser", user);
+      context.commit("updatePharmacy",pharmacy);
     },
   },
 });

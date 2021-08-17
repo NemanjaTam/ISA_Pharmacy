@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tim40.tim40.dto.MedicationQuantityDTO;
 import com.tim40.tim40.dto.PatientAllergedDTO;
 import com.tim40.tim40.dto.PharmacyDTO;
 import com.tim40.tim40.dto.PharmacyProfileDTO;
@@ -79,4 +80,14 @@ public class PharmacyController {
 		return this.pharmacyService.getPharmacyIdByUserId(id);
 		
 	}
+	//ne menjati
+	@PostMapping(value="purchaseorder-create/{id}",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseStatus(HttpStatus.OK)
+	public boolean CreatePurchaseOrder(@RequestBody MedicationQuantityDTO dto,@PathVariable(name="id") String stringId) {
+		long id = Long.valueOf(stringId);
+		Pharmacy pharmacy = this.pharmacyService.getById(id);
+		return false;
+		
+	}
+
 }
