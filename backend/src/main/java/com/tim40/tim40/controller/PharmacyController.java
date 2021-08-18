@@ -15,12 +15,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tim40.tim40.dto.MedicationDTO;
 import com.tim40.tim40.dto.MedicationQuantityDTO;
 import com.tim40.tim40.dto.PatientAllergedDTO;
 import com.tim40.tim40.dto.PharmacyDTO;
 import com.tim40.tim40.dto.PharmacyProfileDTO;
+import com.tim40.tim40.dto.PurchaseOrderDTO;
 import com.tim40.tim40.model.Medication;
 import com.tim40.tim40.model.Pharmacy;
+import com.tim40.tim40.model.QuantityMedication;
 import com.tim40.tim40.service.PharmacyService;
 
 @RestController
@@ -83,10 +86,16 @@ public class PharmacyController {
 	//ne menjati
 	@PostMapping(value="purchaseorder-create/{id}",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.OK)
-	public boolean CreatePurchaseOrder(@RequestBody MedicationQuantityDTO dto,@PathVariable(name="id") String stringId) {
+	public boolean CreatePurchaseOrder(@PathVariable(name="id") String stringId,@RequestBody PurchaseOrderDTO dto) {
 		long id = Long.valueOf(stringId);
 		Pharmacy pharmacy = this.pharmacyService.getById(id);
-		return false;
+		System.out.println(dto.getStartTime());
+		for(MedicationQuantityDTO med: dto.getMedicationDTO()) {
+			System.out.println(med.getName());
+		}
+		System.out.println();
+		
+		return this.pharmacyService.CreatePurchaseOrder(pharmacy,dto);
 		
 	}
 

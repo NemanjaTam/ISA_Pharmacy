@@ -72,19 +72,16 @@
               <div class="bottom_div">
                 <label>start/end date:</label>
                 <b-form-datepicker
-                  class="mb-1 datepicker_b"
+                  class="mb-2 datepicker_b"
                   :min="minDatePicker_1"
                   v-model="datepicker_1"
                   :format="'dd-MM-yyyy'"
-                  placeholder="start"
-                  hover="start date"
                 ></b-form-datepicker>
                 <b-form-datepicker
                   :format="'dd-MM-yyyy'"
                   :min="datepicker_1"
                   class="datepicker_b"
                   v-model="datepicker_2"
-                  placeholder="end"
                 ></b-form-datepicker>
                 <br />
                 <b-button variant="success" @click="sendPurchaseOrder"
@@ -265,7 +262,40 @@ export default {
         alert("Please enter quantity and select medication!");
       }
     },
-    sendPurchaseOrder() {},
+    sendPurchaseOrder() {
+      if(this.medicationOrder.length > 0){
+      const body = {
+        startTime: this.datepicker_1,
+        endTime: this.datepicker_2,
+        medicationDTO: this.medicationOrder,
+
+        adminId: this.userId,
+      };
+      fetch(
+        `http://localhost:9005/api/pharmacy/purchaseorder-create/${this.pharmacy_id}`,
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          method: "POST",
+          body: JSON.stringify(body),
+        }
+      )
+        .then(function(response) {
+          if (response.ok) {
+            alert("Purchase order made")
+            return response.json();
+          } else {
+            return Promise.reject(response);
+          }
+        })
+        .catch(function(error) {
+          console.warn(error);
+        });}else{
+          alert("Please select medication!");
+        }
+    },
   },
   mounted() {
     this.getPharmacyIdbyUserID(this.userId);
@@ -310,7 +340,7 @@ export default {
 .datepicker_b {
   width: 300px;
 }
-.margin_right{
+.margin_right {
   margin-right: 15px;
 }
 </style>

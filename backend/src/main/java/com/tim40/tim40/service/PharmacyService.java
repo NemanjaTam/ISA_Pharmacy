@@ -1,5 +1,7 @@
 package com.tim40.tim40.service;
 
+import java.math.BigInteger;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -9,14 +11,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.tim40.tim40.dto.MedicationQuantityDTO;
 import com.tim40.tim40.dto.PharmacyDTO;
+import com.tim40.tim40.dto.PurchaseOrderDTO;
 import com.tim40.tim40.email.service.MailService;
 import com.tim40.tim40.model.Dermatologist;
 import com.tim40.tim40.model.Medication;
 import com.tim40.tim40.model.Patient;
 import com.tim40.tim40.model.Pharmacy;
+import com.tim40.tim40.model.PurchaseOrder;
 import com.tim40.tim40.model.QuantityMedication;
 import com.tim40.tim40.model.User;
+import com.tim40.tim40.model.enums.PurchaseOrderStatus;
 import com.tim40.tim40.repository.PharmacyRepository;
 
 @Service
@@ -79,8 +85,26 @@ public class PharmacyService implements IPharmacyService {
 		
 	}
 
-	public boolean CreatePurchaseOrder(Pharmacy pharmacy) {
-		return false;
+	public boolean CreatePurchaseOrder(Pharmacy pharmacy, PurchaseOrderDTO dto) {
+		Integer integerId = this.pharmacyRepository.createPurchaseOrder( dto.getEndTime(),  dto.getStartTime(), dto.getAdminId(),"CEKA_PONUDE");
+        System.out.println(integerId);
+        if(integerId > 0) {
+		Integer purchaseOrderId = this.pharmacyRepository.insertPurchaseOrderIntoPharmacy(pharmacy.getId(),integerId.longValue());
+		
+		if(purchaseOrderId >0) {
+			for(MedicationQuantityDTO meds: dto.getMedicationDTO()) {
+				Integer id = this.pharmacyRepository.insertIntoQuantityMedicationPurchaseOrder(integerId.longValue(), meds.getId());
+				this.pharmacyRepository.insertMedicationInPurchaseOrder(purchaseOrderId.longValue(), id.longValue());
+			}
+			
+		}
+		else {return false;}
+		
+		}else {
+			return false;
+		}
+
+		return true;
 		
 	}
 

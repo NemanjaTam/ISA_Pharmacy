@@ -25,7 +25,7 @@ public class PurchaseOrder {
 	private Long id;
 	
 	@OneToMany(fetch = FetchType.LAZY)
-	private final Set<QuantityMedication> quantityMedications = new HashSet<QuantityMedication>();
+	private final Set<QuantityMedicationPurchaseOrder> quantityMedicationsPurchase = new HashSet<QuantityMedicationPurchaseOrder>();
 	
 	@ManyToOne
 	@JoinColumn(name = "pharmacy_administrator_id", nullable = false)
