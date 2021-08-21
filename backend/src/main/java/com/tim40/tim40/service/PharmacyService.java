@@ -91,7 +91,7 @@ public class PharmacyService implements IPharmacyService {
         if(integerId > 0) {
 		Integer purchaseOrderId = this.pharmacyRepository.insertPurchaseOrderIntoPharmacy(pharmacy.getId(),integerId.longValue());
 		
-		if(purchaseOrderId >0) {
+		if(purchaseOrderId > 0) {
 			for(MedicationQuantityDTO meds: dto.getMedicationDTO()) {
 				Integer id = this.pharmacyRepository.insertIntoQuantityMedicationPurchaseOrder(integerId.longValue(), meds.getId());
 				this.pharmacyRepository.insertMedicationInPurchaseOrder(purchaseOrderId.longValue(), id.longValue());

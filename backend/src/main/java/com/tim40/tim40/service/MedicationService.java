@@ -11,9 +11,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.tim40.tim40.dto.MedicationDTO;
+import com.tim40.tim40.dto.MedicationQuantityDTO;
 import com.tim40.tim40.model.Medication;
 import com.tim40.tim40.model.Pharmacy;
 import com.tim40.tim40.model.QuantityMedication;
+import com.tim40.tim40.model.enums.MedicationForm;
 import com.tim40.tim40.repository.MedicationRepository;
 import com.tim40.tim40.repository.PharmacyRepository;
 
@@ -29,18 +31,28 @@ public class MedicationService implements IMedicationService{
 		this.pharmacyRepository = pharmacyRepository;
 	}
 
-	public MedicationDTO createMedication (MedicationDTO medicationDTO) {
-		Pharmacy pharmacy = pharmacyRepository.findById(medicationDTO.getPharmacyID()).get();
+//	public MedicationDTO createMedication (MedicationDTO medicationDTO) {
+//		Pharmacy pharmacy = pharmacyRepository.findById(medicationDTO.getPharmacyID()).get();
+//		Set<Medication> replacementMedications = new HashSet<Medication>();
+//		for(Long med : medicationDTO.getReplacementMedicationsIDs()) {
+//			replacementMedications.add(this.medicationRepository.findById(med).get());
+//		}
+//		Medication medication = new Medication(medicationDTO.getName(), medicationDTO.getCode(), medicationDTO.getTypeOfMedication(),
+//				medicationDTO.getStructure(), medicationDTO.getContraindications(), medicationDTO.getRecommendedIntake(), 
+//				pharmacy, replacementMedications);
+//		Medication createdMedication = medicationRepository.save(medication);
+//		return new MedicationDTO(createdMedication);
+//	}
+	public Medication createMedicationWithoutReplacement (MedicationQuantityDTO medicationDTO) {
+		
 		Set<Medication> replacementMedications = new HashSet<Medication>();
-		for(Long med : medicationDTO.getReplacementMedicationsIDs()) {
-			replacementMedications.add(this.medicationRepository.findById(med).get());
-		}
-		Medication medication = new Medication(medicationDTO.getName(), medicationDTO.getCode(), medicationDTO.getTypeOfMedication(),
-				medicationDTO.getStructure(), medicationDTO.getContraindications(), medicationDTO.getRecommendedIntake(), 
-				pharmacy, replacementMedications);
+
+		Medication medication = new Medication(medicationDTO.getName(),medicationDTO.getCode(),medicationDTO.getTypeOfMedication(),medicationDTO.getStructure(),medicationDTO.getContraindications(),medicationDTO.getRecommendedIntake(),medicationDTO.getDescription(),medicationDTO.getManufacturer()
+				,medicationDTO.getMedicationForm(),medicationDTO.getPrescriptionRegime());
 		Medication createdMedication = medicationRepository.save(medication);
-		return new MedicationDTO(createdMedication);
+		return createdMedication;
 	}
+
 
 	@Override
 	public ResponseEntity<List<Medication>> getReplacementMedication(Long pharmacyId, Long medicationId) {

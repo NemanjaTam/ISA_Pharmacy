@@ -17,7 +17,11 @@ public interface PharmacyRepository extends JpaRepository<Pharmacy, Long> {
   @Query(value="select p.id from pharmacies as p,users as u where u.id=:id AND p.id = u.pharmacy_id",nativeQuery = true)
   public Long getPharmacyIdByUserId(@Param("id") Long id);
   
-  
+
+////  @Query(value="",nativeQuery=true)
+//  public Integer createNewQuantityMedication();
+////  @Query(value="",nativeQuery=true)
+//  public Integer insertNewMedicationIntoPharmacy();
   
 // METODE ZA PURCHASE ORDER - NE MENJATI ***
   @Query(value="INSERT INTO purchase_order_list(endtime,purchase_status,starttime,pharmacy_administrator_id)"

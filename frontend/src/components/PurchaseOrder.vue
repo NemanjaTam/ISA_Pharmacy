@@ -3,7 +3,7 @@
     <div>
       <b-card no-body>
         <b-tabs card>
-          <b-tab title="Order existing medicine" active>
+          <b-tab title="Order existing medication" active>
             <div class="container_div">
               <div class="scrollable_div">
                 <label>Please select medication:</label>
@@ -92,7 +92,140 @@
               <!-- </div> -->
             </div>
           </b-tab>
-          <b-tab title="Add new medicine" active> </b-tab>
+          <b-tab
+            title="Order new medication"
+            active
+           
+          >
+            <div role="group">
+              <label for="input-live">Name:</label>
+              <b-form-input
+                id="input-live"
+                v-model="newMedication.name"
+                aria-describedby="input-live-help input-live-feedback"
+                :state="nameState"
+                placeholder="Enter your name"
+                trim
+              ></b-form-input>
+
+              <label for="input-live">Quantity:</label>
+              <b-form-input
+                id="input-live-quantity"
+                v-model="newMedication.quantity"
+                type="number"
+                :min="1"
+                aria-describedby="input-live-help input-live-quantity2"
+                :state="quantityState"
+                placeholder="Enter your name"
+                trim
+              ></b-form-input>
+
+              <label> Medication Form:</label>
+              <b-form-select
+                id="inline-form-custom-select-pref"
+                v-model="newMedication.medicationForm"
+                aria-describedby="input-live-help input-live-feedback"
+                :state="medicationFormState"
+                class="mb-2 mr-sm-2 mb-sm-0"
+                :options="[
+                  'PRASAK',
+                  'KAPSULA',
+                  'TABLETA',
+                  'MAST',
+                  'GEL',
+                  'RASTVOR',
+                  'SIRUP',
+                ]"
+                :value="null"
+              ></b-form-select>
+
+              <label> Type of medication:</label>
+              <b-form-select
+                id="inline-form-custom-select-pref"
+                v-model="newMedication.typeOfMedication"
+                :state="typeOfMedicationState"
+                class="mb-2 mr-sm-2 mb-sm-0"
+                :options="[
+                  'ANTIPYRETIC',
+                  'ANALGESIC',
+                  'ANTIBIOTIC',
+                  'ANTISEPTIC',
+                  'ANTIDEPRESSANT',
+                  'ANTIALERGIC',
+                  'BARBITURATE',
+                  'HORMONE',
+                  'CONTRACEPTIVE',
+                  'PROBIOTIC',
+                  'TRANQUILIZER',
+                ]"
+                :value="null"
+              ></b-form-select>
+              <label> Presciption regime:</label>
+              <b-form-select
+                id="inline-form-custom-select-pref"
+                v-model="newMedication.prescriptionRegime"
+                :state="prescriptionRegimeState"
+                class="mb-2 mr-sm-2 mb-sm-0"
+                :options="['NA_RECEPT', 'BEZ_RECEPTA']"
+                :value="null"
+              ></b-form-select>
+              <label for="input-live">Manufacturer:</label>
+              <b-form-input
+                id="input-live"
+                v-model="newMedication.manufacturer"
+                aria-describedby="input-live-help input-live-feedback"
+                placeholder="Enter manufacturer"
+                :state="manufacturerState"
+                trim
+              ></b-form-input>
+              <label for="input-live">Decription:</label>
+              <b-form-input
+                id="input-live"
+                v-model="newMedication.description"
+                aria-describedby="input-live-help input-live-feedback"
+                placeholder="Enter description"
+                :state="descriptionState"
+                trim
+              ></b-form-input>
+
+              <label>start/end date:</label>
+              <b-form-datepicker
+                class="mb-2 datepicker_b"
+                :min="minDatePicker_1"
+                v-model="datepicker_1"
+                :format="'dd-MM-yyyy'"
+              ></b-form-datepicker>
+              <b-form-datepicker
+                :format="'dd-MM-yyyy'"
+                :min="datepicker_1"
+                class="datepicker_b"
+                v-model="datepicker_2"
+              ></b-form-datepicker>
+              <br />
+              <b-button variant="success" @click="addNewMedication"
+                >Add medicine</b-button
+              >
+              <b-button variant="warning" @click="clearField"
+                >Clear fields</b-button
+              >
+              <b-button variant="danger" @click="newMedicationOrder">Reset </b-button>
+              <b-button variant="success" @click="sendPurchaseOrderAndCreateMedication"
+                >Submit</b-button
+              >
+              <br />
+              <label>Meds: Quantity:</label>
+              <b-list-group
+                v-for="(listItem, index) in newMedicationOrder"
+                v-bind:key="index"
+                class="medication_list_scrollable"
+              >
+                <b-list-group-item>
+                  {{ listItem.name }}
+                  {{ listItem.quantity }}</b-list-group-item
+                >
+              </b-list-group>
+            </div>
+          </b-tab>
         </b-tabs>
       </b-card>
     </div>
@@ -123,6 +256,27 @@ export default {
         return e.name.split("\n");
       });
     },
+    nameState() {
+      return this.newMedication.name.length > 2 ? true : false;
+    },
+    medicationFormState() {
+      return this.newMedication.medicationForm.length > 1 ? true : false;
+    },
+    typeOfMedicationState() {
+      return this.newMedication.typeOfMedication.length > 1 ? true : false;
+    },
+    manufacturerState() {
+      return this.newMedication.manufacturer.length > 3 ? true : false;
+    },
+    descriptionState() {
+      return this.newMedication.description.length > 3 ? true : false;
+    },
+    quantityState() {
+      this.newMedication.quantity > 0 ? true : false;
+    },
+    prescriptionRegimeState() {
+      return this.newMedication.prescriptionRegime.length > 1 ? true : false;
+    },
   },
   data() {
     const now = new Date();
@@ -146,6 +300,7 @@ export default {
           quantity: 0,
         },
       ],
+      newMedicationOrder:[],
       medicationOrder: [
         {
           id: 0,
@@ -163,6 +318,21 @@ export default {
           quantity: 0,
         },
       ],
+      newMedication: {
+        id: 0,
+        name: "",
+        description: "",
+        manufacturer: "",
+        medicationForm: "",
+        prescriptionRegime: "",
+        code: "",
+        typeOfMedication: "",
+        structure: "",
+        contraindications: "",
+        recommendedIntake: "",
+        ratings: [],
+        quantity: 1,
+      },
       pharmacy_id: 0,
       currentMedication: "",
       currentQuantity: 0,
@@ -219,10 +389,32 @@ export default {
       this.datepicker_1 = new Date();
       this.datepicker_2 = new Date();
     },
+    resetFormNewMedication(){
+      this.newMedicationOrder = []
+    },
+    clearField() {
+      this.newMedication.id = 0;
+      this.newMedication.name = "";
+      this.newMedication.description = "";
+      this.newMedication.manufacturer = "";
+      this.newMedication.medicationForm = "";
+      this.newMedication.prescriptionRegime = "";
+      this.newMedication.code = "";
+      this.newMedication.typeOfMedication = "";
+      this.newMedication.structure = "";
+      this.newMedication.contraindications = "";
+      this.newMedication.recommendedIntake = "";
+      this.newMedication.ratings = [];
+      this.newMedication.quantity = 1;
+    },
     addMedicine(name, id) {
       this.currentMedication = name;
       this.currentQuantity = 0;
       this.currentId = id;
+    },
+    resetMedicationOrder() {
+      this.medicationOrder = [];
+      this.currentMedication = "";
     },
     filterValue(id) {
       return (item = this.medications.find((item) => item.id === id));
@@ -262,39 +454,122 @@ export default {
         alert("Please enter quantity and select medication!");
       }
     },
-    sendPurchaseOrder() {
-      if(this.medicationOrder.length > 0){
-      const body = {
-        startTime: this.datepicker_1,
-        endTime: this.datepicker_2,
-        medicationDTO: this.medicationOrder,
 
-        adminId: this.userId,
-      };
-      fetch(
-        `http://localhost:9005/api/pharmacy/purchaseorder-create/${this.pharmacy_id}`,
-        {
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          method: "POST",
-          body: JSON.stringify(body),
-        }
-      )
+    addNewMedication() {
+      if (
+        this.nameState &&
+        this.medicationFormState &&
+        this.typeOfMedicationState &&
+        this.descriptionState &&
+        this.manufacturerState &&
+        this.prescriptionRegimeState
+      ) {
+        var medication = {
+          id: this.newMedication.id,
+          name: this.newMedication.name,
+          description: this.newMedication.description,
+          manufacturer: this.newMedication.manufacturer,
+          medicationForm: this.newMedication.medicationForm,
+          prescriptionRegime: this.newMedication.prescriptionRegime,
+          code: this.newMedication.code,
+          typeOfMedication: this.newMedication.typeOfMedication,
+          structure: this.newMedication.structure,
+          contraindications: this.newMedication.contraindications,
+          recommendedIntake: this.newMedication.recommendedIntake,
+          ratings: this.newMedication.ratings,
+          quantity: this.newMedication.quantity,
+        };
+        this.newMedicationOrder.push(medication);
+      } else {
+        alert("Please enter medication data!");
+      }
+    },
+    sendPurchaseOrderAndCreateMedication() {
+      var vm = this;
+
+      fetch(`http://localhost:9005/api/medication/addMultiple`, {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+        body: JSON.stringify(vm.medicationOrder),
+      })
         .then(function(response) {
           if (response.ok) {
-            alert("Purchase order made")
             return response.json();
           } else {
             return Promise.reject(response);
           }
         })
+        .then(function(data) {
+                  const body = {
+        startTime: vm.datepicker_1,
+        endTime: vm.datepicker_2,
+        medicationDTO: data,
+
+        adminId: vm.userId,
+      };
+          return fetch(
+            `http://localhost:9005/api/pharmacy/purchaseorder-create/${vm.pharmacy_id}`,
+            {
+              headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+              },
+              method: "POST",
+              body: JSON.stringify(body),
+            }
+          );
+        })
+        .then(function(response) {
+          if (response.ok) {
+            alert("Purchase order made");
+            return response.json();
+          } else {
+            return Promise.reject(response);
+          }
+        })
+
         .catch(function(error) {
           console.warn(error);
-        });}else{
-          alert("Please select medication!");
-        }
+        });
+    },
+
+    sendPurchaseOrder() {
+      if (this.medicationOrder.length > 0) {
+        const body = {
+          startTime: this.datepicker_1,
+          endTime: this.datepicker_2,
+          medicationDTO: this.medicationOrder,
+
+          adminId: this.userId,
+        };
+        fetch(
+          `http://localhost:9005/api/pharmacy/purchaseorder-create/${this.pharmacy_id}`,
+          {
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            method: "POST",
+            body: JSON.stringify(body),
+          }
+        )
+          .then(function(response) {
+            if (response.ok) {
+              alert("Purchase order made");
+              return response.json();
+            } else {
+              return Promise.reject(response);
+            }
+          })
+          .catch(function(error) {
+            console.warn(error);
+          });
+      } else {
+        alert("Please select medication!");
+      }
     },
   },
   mounted() {

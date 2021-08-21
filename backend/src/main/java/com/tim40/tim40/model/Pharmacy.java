@@ -59,8 +59,8 @@ public class Pharmacy {
 //    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pharmacy")
 //    private final Set<Appointment> appointments = new HashSet<Appointment>();
 
-//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pharmacy")
-//    private final Set<Medication> medications = new HashSet<Medication>();
+//    @OneToMany(fetch = FetchType.LAZY)
+//    private final Set<QuantityMedication> medications = new HashSet<QuantityMedication>();
 
 //    @OneToMany(fetch = FetchType.LAZY,mappedBy="pharmacy")
 //	  private final Set<PharmacyAdministrator> pharmacyAdministrators = new HashSet<PharmacyAdministrator>();
