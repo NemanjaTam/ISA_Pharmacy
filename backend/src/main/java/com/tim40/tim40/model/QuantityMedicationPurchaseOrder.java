@@ -1,17 +1,14 @@
 package com.tim40.tim40.model;
-
 import javax.persistence.*;
 import lombok.*;
-
-
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="medication_quantity")
+@Table(name="medication_quantity_of_purchase_order")
 @Getter
 @Setter
-public class QuantityMedication {
-
+//ova klasa se koristi za purchase order iskljucivo jer ne sme da se stavlja u quantity medication lek koji je porucen ali nije NABAVLJEN!	
+public class QuantityMedicationPurchaseOrder {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -22,7 +19,5 @@ public class QuantityMedication {
 	@OneToOne(cascade = CascadeType.ALL)
 	private Medication medication;
 	
-	@ManyToOne
-    @JoinColumn(name = "pharmacy_id", nullable = false)
-	private Pharmacy pharmacy;
+
 }

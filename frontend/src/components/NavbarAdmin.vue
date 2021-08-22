@@ -28,7 +28,9 @@
 
         <b-nav-item-dropdown text="More" left>
           <b-dropdown-item class="dropdaun" href="#"
-            >PURCHASE ORDER</b-dropdown-item
+            ><router-link to="/pharmacyAdminPage/purchaseorder" class="routerlink"
+              >PURCHASE ORDER</router-link>
+            </b-dropdown-item
           >
           <b-dropdown-item class="dropdaun" href="#"
             ><router-link to="/pharmacyAdminPage/action" class="routerlink"
