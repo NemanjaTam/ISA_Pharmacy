@@ -83,7 +83,7 @@ public class Pharmacy {
     @ManyToMany(fetch = FetchType.LAZY,mappedBy="pharmacy",cascade = CascadeType.ALL)
    	private final Set<QuantityMedication> medicationQuantity = new HashSet<QuantityMedication>();
     
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY,mappedBy="pharmacy",cascade = CascadeType.ALL)
    	private final Set<PurchaseOrder> purchaseOrders = new HashSet<PurchaseOrder>(); 
     
 //    @OneToMany(fetch = FetchType.LAZY,mappedBy="pharmacy")

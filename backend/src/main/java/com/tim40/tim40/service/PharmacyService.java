@@ -35,6 +35,7 @@ public class PharmacyService implements IPharmacyService {
 	
 	private PharmacyRepository pharmacyRepository;
 	private MedicationRepository medicationRepository;
+//	private PurchaseOrderRepository purchaseOrderRepository;
 
 	@Autowired
 	public PharmacyService(PharmacyRepository pharmacyRepository,MedicationRepository medicationRepository) {
@@ -93,28 +94,40 @@ public class PharmacyService implements IPharmacyService {
 	}
 
 	public boolean CreatePurchaseOrder(Pharmacy pharmacy, PurchaseOrderDTO dto) {
-		Integer integerId = this.pharmacyRepository.createPurchaseOrder( dto.getEndTime(),  dto.getStartTime(), dto.getAdminId(),"CEKA_PONUDE");
-
-        System.out.println(integerId);
-        if(integerId > 0) {
-		Integer purchaseOrderId = this.pharmacyRepository.insertPurchaseOrderIntoPharmacy(pharmacy.getId(),integerId.longValue());
-		
-		if(purchaseOrderId > 0) {
-			
+	Integer integerId = this.pharmacyRepository.createPurchaseOrder( dto.getEndTime(),  dto.getStartTime(), dto.getAdminId(),"CEKA_PONUDE",pharmacy.getId());
+	
+//		if(integerId > 0) {
+		 PurchaseOrder purchaseOrder = new PurchaseOrder();
+	
             List<Medication> medication = pharmacy.getAllMedication();
-			
-			
-			for(MedicationQuantityDTO meds: dto.getMedicationDTO()) {	
-
-				Medication newMedication = new Medication();
-				
-				
-//				meds.getName(),meds.getCode(),meds.getTypeOfMedication(),meds.getStructure(),
-//				meds.getContraindications(),meds.getRecommendedIntake(),
-//				,meds.getManufacturer()
-//				,meds.getMedicationForm(),meds.getPrescriptionRegime()
-//				
-				
+			for(MedicationQuantityDTO meds: dto.getMedicationDTO()) {	//brufen
+				for (Medication medication2 : medication) {
+					if(medication2.getId() == meds.getId()){
+							System.out.println(medication2.getId());
+							System.out.println(medication2.getName());
+							System.out.println("*************\n");
+							System.out.println(meds.getId());
+							System.out.println(meds.getId());
+							
+							Integer id = this.pharmacyRepository.insertIntoQuantityMedicationPurchaseOrder(meds.getQuantity().intValue(), meds.getId());
+							this.pharmacyRepository.insertMedicationInPurchaseOrder(integerId.longValue(), id.longValue());
+							System.out.println("usao u drugi if!");}			
+			}//ovo se svakako izvrsi 
+		}
+//	}else{
+//		return false;
+//		}
+		return true;
+		
+	}
+	
+	
+	public boolean CreatePurchaseOrderForNewMedication(Pharmacy pharmacy, PurchaseOrderDTO dto) {
+		Integer integerId = this.pharmacyRepository.createPurchaseOrder( dto.getEndTime(),  dto.getStartTime(), dto.getAdminId(),"CEKA_PONUDE",pharmacy.getId());
+		if(integerId > 0) {
+            List<Medication> medication = pharmacy.getAllMedication();
+			for(MedicationQuantityDTO meds: dto.getMedicationDTO()) {
+				Medication newMedication = new Medication();	
 				newMedication.setName(meds.getName());
 				newMedication.setCode(meds.getCode());
 				newMedication.setTypeOfMedication(meds.getTypeOfMedication());
@@ -125,32 +138,20 @@ public class PharmacyService implements IPharmacyService {
 				newMedication.setManufacturer(meds.getManufacturer());
 				newMedication.setMedicationForm(meds.getMedicationForm());
 				newMedication.setPrescriptionRegime(meds.getPrescriptionRegime());
-				Medication created = this.medicationRepository.save(newMedication);
-				
-				if(!medication.contains(created)) {
-					QuantityMedication quantity = new QuantityMedication();
-					quantity.setQuantity(0);
-					quantity.setMedication(created);
-					quantity.setPharmacy(pharmacy);
-					pharmacy.getMedicationQuantity().add(quantity);
-					
-					System.out.println(created.getId());
-					Integer id = this.pharmacyRepository.insertIntoQuantityMedicationPurchaseOrder(integerId.longValue(), created.getId());
-					this.pharmacyRepository.insertMedicationInPurchaseOrder(purchaseOrderId.longValue(), id.longValue());
-				}else {
-					Integer id = this.pharmacyRepository.insertIntoQuantityMedicationPurchaseOrder(integerId.longValue(), meds.getId());
-					this.pharmacyRepository.insertMedicationInPurchaseOrder(purchaseOrderId.longValue(), id.longValue());
-				}
-			
-			}
-			
-		}
-		else {return false;}
-		
-		}else {
-			return false;
-		}
 
+				Medication created = this.medicationRepository.save(newMedication);
+				QuantityMedication quantity = new QuantityMedication();
+				quantity.setQuantity(0);
+				quantity.setMedication(created);
+				quantity.setPharmacy(pharmacy);
+				pharmacy.getMedicationQuantity().add(quantity);
+				
+	
+				Integer id = this.pharmacyRepository.insertIntoQuantityMedicationPurchaseOrder(meds.getQuantity().intValue(), created.getId());
+				this.pharmacyRepository.insertMedicationInPurchaseOrder(integerId.longValue(), id.longValue());//brufen
+}
+					
+			}else {return false;}
 		return true;
 		
 	}

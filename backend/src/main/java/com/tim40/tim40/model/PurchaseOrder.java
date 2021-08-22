@@ -24,7 +24,7 @@ public class PurchaseOrder {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@OneToMany(fetch = FetchType.LAZY)
+	@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	private final Set<QuantityMedicationPurchaseOrder> quantityMedicationsPurchase = new HashSet<QuantityMedicationPurchaseOrder>();
 	
 	@ManyToOne
@@ -44,4 +44,7 @@ public class PurchaseOrder {
 	@JsonDeserialize(using = UnixToLocalDateTimeConverter.class)
 	@Column(name = "endtime", nullable = true)
 	private LocalDate endTime;
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "pharmacy_id", nullable = false)
+	private Pharmacy pharmacy;
 }

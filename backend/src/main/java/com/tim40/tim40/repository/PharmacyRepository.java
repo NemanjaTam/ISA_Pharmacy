@@ -24,17 +24,17 @@ public interface PharmacyRepository extends JpaRepository<Pharmacy, Long> {
 //  public Integer insertNewMedicationIntoPharmacy();
   
 // METODE ZA PURCHASE ORDER - NE MENJATI ***
-  @Query(value="INSERT INTO purchase_order_list(endtime,purchase_status,starttime,pharmacy_administrator_id)"
-  		+ " values(:endTime,:status,:startTime,:adminId) RETURNING id",nativeQuery= true)
-  public Integer createPurchaseOrder(@Param("endTime") LocalDate endTime,@Param("startTime") LocalDate startTime,@Param("adminId") Long adminId,@Param("status")String status);
+  @Query(value="INSERT INTO purchase_order_list(endtime,purchase_status,starttime,pharmacy_administrator_id,pharmacy_id)"
+  		+ " values(:endTime,:status,:startTime,:adminId,:pharmacy_id) RETURNING id",nativeQuery= true)
+  public Integer createPurchaseOrder(@Param("endTime") LocalDate endTime,@Param("startTime") LocalDate startTime,@Param("adminId") Long adminId,@Param("status")String status,@Param("pharmacy_id") Long pharmacy_id);
   
-  @Query( value = "insert into pharmacies_purchase_orders(pharmacy_id,purchase_orders_id)"
-  		+ "values(:pharmaycId,:purchaseOrderId) returning purchase_orders_id",nativeQuery = true)
-  public Integer insertPurchaseOrderIntoPharmacy(@Param("pharmaycId") Long pharmaycId,@Param("purchaseOrderId") Long purchaseOrderId);
+//  @Query( value = "insert into pharmacies_purchase_orders(pharmacy_id,purchase_orders_id)"
+//  		+ "values(:pharmaycId,:purchaseOrderId) returning purchase_orders_id",nativeQuery = true)
+//  public Integer insertPurchaseOrderIntoPharmacy(@Param("pharmaycId") Long pharmaycId,@Param("purchaseOrderId") Long purchaseOrderId);
 
   @Query(value="insert into medication_quantity_of_purchase_order(quantity,medication_id) "
-  		+ "values(:id,:medId) RETURNING id",nativeQuery= true)
-  public Integer insertIntoQuantityMedicationPurchaseOrder(@Param("id") Long id,@Param("medId") Long medId); //ovde postavljam medicatione
+  		+ "values(:quantity,:medId) RETURNING id",nativeQuery= true)
+  public Integer insertIntoQuantityMedicationPurchaseOrder(@Param("quantity") Integer quantity,@Param("medId") Long medId); //ovde postavljam medicatione
   @Modifying
   @Transactional
   @Query(value="insert into purchase_order_list_quantity_medications_purchase(purchase_order_id,quantity_medications_purchase_id)"

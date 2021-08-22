@@ -16,6 +16,8 @@ public class QuantityMedicationPurchaseOrder {
 	@Column(nullable = false)
 	private int quantity;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private Medication medication;
+	
+
 }

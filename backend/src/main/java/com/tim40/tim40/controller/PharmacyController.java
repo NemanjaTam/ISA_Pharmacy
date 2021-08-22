@@ -88,14 +88,17 @@ public class PharmacyController {
 	@ResponseStatus(HttpStatus.OK)
 	public boolean CreatePurchaseOrder(@PathVariable(name="id") String stringId,@RequestBody PurchaseOrderDTO dto) {
 		long id = Long.valueOf(stringId);
-		Pharmacy pharmacy = this.pharmacyService.getById(id);
-		System.out.println(dto.getStartTime());
-		for(MedicationQuantityDTO med: dto.getMedicationDTO()) {
-			System.out.println(med.getName());
-		}
-		System.out.println();
-		
+		Pharmacy pharmacy = this.pharmacyService.getById(id);	
 		return this.pharmacyService.CreatePurchaseOrder(pharmacy,dto);
+		
+	}
+	
+	@PostMapping(value="purchaseorder-create-new-medication/{id}",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseStatus(HttpStatus.OK)
+	public boolean CreatePurchaseOrderForNewMedication(@PathVariable(name="id") String stringId,@RequestBody PurchaseOrderDTO dto) {
+		long id = Long.valueOf(stringId);
+		Pharmacy pharmacy = this.pharmacyService.getById(id);	
+		return this.pharmacyService.CreatePurchaseOrderForNewMedication(pharmacy,dto);
 		
 	}
 

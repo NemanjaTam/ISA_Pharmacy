@@ -495,7 +495,7 @@ export default {
       };
 
             fetch(
-            `http://localhost:9005/api/pharmacy/purchaseorder-create/${vm.pharmacy_id}`,
+            `http://localhost:9005/api/pharmacy/purchaseorder-create-new-medication/${vm.pharmacy_id}`,
             {
               headers: {
                 Accept: "application/json",
@@ -603,6 +603,7 @@ export default {
   mounted() {
     this.getPharmacyIdbyUserID(this.userId);
     this.resetForm();
+    
   },
 };
 </script>

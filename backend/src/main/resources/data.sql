@@ -89,7 +89,7 @@ insert into medications (code, contraindications, description, manufacturer, med
 insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('', '', '', 'MedbayTech', 'PRASAK', 'Losartan', 'NA_RECEPT', '', '', 'ANTIPYRETIC')
 insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('', '', '', 'MedbayTech', 'PRASAK', 'Albuterol', 'NA_RECEPT', '', '', 'ANTIPYRETIC')
 insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('', '', '', 'MedbayTech', 'PRASAK', 'Sirup', 'NA_RECEPT', '', '', 'ANTIPYRETIC')
-insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('', '', '', 'MedbayTech', 'PRASAK', 'Panklav', 'NA_RECEPT', '', '', 'ANTIPYRETIC')
+insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('', '', '', 'MedbayTech', 'PRASAK', 'Panklav2', 'NA_RECEPT', '', '', 'ANTIPYRETIC')
 
 
 insert into medication_quantity (quantity, medication_id,pharmacy_id) values (10, 1,1)
