@@ -181,7 +181,7 @@ export default {
         "Content-Type": "application/json",
       };
       headers["usertype"] = type;
-      if (this.userType == "PATIENT") {
+      if (this.userType == "PHARMACY_ADMINISTRATOR") {
         fetch(
           `http://localhost:9005/api/dermatologist/getalldermatologist/${id}`,
           {
@@ -190,7 +190,7 @@ export default {
         )
           .then((response) => response.json())
           .then((data) => (this.dermatologists = data));
-      } else if (this.userType == "PHARMACY_ADMINISTRATOR") {
+      } else if (this.userType == "PATIENT") {
         fetch(
           `http://localhost:9005/api/dermatologist/getdermatologistsandpharmacynames/`,
           {

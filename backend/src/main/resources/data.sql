@@ -431,3 +431,11 @@ insert into users(dtype, city, number, postalcode, state, street, email, is_firs
 insert into pharmacies_subscribers(pharmacy_id,subscribers_id) values(1,41)
 
 insert into absences(is_approved, is_finished, endtime, starttime, user_id) values (true, false, '2021-07-20 00:00:00-08', '2021-07-10 00:00:00-08', 1)
+
+insert into purchase_order_list(endtime,purchase_status,starttime,pharmacy_administrator_id,pharmacy_id) values('2021-08-08','CEKA_PONUDE','2021-01-01',1,1)
+insert into medication_quantity_of_purchase_order(quantity,medication_id) values (10,1)
+insert into purchase_order_list_quantity_medications_purchase(purchase_order_id,quantity_medications_purchase_id) values(1,1)
+
+insert into providers(name,info) values('Dobavljac 1','Najbolji dobavljac na svetu')
+
+insert into offers(is_accepted,price,purchase_order_id, provider_id) values (false,200,1,1)

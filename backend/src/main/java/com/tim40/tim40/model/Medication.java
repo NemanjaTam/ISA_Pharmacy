@@ -44,6 +44,7 @@ public class Medication {
     @Column(nullable = false)
     private String name;
 
+
     @Column(nullable = false)
     private String description;
 
@@ -83,7 +84,7 @@ public class Medication {
     
     @OneToMany(fetch = FetchType.LAZY,mappedBy="medication")
     private Set<MedicationRating> ratings;
-
+    
     @JsonBackReference
     @ManyToMany
 //    @JoinTable(

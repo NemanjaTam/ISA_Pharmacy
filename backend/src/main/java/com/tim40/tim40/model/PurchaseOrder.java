@@ -2,6 +2,7 @@ package com.tim40.tim40.model;
 
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -47,4 +48,7 @@ public class PurchaseOrder {
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "pharmacy_id", nullable = false)
 	private Pharmacy pharmacy;
+	
+	@OneToMany(fetch = FetchType.LAZY,mappedBy="purchaseOrder",cascade = CascadeType.ALL)
+	private List<Offer> offers;
 }

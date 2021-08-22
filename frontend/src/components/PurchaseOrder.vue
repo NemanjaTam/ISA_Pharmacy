@@ -226,6 +226,9 @@
               </b-list-group>
             </div>
           </b-tab>
+          <b-tab title="Order existing medication">
+           
+          </b-tab>
         </b-tabs>
       </b-card>
     </div>
@@ -235,6 +238,7 @@
 <script>
 export default {
   name: "PurchaseOrder",
+
   computed: {
     User() {
       this.$store.getters.getUser;
@@ -603,7 +607,6 @@ export default {
   mounted() {
     this.getPharmacyIdbyUserID(this.userId);
     this.resetForm();
-    
   },
 };
 </script>

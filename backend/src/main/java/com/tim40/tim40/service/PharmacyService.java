@@ -155,6 +155,12 @@ public class PharmacyService implements IPharmacyService {
 		return true;
 		
 	}
+	
+	public Set<PurchaseOrder> getAllPurchaseOrders(Long id){
+		Pharmacy pharmacy = this.pharmacyRepository.getById(id);
+		return pharmacy.getPurchaseOrders();
+	}
+	
 
 	
 }
