@@ -1,8 +1,11 @@
 package com.tim40.tim40.model;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.ManyToMany;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -77,7 +80,7 @@ public class Pharmacy {
 //    @OneToMany(fetch = FetchType.LAZY,mappedBy="pharmacy")
 //    private Set<PharmacyRating> ratings = new HashSet<PharmacyRating>();
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY,mappedBy="pharmacy",cascade = CascadeType.ALL)
    	private final Set<QuantityMedication> medicationQuantity = new HashSet<QuantityMedication>();
     
     @OneToMany(fetch = FetchType.LAZY)
@@ -96,7 +99,14 @@ public class Pharmacy {
         this.address = address;
         this.avgRating = 0.0;
     }
-    
+    //ne menjati
+    public List<Medication> getAllMedication() {
+    	List<Medication> medication = new ArrayList<Medication>();
+    	for (QuantityMedication quantityMedication : medicationQuantity) {
+			medication.add(quantityMedication.getMedication());
+		}
+		return medication;
+    }
     
 
 }

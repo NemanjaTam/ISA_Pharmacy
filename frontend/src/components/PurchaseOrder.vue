@@ -208,7 +208,7 @@
               <b-button variant="warning" @click="clearField"
                 >Clear fields</b-button
               >
-              <b-button variant="danger" @click="newMedicationOrder">Reset </b-button>
+              <b-button variant="danger" @click="resetFormNewMedication">Reset </b-button>
               <b-button variant="success" @click="sendPurchaseOrderAndCreateMedication"
                 >Submit</b-button
               >
@@ -486,31 +486,15 @@ export default {
     },
     sendPurchaseOrderAndCreateMedication() {
       var vm = this;
-
-      fetch(`http://localhost:9005/api/medication/addMultiple`, {
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        method: "POST",
-        body: JSON.stringify(vm.medicationOrder),
-      })
-        .then(function(response) {
-          if (response.ok) {
-            return response.json();
-          } else {
-            return Promise.reject(response);
-          }
-        })
-        .then(function(data) {
                   const body = {
         startTime: vm.datepicker_1,
         endTime: vm.datepicker_2,
-        medicationDTO: data,
+        medicationDTO: this.newMedicationOrder,
 
         adminId: vm.userId,
       };
-          return fetch(
+
+            fetch(
             `http://localhost:9005/api/pharmacy/purchaseorder-create/${vm.pharmacy_id}`,
             {
               headers: {
@@ -520,8 +504,7 @@ export default {
               method: "POST",
               body: JSON.stringify(body),
             }
-          );
-        })
+          )
         .then(function(response) {
           if (response.ok) {
             alert("Purchase order made");
@@ -531,9 +514,54 @@ export default {
           }
         })
 
-        .catch(function(error) {
-          console.warn(error);
-        });
+
+      // fetch(`http://localhost:9005/api/medication/addMultiple`, {
+      //   headers: {
+      //     Accept: "application/json",
+      //     "Content-Type": "application/json",
+      //   },
+      //   method: "POST",
+      //   body: JSON.stringify(vm.newMedicationOrder),
+      // })
+      //   .then(function(response) {
+      //     if (response.ok) {
+      //       return response.json();
+      //     } else {
+      //       return Promise.reject(response);
+      //     }
+      //   })
+      //   .then(function(data) {
+      //             const body = {
+      //   startTime: vm.datepicker_1,
+      //   endTime: vm.datepicker_2,
+      //   medicationDTO: data,
+
+      //   adminId: vm.userId,
+      // };
+      //     return fetch(
+      //       `http://localhost:9005/api/pharmacy/purchaseorder-create/${vm.pharmacy_id}`,
+      //       {
+      //         headers: {
+      //           Accept: "application/json",
+      //           "Content-Type": "application/json",
+      //         },
+      //         method: "POST",
+      //         body: JSON.stringify(body),
+      //       }
+      //     );
+      //   })
+      //   .then(function(response) {
+      //     if (response.ok) {
+      //       alert("Purchase order made");
+      //       return response.json();
+      //     } else {
+      //       return Promise.reject(response);
+      //     }
+      //   })
+
+      //   .catch(function(error) {
+      //     console.warn(error);
+      //   });
     },
 
     sendPurchaseOrder() {
