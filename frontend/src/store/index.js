@@ -2,7 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 
 Vue.use(Vuex);
-
+import createPersistedState from "vuex-persistedstate";
 export const store = new Vuex.Store({
  
   //states (data) can be edided only through mutations
@@ -160,4 +160,5 @@ export const store = new Vuex.Store({
       context.commit("updatePharmacy",pharmacy);
     },
   },
+  plugins: [createPersistedState()],
 });
