@@ -5,7 +5,6 @@ Vue.use(Vuex);
 import createPersistedState from "vuex-persistedstate";
 
 export const store = new Vuex.Store({
- 
   //states (data) can be edided only through mutations
   strict: true,
   // this is like data:
@@ -31,37 +30,39 @@ export const store = new Vuex.Store({
     },
     appointments: [],
     appointmentProcess: null,
-    pharmacy: 0, //ne menjati ovo se koristi vec! 
-    //ne menjaj ovo 
-    purchaseOrders :[{
-      id:0,
-      quantityMedicationPurchase:[],
-      adminPharmacy:{},
-      purchaseOrderStatus:"",
-      startTime:"",
-      endTime:"",
-      pharmacy:{},
-      offers:[],
-
-    }],
+    pharmacy: 0, //ne menjati ovo se koristi vec!
     //ne menjaj ovo
-    selectedOffer:{}
+    purchaseOrders: [
+      {
+        id: 0,
+        quantityMedicationPurchase: [],
+        adminPharmacy: {},
+        purchaseOrderStatus: "",
+        startTime: "",
+        endTime: "",
+        pharmacy: {},
+        offers: [],
+      },
+    ],
+    //ne menjaj ovo
+    selectedOffer: {},
   },
   //methods that return data (state)
   getters: {
     getUser(state) {
       return state.user;
     },
-    getPurchaseOrders(state){
+    getPurchaseOrders(state) {
       return state.purchaseOrders;
     },
-    getPharmacy(state) { //ne menjati ovo se koristi vec!
+    getPharmacy(state) {
+      //ne menjati ovo se koristi vec!
       return state.pharmacy;
     },
     getFullName(state) {
       return state.user.name + " " + state.user.surname;
     },
-    getSelectedOfer(state){
+    getSelectedOfer(state) {
       return state.selectedOffer;
     },
     isUserLogged(state) {
@@ -99,16 +100,19 @@ export const store = new Vuex.Store({
     getId(state) {
       return state.user.id;
     },
+    getOffer(state){
+      return state.purchaseOrders.offers;
+    }
   },
   //methods for changing date (state)
   mutations: {
     updateUser(state, user) {
       state.user = user;
     },
-    updateSelectedOffer(state,selectedOffer){
+    updateSelectedOffer(state, selectedOffer) {
       state.selectedOffer = selectedOffer;
     },
-    updateSelectedOffer(state,selectedOffer){
+    updateSelectedOffer(state, selectedOffer) {
       state.selectedOffer = selectedOffer;
     },
     updatePassword(state, password) {
@@ -117,10 +121,11 @@ export const store = new Vuex.Store({
         state.user.firstTimeLogging = false;
       }
     },
-    updatePurchaseOrders(state,purchaseOrders){
+    updatePurchaseOrders(state, purchaseOrders) {
       state.purchaseOrders = purchaseOrders;
     },
-    updatePharmacy(state, pharmacy) { //ne menjati ovo se koristi vec!
+    updatePharmacy(state, pharmacy) {
+      //ne menjati ovo se koristi vec!
       state.pharmacy = pharmacy;
     },
     updateAppointments(state, appointments) {
@@ -138,20 +143,35 @@ export const store = new Vuex.Store({
     updateUserType(state, report) {
       state.user.userType = report;
     },
+    updatePurchaseOrderElement(state, payload) {
+      const index = state.getPurchaseOrders.findIndex((item) => item.id === payload.id);
+      if (index !== -1) {
+        Vue.set(state.getPurchaseOrders, index, payload);
+      }
+    },
+    updatePurchaseOrderOffer(state,payload){
+     state.purchaseOrders.forEach(element => {
+      const index = element.offers.findIndex((item) => item.id === payload.id);
+      if (index !== -1) {
+        Vue.set(element.offers, index, payload);
+      }
+     });
+    }
   },
   //always on components dispatch action which commit some mutations. Never commit mutations from component because of async
   actions: {
     updateUser(context, user) {
       context.commit("updateUser", user);
     },
-    updatePharmacy(context, pharmacy) { //ne menjati ovo se koristi vec!
+    updatePharmacy(context, pharmacy) {
+      //ne menjati ovo se koristi vec!
       context.commit("updatePharmacy", pharmacy);
     },
-    updateSelectedOffer(context,selectedOffer){
-      context.commit("updateSelectedOffer",selectedOffer);
+    updateSelectedOffer(context, selectedOffer) {
+      context.commit("updateSelectedOffer", selectedOffer);
     },
-    updatePurchaseOrders(context,purchaseOrders){
-      context.commit("updatePurchaseOrders",purchaseOrders)
+    updatePurchaseOrders(context, purchaseOrders) {
+      context.commit("updatePurchaseOrders", purchaseOrders);
     },
     updatePassword(context, password) {
       context.commit("updatePassword", password);
@@ -170,6 +190,12 @@ export const store = new Vuex.Store({
     },
     addReport(context, report) {
       context.commit("addReport", report);
+    },
+    updatePurchaseOrderElement(context,elemet){
+      context.commit("updatePurchaseOrderElement",elemet);
+    },
+    updatePurchaseOrderOffer(context,element){
+      context.commit("updatePurchaseOrderOffer",element);
     },
 
     logout(context) {
@@ -195,8 +221,8 @@ export const store = new Vuex.Store({
       var pharmacy = 0;
       var selectedOffer = {};
       context.commit("updateUser", user);
-      context.commit("updatePharmacy",pharmacy);
-      context.commit("updateSelectedOffer",selectedOffer);
+      context.commit("updatePharmacy", pharmacy);
+      context.commit("updateSelectedOffer", selectedOffer);
     },
   },
   plugins: [createPersistedState()],

@@ -10,12 +10,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tim40.tim40.dto.AcceptOfferDTO;
 import com.tim40.tim40.dto.MedicationDTO;
 import com.tim40.tim40.dto.MedicationQuantityDTO;
 import com.tim40.tim40.dto.PatientAllergedDTO;
@@ -23,6 +25,7 @@ import com.tim40.tim40.dto.PharmacyDTO;
 import com.tim40.tim40.dto.PharmacyProfileDTO;
 import com.tim40.tim40.dto.PurchaseOrderDTO;
 import com.tim40.tim40.model.Medication;
+import com.tim40.tim40.model.Offer;
 import com.tim40.tim40.model.Pharmacy;
 import com.tim40.tim40.model.PurchaseOrder;
 import com.tim40.tim40.model.QuantityMedication;
@@ -110,6 +113,13 @@ public class PharmacyController {
 		return purchaseOrders;
 	}
 	
-	
+	@PostMapping(value = "/accept-offer",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseStatus(HttpStatus.OK)
+	public List<Offer> acceptAndDeclineOffers(@RequestBody AcceptOfferDTO acceptOffer){
+		List<Offer> offers = this.pharmacyService.acceptOffer(acceptOffer);
+		
+		
+		return offers;
+	}	
 
 }

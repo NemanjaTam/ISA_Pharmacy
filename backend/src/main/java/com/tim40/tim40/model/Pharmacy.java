@@ -108,5 +108,16 @@ public class Pharmacy {
 		return medication;
     }
     
+    public PurchaseOrder update(PurchaseOrder po) {
+    	for (PurchaseOrder purchaseOrder : purchaseOrders) {
+			if(po.getId().equals(purchaseOrder.getId())) {
+			    purchaseOrder.setOffers(po.getOffers());
+			    purchaseOrder.setPurchaseOrderStatus(po.getPurchaseOrderStatus());
+			}
+		}
+		return po;
+    	
+    }
+    
 
 }

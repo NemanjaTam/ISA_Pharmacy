@@ -1,6 +1,8 @@
 package com.tim40.tim40.model;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -37,8 +39,17 @@ public class Provider {
 	@Column(nullable = false)
 	private String info;
 	
+	@Column(name = "email", nullable = false)
+	private String email;
+	
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY,mappedBy="provider")
 	private List<Offer> offers; 
+	
+	@OneToMany(fetch = FetchType.LAZY,mappedBy="userReceiver")
+	private Set<Email> inbox = new HashSet<Email>();
+	
+	@OneToMany(fetch = FetchType.LAZY,mappedBy="userSender")
+	private Set<Email> send = new HashSet<Email>();
 
 }
