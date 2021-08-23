@@ -31,18 +31,38 @@ export const store = new Vuex.Store({
     },
     appointments: [],
     appointmentProcess: null,
-    pharmacy: 0, //ne menjati ovo se koristi vec!
+    pharmacy: 0, //ne menjati ovo se koristi vec! 
+    //ne menjaj ovo 
+    purchaseOrders :[{
+      id:0,
+      quantityMedicationPurchase:[],
+      adminPharmacy:{},
+      purchaseOrderStatus:"",
+      startTime:"",
+      endTime:"",
+      pharmacy:{},
+      offers:[],
+
+    }],
+    //ne menjaj ovo
+    selectedOffer:{}
   },
   //methods that return data (state)
   getters: {
     getUser(state) {
       return state.user;
     },
+    getPurchaseOrders(state){
+      return state.purchaseOrders;
+    },
     getPharmacy(state) { //ne menjati ovo se koristi vec!
       return state.pharmacy;
     },
     getFullName(state) {
       return state.user.name + " " + state.user.surname;
+    },
+    getSelectedOfer(state){
+      return state.selectedOffer;
     },
     isUserLogged(state) {
       if (state.user.id != null) {
@@ -85,11 +105,20 @@ export const store = new Vuex.Store({
     updateUser(state, user) {
       state.user = user;
     },
+    updateSelectedOffer(state,selectedOffer){
+      state.selectedOffer = selectedOffer;
+    },
+    updateSelectedOffer(state,selectedOffer){
+      state.selectedOffer = selectedOffer;
+    },
     updatePassword(state, password) {
       state.user.password = password;
       if (state.user.firstTimeLogging) {
         state.user.firstTimeLogging = false;
       }
+    },
+    updatePurchaseOrders(state,purchaseOrders){
+      state.purchaseOrders = purchaseOrders;
     },
     updatePharmacy(state, pharmacy) { //ne menjati ovo se koristi vec!
       state.pharmacy = pharmacy;
@@ -117,6 +146,12 @@ export const store = new Vuex.Store({
     },
     updatePharmacy(context, pharmacy) { //ne menjati ovo se koristi vec!
       context.commit("updatePharmacy", pharmacy);
+    },
+    updateSelectedOffer(context,selectedOffer){
+      context.commit("updateSelectedOffer",selectedOffer);
+    },
+    updatePurchaseOrders(context,purchaseOrders){
+      context.commit("updatePurchaseOrders",purchaseOrders)
     },
     updatePassword(context, password) {
       context.commit("updatePassword", password);
@@ -157,8 +192,11 @@ export const store = new Vuex.Store({
         inbox: [],
         send: [],
       };
+      var pharmacy = 0;
+      var selectedOffer = {};
       context.commit("updateUser", user);
       context.commit("updatePharmacy",pharmacy);
+      context.commit("updateSelectedOffer",selectedOffer);
     },
   },
   plugins: [createPersistedState()],

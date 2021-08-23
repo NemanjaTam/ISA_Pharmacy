@@ -104,9 +104,10 @@ public class PharmacyController {
 		
 	}
 	@GetMapping(value = "/get-purchase-order/{id}",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Set<PurchaseOrder>> getAllPurchaseOrders(@PathVariable("id") Long id){
+	@ResponseStatus(HttpStatus.OK)
+	public Set<PurchaseOrder> getAllPurchaseOrders(@PathVariable("id") Long id){
 	 Set<PurchaseOrder> purchaseOrders = this.pharmacyService.getAllPurchaseOrders(id);
-		return new ResponseEntity<Set<PurchaseOrder>>(purchaseOrders, HttpStatus.OK);
+		return purchaseOrders;
 	}
 	
 	

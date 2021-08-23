@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import com.tim40.tim40.dto.MedicationQuantityDTO;
 import com.tim40.tim40.dto.PharmacyDTO;
 import com.tim40.tim40.dto.PurchaseOrderDTO;
+import com.tim40.tim40.dto.PurchaseOrderDetailedDTO;
 import com.tim40.tim40.email.service.MailService;
 import com.tim40.tim40.model.Dermatologist;
 import com.tim40.tim40.model.Medication;
@@ -157,9 +158,14 @@ public class PharmacyService implements IPharmacyService {
 	}
 	
 	public Set<PurchaseOrder> getAllPurchaseOrders(Long id){
+		List<PurchaseOrderDetailedDTO> purchaseOrdersDTO = new ArrayList<PurchaseOrderDetailedDTO>();
 		Pharmacy pharmacy = this.pharmacyRepository.getById(id);
+//		for (PurchaseOrderDetailedDTO purchaseOrderDetailedDTO : purchaseOrdersDTO) {
+//			
+//		}
 		return pharmacy.getPurchaseOrders();
 	}
+	
 	
 
 	

@@ -12,6 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,15 +26,19 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Provider {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	@Column(nullable=false)
 	private String name;
 	@Column(nullable = false)
 	private String info;
-	@OneToMany(fetch = FetchType.LAZY,mappedBy="provider",cascade = CascadeType.ALL)
+	
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY,mappedBy="provider")
 	private List<Offer> offers; 
 
 }

@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -35,10 +37,11 @@ public class Offer {
 	@Column()
 	private boolean isAccepted;
 	
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "purchase_order_id", nullable = true)
 	private PurchaseOrder purchaseOrder;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "provider_id", nullable = true)
 	private Provider provider;
