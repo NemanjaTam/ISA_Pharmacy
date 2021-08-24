@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tim40.tim40.dto.MedicationDTO;
 import com.tim40.tim40.dto.PatientAllergedDTO;
+import com.tim40.tim40.dto.SearchMedicationDTO;
 import com.tim40.tim40.model.Medication;
 import com.tim40.tim40.service.MedicationService;
 
@@ -48,5 +49,11 @@ public class MedicationController {
 	{
 		List<MedicationDTO> medications = medicationService.getAllMedications();
 		return new ResponseEntity<List<MedicationDTO>> (medications, HttpStatus.OK);
+	}
+	
+	@PostMapping(value = "/search-medications", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<MedicationDTO>> searchMedications(@RequestBody SearchMedicationDTO searchMedicationDTO) 
+	{
+		return medicationService.searchMedications(searchMedicationDTO);
 	}
 }

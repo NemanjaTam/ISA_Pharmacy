@@ -11,7 +11,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.tim40.tim40.dto.MedicationDTO;
+import com.tim40.tim40.dto.SearchMedicationDTO;
 import com.tim40.tim40.model.Medication;
+import com.tim40.tim40.model.MedicationRating;
 import com.tim40.tim40.model.Pharmacy;
 import com.tim40.tim40.model.QuantityMedication;
 import com.tim40.tim40.repository.MedicationRepository;
@@ -64,5 +66,35 @@ public class MedicationService implements IMedicationService{
 			medicationDTOs.add(new MedicationDTO(m));
 		}
 		return medicationDTOs; 
+	}
+
+	@Override
+	public ResponseEntity<List<MedicationDTO>> searchMedications(SearchMedicationDTO searchMedicationDTO) {
+		List<Medication> medications = medicationRepository.findAll();
+		List<Medication> results = new ArrayList<>();
+		
+		for(Medication m : medications) {
+			boolean isNameMatching = searchMedicationDTO.getName() == null || m.getName().contains(searchMedicationDTO.getName());
+			int sumOfRatings = 0;
+			
+			for(MedicationRating rating : m.getRatings()) {
+				sumOfRatings += rating.getRating();
+			}
+			
+			double avgRating = sumOfRatings/m.getRatings().size();
+			boolean isAvgRatingMatching = searchMedicationDTO.getAvgRate() < avgRating;
+			boolean isTypeMatching = searchMedicationDTO.getTypeOfMedication() == null || searchMedicationDTO.getTypeOfMedication() == m.getTypeOfMedication();
+			
+			if(isNameMatching && isAvgRatingMatching && isTypeMatching) {
+				results.add(m);
+			}
+			
+		}
+		List<MedicationDTO> resultsDTOs = new ArrayList<MedicationDTO>();
+		for(Medication m : results) {
+			resultsDTOs.add(new MedicationDTO(m));
+		}
+		
+		return new ResponseEntity<List<MedicationDTO>>(resultsDTOs, HttpStatus.OK);
 	}
 }
