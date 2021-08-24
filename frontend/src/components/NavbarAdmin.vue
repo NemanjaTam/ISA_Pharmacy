@@ -19,7 +19,7 @@
             ></b-dropdown-item
           >
           <b-dropdown-item class="dropdaun" href="#"
-            >Pharmacists</b-dropdown-item
+            ><router-link to="/pharmacyAdminPage/medication" class="routerlink">Medication</router-link></b-dropdown-item
           >
           <b-dropdown-item class="dropdaun" href="#"
             >Pharmacists</b-dropdown-item

@@ -5,6 +5,8 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,6 +14,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.tim40.tim40.model.enums.OfferStatus;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -32,13 +37,15 @@ public class Offer {
 	@Column(nullable=false)
 	private Integer price;
 	
-	@Column()
-	private boolean isAccepted;
+	@Column(name = "status", nullable = false)
+	@Enumerated(EnumType.STRING)
+	private OfferStatus status;
 	
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "purchase_order_id", nullable = true)
 	private PurchaseOrder purchaseOrder;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "provider_id", nullable = true)
 	private Provider provider;

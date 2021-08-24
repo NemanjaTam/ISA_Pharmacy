@@ -4,6 +4,8 @@ import java.math.BigInteger;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -13,20 +15,27 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.tim40.tim40.dto.AcceptOfferDTO;
 import com.tim40.tim40.dto.MedicationQuantityDTO;
 import com.tim40.tim40.dto.PharmacyDTO;
 import com.tim40.tim40.dto.PurchaseOrderDTO;
+import com.tim40.tim40.dto.PurchaseOrderDetailedDTO;
 import com.tim40.tim40.email.service.MailService;
 import com.tim40.tim40.model.Dermatologist;
 import com.tim40.tim40.model.Medication;
+import com.tim40.tim40.model.Offer;
 import com.tim40.tim40.model.Patient;
 import com.tim40.tim40.model.Pharmacy;
 import com.tim40.tim40.model.PurchaseOrder;
 import com.tim40.tim40.model.QuantityMedication;
+import com.tim40.tim40.model.Reservation;
 import com.tim40.tim40.model.User;
+import com.tim40.tim40.model.enums.OfferStatus;
 import com.tim40.tim40.model.enums.PurchaseOrderStatus;
 import com.tim40.tim40.repository.MedicationRepository;
 import com.tim40.tim40.repository.PharmacyRepository;
+import com.tim40.tim40.repository.QuantityMedicationRepository;
+import com.tim40.tim40.repository.ReservationRepository;
 
 
 
@@ -35,12 +44,15 @@ public class PharmacyService implements IPharmacyService {
 	
 	private PharmacyRepository pharmacyRepository;
 	private MedicationRepository medicationRepository;
-//	private PurchaseOrderRepository purchaseOrderRepository;
+	private QuantityMedicationRepository quantityRepository;
+	private ReservationRepository reservationRepository;
 
 	@Autowired
-	public PharmacyService(PharmacyRepository pharmacyRepository,MedicationRepository medicationRepository) {
+	public PharmacyService(PharmacyRepository pharmacyRepository,MedicationRepository medicationRepository,QuantityMedicationRepository quantityRepository,ReservationRepository reservationRepository) {
 		this.pharmacyRepository = pharmacyRepository;
 		this.medicationRepository = medicationRepository;
+		this.quantityRepository = quantityRepository;
+		this.reservationRepository = reservationRepository;
 	}
 	
 	public PharmacyDTO createPharmacy (PharmacyDTO pharmacyDTO) {
@@ -157,9 +169,71 @@ public class PharmacyService implements IPharmacyService {
 	}
 	
 	public Set<PurchaseOrder> getAllPurchaseOrders(Long id){
+		Set<PurchaseOrder> purchaseOrdersDTO = new HashSet<PurchaseOrder>();
 		Pharmacy pharmacy = this.pharmacyRepository.getById(id);
-		return pharmacy.getPurchaseOrders();
+		for (PurchaseOrder purchaseOrder : pharmacy.getPurchaseOrders()) {
+			if(purchaseOrder.getPurchaseOrderStatus().equals(PurchaseOrderStatus.CEKA_PONUDE)) {
+				purchaseOrdersDTO.add(purchaseOrder);
+			}
+		}
+		
+		return purchaseOrdersDTO;
 	}
+	
+	
+	public List<Offer> acceptOffer(AcceptOfferDTO dto){
+		Pharmacy pharmacy = this.pharmacyRepository.getById(dto.getPharmacyId());
+		List<Offer> offers = new ArrayList<Offer>();
+		PurchaseOrder purchaseOrder = new PurchaseOrder();
+		for (PurchaseOrder purchaseOrders : pharmacy.getPurchaseOrders()) {
+			if(purchaseOrders.getId().equals(dto.getPurchaseOrderId())) {
+				 purchaseOrder.setAdminPharmacy(purchaseOrders.getAdminPharmacy());
+				 purchaseOrder.setEndTime(purchaseOrders.getEndTime());
+				 purchaseOrder.setStartTime(purchaseOrders.getStartTime());
+				 purchaseOrder.setId(purchaseOrders.getId());
+				 purchaseOrder.setPurchaseOrderStatus(PurchaseOrderStatus.OBRADJENA);
+				 purchaseOrder.setOffers(purchaseOrders.getOffers());
+				 purchaseOrder.setPharmacy(pharmacy);
+				 purchaseOrder.setPurchaseOrderStatus(purchaseOrders.getPurchaseOrderStatus());
+			     offers = purchaseOrders.getOffers();
+				
+				}
+			}	
+		for (Offer offer : offers) {
+			System.out.print(dto.getOfferId()+ " " +" offer id");
+			System.out.print(offer.getId() + " stanje ");
+			if(offer.getId().equals(dto.getOfferId())) {
+				
+				offer.setStatus(OfferStatus.PRIHVACENA);
+			}else {
+				offer.setStatus(OfferStatus.ODBIJENA);
+			}
+		}
+		purchaseOrder.setOffers(offers);
+		for (PurchaseOrder po :pharmacy.getPurchaseOrders()) {
+			po.setOffers(purchaseOrder.getOffers());
+			po.setPurchaseOrderStatus(purchaseOrder.getPurchaseOrderStatus());
+			
+		}
+		this.pharmacyRepository.save(pharmacy);
+		
+		return offers;
+	}
+	
+	
+	public boolean deleteMedication(Long id,Long medicationId) {
+		Pharmacy pharmacy = pharmacyRepository.findById(id).get();
+		List<Reservation> reservations = this.reservationRepository.findAll();
+		for (Reservation reservation : reservations) {
+			if(reservation.getMedication().getId().equals(medicationId) && reservation.isDone()) {
+			return false;
+			}
+		}
+		this.quantityRepository.deleteById(medicationId, pharmacy.getId());		
+		return true;
+	}
+
+	
 	
 
 	

@@ -1,12 +1,19 @@
 package com.tim40.tim40.controller;
 
 import java.util.List;
+
 import java.util.Set;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,18 +23,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tim40.tim40.dto.AcceptOfferDTO;
 import com.tim40.tim40.dto.MedicationDTO;
 import com.tim40.tim40.dto.MedicationQuantityDTO;
 import com.tim40.tim40.dto.PatientAllergedDTO;
 import com.tim40.tim40.dto.PharmacyDTO;
 import com.tim40.tim40.dto.PharmacyProfileDTO;
 import com.tim40.tim40.dto.PurchaseOrderDTO;
+import com.tim40.tim40.dto.RejectedAcceptedDTO;
 import com.tim40.tim40.model.Medication;
+import com.tim40.tim40.model.Offer;
 import com.tim40.tim40.model.Pharmacy;
 import com.tim40.tim40.model.PurchaseOrder;
 import com.tim40.tim40.model.QuantityMedication;
 import com.tim40.tim40.service.PharmacyService;
-
+@EnableTransactionManagement
 @RestController
 @RequestMapping(value = "api/pharmacy")
 public class PharmacyController {
@@ -104,11 +114,30 @@ public class PharmacyController {
 		
 	}
 	@GetMapping(value = "/get-purchase-order/{id}",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Set<PurchaseOrder>> getAllPurchaseOrders(@PathVariable("id") Long id){
+	@ResponseStatus(HttpStatus.OK)
+	public Set<PurchaseOrder> getAllPurchaseOrders(@PathVariable("id") Long id){
 	 Set<PurchaseOrder> purchaseOrders = this.pharmacyService.getAllPurchaseOrders(id);
-		return new ResponseEntity<Set<PurchaseOrder>>(purchaseOrders, HttpStatus.OK);
+		return purchaseOrders;
 	}
 	
+	@PostMapping(value = "/accept-offer",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseStatus(HttpStatus.OK)
+	@Transactional(readOnly = false)
+	 //ovde je transakcija jer sta ako se desi da se ne apdejtuje purchase order status?! ->nekonzistentno
+	public List<Offer> acceptAndDeclineOffers(@RequestBody AcceptOfferDTO acceptOffer){
+		List<Offer> offers = this.pharmacyService.acceptOffer(acceptOffer);
+		return offers;
+	}
 	
+//	@DeleteMapping(value="/delete-medication/{id}",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(method = RequestMethod.POST, path = "/delete-medication/{id}")
+	@ResponseStatus(HttpStatus.OK)
+	@Transactional(readOnly = false)
+	public boolean deleteMedication(@RequestBody Long medicationId,@PathVariable("id") Long id){
+		 System.out.println(id + " " + "PHARMACY ID");
+		Pharmacy pharmacy = this.pharmacyService.getById(id);
+		boolean success = this.pharmacyService.deleteMedication(id,medicationId);
+		return success;
+	}
 
 }

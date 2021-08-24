@@ -227,7 +227,7 @@
             </div>
           </b-tab>
           <b-tab title="Order existing medication">
-           
+           <PurchaseOrderList/>
           </b-tab>
         </b-tabs>
       </b-card>
@@ -235,10 +235,14 @@
   </div>
 </template>
 
+
 <script>
+import PurchaseOrderList from "../components/PurchaseOrderList.vue";
 export default {
   name: "PurchaseOrder",
-
+  components: {
+    PurchaseOrderList,
+  },
   computed: {
     User() {
       this.$store.getters.getUser;

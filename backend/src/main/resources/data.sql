@@ -342,6 +342,7 @@ insert into reservations (is_done, serialnumber, endtime, starttime, medication_
 insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, 'SN1315', '2021-06-30 00:00:00-08', '2021-06-01 00:00:00-08', 2,22,1)
 insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, 'SN1245', '2021-06-09 00:00:00-08', '2021-06-03 00:00:00-08', 3,23,1)
 insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, 'SN1465', '2021-06-05 00:00:00-08', '2021-06-03 00:00:00-08', 4,24,1)
+insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, 'SN1465', '2021-06-05 00:00:00-08', '2021-06-03 00:00:00-08', 1,24,1)
 
 --insert into reservations (is_done, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, '2021-07-03 00:00:00-08', '2021-07-21 00:00:00-08', 5,25,2)
 --insert into reservations (is_done, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, '2021-07-03 00:00:00-08', '2021-07-21 00:00:00-08', 6,26,2)
@@ -428,14 +429,30 @@ insert into consultations (is_finished, is_taken, endtime, starttime, report, pa
 
 
 insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Pharmacy_admin', 'Novi Sad', '23', 21242, 'Srbija', 'Stefana Nemanje1', 'pjevalica@gmail.com', true, 'Bojana', 'bobi','+381613238240', 'Pjevalica', 'PHARMACY_ADMINISTRATOR', null, 1)
+insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Pharmacy_admin', 'Novi Sad', '23', 21245, 'Srbija', 'Stefana Nemanje1', 'sara@gmail.com', true, 'Sara', 'admin','+381613238249', 'Jovic', 'PHARMACY_ADMINISTRATOR', null, 1)
+insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Pharmacy_admin', 'Novi Sad', '23', 21249, 'Srbija', 'Stefana Nemanje1', 'jovan@gmail.com', true, 'Jovan', 'admin','+381613238243', 'Jovic', 'PHARMACY_ADMINISTRATOR', null, 1)
+
 insert into pharmacies_subscribers(pharmacy_id,subscribers_id) values(1,41)
 
 insert into absences(is_approved, is_finished, endtime, starttime, user_id) values (true, false, '2021-07-20 00:00:00-08', '2021-07-10 00:00:00-08', 1)
 
-insert into purchase_order_list(endtime,purchase_status,starttime,pharmacy_administrator_id,pharmacy_id) values('2021-08-08','CEKA_PONUDE','2021-01-01',1,1)
+insert into purchase_order_list(endtime,purchase_status,starttime,pharmacy_administrator_id,pharmacy_id) values('2021-08-08','CEKA_PONUDE','2021-01-01',42,1)
 insert into medication_quantity_of_purchase_order(quantity,medication_id) values (10,1)
 insert into purchase_order_list_quantity_medications_purchase(purchase_order_id,quantity_medications_purchase_id) values(1,1)
 
-insert into providers(name,info) values('Dobavljac 1','Najbolji dobavljac na svetu')
+insert into purchase_order_list(endtime,purchase_status,starttime,pharmacy_administrator_id,pharmacy_id) values('2021-08-08','CEKA_PONUDE','2021-01-01',43,1)
+insert into medication_quantity_of_purchase_order(quantity,medication_id) values (10,2)
+insert into purchase_order_list_quantity_medications_purchase(purchase_order_id,quantity_medications_purchase_id) values(2,2)
 
-insert into offers(is_accepted,price,purchase_order_id, provider_id) values (false,200,1,1)
+insert into purchase_order_list(endtime,purchase_status,starttime,pharmacy_administrator_id,pharmacy_id) values('2021-08-08','CEKA_PONUDE','2021-01-01',44,1)
+insert into medication_quantity_of_purchase_order(quantity,medication_id) values (10,3)
+insert into purchase_order_list_quantity_medications_purchase(purchase_order_id,quantity_medications_purchase_id) values(3,3)
+
+
+insert into providers(name,email,info) values('Dobavljac 1','boyanasixxhalliwell@gmail.com','Najbolji dobavljac na svetu')
+insert into providers(name,email,info) values('Dobavljac 2','','Ekstra cene pun kvalitet')
+insert into providers(name,email,info) values('Dobavljac 3','','Lek za stek')
+
+insert into offers(status,price,purchase_order_id, provider_id) values ('CEKA',200,1,1)
+insert into offers(status,price,purchase_order_id,provider_id) values ('CEKA',150,1,2)
+insert into offers(status,price,purchase_order_id,provider_id) values ('CEKA',150,1,3)
