@@ -34,4 +34,16 @@ public class PatientController {
 	{
 		return patientService.isAlergedOnMedication(patientAllergedDTO.getPatientId(), patientAllergedDTO.getMedicationId());
 	}
+	
+	@PostMapping(value = "/subscribe-to-pharmacy/{patientId}/{pharmacyId}")
+	public ResponseEntity<Boolean> subscribeToPharmacy(@PathVariable("patientId") Long patientId, @PathVariable("pharmacyId") Long pharmacyId) 
+	{
+		return patientService.subscribeToPharmacy(patientId, pharmacyId);
+	}
+	
+	@PostMapping(value = "/unsubscribe-to-pharmacy/{patientId}/{pharmacyId}")
+	public ResponseEntity<Boolean> unsubscribeToPharmacy(@PathVariable("patientId") Long patientId, @PathVariable("pharmacyId") Long pharmacyId) 
+	{
+		return patientService.unsubscribeToPharmacy(patientId, pharmacyId);
+	}
 }

@@ -59,4 +59,13 @@ public class Patient extends User {
         inverseJoinColumns = @JoinColumn(name = "medication_id")
     )
 	private Set<Medication> allergedOnMedications = new HashSet<Medication>();
+	
+	@ManyToMany
+    @JoinTable
+    (
+        name = "patient_subscribed_on_promotions",
+        joinColumns = @JoinColumn(name = "patient_id"),
+        inverseJoinColumns = @JoinColumn(name = "pharmacy_id")
+    )
+	private Set<Pharmacy> subscribedToPharmacies = new HashSet<Pharmacy>();
 }
