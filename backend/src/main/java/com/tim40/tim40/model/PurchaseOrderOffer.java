@@ -1,5 +1,7 @@
 package com.tim40.tim40.model;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -34,5 +36,6 @@ public class PurchaseOrderOffer {
 	
 	private String status;
 	private int offer;
+	private Date deliveryDeadline;
 	
 }

@@ -13,8 +13,10 @@ import org.springframework.stereotype.Service;
 import com.tim40.tim40.dto.OfferDTO;
 import com.tim40.tim40.dto.OfferFilterDTO;
 import com.tim40.tim40.dto.PurchaseOrderOfferDTO;
+import com.tim40.tim40.model.Pharmacy;
 import com.tim40.tim40.model.PurchaseOrder;
 import com.tim40.tim40.model.PurchaseOrderOffer;
+import com.tim40.tim40.model.QuantityMedication;
 import com.tim40.tim40.model.Supplier;
 import com.tim40.tim40.repository.PurchaseOrderOfferRepository;
 import com.tim40.tim40.repository.PurchaseOrderRepository;
@@ -39,12 +41,33 @@ public class SupplierService implements ISupplierService {
 		PurchaseOrderOffer purchaseOrderOffer = new PurchaseOrderOffer();
 		purchaseOrderOffer.setStatus("WAITING_FOR_APPROVAL");
 		purchaseOrderOffer.setOffer(purchaseOrderOfferDTO.getOffer());
+		purchaseOrderOffer.setDeliveryDeadline(purchaseOrderOfferDTO.getDeliveryDeadline());
 		
 		PurchaseOrder p = purchaseOrderRepository.getById(purchaseOrderOfferDTO.getPurchaseOrderId());
 		purchaseOrderOffer.setPurchaseOrder(p);
 		
 		Supplier s = supplierRepository.getById(purchaseOrderOfferDTO.getSupplierId());
 		purchaseOrderOffer.setSupplier(s);
+		
+		boolean supplierHasAllInStock = true;
+		for(QuantityMedication qm : p.getQuantityMedications()) {
+			int quantityRemaining = qm.getQuantity();
+			
+			for(Pharmacy pharmacy : s.getPharmacies()) {
+				for(QuantityMedication pharmacyQM : pharmacy.getMedicationQuantity()) {
+					if(pharmacyQM.getMedication().getId() == qm.getMedication().getId()) {
+						quantityRemaining -= pharmacyQM.getQuantity();
+					}
+				}
+			}
+			if(quantityRemaining >= 0) {  
+				supplierHasAllInStock = false;
+				break;
+			}
+		}
+		if(supplierHasAllInStock == false) {
+			return new ResponseEntity<PurchaseOrderOfferDTO>(new PurchaseOrderOfferDTO(null), HttpStatus.BAD_REQUEST);
+		}
 		
 		PurchaseOrderOffer created = purchaseOrderOfferRepository.save(purchaseOrderOffer);
 		
@@ -79,6 +102,49 @@ public class SupplierService implements ISupplierService {
 		}
 		
 		return new ResponseEntity<List<OfferDTO>>(offers, HttpStatus.OK);
+	}
+
+	@Override
+	public ResponseEntity<PurchaseOrderOfferDTO> updatePurchaseOrderOffer(PurchaseOrderOfferDTO purchaseOrderOfferDTO) {
+		PurchaseOrderOffer poo = purchaseOrderOfferRepository.getById(purchaseOrderOfferDTO.getId());
+		
+		if(poo == null) {
+			return new ResponseEntity<PurchaseOrderOfferDTO>(new PurchaseOrderOfferDTO(null), HttpStatus.BAD_REQUEST);
+		}
+		
+		poo.setStatus("WAITING_FOR_APPROVAL");
+		poo.setOffer(purchaseOrderOfferDTO.getOffer());
+		poo.setDeliveryDeadline(purchaseOrderOfferDTO.getDeliveryDeadline());
+		
+		PurchaseOrder p = purchaseOrderRepository.getById(purchaseOrderOfferDTO.getPurchaseOrderId());
+		poo.setPurchaseOrder(p);
+		
+		Supplier s = supplierRepository.getById(purchaseOrderOfferDTO.getSupplierId());
+		poo.setSupplier(s);
+		
+		boolean supplierHasAllInStock = true;
+		for(QuantityMedication qm : p.getQuantityMedications()) {
+			int quantityRemaining = qm.getQuantity();
+			
+			for(Pharmacy pharmacy : s.getPharmacies()) {
+				for(QuantityMedication pharmacyQM : pharmacy.getMedicationQuantity()) {
+					if(pharmacyQM.getMedication().getId() == qm.getMedication().getId()) {
+						quantityRemaining -= pharmacyQM.getQuantity();
+					}
+				}
+			}
+			if(quantityRemaining >= 0) {  
+				supplierHasAllInStock = false;
+				break;
+			}
+		}
+		if(supplierHasAllInStock == false) {
+			return new ResponseEntity<PurchaseOrderOfferDTO>(new PurchaseOrderOfferDTO(null), HttpStatus.BAD_REQUEST);
+		}
+		
+		PurchaseOrderOffer created = purchaseOrderOfferRepository.save(poo);
+		
+		return new ResponseEntity<PurchaseOrderOfferDTO>(new PurchaseOrderOfferDTO(created), HttpStatus.OK);
 	}
 	
 	

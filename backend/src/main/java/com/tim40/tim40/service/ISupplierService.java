@@ -8,4 +8,5 @@ public interface ISupplierService {
 
 	ResponseEntity<PurchaseOrderOfferDTO> makePurchaseOrderOffer(PurchaseOrderOfferDTO purchaseOrderOfferDTO);
 	ResponseEntity<List<PurchaseOrderOfferDTO>> getPurchaseOrderOffers(Long id);
+	ResponseEntity<PurchaseOrderOfferDTO> updatePurchaseOrderOffer(PurchaseOrderOfferDTO purchaseOrderOfferDTO);
 }

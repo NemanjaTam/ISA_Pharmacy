@@ -41,4 +41,9 @@ public class SupplierController {
 	public ResponseEntity<List<OfferDTO>> getSupplierOffers(@PathVariable("id") Long id, @RequestBody OfferFilterDTO offerFilterDTO) throws Exception{
 		return supplierService.getSupplierOffers(id, offerFilterDTO);
 	}
+	
+	@PostMapping(value = "/update-offer", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<PurchaseOrderOfferDTO> updatePurchaseOrderOffer(@RequestBody PurchaseOrderOfferDTO purchaseOrderOfferDTO) throws Exception{
+		return supplierService.updatePurchaseOrderOffer(purchaseOrderOfferDTO);
+	}
 }
