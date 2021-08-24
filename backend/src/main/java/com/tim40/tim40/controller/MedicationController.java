@@ -2,14 +2,17 @@ package com.tim40.tim40.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tim40.tim40.dto.MedicationDTO;
@@ -36,6 +39,9 @@ public class MedicationController {
 //		MedicationDTO createdMedication = medicationService.createMedication(medicationDTO);
 //		return new ResponseEntity<> (createdMedication, HttpStatus.OK);
 // 	}
+	
+
+	
 	
 	@PostMapping(value="/addMultiple", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	 public ResponseEntity<?> addMultipleMedication(@RequestBody List<MedicationQuantityDTO> newMedicationList)

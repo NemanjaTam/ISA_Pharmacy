@@ -133,6 +133,7 @@ export default {
     onReset(event) {
       event.preventDefault();
       console.log("reset");
+      this.getPharmacyIdbyUserId();
     },
   },
 };

@@ -28,11 +28,14 @@ import com.tim40.tim40.model.Patient;
 import com.tim40.tim40.model.Pharmacy;
 import com.tim40.tim40.model.PurchaseOrder;
 import com.tim40.tim40.model.QuantityMedication;
+import com.tim40.tim40.model.Reservation;
 import com.tim40.tim40.model.User;
 import com.tim40.tim40.model.enums.OfferStatus;
 import com.tim40.tim40.model.enums.PurchaseOrderStatus;
 import com.tim40.tim40.repository.MedicationRepository;
 import com.tim40.tim40.repository.PharmacyRepository;
+import com.tim40.tim40.repository.QuantityMedicationRepository;
+import com.tim40.tim40.repository.ReservationRepository;
 
 
 
@@ -41,12 +44,15 @@ public class PharmacyService implements IPharmacyService {
 	
 	private PharmacyRepository pharmacyRepository;
 	private MedicationRepository medicationRepository;
-//	private PurchaseOrderRepository purchaseOrderRepository;
+	private QuantityMedicationRepository quantityRepository;
+	private ReservationRepository reservationRepository;
 
 	@Autowired
-	public PharmacyService(PharmacyRepository pharmacyRepository,MedicationRepository medicationRepository) {
+	public PharmacyService(PharmacyRepository pharmacyRepository,MedicationRepository medicationRepository,QuantityMedicationRepository quantityRepository,ReservationRepository reservationRepository) {
 		this.pharmacyRepository = pharmacyRepository;
 		this.medicationRepository = medicationRepository;
+		this.quantityRepository = quantityRepository;
+		this.reservationRepository = reservationRepository;
 	}
 	
 	public PharmacyDTO createPharmacy (PharmacyDTO pharmacyDTO) {
@@ -209,10 +215,23 @@ public class PharmacyService implements IPharmacyService {
 			po.setPurchaseOrderStatus(purchaseOrder.getPurchaseOrderStatus());
 			
 		}
+		this.pharmacyRepository.save(pharmacy);
 		
 		return offers;
 	}
 	
+	
+	public boolean deleteMedication(Long id,Long medicationId) {
+		Pharmacy pharmacy = pharmacyRepository.findById(id).get();
+		List<Reservation> reservations = this.reservationRepository.findAll();
+		for (Reservation reservation : reservations) {
+			if(reservation.getMedication().getId().equals(medicationId) && reservation.isDone()) {
+			return false;
+			}
+		}
+		this.quantityRepository.deleteById(medicationId, pharmacy.getId());		
+		return true;
+	}
 
 	
 	

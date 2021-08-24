@@ -44,6 +44,7 @@ export const store = new Vuex.Store({
         offers: [],
       },
     ],
+    medicines:[{}],
     //ne menjaj ovo
     selectedOffer: {},
   },
@@ -64,6 +65,9 @@ export const store = new Vuex.Store({
     },
     getSelectedOfer(state) {
       return state.selectedOffer;
+    },
+    getMedicines(state){
+      return state.medicines
     },
     isUserLogged(state) {
       if (state.user.id != null) {
@@ -149,6 +153,9 @@ export const store = new Vuex.Store({
         Vue.set(state.getPurchaseOrders, index, payload);
       }
     },
+    updateMedicines(state,medicines){
+      state.medicines = medicines;
+    },
     updatePurchaseOrderOffer(state,payload){
      state.purchaseOrders.forEach(element => {
       const index = element.offers.findIndex((item) => item.id === payload.id);
@@ -156,6 +163,9 @@ export const store = new Vuex.Store({
         Vue.set(element.offers, index, payload);
       }
      });
+    },
+    removeMedicine(state,medicine){
+      state.medicines.splice(state.medicines.indexOf(medicine), 1);
     }
   },
   //always on components dispatch action which commit some mutations. Never commit mutations from component because of async
@@ -196,6 +206,12 @@ export const store = new Vuex.Store({
     },
     updatePurchaseOrderOffer(context,element){
       context.commit("updatePurchaseOrderOffer",element);
+    },
+    updateMedicines(context,element){
+      context.commit("updateMedicines",element);
+    },
+    removeMedicine(context,medicine){
+      context.commit("removeMedicine",medicine);
     },
 
     logout(context) {

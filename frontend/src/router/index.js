@@ -21,6 +21,7 @@ import Pharmacy from "../views/Pharmacy.vue";
 import SearchListFilter from "../components/SearchListFilter.vue";
 import Action from "../components/Action.vue";
 import PurchaseOrder from "../components/PurchaseOrder.vue"
+import Medication from "../views/MedicationList.vue"
 Vue.use(VueRouter);
 
 const routes = [
@@ -128,6 +129,10 @@ const routes = [
         path:"purchaseorder",
         name:"purchaseOrder",
         component: PurchaseOrder,
+      },{
+        path:"medication",
+        name:"medication",
+        component: Medication,
       },
     ],
   },

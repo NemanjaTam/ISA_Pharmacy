@@ -101,8 +101,8 @@ export default {
           sortable: true,
         },
         {
-          key: "name",
-          sortable: false,
+          key: "description",
+
           sortable: true,
         },
         {
