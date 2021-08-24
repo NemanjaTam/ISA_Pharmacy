@@ -47,6 +47,7 @@ export const store = new Vuex.Store({
     medicines:[{}],
     //ne menjaj ovo
     selectedOffer: {},
+    seletedMedicineForEdit:{},
   },
   //methods that return data (state)
   getters: {
@@ -65,6 +66,9 @@ export const store = new Vuex.Store({
     },
     getSelectedOfer(state) {
       return state.selectedOffer;
+    },
+    getSelectedMedicineForEdit(state){
+      return state.seletedMedicineForEdit;
     },
     getMedicines(state){
       return state.medicines
@@ -127,6 +131,9 @@ export const store = new Vuex.Store({
     },
     updatePurchaseOrders(state, purchaseOrders) {
       state.purchaseOrders = purchaseOrders;
+    },
+    updateSelectedMedicineForEdit(state,edit){
+      state.seletedMedicineForEdit = edit;
     },
     updatePharmacy(state, pharmacy) {
       //ne menjati ovo se koristi vec!
@@ -191,6 +198,9 @@ export const store = new Vuex.Store({
     },
     updateAppointments(context, appointments) {
       context.commit("updateAppointments", appointments);
+    },
+    updateSelectedMedicineForEdit(context,edit){
+      context.commit("updateSelectedMedicineForEdit",edit);
     },
     updateCurrentAppointment(context, appointment) {
       context.commit("updateCurrentAppointment", appointment);

@@ -1,17 +1,17 @@
 <template>
   <div>
-    <b-button size="sm" @click="show = true">Edit</b-button>
-
-    <b-modal v-model="show" ref="modal" title="Edit" @ok="handleOk">
+    <b-button size="sm" @click="onshow(selected)">Edit</b-button>
+<!-- @ok="handleOk" :beforeClose=false -->
+    <b-modal v-model="show" ref="modal" title="Edit" >
       <div>
-        <b-form-input v-model="medication.name" placeholder="name"></b-form-input>
-        <b-form-input v-model="item.name" placeholder="name"></b-form-input>
-        <b-form-input v-model="item.name" placeholder="name"></b-form-input>
-        <b-form-input v-model="item.name" placeholder="name"></b-form-input>
-        <b-form-input v-model="item.name" placeholder="name"></b-form-input>
-        <b-form-input v-model="item.name" placeholder="name"></b-form-input>
-        <b-form-input v-model="item.name" placeholder="name"></b-form-input>
-        <b-form-input v-model="item.name" placeholder="name"></b-form-input>
+     
+
+        {{this.medication.name + " " + "is name"}}
+         <b-form-input
+                id="input-live"
+                v-model="changedMedication.name"
+                trim
+              ></b-form-input> 
       </div>
       <!-- <label for="input-live">Name:</label>
               <b-form-input
@@ -29,15 +29,43 @@
 <script>
 export default {
   name: "Modal",
-  props: ["item"],
+  props: ["selected"],
+  computed:{
+ 
+  },
   data() {
     return {
       show: false,
-      medication:{},
+      medication: "",
+      changedMedication:{
+          id: 0,
+          name: "",
+          description: "",
+          manufacturer: "",
+          medicationForm: "",
+          prescriptionRegime: "",
+          code: "",
+          typeOfMedication: "",
+          structure: "",
+          contraindications: "",
+          recommendedIntake: "",
+          ratings: [],
+          quantity: 0,
+        },
     };
   },
-  mounted(){
-    this.medication = item;
+  // this.$store.getters.getSelectedMedicineForEdit
+  methods:{
+    onshow(selected){
+      this.show = true;
+      this.medication = selected;
+      this.changedMedication.id = selected.id;
+       this.changedMedication.name = selected.name;
+        this.changedMedication.id = selected.id;
+         this.changedMedication.id = selected.id;
+        
+  }
+
   }
 };
 </script>
