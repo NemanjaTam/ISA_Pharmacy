@@ -60,7 +60,8 @@ public class PharmacyService implements IPharmacyService {
 		Pharmacy createdPharmacy = pharmacyRepository.save(pharmacy); 
 		return new PharmacyDTO(createdPharmacy);
 	}
-
+	
+	//ne menjati
 	@Override
 	public ResponseEntity<List<Medication>> getAllMedications(Long id) {
 		Pharmacy pharmacy = pharmacyRepository.findById(id).get();
@@ -98,13 +99,16 @@ public class PharmacyService implements IPharmacyService {
 		}
 		return emails;
 	}
-//ne menjati
+	//ne menjati
 	@Override
 	public Long getPharmacyIdByUserId(Long id) {
 		return this.pharmacyRepository.getPharmacyIdByUserId(id);
 		
 	}
-
+	
+	
+	//ne menjati
+	@Override
 	public boolean CreatePurchaseOrder(Pharmacy pharmacy, PurchaseOrderDTO dto) {
 	Integer integerId = this.pharmacyRepository.createPurchaseOrder( dto.getEndTime(),  dto.getStartTime(), dto.getAdminId(),"CEKA_PONUDE",pharmacy.getId());
 	
@@ -134,6 +138,8 @@ public class PharmacyService implements IPharmacyService {
 	}
 	
 	
+	//ne menjati
+	@Override
 	public boolean CreatePurchaseOrderForNewMedication(Pharmacy pharmacy, PurchaseOrderDTO dto) {
 		Integer integerId = this.pharmacyRepository.createPurchaseOrder( dto.getEndTime(),  dto.getStartTime(), dto.getAdminId(),"CEKA_PONUDE",pharmacy.getId());
 		if(integerId > 0) {
@@ -167,7 +173,7 @@ public class PharmacyService implements IPharmacyService {
 		return true;
 		
 	}
-	
+	@Override
 	public Set<PurchaseOrder> getAllPurchaseOrders(Long id){
 		Set<PurchaseOrder> purchaseOrdersDTO = new HashSet<PurchaseOrder>();
 		Pharmacy pharmacy = this.pharmacyRepository.getById(id);
@@ -180,7 +186,7 @@ public class PharmacyService implements IPharmacyService {
 		return purchaseOrdersDTO;
 	}
 	
-	
+	@Override
 	public List<Offer> acceptOffer(AcceptOfferDTO dto){
 		Pharmacy pharmacy = this.pharmacyRepository.getById(dto.getPharmacyId());
 		List<Offer> offers = new ArrayList<Offer>();
@@ -219,8 +225,8 @@ public class PharmacyService implements IPharmacyService {
 		
 		return offers;
 	}
-	
-	
+	//ne menjati
+	@Override
 	public boolean deleteMedication(Long id,Long medicationId) {
 		Pharmacy pharmacy = pharmacyRepository.findById(id).get();
 		List<Reservation> reservations = this.reservationRepository.findAll();
@@ -231,6 +237,27 @@ public class PharmacyService implements IPharmacyService {
 		}
 		this.quantityRepository.deleteById(medicationId, pharmacy.getId());		
 		return true;
+	}
+//ne menjati
+	@Override
+	public boolean editMedication(MedicationQuantityDTO dto, Long id) {
+		Pharmacy pharmacy = this.pharmacyRepository.getById(id);
+		boolean found = false;
+		for(QuantityMedication qm : pharmacy.getMedicationQuantity()) {
+			if(qm.getMedication().getId().equals(dto.getId())) {
+				qm.getMedication().setCode(dto.getCode());
+				qm.getMedication().setName(dto.getName());
+				qm.getMedication().setDescription(dto.getDescription());
+				qm.getMedication().setManufacturer(dto.getManufacturer());
+				qm.getMedication().setMedicationForm(dto.getMedicationForm());
+				qm.getMedication().setTypeOfMedication(dto.getTypeOfMedication());
+				qm.getMedication().setPrescriptionRegime(dto.getPrescriptionRegime());
+				qm.getMedication().setContraindications(dto.getContraindications());
+				found = true;
+			}
+		}
+		this.pharmacyRepository.save(pharmacy);
+		return found;
 	}
 
 	
