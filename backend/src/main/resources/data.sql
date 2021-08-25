@@ -450,8 +450,8 @@ insert into purchase_order_list_quantity_medications_purchase(purchase_order_id,
 
 
 insert into providers(name,email,info) values('Dobavljac 1','boyanasixxhalliwell@gmail.com','Najbolji dobavljac na svetu')
-insert into providers(name,email,info) values('Dobavljac 2','','Ekstra cene pun kvalitet')
-insert into providers(name,email,info) values('Dobavljac 3','','Lek za stek')
+insert into providers(name,email,info) values('Dobavljac 2','blabla@gmail.com','Ekstra cene pun kvalitet')
+insert into providers(name,email,info) values('Dobavljac 3','boyanacroft@yahoo.com','Lek za stek')
 
 insert into offers(status,price,purchase_order_id, provider_id) values ('CEKA',200,1,1)
 insert into offers(status,price,purchase_order_id,provider_id) values ('CEKA',150,1,2)
