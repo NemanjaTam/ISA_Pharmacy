@@ -52,9 +52,9 @@ public class MedicationDTO {
     	}
     	
     	String specification = "";
-    	specification += "Contraindications: " + medication.getContraindications() + ".";
-    	specification += "Structure: " + medication.getStructure() + ".";
-    	specification += "Recommended intake: " + medication.getRecommendedIntake() + ".";
+    	specification += "Contraindications: " + (medication.getContraindications().length() > 0 ? medication.getContraindications() : "none") + ".";
+    	specification += "Structure: " + (medication.getStructure().length() > 0 ? medication.getStructure() : "none") + ".";
+    	specification += "Recommended intake: " + (medication.getRecommendedIntake().length() > 0 ? medication.getRecommendedIntake() : "none") + ".";
     	specification += "Replacement medications: ";
     	
     	for(Medication m : medication.getReplacementMedications()) {
