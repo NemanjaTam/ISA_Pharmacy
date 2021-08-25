@@ -33,16 +33,14 @@ public class MedicationController {
 		this.medicationService = medicationService;
 	}
 	
-//	@PostMapping(value = "/add", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-//	 public ResponseEntity<?> addMedication(@RequestBody MedicationDTO medicationDTO)
-//	{
-//		MedicationDTO createdMedication = medicationService.createMedication(medicationDTO);
-//		return new ResponseEntity<> (createdMedication, HttpStatus.OK);
-// 	}
+	@PostMapping(value = "/add", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	 public ResponseEntity<?> addMedication(@RequestBody MedicationDTO medicationDTO)
+	{
+		MedicationDTO createdMedication = medicationService.createMedication(medicationDTO);
+		return new ResponseEntity<> (createdMedication, HttpStatus.OK);
+ 	}
 	
-
-	
-	
+	//ne menjati
 	@PostMapping(value="/addMultiple", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	 public ResponseEntity<?> addMultipleMedication(@RequestBody List<MedicationQuantityDTO> newMedicationList)
 	{ 
@@ -55,9 +53,7 @@ public class MedicationController {
 		return new ResponseEntity<> (newMeds, HttpStatus.OK);
 	}
 	
-	@PostMapping(value = "/get-replacement-medications", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Medication>> getReplacementMedication(@RequestBody PatientAllergedDTO patientAllergedDTO ) 
-	{
-		return medicationService.getReplacementMedication(patientAllergedDTO.getPatientId(), patientAllergedDTO.getMedicationId());
-	}
+
+	
+	
 }

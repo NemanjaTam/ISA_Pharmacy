@@ -28,7 +28,7 @@
           <b-button size="sm" @click="removeItem(row.item)" class="mr-2">
             Delete
           </b-button>
-          <Modal :selected="row.item"></Modal>
+          <Modal :selected="row.item" :id="Pharmacy"></Modal>
         </template>
 
         <!-- <template #row-details="row">
