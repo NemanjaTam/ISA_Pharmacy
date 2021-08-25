@@ -18,7 +18,6 @@ public class ComplainDTO {
 		this.complain = complain.getComplain();
 		this.dermatologistId = complain.getDermatologist().getId();
 		this.pharmacistId = complain.getPharmacist().getId();
-		this.pharmacyId = complain.getPharmacy().getId();
 		this.userId = complain.getUser().getId();
 	}
 	

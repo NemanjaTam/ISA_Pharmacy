@@ -139,7 +139,6 @@ public class UserService implements IUserService {
 	@Override
 	public ResponseEntity<ComplainResponseDTO> createComplain(ComplainDTO complainDTO) {
 		User user = userRepository.getById(complainDTO.getUserId());
-		Pharmacy pharmacy = pharmacyRepository.getById(complainDTO.getPharmacyId());
 		Pharmacist pharmacist = pharmacistRepository.getById(complainDTO.getPharmacistId());
 		Dermatologist dermatologist = dermatologistRepository.getById(complainDTO.getDermatologistId());
 		
@@ -148,18 +147,20 @@ public class UserService implements IUserService {
 		complain.setDermatologist(dermatologist);
 		complain.setPharmacist(pharmacist);
 		complain.setUser(user);
+		complain.setResponse("");
 		
 		complain = complainRepository.save(complain);
 		
 		ComplainResponseDTO response = new ComplainResponseDTO();
 		
-		response.setComplain(complainDTO.getComplain());
-		response.setDermatologistId(complainDTO.getDermatologistId());
-		response.setPharmacistId(complainDTO.getPharmacistId());
-		response.setUserId(complainDTO.getUserId());
-		response.setPharmacyId(complainDTO.getPharmacyId());
-		response.setId(complainDTO.getId());
+		response.setComplain(complain.getComplain());
+		response.setDermatologistId(complain.getDermatologist().getId());
+		response.setPharmacistId(complain.getPharmacist().getId());
+		response.setUserId(complain.getUser().getId());
+		response.setId(complain.getId());
+		response.setResponse("");
 		
 		return new ResponseEntity<ComplainResponseDTO>(response, HttpStatus.OK);
 	}
+
 }

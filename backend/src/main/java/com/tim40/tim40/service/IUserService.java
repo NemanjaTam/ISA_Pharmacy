@@ -22,4 +22,5 @@ public interface IUserService {
 	ResponseEntity<UserDTO> updateUser(UserDTO userDTO);
 	ResponseEntity<String> checkIsEmailTaken(String email);
 	ResponseEntity<ComplainResponseDTO> createComplain(ComplainDTO complainResponseDTO);
+	
 }

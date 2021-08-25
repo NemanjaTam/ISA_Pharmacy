@@ -21,6 +21,7 @@ import com.tim40.tim40.dto.LoginDTO;
 import com.tim40.tim40.dto.PharmacyDTO;
 import com.tim40.tim40.dto.UserDTO;
 import com.tim40.tim40.model.User;
+import com.tim40.tim40.service.ComplainService;
 import com.tim40.tim40.service.UserService;
 
 @RestController
@@ -28,10 +29,12 @@ import com.tim40.tim40.service.UserService;
 public class UserController {
 	
 	private UserService userService;
-
+	private ComplainService complainService;
+	
 	@Autowired
-	public UserController(UserService userService) {
+	public UserController(UserService userService, ComplainService complainService) {
 		this.userService = userService;
+		this.complainService = complainService;
 	}
 	
 	@GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -78,7 +81,12 @@ public class UserController {
 	 public ResponseEntity<?> createComplain(@RequestBody ComplainDTO complainDTO)
 	{
 		ResponseEntity<ComplainResponseDTO> createdComplain = userService.createComplain(complainDTO);
-		return new ResponseEntity<> (createdComplain, HttpStatus.OK);
+		return createdComplain;
 	}
 	
+	@GetMapping(value = "/non-answered-complains", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<ComplainDTO>> getNonAnsweredComplains()
+	{
+		return complainService.getNonAnsweredComplains();
+	}
 }
