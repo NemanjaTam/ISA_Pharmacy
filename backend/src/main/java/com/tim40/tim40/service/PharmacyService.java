@@ -15,12 +15,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.tim40.tim40.dto.AbsenceDetailedDTO;
 import com.tim40.tim40.dto.AcceptOfferDTO;
 import com.tim40.tim40.dto.MedicationQuantityDTO;
 import com.tim40.tim40.dto.PharmacyDTO;
 import com.tim40.tim40.dto.PurchaseOrderDTO;
 import com.tim40.tim40.dto.PurchaseOrderDetailedDTO;
 import com.tim40.tim40.email.service.MailService;
+import com.tim40.tim40.model.Absence;
 import com.tim40.tim40.model.Dermatologist;
 import com.tim40.tim40.model.Medication;
 import com.tim40.tim40.model.Offer;
@@ -312,6 +314,37 @@ public class PharmacyService implements IPharmacyService {
 		this.purchaseOrderRepository.deleteOrderedQuantity(id);
 		this.purchaseOrderRepository.deleteById(id, pharmacyId);
 		return true;
+	}
+
+	@Override
+	public Set<AbsenceDetailedDTO> getAllUnapprovedAbsencesByPharmacyId(Long id) {
+		Set<AbsenceDetailedDTO> unapproved = new HashSet<AbsenceDetailedDTO>();
+		AbsenceDetailedDTO dto = new AbsenceDetailedDTO();
+		Pharmacy pharmacy = this.pharmacyRepository.getById(id);
+		for (Absence absence : pharmacy.getAbsences()) {
+			if(!absence.isApproved()) {
+				dto.setId(absence.getId());
+				dto.setApproved(absence.isApproved());
+				dto.setFinished(absence.isFinished());
+				dto.setName(absence.getUser().getName());
+				dto.setSurname(absence.getUser().getSurname());
+				dto.setPeriod(absence.getPeriod());
+				unapproved.add(dto);
+			}
+		}
+		return unapproved;
+	}
+
+	@Override
+	public Set<Absence> getAllApprovedAbsencesByPharmacyId(Long id) {
+		Set<Absence> approved = new HashSet<Absence>();
+		Pharmacy pharmacy = this.pharmacyRepository.getById(id);
+		for (Absence absence : pharmacy.getAbsences()) {
+			if(absence.isApproved()) {
+				approved.add(absence);
+			}
+		}
+		return approved;
 	}
 
 	

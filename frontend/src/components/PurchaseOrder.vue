@@ -227,7 +227,7 @@
               </b-list-group>
             </div>
           </b-tab>
-          <b-tab title="Order existing medication">
+          <b-tab title="All orders">
            <!-- <PurchaseOrderList/>-->
            <List/>
           </b-tab>
@@ -239,12 +239,12 @@
 
 
 <script>
-import PurchaseOrderList from "../components/PurchaseOrderList.vue";
+
 import List from "../components/ListOfPurchaseOrders.vue"
 export default {
   name: "PurchaseOrder",
   components: {
-    PurchaseOrderList,
+    
     List,
   },
   computed: {

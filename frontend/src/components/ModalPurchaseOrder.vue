@@ -3,7 +3,7 @@
 
   <div>
     <b-button size="sm" @click="onshow(selected)">Open</b-button>
-    <b-modal v-model="show" ref="modal" title="Edit" hide-footer>
+    <b-modal v-model="show" ref="modal" title="Offers" hide-footer>
       <div>
         <p class="my-4" v-for="(offer, indexxx) in offerList" :key="indexxx">
           <b-card class="b-card-two">

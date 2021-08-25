@@ -44,10 +44,13 @@ export const store = new Vuex.Store({
         offers: [],
       },
     ],
+    //ne menjati nista 
     medicines:[{}],
     //ne menjaj ovo
     selectedOffer: {},
     seletedMedicineForEdit:{},
+    unnaprovedAbsences:[],
+    approvedAbsences:[],
   },
   //methods that return data (state)
   getters: {
@@ -110,6 +113,12 @@ export const store = new Vuex.Store({
     },
     getOffer(state){
       return state.purchaseOrders.offers;
+    },
+    getUnnaprovedAbsences(state){
+      return state.unnaprovedAbsences;
+    },
+    getApprovedAbsences(state){
+      return state.approvedAbsences;
     }
   },
   //methods for changing date (state)
@@ -173,7 +182,13 @@ export const store = new Vuex.Store({
     },
     removeMedicine(state,medicine){
       state.medicines.splice(state.medicines.indexOf(medicine), 1);
-    }
+    },
+    updateUnapprovedAbsences(state,absence){
+      state.unnaprovedAbsences = absence;
+    },
+    updateApprovedAbsences(state,absence){
+      state.approvedAbsences = absence;
+    },
   },
   //always on components dispatch action which commit some mutations. Never commit mutations from component because of async
   actions: {
@@ -222,6 +237,12 @@ export const store = new Vuex.Store({
     },
     removeMedicine(context,medicine){
       context.commit("removeMedicine",medicine);
+    },
+    updateUnapprovedAbsences(context,absence){
+      context.commit("updateUnapprovedAbsences",absence);
+    },    
+    updateApprovedAbsences(context,absence){
+      context.commit("updateApprovedAbsences",absence);
     },
 
     logout(context) {
