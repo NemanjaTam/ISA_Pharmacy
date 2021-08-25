@@ -28,6 +28,7 @@ import com.tim40.tim40.model.Patient;
 import com.tim40.tim40.model.Pharmacy;
 import com.tim40.tim40.model.PurchaseOrder;
 import com.tim40.tim40.model.QuantityMedication;
+import com.tim40.tim40.model.QuantityMedicationPurchaseOrder;
 import com.tim40.tim40.model.Reservation;
 import com.tim40.tim40.model.User;
 import com.tim40.tim40.model.enums.OfferStatus;
@@ -193,6 +194,7 @@ public class PharmacyService implements IPharmacyService {
 	@Override
 	public List<Offer> acceptOffer(AcceptOfferDTO dto){
 		Pharmacy pharmacy = this.pharmacyRepository.getById(dto.getPharmacyId());
+//		List<QuantityMedicationPurchaseOrder> qmpo = this.
 		List<Offer> offers = new ArrayList<Offer>();
 		PurchaseOrder purchaseOrder = new PurchaseOrder();
 		for (PurchaseOrder purchaseOrders : pharmacy.getPurchaseOrders()) {
@@ -201,7 +203,7 @@ public class PharmacyService implements IPharmacyService {
 				 purchaseOrder.setEndTime(purchaseOrders.getEndTime());
 				 purchaseOrder.setStartTime(purchaseOrders.getStartTime());
 				 purchaseOrder.setId(purchaseOrders.getId());
-				 purchaseOrder.setPurchaseOrderStatus(PurchaseOrderStatus.OBRADJENA);
+				 purchaseOrders.setPurchaseOrderStatus(PurchaseOrderStatus.OBRADJENA);
 				 purchaseOrder.setOffers(purchaseOrders.getOffers());
 				 purchaseOrder.setPharmacy(pharmacy);
 				 purchaseOrder.setPurchaseOrderStatus(purchaseOrders.getPurchaseOrderStatus());
@@ -210,8 +212,7 @@ public class PharmacyService implements IPharmacyService {
 				}
 			}	
 		for (Offer offer : offers) {
-			System.out.print(dto.getOfferId()+ " " +" offer id");
-			System.out.print(offer.getId() + " stanje ");
+			
 			if(offer.getId().equals(dto.getOfferId())) {
 				
 				offer.setStatus(OfferStatus.PRIHVACENA);
@@ -219,15 +220,48 @@ public class PharmacyService implements IPharmacyService {
 				offer.setStatus(OfferStatus.ODBIJENA);
 			}
 		}
-		purchaseOrder.setOffers(offers);
-		for (PurchaseOrder po :pharmacy.getPurchaseOrders()) {
-			po.setOffers(purchaseOrder.getOffers());
-			po.setPurchaseOrderStatus(purchaseOrder.getPurchaseOrderStatus());
-			
+		int quantity = 0;
+		for (QuantityMedication qm : pharmacy.getMedicationQuantity()) {
+			for (QuantityMedicationPurchaseOrder pm : dto.getQuantityMedicationPurchaseOrder()) {
+				if(qm.getMedication().getId().equals(pm.getMedication().getId())) {
+					
+					quantity = qm.getQuantity();
+					quantity = quantity + pm.getQuantity();
+					this.quantityRepository.update(quantity,pharmacy.getId(),pm.getMedication().getId());
+                    System.out.println("QUANTITY:"  + quantity);
+                    System.out.println("IN BASE:" + qm.getQuantity());
+                    System.out.println("IN DTO:" + pm.getQuantity());
+				}
+
+			}
+
 		}
+        
 		this.pharmacyRepository.save(pharmacy);
 		
 		return offers;
+	}
+	//ne menjati,koristi se
+	public void setQuantityFromAcceptedOffer(Pharmacy pharmacy,PurchaseOrder purchaseOrder) {
+	    int quantity = 0;
+		for (QuantityMedication qm : pharmacy.getMedicationQuantity()) {
+			for (QuantityMedicationPurchaseOrder pm : purchaseOrder.getQuantityMedicationsPurchase()) {
+				if(qm.getMedication().getId().equals(pm.getMedication().getId())) {
+//					qmnew.setId(qm.getId());
+//					qmnew.setMedication(qm.getMedication());
+//					qmnew.setPharmacy(qm.getPharmacy());
+//					qmnew.setQuantity(qm.getQuantity() + pm.getQuantity());
+//				    
+					quantity = qm.getQuantity();
+					quantity = quantity + pm.getQuantity();
+					this.quantityRepository.update(quantity,pharmacy.getId(),pm.getMedication().getId());
+//					newQuantities.add(qmnew);
+				}
+			}
+			
+		}
+		
+		
 	}
 	//ne menjati
 	@Override

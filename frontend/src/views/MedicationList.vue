@@ -1,9 +1,7 @@
 <template>
   <div>
     <b-input v-model="filter" placeholder="Search"></b-input>
-
     <div>
-      <!-- <Modal :selected="selected"></Modal> -->
       <b-table
         :items="this.getMedicines"
         :filter="filter"
@@ -21,40 +19,11 @@
         ]"
       >
         <template #cell(show_details)="row">
-          <!-- <b-button size="sm" @click="row.toggleDetails" class="mr-2">
-            {{ row.detailsShowing ? "Hide" : "Show" }} Edit
-          </b-button> -->
-
           <b-button size="sm" @click="removeItem(row.item)" class="mr-2">
             Delete
           </b-button>
           <Modal :selected="row.item" :id="Pharmacy"></Modal>
         </template>
-
-        <!-- <template #row-details="row">
-          <b-card>
-            <b-row class="mb-2">
-              <b-col sm="3" class="text-sm-right"><b>Age:</b></b-col>
-              <b-col>{{ row.item.age }}</b-col>
-            </b-row>
-
-            <b-row class="mb-2">
-              <b-col sm="3" class="text-sm-right">
-                <b-form-input
-                  v-model="row.item.name"
-                  placeholder="name"
-                ></b-form-input>
-              </b-col>
-              <b-col>{{ row.item.isActive }}</b-col>
-            </b-row>
-
-            <b-button size="sm" @click="row.toggleDetails"
-              >Hide Details</b-button
-            >
-            <b-button size="sm">OK</b-button>
-          </b-card>
-        </template> -->
-
         <div></div>
       </b-table>
     </div>

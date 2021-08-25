@@ -1,137 +1,124 @@
 <template>
-<!-- MODALNI DIJALOG ZA LEKOVE - BOJANA -->
+  <!-- MODALNI DIJALOG ZA LEKOVE - BOJANA -->
 
   <div>
     <b-button size="sm" @click="onshow(selected)">Open</b-button>
     <b-modal v-model="show" ref="modal" title="Edit" hide-footer>
       <div>
-        
-      
-   
-    <input type="submit" value="Submit" @click="checkForm">  
- 
+        <p class="my-4" v-for="(offer, indexxx) in offerList" :key="indexxx">
+          <b-card class="b-card-two">
+            <b-card-text>Price : {{ offer.price }}</b-card-text>
+            <b-card-text>Supplier: {{ offer.provider.name }}</b-card-text>
+
+            <b-button
+              @click="
+                selectOffer(
+                  purchaseOrder,
+                  offer,
+                  purchaseOrder.endTime,
+                  id,
+                  quantityMedication
+                )
+              "
+              v-if="user === purchaseOrderCreator"
+            >
+              ACCEPT
+            </b-button>
+          </b-card>
+        </p>
       </div>
     </b-modal>
   </div>
 </template>
 
 <script>
+const moment = require("moment");
 export default {
   name: "ModalPurchaseOrder",
-  props: ["selected","id"],
+  props: [
+    "selected",
+    "id",
+    "user",
+    "purchaseOrderCreator",
+    "purchaseOrder",
+    "quantityMedication",
+  ],
   computed: {},
   data() {
     return {
       show: false,
-      medication: "",
-      changedMedication: {
-        id: 0,
-        name: "",
-        description: "",
-        manufacturer: "",
-        medicationForm: "",
-        prescriptionRegime: "",
-        code: "",
-        typeOfMedication: "",
-        structure: "",
-        contraindications: "",
-        recommendedIntake: "",
-        ratings: [],
-        quantity: 0,
-       
-      },
-      errors:[],
+      offerList: [],
+      errors: [],
     };
   },
   // this.$store.getters.getSelectedMedicineForEdit
   methods: {
-    editMedicine(){
-     
-      if(this.checkForm){
-        console.log("uslo u if");
-           
-      }else{
-        alert("Please fill in empty fields");
-      }
+    onshow(selected) {
+      this.show = true;
+      this.offerList = selected; //ovde stizu offers
+      console.log(this.purchaseOrderCreator);
+      console.log(this.user);
     },
-    checkForm: function(e) {
-        var vm = this;
-      this.errors = [];
-      console.log("POZVANO")
-  
-      if (!this.changedMedication.name ) {
-        this.errors.push("Name required.");
-      }
-      if (!this.changedMedication.manufacturer) {
-        this.errors.push("Manufacturer required.");
-      }
 
-      if (!this.errors.length) {
-       fetch(
-        `http://localhost:9005/api/pharmacy/edit-medication/${vm.id}`,
-        {
+    selectOffer(purchaseOrder, offer, endTime, id, quantityMedication) {
+      var today = new Date();
+      var vm = this;
+      var body = {
+        purchaseOrderId: purchaseOrder.id,
+        offerId: offer.id,
+        pharmacyId: id,
+        quantityMedicationPurchaseOrder: quantityMedication,
+      };
+
+      if (
+        moment(endTime).isBefore(moment(String(today)).format("YYYY-MM-DD"))
+      ) {
+        fetch(`http://localhost:9005/api/pharmacy/accept-offer`, {
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
           },
-            method: "POST",
-           body: JSON.stringify(vm.changedMedication),
-        }
-      )
-        .then(function(response) {
-          if (response.ok) {
-            alert("Successful!");
-            return response.json();
-            
-          } else {
-            return Promise.reject(response);
-          }
-        }).then(function(data) {
-          if(data){
-          return fetch(
-            `http://localhost:9005/api/pharmacy/get-medications/${vm.id}`,
-            {
-              headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-              },
-              method: "GET",
-            }
-          );
-        }}).then(function(response) {
-          return response.json();
+          method: "POST",
+          body: JSON.stringify(body),
         })
-        .then((data) => this.$store.dispatch("updateMedicines", data))
-        
-        .catch(function(error) {
-          console.warn(error);
-        });
+          .then(function(response) {
+            if (response.ok) {
+              return response.json();
+            } else {
+              return Promise.reject(response);
+            }
+          })
+          .then(function(data) {
+            vm.pharmacy_id = data;
+            console.log(vm.pharmacy_id);
+            return fetch(
+              `http://localhost:9005/api/pharmacy/get-purchase-order/${vm.id}`,
+              {
+                headers: {
+                  Accept: "application/json",
+                  "Content-Type": "application/json",
+                },
+                method: "GET",
+              }
+            );
+          })
+          .then(function(response) {
+            return response.json();
+          })
+         .then((data) => this.$store.dispatch("updatePurchaseOrders", data))
+
+          .catch(function(error) {
+            console.warn(error);
+          });
+      } else {
+        alert("You are not allowed.");
       }
-
-    },
-
-    onshow(selected) {
-      this.show = true;
-      this.medication = selected;
-      this.changedMedication.name = selected.name;
-      this.changedMedication.description = selected.description;
-      this.changedMedication.manufacturer = selected.manufacturer;
-      this.changedMedication.code = selected.code;
-      this.changedMedication.contraindications = selected.contraindications;
-      this.changedMedication.medicationForm = selected.medicationForm;
-      this.changedMedication.typeOfMedication = selected.typeOfMedication;
-      this.changedMedication.prescriptionRegime = selected.prescriptionRegime;
-      this.changedMedication.id = selected.id;
-      this.changedMedication.ratings = selected.ratings;
-      this.changedMedication.recommendedIntake = selected.recommendedIntake;
-      this.changedMedication.quantity = selected.quantity;
-       
     },
   },
 };
 </script>
 <style scoped>
-.error{
- color: rgb(255, 0, 0);
+.error {
+  color: rgb(255, 0, 0);
 }
 </style>

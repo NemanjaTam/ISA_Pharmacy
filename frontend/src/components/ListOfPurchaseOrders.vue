@@ -21,7 +21,8 @@
           </b-button>
         </template>
         <template #cell(edit)="row">
-             <ModalPurchaseOrder  :selected="row.item.offers" :id="Pharmacy"></ModalPurchaseOrder>
+             <ModalPurchaseOrder  :selected="row.item.offers" :id="Pharmacy" :user="userId" :purchaseOrderCreator="row.item.adminPharmacy.id" :purchaseOrder="row.item"
+             :quantityMedication="row.item.quantityMedicationsPurchase"></ModalPurchaseOrder>
         </template>
         <div></div>
       </b-table>
@@ -81,7 +82,7 @@ export default {
   methods: {
     getAllOrders() {
       fetch(
-        `http://localhost:9005/api/pharmacy/get-purchase-order/${this.getPharmacy}`,
+        `http://localhost:9005/api/pharmacy/get-purchase-order/${this.Pharmacy}`,
         {
           headers: {
             Accept: "application/json",

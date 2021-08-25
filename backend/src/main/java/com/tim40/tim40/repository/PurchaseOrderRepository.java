@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import com.tim40.tim40.model.PurchaseOrder;
 
 public interface PurchaseOrderRepository extends JpaRepository<PurchaseOrder, Long> {
+	//ne dirati nista
     @Modifying
     @Query(value= "delete from purchase_order_list as po  where po.id = :id and po.pharmacy_id =:pharmacyId",nativeQuery = true)
     void deleteById(@Param("id") Long id,@Param("pharmacyId") Long pharmacyId);
