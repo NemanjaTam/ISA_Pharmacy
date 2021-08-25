@@ -120,6 +120,18 @@ public class PharmacyController {
 	 Set<PurchaseOrder> purchaseOrders = this.pharmacyService.getAllPurchaseOrders(id);
 		return purchaseOrders;
 	}
+	
+	
+	//ne menjati
+	@Transactional()
+	@PostMapping(value="/delete-purchase-order/{id}",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseStatus(HttpStatus.OK)
+	public boolean deletePurchaseOrder(@RequestBody Long id,@PathVariable("id") Long pharmacyId) {
+		return this.pharmacyService.deletePurchaseOrder(id, pharmacyId);
+	}
+	
+	
+	
 	//ne menjati
 	@PostMapping(value = "/accept-offer",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.OK)

@@ -1,4 +1,6 @@
 <template>
+<!-- MODALNI DIJALOG ZA LEKOVE - BOJANA -->
+
   <div>
     <b-button size="sm" @click="onshow(selected)">Edit</b-button>
     <!--  :beforeClose=false -->
