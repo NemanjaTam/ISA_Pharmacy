@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tim40.tim40.dto.ComplainDTO;
+import com.tim40.tim40.dto.ComplainResponseDTO;
 import com.tim40.tim40.dto.LoginDTO;
 import com.tim40.tim40.dto.PharmacyDTO;
 import com.tim40.tim40.dto.UserDTO;
@@ -70,6 +72,13 @@ public class UserController {
 	public ResponseEntity<List<PharmacyDTO>> subscribeToPharmacy(@PathVariable("userID") Long userID, @PathVariable("pharmacyID") Long pharmacyID)
 	{
 		return userService.subscribeToPharmacy(userID, pharmacyID);
+	}
+	
+	@PostMapping(value = "/add-complain", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	 public ResponseEntity<?> createComplain(@RequestBody ComplainDTO complainDTO)
+	{
+		ResponseEntity<ComplainResponseDTO> createdComplain = userService.createComplain(complainDTO);
+		return new ResponseEntity<> (createdComplain, HttpStatus.OK);
 	}
 	
 }

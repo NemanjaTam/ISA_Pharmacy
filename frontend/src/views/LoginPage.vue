@@ -114,14 +114,13 @@ export default {
                 localStorage.setItem("user", user);
                 this.$router.push({ name: "PharmacyAdminPage" });
               }
-        
-              //  else {
-             //     this.$store.dispatch('updateUser', user)
-             //     this.$router.push({name: 'HomePage'})
-           //     }
-                // alert("Pharmacist profile is still under development!")
-                return   
-            }
+              }        
+                else {
+                  this.$store.dispatch('updateUser', user)
+                  this.$router.push({name: 'HomePage'})
+                }
+                alert("Pharmacist profile is still under development!")
+                
           }
         });
     },

@@ -9,12 +9,20 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.tim40.tim40.dto.ComplainDTO;
+import com.tim40.tim40.dto.ComplainResponseDTO;
 import com.tim40.tim40.dto.LoginDTO;
 import com.tim40.tim40.dto.PharmacyDTO;
 import com.tim40.tim40.dto.UserDTO;
 import com.tim40.tim40.model.Address;
+import com.tim40.tim40.model.Complain;
+import com.tim40.tim40.model.Dermatologist;
+import com.tim40.tim40.model.Pharmacist;
 import com.tim40.tim40.model.Pharmacy;
 import com.tim40.tim40.model.User;
+import com.tim40.tim40.repository.ComplainRepository;
+import com.tim40.tim40.repository.DermatologistRepository;
+import com.tim40.tim40.repository.PharmacistRepository;
 import com.tim40.tim40.repository.PharmacyRepository;
 import com.tim40.tim40.repository.UserRepository;
 
@@ -23,11 +31,17 @@ public class UserService implements IUserService {
 
 	private UserRepository userRepository;
 	private PharmacyRepository pharmacyRepository;
+	private DermatologistRepository dermatologistRepository;
+	private PharmacistRepository pharmacistRepository;
+	private ComplainRepository complainRepository;
 	
 	@Autowired
-	public UserService(UserRepository userRepository, PharmacyRepository pharmacyRepository) {
+	public UserService(UserRepository userRepository, PharmacyRepository pharmacyRepository, DermatologistRepository dermatologistRepository, PharmacistRepository pharmacistRepository, ComplainRepository complainRepository) {
 		this.userRepository = userRepository;
 		this.pharmacyRepository = pharmacyRepository;
+		this.dermatologistRepository = dermatologistRepository;
+		this.pharmacistRepository = pharmacistRepository;
+		this.complainRepository = complainRepository;
 	}
 
 	@Override
@@ -120,5 +134,32 @@ public class UserService implements IUserService {
 	public User findByEmail(String email) {
 		return userRepository.findByEmail(email).orElse(null);
 
+	}
+
+	@Override
+	public ResponseEntity<ComplainResponseDTO> createComplain(ComplainDTO complainDTO) {
+		User user = userRepository.getById(complainDTO.getUserId());
+		Pharmacy pharmacy = pharmacyRepository.getById(complainDTO.getPharmacyId());
+		Pharmacist pharmacist = pharmacistRepository.getById(complainDTO.getPharmacistId());
+		Dermatologist dermatologist = dermatologistRepository.getById(complainDTO.getDermatologistId());
+		
+		Complain complain = new Complain();
+		complain.setComplain(complainDTO.getComplain());
+		complain.setDermatologist(dermatologist);
+		complain.setPharmacist(pharmacist);
+		complain.setUser(user);
+		
+		complain = complainRepository.save(complain);
+		
+		ComplainResponseDTO response = new ComplainResponseDTO();
+		
+		response.setComplain(complainDTO.getComplain());
+		response.setDermatologistId(complainDTO.getDermatologistId());
+		response.setPharmacistId(complainDTO.getPharmacistId());
+		response.setUserId(complainDTO.getUserId());
+		response.setPharmacyId(complainDTO.getPharmacyId());
+		response.setId(complainDTO.getId());
+		
+		return new ResponseEntity<ComplainResponseDTO>(response, HttpStatus.OK);
 	}
 }

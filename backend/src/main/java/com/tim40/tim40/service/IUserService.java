@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 
+import com.tim40.tim40.dto.ComplainDTO;
+import com.tim40.tim40.dto.ComplainResponseDTO;
 import com.tim40.tim40.dto.LoginDTO;
 import com.tim40.tim40.dto.UserDTO;
 import com.tim40.tim40.model.User;
@@ -19,4 +21,5 @@ public interface IUserService {
 	ResponseEntity<UserDTO> login(LoginDTO loginDTO);
 	ResponseEntity<UserDTO> updateUser(UserDTO userDTO);
 	ResponseEntity<String> checkIsEmailTaken(String email);
+	ResponseEntity<ComplainResponseDTO> createComplain(ComplainDTO complainResponseDTO);
 }
