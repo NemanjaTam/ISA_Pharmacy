@@ -34,6 +34,7 @@ import com.tim40.tim40.model.enums.OfferStatus;
 import com.tim40.tim40.model.enums.PurchaseOrderStatus;
 import com.tim40.tim40.repository.MedicationRepository;
 import com.tim40.tim40.repository.PharmacyRepository;
+import com.tim40.tim40.repository.PurchaseOrderRepository;
 import com.tim40.tim40.repository.QuantityMedicationRepository;
 import com.tim40.tim40.repository.ReservationRepository;
 
@@ -46,13 +47,16 @@ public class PharmacyService implements IPharmacyService {
 	private MedicationRepository medicationRepository;
 	private QuantityMedicationRepository quantityRepository;
 	private ReservationRepository reservationRepository;
+	private PurchaseOrderRepository purchaseOrderRepository;
 
 	@Autowired
-	public PharmacyService(PharmacyRepository pharmacyRepository,MedicationRepository medicationRepository,QuantityMedicationRepository quantityRepository,ReservationRepository reservationRepository) {
+	public PharmacyService(PharmacyRepository pharmacyRepository,MedicationRepository medicationRepository,QuantityMedicationRepository quantityRepository,ReservationRepository reservationRepository,
+			 PurchaseOrderRepository purchaseOrderRepository) {
 		this.pharmacyRepository = pharmacyRepository;
 		this.medicationRepository = medicationRepository;
 		this.quantityRepository = quantityRepository;
 		this.reservationRepository = reservationRepository;
+		this.purchaseOrderRepository = purchaseOrderRepository;
 	}
 	
 	public PharmacyDTO createPharmacy (PharmacyDTO pharmacyDTO) {
@@ -258,6 +262,22 @@ public class PharmacyService implements IPharmacyService {
 		}
 		this.pharmacyRepository.save(pharmacy);
 		return found;
+	}
+
+	@Override
+	public boolean deletePurchaseOrder(Long id, Long pharmacyId) {
+		Pharmacy pharmacy = this.getById(pharmacyId);
+		for(PurchaseOrder po : pharmacy.getPurchaseOrders()) {
+			if(po.getId().equals(id)) {
+				if(po.getOffers().size() > 1) {
+					return false;
+					
+				}
+			}
+		}
+		this.purchaseOrderRepository.deleteOrderedQuantity(id);
+		this.purchaseOrderRepository.deleteById(id, pharmacyId);
+		return true;
 	}
 
 	

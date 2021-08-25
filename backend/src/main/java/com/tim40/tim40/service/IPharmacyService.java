@@ -26,5 +26,6 @@ public interface IPharmacyService {
 	public Set<PurchaseOrder> getAllPurchaseOrders(Long id);
 	public List<Offer> acceptOffer(AcceptOfferDTO dto);
 	public boolean deleteMedication(Long id,Long medicationId);
+	public boolean deletePurchaseOrder(Long id,Long pharmacyId);
 
 }
