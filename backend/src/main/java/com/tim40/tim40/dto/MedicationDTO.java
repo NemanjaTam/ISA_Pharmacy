@@ -29,7 +29,9 @@ public class MedicationDTO {
     private Set<Long> replacementMedicationsIDs = new HashSet<Long>();
     private String notes;
     private String manufacturer;
- 
+    private double avgRate;
+    private String medicationSpecification;
+    
   // private final Set<Patient> patients = new HashSet<Patient>();
   
     public MedicationDTO (Medication medication) {
@@ -48,6 +50,18 @@ public class MedicationDTO {
     	for(Medication m : medication.getReplacementMedications()) {
     		this.replacementMedicationsIDs.add(m.getId());
     	}
+    	
+    	String specification = "";
+    	specification += "Contraindications: " + medication.getContraindications() + ".";
+    	specification += "Structure: " + medication.getStructure() + ".";
+    	specification += "Recommended intake: " + medication.getRecommendedIntake() + ".";
+    	specification += "Replacement medications: ";
+    	
+    	for(Medication m : medication.getReplacementMedications()) {
+    		specification += m.getName() + ", ";
+    	}
+    	
+    	this.medicationSpecification = specification.substring(0, specification.length()-1);
     }
 
 	

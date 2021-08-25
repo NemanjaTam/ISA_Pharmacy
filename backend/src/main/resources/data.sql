@@ -94,6 +94,13 @@ insert into medications (code, contraindications, manufacturer, medication_form,
 insert into medications (code, contraindications, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type,notes) values ('', '', 'MedbayTech', 'POWDER', 'Sirup', 'NA_RECEPT', '', '', 'ANTIPYRETIC', 'ss')
 insert into medications (code, contraindications, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type,notes) values ('', '', 'MedbayTech', 'POWDER', 'Panklav', 'NA_RECEPT', '', '', 'ANTIPYRETIC', 'ss')
 
+insert into price_list_medications (active, endtime, starttime, pharmacy_id) values (true,  '2021-08-13 09:00:00-08', '2021-08-13 09:30:00-08', 1)
+insert into price_list_medications (active, endtime, starttime, pharmacy_id) values (true,  '2021-08-13 09:00:00-08', '2021-08-13 09:30:00-08', 2)
+
+insert into price_medications(price, medication_id, price_list_medication_id) values (220, 1, 1)
+insert into price_medications(price, medication_id, price_list_medication_id) values (220, 2, 1)
+insert into price_medications(price, medication_id, price_list_medication_id) values (220, 3, 2)
+insert into price_medications(price, medication_id, price_list_medication_id) values (220, 4, 2)
 
 insert into medication_quantity (quantity, medication_id) values (10, 1)
 insert into medication_quantity (quantity, medication_id) values (10, 2)

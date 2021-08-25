@@ -10,11 +10,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.tim40.tim40.dto.FilterMedicationDTO;
 import com.tim40.tim40.dto.MedicationDTO;
+import com.tim40.tim40.dto.MedicationPharmacyPriceDTO;
 import com.tim40.tim40.dto.SearchMedicationDTO;
 import com.tim40.tim40.model.Medication;
 import com.tim40.tim40.model.MedicationRating;
 import com.tim40.tim40.model.Pharmacy;
+import com.tim40.tim40.model.PriceListMedication;
+import com.tim40.tim40.model.PriceMedication;
 import com.tim40.tim40.model.QuantityMedication;
 import com.tim40.tim40.repository.MedicationRepository;
 import com.tim40.tim40.repository.PharmacyRepository;
@@ -69,9 +73,9 @@ public class MedicationService implements IMedicationService{
 	}
 
 	@Override
-	public ResponseEntity<List<MedicationDTO>> searchMedications(SearchMedicationDTO searchMedicationDTO) {
+	public ResponseEntity<List<FilterMedicationDTO>> searchMedications(SearchMedicationDTO searchMedicationDTO) {
 		List<Medication> medications = medicationRepository.findAll();
-		List<Medication> results = new ArrayList<>();
+		List<FilterMedicationDTO> resultsDTOs = new ArrayList<FilterMedicationDTO>();
 		
 		for(Medication m : medications) {
 			boolean isNameMatching = searchMedicationDTO.getName() == null || m.getName().contains(searchMedicationDTO.getName());
@@ -81,20 +85,34 @@ public class MedicationService implements IMedicationService{
 				sumOfRatings += rating.getRating();
 			}
 			
-			double avgRating = sumOfRatings/m.getRatings().size();
+			double avgRating = m.getRatings().size() > 0 ? sumOfRatings/m.getRatings().size() : 5;
 			boolean isAvgRatingMatching = searchMedicationDTO.getAvgRate() < avgRating;
 			boolean isTypeMatching = searchMedicationDTO.getTypeOfMedication() == null || searchMedicationDTO.getTypeOfMedication() == m.getTypeOfMedication();
 			
 			if(isNameMatching && isAvgRatingMatching && isTypeMatching) {
-				results.add(m);
+				MedicationDTO mdto = new MedicationDTO(m);
+				mdto.setAvgRate(avgRating);
+				FilterMedicationDTO f = new FilterMedicationDTO();
+				f.setMedicationDTO(mdto);
+				
+				List<Pharmacy> pharmacies = pharmacyRepository.findAll();
+				
+				for(Pharmacy p : pharmacies) {
+					Set<PriceListMedication> priceListMedications = p.getPriceListMedication();
+					for(PriceListMedication plm : priceListMedications) {
+						Set<PriceMedication> priceMedications = plm.getMedicationPrices();
+						for(PriceMedication pm : priceMedications) {
+							if(pm.getMedication().getId() == m.getId()) {
+								f.getMedicationPharmaciesPrices().add(new MedicationPharmacyPriceDTO(p, pm.getPrice()));
+							}
+						}
+					}
+				}
+				
+				resultsDTOs.add(f);
 			}
-			
-		}
-		List<MedicationDTO> resultsDTOs = new ArrayList<MedicationDTO>();
-		for(Medication m : results) {
-			resultsDTOs.add(new MedicationDTO(m));
 		}
 		
-		return new ResponseEntity<List<MedicationDTO>>(resultsDTOs, HttpStatus.OK);
+		return new ResponseEntity<List<FilterMedicationDTO>>(resultsDTOs, HttpStatus.OK);
 	}
 }

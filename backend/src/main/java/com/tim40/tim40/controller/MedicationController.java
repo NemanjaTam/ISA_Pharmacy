@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tim40.tim40.dto.FilterMedicationDTO;
 import com.tim40.tim40.dto.MedicationDTO;
 import com.tim40.tim40.dto.PatientAllergedDTO;
 import com.tim40.tim40.dto.SearchMedicationDTO;
@@ -52,7 +53,7 @@ public class MedicationController {
 	}
 	
 	@PostMapping(value = "/search-medications", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<MedicationDTO>> searchMedications(@RequestBody SearchMedicationDTO searchMedicationDTO) 
+	public ResponseEntity<List<FilterMedicationDTO>> searchMedications(@RequestBody SearchMedicationDTO searchMedicationDTO) 
 	{
 		return medicationService.searchMedications(searchMedicationDTO);
 	}
