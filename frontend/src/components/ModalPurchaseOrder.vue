@@ -3,7 +3,7 @@
 
   <div>
     <b-button size="sm" @click="onshow(selected)">Open</b-button>
-    <b-modal v-model="show" ref="modal" title="Edit" hide-footer>
+    <b-modal v-model="show" ref="modal" title="Offers" hide-footer>
       <div>
         <p class="my-4" v-for="(offer, indexxx) in offerList" :key="indexxx">
           <b-card class="b-card-two">
@@ -49,6 +49,8 @@ export default {
       show: false,
       offerList: [],
       errors: [],
+      mailcontent: [],
+      respondedOffers: [],
     };
   },
   // this.$store.getters.getSelectedMedicineForEdit
@@ -70,6 +72,16 @@ export default {
         quantityMedicationPurchaseOrder: quantityMedication,
       };
 
+      var email = {
+        mailTo: [],
+        mailCc: "",
+        mailBcc: "",
+        mailSubject: "Offer response",
+        mailContent: "Your offer is" + vm.respondedOffers.purchaseOrderStatus,
+        contentType: "",
+        attachments: [],
+      };
+
       if (
         moment(endTime).isBefore(moment(String(today)).format("YYYY-MM-DD"))
       ) {
@@ -89,8 +101,52 @@ export default {
             }
           })
           .then(function(data) {
-            vm.pharmacy_id = data;
-            console.log(vm.pharmacy_id);
+            vm.respondedOffers = data;
+            if (vm.respondedOffers.length > 0) {
+              for (let i = 0; i < vm.respondedOffers.length; i++) {
+                var email = {
+                  mailTo: [],
+                  mailCc: "",
+                  mailBcc: "",
+                  mailSubject: "",
+                  mailContent:"",
+                  contentType: "",
+                  attachments: [],
+                };
+
+                email.mailTo.push(vm.respondedOffers[i].provider.email);
+                email.mailCc = "";
+                email.mailBcc = "";
+                email.mailSubject = " Offer response";
+                email.mailContent =
+                  "You offer is " + vm.respondedOffers[i].status;
+                email.contentType = "";
+                email.attachments = [];
+                vm.mailcontent.push(email);
+              }
+            }
+            if (vm.mailcontent.length > 0) {
+              return fetch(
+                `http://localhost:9005/api/email/send-different-messages-to-provider/`,
+                {
+                  headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                  },
+                  method: "POST",
+                  body: JSON.stringify(vm.mailcontent),
+                }
+              );
+            }
+          })
+          .then(function(response) {
+            if (response.ok) {
+              return response.json();
+            } else {
+              return Promise.reject(response);
+            }
+          })
+          .then(function(data) {
             return fetch(
               `http://localhost:9005/api/pharmacy/get-purchase-order/${vm.id}`,
               {
@@ -105,7 +161,7 @@ export default {
           .then(function(response) {
             return response.json();
           })
-         .then((data) => this.$store.dispatch("updatePurchaseOrders", data))
+          .then((data) => this.$store.dispatch("updatePurchaseOrders", data))
 
           .catch(function(error) {
             console.warn(error);

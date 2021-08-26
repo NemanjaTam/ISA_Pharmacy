@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tim40.tim40.dto.AbsenceDetailedDTO;
 import com.tim40.tim40.dto.AcceptOfferDTO;
 import com.tim40.tim40.dto.MedicationDTO;
 import com.tim40.tim40.dto.MedicationQuantityDTO;
@@ -31,6 +32,7 @@ import com.tim40.tim40.dto.PharmacyDTO;
 import com.tim40.tim40.dto.PharmacyProfileDTO;
 import com.tim40.tim40.dto.PurchaseOrderDTO;
 import com.tim40.tim40.dto.RejectedAcceptedDTO;
+import com.tim40.tim40.model.Absence;
 import com.tim40.tim40.model.Medication;
 import com.tim40.tim40.model.Offer;
 import com.tim40.tim40.model.Pharmacy;
@@ -142,7 +144,7 @@ public class PharmacyController {
 		return offers;
 	}
 	//ne menjati
-//	@DeleteMapping(value="/delete-medication/{id}",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+
 	@RequestMapping(method = RequestMethod.POST, path = "/delete-medication/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	@Transactional(readOnly = false)
@@ -158,5 +160,18 @@ public class PharmacyController {
 	public boolean editMedication(@RequestBody MedicationQuantityDTO dto,@PathVariable("id") Long pharmacyId){
 		return this.pharmacyService.editMedication(dto, pharmacyId);
 	}
+	
+	@ResponseStatus(HttpStatus.OK)
+	@GetMapping(value="/get-all-unapproved-absences/{id}",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public Set<AbsenceDetailedDTO> getAbsencesForPharmacyId(@PathVariable("id") Long id){
+		return this.pharmacyService.getAllUnapprovedAbsencesByPharmacyId(id);
+	}
+	
+	@ResponseStatus(HttpStatus.OK)
+	@GetMapping(value="/get-all-approved-absences/{id}",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public Set<Absence> getApprovedAbsencesForPharmacyId(@PathVariable("id") Long id){
+		return this.pharmacyService.getAllApprovedAbsencesByPharmacyId(id);
+	}
+	
 
 }

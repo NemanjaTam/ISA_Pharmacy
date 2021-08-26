@@ -20,7 +20,7 @@
             Delete
           </b-button>
         </template>
-        <template #cell(edit)="row">
+        <template #cell(offer)="row">
              <ModalPurchaseOrder  :selected="row.item.offers" :id="Pharmacy" :user="userId" :purchaseOrderCreator="row.item.adminPharmacy.id" :purchaseOrder="row.item"
              :quantityMedication="row.item.quantityMedicationsPurchase"></ModalPurchaseOrder>
         </template>

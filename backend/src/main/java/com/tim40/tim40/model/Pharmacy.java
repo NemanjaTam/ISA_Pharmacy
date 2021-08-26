@@ -86,6 +86,9 @@ public class Pharmacy {
     @OneToMany(fetch = FetchType.LAZY,mappedBy="pharmacy",cascade = CascadeType.ALL)
    	private final Set<PurchaseOrder> purchaseOrders = new HashSet<PurchaseOrder>(); 
     
+    @OneToMany(fetch = FetchType.LAZY,mappedBy="pharmacy",cascade = CascadeType.ALL)
+   	private final Set<Absence> absences = new HashSet<Absence>(); 
+    
 //    @OneToMany(fetch = FetchType.LAZY,mappedBy="pharmacy")
 //   	private final Set<Sale> sales = new HashSet<Sale>();
 //    
