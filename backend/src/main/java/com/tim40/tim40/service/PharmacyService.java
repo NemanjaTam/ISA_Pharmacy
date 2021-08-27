@@ -2,6 +2,7 @@ package com.tim40.tim40.service;
 
 import java.math.BigInteger;
 
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -21,6 +22,7 @@ import com.tim40.tim40.dto.MedicationQuantityDTO;
 import com.tim40.tim40.dto.PharmacyDTO;
 import com.tim40.tim40.dto.PurchaseOrderDTO;
 import com.tim40.tim40.dto.PurchaseOrderDetailedDTO;
+import com.tim40.tim40.model.enums.AbsenceType;
 import com.tim40.tim40.email.service.MailService;
 import com.tim40.tim40.model.Absence;
 import com.tim40.tim40.model.Dermatologist;
@@ -319,16 +321,19 @@ public class PharmacyService implements IPharmacyService {
 	@Override
 	public Set<AbsenceDetailedDTO> getAllUnapprovedAbsencesByPharmacyId(Long id) {
 		Set<AbsenceDetailedDTO> unapproved = new HashSet<AbsenceDetailedDTO>();
-		AbsenceDetailedDTO dto = new AbsenceDetailedDTO();
+		
 		Pharmacy pharmacy = this.pharmacyRepository.getById(id);
 		for (Absence absence : pharmacy.getAbsences()) {
-			if(!absence.isApproved()) {
+			if(absence.getType().equals(AbsenceType.PROCESSING)) {
+				AbsenceDetailedDTO dto = new AbsenceDetailedDTO();
 				dto.setId(absence.getId());
 				dto.setApproved(absence.isApproved());
 				dto.setFinished(absence.isFinished());
 				dto.setName(absence.getUser().getName());
 				dto.setSurname(absence.getUser().getSurname());
-				dto.setPeriod(absence.getPeriod());
+				dto.setType(absence.getType());
+				dto.setEndTime(absence.getEndTime());
+				dto.setStartTime(absence.getStartTime());
 				unapproved.add(dto);
 			}
 		}
@@ -340,14 +345,13 @@ public class PharmacyService implements IPharmacyService {
 		Set<Absence> approved = new HashSet<Absence>();
 		Pharmacy pharmacy = this.pharmacyRepository.getById(id);
 		for (Absence absence : pharmacy.getAbsences()) {
-			if(absence.isApproved()) {
+			if(absence.getType().equals(AbsenceType.APPROVED)) {
 				approved.add(absence);
 			}
 		}
 		return approved;
 	}
 
-	
 	
 
 	

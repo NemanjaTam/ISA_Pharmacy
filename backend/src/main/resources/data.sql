@@ -33,16 +33,16 @@ insert into dermatologist_pharmacy(pharmacy_id, dermatologist_id) values (3,9)
 insert into dermatologist_pharmacy(pharmacy_id, dermatologist_id) values (4,10)
 
 
-insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Pharmacist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic11@gmail.com', true, 'Nikola', 'kinzo','+381613238249', 'Savic', 'PHARMACIST', null, 1)
-insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Pharmacist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic12@gmail.com', true, 'Nikola', 'kinzo','+381613238249', 'Markovic', 'PHARMACIST', null, 1)
-insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Pharmacist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic13@gmail.com', true, 'Nikola', 'kinzo','+381613238249', 'Jovanovic', 'PHARMACIST', null, 1)
-insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Pharmacist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic14@gmail.com', true, 'Nikola', 'kinzo','+381613238249', 'Matejic', 'PHARMACIST', null, 2)
-insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Pharmacist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic15@gmail.com', true, 'Nikola', 'kinzo','+381613238249', 'Preradovic', 'PHARMACIST', null, 2)
-insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Pharmacist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic16@gmail.com', true, 'Nikola', 'kinzo','+381613238249', 'Prpic', 'PHARMACIST', null, 2)
-insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Pharmacist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic17@gmail.com', true, 'Nikola', 'kinzo','+381613238249', 'Antonic', 'PHARMACIST', null, 3)
-insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Pharmacist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic18@gmail.com', true, 'Nikola', 'kinzo','+381613238249', 'Atanasijevic', 'PHARMACIST', null, 3)
-insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Pharmacist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic19@gmail.com', true, 'Nikola', 'kinzo','+381613238249', 'Antonijevic', 'PHARMACIST', null, 3)
-insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Pharmacist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic20@gmail.com', true, 'Nikola', 'kinzo','+381613238249', 'Antonic', 'PHARMACIST', null, 4)
+insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Pharmacist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic11@gmail.com', true, 'Savo', 'kinzo','+381613238249', 'Savic', 'PHARMACIST', null, 1)
+insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Pharmacist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic12@gmail.com', true, 'Marko', 'kinzo','+381613238249', 'Markovic', 'PHARMACIST', null, 1)
+insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Pharmacist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic13@gmail.com', true, 'Jovan', 'kinzo','+381613238249', 'Jovanovic', 'PHARMACIST', null, 1)
+insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Pharmacist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic14@gmail.com', true, 'Mateja', 'kinzo','+381613238249', 'Matejic', 'PHARMACIST', null, 2)
+insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Pharmacist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic15@gmail.com', true, 'Prerad', 'kinzo','+381613238249', 'Preradovic', 'PHARMACIST', null, 2)
+insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Pharmacist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic16@gmail.com', true, 'Prerad', 'kinzo','+381613238249', 'Prpic', 'PHARMACIST', null, 2)
+insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Pharmacist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic17@gmail.com', true, 'Anton', 'kinzo','+381613238249', 'Antonic', 'PHARMACIST', null, 3)
+insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Pharmacist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic18@gmail.com', true, 'Atanasije', 'kinzo','+381613238249', 'Atanasijevic', 'PHARMACIST', null, 3)
+insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Pharmacist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic19@gmail.com', true, 'Antonije', 'kinzo','+381613238249', 'Antonijevic', 'PHARMACIST', null, 3)
+insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Pharmacist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic20@gmail.com', true, 'Andrej', 'kinzo','+381613238249', 'Antonic', 'PHARMACIST', null, 4)
 
 
 
@@ -433,14 +433,15 @@ insert into users(dtype, city, number, postalcode, state, street, email, is_firs
 insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Pharmacy_admin', 'Novi Sad', '23', 21249, 'Srbija', 'Stefana Nemanje1', 'jovan@gmail.com', true, 'Jovan', 'admin','+381613238243', 'Jovic', 'PHARMACY_ADMINISTRATOR', null, 1)
 
 insert into pharmacies_subscribers(pharmacy_id,subscribers_id) values(1,41)
+insert into absences( endtime,is_approved,is_finished, starttime,type,pharmacy_id ,user_id) values ( '2021-08-08',true, false, '2021-11-08','APPROVED', 1,11)
 
-insert into absences(is_approved, is_finished, endtime, starttime,pharmacy_id ,user_id) values (true, false, '2021-07-20 00:00:00-08', '2021-07-10 00:00:00-08', 1,1)
+insert into absences(  endtime,is_approved,is_finished, starttime,type,pharmacy_id ,user_id) values ( '2021-08-08',false, false, '2021-08-15','PROCESSING', 1,12)
+insert into absences(  endtime,is_approved,is_finished, starttime,type,pharmacy_id ,user_id) values ( '2021-08-08',false, false, '2021-08-15','PROCESSING', 1,13)
+insert into absences( endtime,is_approved,is_finished, starttime,type,pharmacy_id ,user_id) values ('2021-08-08',false, false, '2021-08-08','PROCESSING', 2,14)
 
-insert into absences(is_approved, is_finished, endtime, starttime,pharmacy_id ,user_id) values (false, false, '2021-07-20 00:00:00-08', '2021-11-10 00:00:00-08', 1,2)
-insert into absences(is_approved, is_finished, endtime, starttime, pharmacy_id,user_id) values (false, false, '2021-07-20 00:00:00-08', '2021-11-10 00:00:00-08', 2,1)
+insert into absences( endtime,is_approved,is_finished, starttime,type,pharmacy_id ,user_id) values ('2021-08-08',false, false,  '2021-10-08','PROCESSING', 3,17)
+insert into absences( endtime,is_approved,is_finished, starttime,type,pharmacy_id ,user_id) values ( '2021-08-08',false, false, '2021-08-08','PROCESSING',4,20)
 
-insert into absences(is_approved, is_finished, endtime, starttime,pharmacy_id ,user_id) values (false, false, '2021-07-20 00:00:00-08', '2021-11-10 00:00:00-08', 3,7)
-insert into absences(is_approved, is_finished, endtime, starttime,pharmacy_id ,user_id) values (false, false, '2021-07-20 00:00:00-08', '2021-11-10 00:00:00-08', 4,10)
 
 insert into purchase_order_list(endtime,purchase_status,starttime,pharmacy_administrator_id,pharmacy_id) values('2021-08-08','CEKA_PONUDE','2021-01-01',42,1)
 insert into medication_quantity_of_purchase_order(quantity,medication_id) values (10,1)

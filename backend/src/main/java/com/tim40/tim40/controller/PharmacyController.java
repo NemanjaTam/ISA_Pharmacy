@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tim40.tim40.dto.AbsenceDetailedDTO;
 import com.tim40.tim40.dto.AcceptOfferDTO;
+import com.tim40.tim40.dto.DermatologistDetailsDTO;
 import com.tim40.tim40.dto.MedicationDTO;
 import com.tim40.tim40.dto.MedicationQuantityDTO;
 import com.tim40.tim40.dto.PatientAllergedDTO;
@@ -161,17 +163,28 @@ public class PharmacyController {
 		return this.pharmacyService.editMedication(dto, pharmacyId);
 	}
 	
-	@ResponseStatus(HttpStatus.OK)
+
 	@GetMapping(value="/get-all-unapproved-absences/{id}",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public Set<AbsenceDetailedDTO> getAbsencesForPharmacyId(@PathVariable("id") Long id){
-		return this.pharmacyService.getAllUnapprovedAbsencesByPharmacyId(id);
+	public ResponseEntity<Set<AbsenceDetailedDTO>> getAbsencesForPharmacyId(@PathVariable("id") Long id,@RequestHeader("usertype") String type){
+		if("PHARMACY_ADMINISTRATOR".equals(type)){
+			return new ResponseEntity<Set<AbsenceDetailedDTO>>(this.pharmacyService.getAllUnapprovedAbsencesByPharmacyId(id), HttpStatus.OK);
+			}
+			else {
+				return new ResponseEntity<Set<AbsenceDetailedDTO>>(HttpStatus.UNAUTHORIZED);
+			}
 	}
 	
-	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(value="/get-all-approved-absences/{id}",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public Set<Absence> getApprovedAbsencesForPharmacyId(@PathVariable("id") Long id){
-		return this.pharmacyService.getAllApprovedAbsencesByPharmacyId(id);
+	public ResponseEntity<Set<Absence>> getApprovedAbsencesForPharmacyId(@PathVariable("id") Long id,@RequestHeader("usertype") String type){
+		if("PHARMACY_ADMINISTRATOR".equals(type)){
+			return new ResponseEntity<Set<Absence>>(this.pharmacyService.getAllApprovedAbsencesByPharmacyId(id), HttpStatus.OK);
+			}
+			else {
+				return new ResponseEntity<Set<Absence>>(HttpStatus.UNAUTHORIZED);
+			}
 	}
+	
+
 	
 
 }

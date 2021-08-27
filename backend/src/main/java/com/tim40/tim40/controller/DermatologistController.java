@@ -49,7 +49,7 @@ public class DermatologistController {
 		public ResponseEntity<List<DermatologistDetailsProjection>> getAllByPharmacyID2(){
 		 return dermatologistService.getAllDermatologistsForAllPharmacies();
 		}
-		
+		//AUTORIZACIJA/AUTENTIKACIJA
 		@RequestMapping(value="/getdermatologistsandpharmacynames/", method = RequestMethod.GET)
 		public  ResponseEntity<List<DermatologistDetailsDTO>> GetDermatologistsAndPharmacyNames(@RequestHeader("usertype") String type){
 			if("PHARMACY_ADMINISTRATOR".equals(type)){

@@ -29,7 +29,7 @@ public class AbsenceDTO {
 		this.id = absence.getId();
 		this.isApproved = absence.isApproved();
 		this.isFinished = absence.isFinished();
-		this.period = absence.getPeriod();
+//		this.period = absence.getPeriod();
 		this.user = absence.getUser();
 	}
 	
