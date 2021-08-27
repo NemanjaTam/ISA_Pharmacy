@@ -12,5 +12,6 @@ public interface IPharmacyService {
 	ResponseEntity<List<Medication>> getAllMedications(Long id);
 	ResponseEntity<String> isMedicationAvailable(Long pharmacyId, Long medicationId);
 	public Pharmacy getById(Long pharmacyID);
+	ResponseEntity<List<Pharmacy>> getMedicationByPharmacy(String ids);
 
 }

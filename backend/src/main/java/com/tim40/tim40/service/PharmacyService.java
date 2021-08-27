@@ -2,7 +2,6 @@ package com.tim40.tim40.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,22 +9,22 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.tim40.tim40.dto.PharmacyDTO;
-import com.tim40.tim40.email.service.MailService;
-import com.tim40.tim40.model.Dermatologist;
 import com.tim40.tim40.model.Medication;
-import com.tim40.tim40.model.Patient;
 import com.tim40.tim40.model.Pharmacy;
 import com.tim40.tim40.model.QuantityMedication;
+import com.tim40.tim40.repository.MedicationRepository;
 import com.tim40.tim40.repository.PharmacyRepository;
 
 @Service
 public class PharmacyService implements IPharmacyService {
 	
 	private PharmacyRepository pharmacyRepository;
-
+	private MedicationRepository medicationRepository;
+	
 	@Autowired
-	public PharmacyService(PharmacyRepository pharmacyRepository) {
+	public PharmacyService(PharmacyRepository pharmacyRepository, MedicationRepository medicationRepository) {
 		this.pharmacyRepository = pharmacyRepository;
+		this.medicationRepository = medicationRepository;
 	}
 	
 	public PharmacyDTO createPharmacy (PharmacyDTO pharmacyDTO) {
@@ -60,6 +59,53 @@ public class PharmacyService implements IPharmacyService {
 		return pharmacyRepository.getById(pharmacyID);
 	}
 
-
+	@Override
+	public ResponseEntity<List<Pharmacy>> getMedicationByPharmacy(String ids) {
+		
+		String[] splitted = ids.split(",");
+		List<Medication> medications = new ArrayList<Medication>();
+		List<Pharmacy> pharmacies = pharmacyRepository.findAll();
+		List<Pharmacy> result = new ArrayList<Pharmacy>();
+		
+		for(String s : splitted) {
+			int s2 = Integer.parseInt(s);
+			medications.add(medicationRepository.findById((long) s2).get()) ;
+			
+		}
+		for(Pharmacy p : pharmacies) {
+			
+			boolean exists = true;
+			
+			for(Medication medication: medications) {
+				
+				if(!isMedicationAvaiable(p, medication.getId()))  {
+					exists = false;
+				}
+				
+			}
+			
+			if(exists) {
+				result.add(p);
+			}
+		}
+		
+		
+		return new ResponseEntity<List<Pharmacy>>(result, HttpStatus.OK);
+		
+		
+	}
 	
+	private boolean isMedicationAvaiable(Pharmacy pharmacy, long medicamentId) {
+		
+		for(QuantityMedication qm : pharmacy.getMedicationQuantity()) {
+			if(qm.getQuantity() > 0 && qm.getMedication().getId().equals(medicamentId))
+			{
+				return true;
+			}
+		}
+		
+		return false;
+	}
+
+
 }
