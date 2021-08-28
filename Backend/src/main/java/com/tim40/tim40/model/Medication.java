@@ -71,10 +71,6 @@ public class Medication {
     )
 	private Set<Medication> replacementMedications = new HashSet<Medication>();
    
-    public Medication() {
-    	super();
-    }
-    
     public Medication (Long id, String name, String code, String typeOfMedicine, String structure, String contraindications, MedicationForm medicationForm,
     		MedicinePublishingType publishingType, String producer, String recommendedIntake, Pharmacy pharmacy, String notes,
     		Set<Medication> replacementMedications)
