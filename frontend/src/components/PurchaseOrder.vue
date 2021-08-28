@@ -106,6 +106,7 @@
                 :state="nameState"
                 placeholder="Enter your name"
                 trim
+              
               ></b-form-input>
 
               <label for="input-live">Quantity:</label>
@@ -226,8 +227,9 @@
               </b-list-group>
             </div>
           </b-tab>
-          <b-tab title="Order existing medication">
-           <PurchaseOrderList/>
+          <b-tab title="All orders">
+           <!-- <PurchaseOrderList/>-->
+           <List/>
           </b-tab>
         </b-tabs>
       </b-card>
@@ -237,11 +239,13 @@
 
 
 <script>
-import PurchaseOrderList from "../components/PurchaseOrderList.vue";
+
+import List from "../components/ListOfPurchaseOrders.vue"
 export default {
   name: "PurchaseOrder",
   components: {
-    PurchaseOrderList,
+    
+    List,
   },
   computed: {
     User() {

@@ -41,5 +41,11 @@ public class AbsenceService implements IAbsenceService {
 		}
 		return new ResponseEntity<String>("not_on_absence", HttpStatus.OK);
 	}
+
+	@Override
+	public List<Absence> getAllAbsenceForPharmacyId(Long id) {
+//		List<Absence> absences = this.absenceRepository.findByPharmacy(id); NE!!!
+		return null;
+	}
 	
 }

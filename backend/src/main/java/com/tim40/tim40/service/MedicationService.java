@@ -31,18 +31,19 @@ public class MedicationService implements IMedicationService{
 		this.pharmacyRepository = pharmacyRepository;
 	}
 
-//	public MedicationDTO createMedication (MedicationDTO medicationDTO) {
-//		Pharmacy pharmacy = pharmacyRepository.findById(medicationDTO.getPharmacyID()).get();
-//		Set<Medication> replacementMedications = new HashSet<Medication>();
-//		for(Long med : medicationDTO.getReplacementMedicationsIDs()) {
-//			replacementMedications.add(this.medicationRepository.findById(med).get());
-//		}
-//		Medication medication = new Medication(medicationDTO.getName(), medicationDTO.getCode(), medicationDTO.getTypeOfMedication(),
-//				medicationDTO.getStructure(), medicationDTO.getContraindications(), medicationDTO.getRecommendedIntake(), 
-//				pharmacy, replacementMedications);
-//		Medication createdMedication = medicationRepository.save(medication);
-//		return new MedicationDTO(createdMedication);
-//	}
+	public MedicationDTO createMedication (MedicationDTO medicationDTO) {
+		Pharmacy pharmacy = pharmacyRepository.findById(medicationDTO.getPharmacyID()).get();
+		Set<Medication> replacementMedications = new HashSet<Medication>();
+		for(Long med : medicationDTO.getReplacementMedicationsIDs()) {
+			replacementMedications.add(this.medicationRepository.findById(med).get());
+		}
+		Medication medication = new Medication(medicationDTO.getName(), medicationDTO.getCode(), medicationDTO.getTypeOfMedication(),
+				medicationDTO.getStructure(), medicationDTO.getContraindications(), medicationDTO.getRecommendedIntake(), 
+				pharmacy, replacementMedications);
+		Medication createdMedication = medicationRepository.save(medication);
+		return new MedicationDTO(createdMedication);
+	}
+	//ne menjati
 	public Medication createMedicationWithoutReplacement (MedicationQuantityDTO medicationDTO) {
 		
 		Set<Medication> replacementMedications = new HashSet<Medication>();

@@ -1,16 +1,15 @@
 <template>
   <div>
-    
     <b-input v-model="filter" placeholder="Search"></b-input>
-
     <div>
       <b-table
         :items="this.getMedicines"
-        :fields="fields"
-        striped
-        responsive="sm"
-        hover
         :filter="filter"
+        :fields="fields"
+        responsive="sm"
+        ref="selectableTable"
+        @row-selected="onRowSelected"
+        @row-unselected="onRowUnselected"
         :filter-included-fields="[
           'name',
           'description',
@@ -20,40 +19,12 @@
         ]"
       >
         <template #cell(show_details)="row">
-          <b-button size="sm" @click="row.toggleDetails" class="mr-2">
-            {{ row.detailsShowing ? "Hide" : "Show" }} Edit
-          </b-button>
-          
           <b-button size="sm" @click="removeItem(row.item)" class="mr-2">
             Delete
           </b-button>
-          <Modal :item="row.item"></Modal>
-          <!-- <modal
-            v-if="modalVisible"
-            @close="modalVisible = false"
-            :data="modalData"
-          /> -->
-
-    
+          <Modal :selected="row.item" :id="Pharmacy"></Modal>
         </template>
-
-        <template #row-details="row">
-          <b-card>
-            <b-row class="mb-2">
-              <b-col sm="3" class="text-sm-right"><b>Age:</b></b-col>
-              <b-col>{{ row.item.age }}</b-col>
-            </b-row>
-
-            <b-row class="mb-2">
-              <b-col sm="3" class="text-sm-right"><b>Is Active:</b></b-col>
-              <b-col>{{ row.item.isActive }}</b-col>
-            </b-row>
-
-            <b-button size="sm" @click="row.toggleDetails"
-              >Hide Details</b-button
-            >
-          </b-card>
-        </template>
+        <div></div>
       </b-table>
     </div>
   </div>
@@ -71,6 +42,9 @@ export default {
     },
     getMedicines() {
       return this.$store.getters.getMedicines;
+    },
+    getSelectedMed() {
+      return this.$store.getters.getSelectedMedicineForEdit;
     },
   },
   data() {
@@ -103,9 +77,26 @@ export default {
       search: "",
       filter: "",
       modalData: "",
+      med: {},
+      selectMode: "single",
+      selected: [],
     };
   },
   methods: {
+    onRowSelected(items) {
+      console.log("klinkuto!!");
+      this.selected = items; //u selected se nalazi
+      this.$store.dispatch("updateSelectedMedicineForEdit", items[0]);
+    },
+    onRowUnselected() {
+      this.selected = [];
+
+      this.$store.dispatch("updateSelectedMedicineForEdit", null);
+    },
+
+    setItem(item) {
+      this.med = item;
+    },
     modalContextMenu(data) {
       this.modalData = data;
       this.modalShow = true;

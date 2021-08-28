@@ -1,6 +1,7 @@
 package com.tim40.tim40.repository;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 import javax.transaction.Transactional;
 
@@ -10,6 +11,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.tim40.tim40.model.Pharmacy;
+import com.tim40.tim40.model.QuantityMedicationPurchaseOrder;
 import com.tim40.tim40.model.enums.PurchaseOrderStatus;
 
 public interface PharmacyRepository extends JpaRepository<Pharmacy, Long> {
@@ -41,6 +43,9 @@ public interface PharmacyRepository extends JpaRepository<Pharmacy, Long> {
   		+ "values(:purchaseId,:id)",nativeQuery = true)
   public void insertMedicationInPurchaseOrder(@Param("purchaseId") Long purchaseId,@Param("id") Long id); //ovde konacno stavljam lekove u purchase order tj povezujem ih
   //***
+  
+  @Query(value="select * from medication_quantity_of_purchase_order where as mq where mq.purchase_order_id =:id",nativeQuery = true)
+  public  Set<QuantityMedicationPurchaseOrder> getAllOrderedQuantities();
 }
 
 

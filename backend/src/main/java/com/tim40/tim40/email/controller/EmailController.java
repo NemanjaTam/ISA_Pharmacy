@@ -60,4 +60,25 @@ public class EmailController {
 		return true;
 	}
 	
+	//salje razlicite poruke svima
+	@ResponseStatus(HttpStatus.OK)
+	@PostMapping(value = "/send-different-messages-to-provider", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public boolean sendMailsToProviders(@RequestBody List<MailListSubscribersDTO> emailDTO) throws Exception{
+		List<MailListSubscribersDTO> dto = emailDTO;
+		
+		List<Mail> mails = new ArrayList<Mail>();
+		for(MailListSubscribersDTO email:dto){
+			System.out.println(email);
+			Mail mail = new Mail(email.getMailFrom(),email.getMailTo().get(0),email.getMailCc(),email.getMailBcc(),
+					email.getMailSubject(),email.getMailContent(),email.getContentType(),email.getAttachments());
+			mails.add(mail);
+			boolean check = emailService.sendMail(mail);
+			if(!check) {
+				System.out.println(check);
+				return check;
+			}
+		}
+		return true;
+	}
+	
 }

@@ -19,5 +19,7 @@ public class QuantityMedicationPurchaseOrder {
 	@OneToOne(cascade = CascadeType.ALL)
 	private Medication medication;
 	
+	
+	
 
 }
