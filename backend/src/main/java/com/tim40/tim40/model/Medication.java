@@ -75,6 +75,8 @@ public class Medication {
     @Column (nullable = false)
     private String notes; 
     
+    @Column (nullable = false)
+    private String description; 
 //    @ManyToOne
 //    @JoinColumn(name = "pharmacy_id", nullable = false)
 //    private Pharmacy pharmacy;
