@@ -105,7 +105,8 @@ export default {
               else if (user.userType == "PHARMACY_ADMINISTRATOR") {
               console.log("ADMIN");
               console.log(user);
-              localStorage.setItem("user", user);
+              this.getPharmacyIdbyUserId(user.id);
+             
               if (user.firstTimeLogging) {
                 this.$store.dispatch("updateUser", user);
                 this.$router.push({ name: "FirstTimeLogging" });
@@ -124,9 +125,32 @@ export default {
           }
         });
     },
+
+    getPharmacyIdbyUserId(id) {
+      fetch(`http://localhost:9005/api/pharmacy/getpharmacyidbyuser/${id}`, {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        method: "GET",
+      })
+        .then(function(response) {
+          if (response.ok) {
+            return response.json();
+          } else {
+            return Promise.reject(response);
+          }
+        })
+        .then((data) => ( this.$store.dispatch("updatePharmacy",data)))
+        .catch(function(error) {
+          console.warn(error);
+        });
+    },
+
     onReset(event) {
       event.preventDefault();
       console.log("reset");
+      this.getPharmacyIdbyUserId();
     },
   },
 };

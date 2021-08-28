@@ -44,6 +44,7 @@ public class Medication {
     @Column(nullable = false)
     private String name;
 
+
     @Column(nullable = false)
     private String manufacturer; //moze biti entitet ali komplikujemo
 
@@ -83,7 +84,7 @@ public class Medication {
     
     @OneToMany(fetch = FetchType.LAZY,mappedBy="medication")
     private Set<MedicationRating> ratings;
-
+    
     @JsonBackReference
     @ManyToMany
 //    @JoinTable(
@@ -108,5 +109,22 @@ public class Medication {
         this.medicationForm = medicationForm;
 //        this.pharmacy = pharmacy; 
 //        this.replacementMedications = replacementMedications;
+    }
+    
+    public Medication (String name, String code, TypeOfMedication typeOfMedication, String structure, String contraindications,
+            String recommendedIntake,String description,String manufacturer,MedicationForm medicationForm,PrescriptionRegime prescriptionRegime)
+    {
+        super();
+        this.name = name;
+        this.code = code;
+        this.typeOfMedication = typeOfMedication;
+        this.structure = structure;
+        this.contraindications = contraindications;
+        this.recommendedIntake = recommendedIntake;
+        this.description = description;
+        this.manufacturer = manufacturer;
+        this.medicationForm = medicationForm;
+        this.prescriptionRegime = prescriptionRegime;
+
     }
 }

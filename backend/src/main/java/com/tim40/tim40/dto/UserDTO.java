@@ -39,6 +39,7 @@ public class UserDTO {
 	private Set<Email> inbox = new HashSet<Email>();
 	
 	private Set<Email> send = new HashSet<Email>();
+	
 
 	public UserDTO(User user) {
 		super();

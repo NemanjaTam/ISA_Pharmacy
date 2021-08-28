@@ -68,6 +68,7 @@ public class PharmacyAdministratorController {
 //		
 //		return pharmacyAdminService.getPharmacy(id);
 //	}
+	//ne menjati
 	@RequestMapping(value="/getpharmacy/{id}", method = RequestMethod.GET)
 	public PharmacyProjection getPharmacyById(@PathVariable("id") Long id) {
 		return pharmacyAdminService.getPharmacyById(id, "PHARMACY_ADMINISTRATOR");

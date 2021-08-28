@@ -37,12 +37,13 @@ public class PharmacistController {
 	public ResponseEntity<Set<Patient>> getAll(@PathVariable("id") Long id) {
 		return pharmacistService.getAllPatients(id);
 	}
+	//ne menjati
 	@RequestMapping(value="/getallpharmacistsbyid/{id}", method = RequestMethod.GET)
 	public ResponseEntity<List<PharmacistDetailsProjection>> getAllPharmacistByPharmacyId(@PathVariable("id") Long id){
 		return pharmacistService.getAllPharamcistsById(id);	
 	}
 	
-	//authorization:PHARMACY ADMINISTRATOR AND REGISTERED USER
+	//authorization:PHARMACY ADMINISTRATOR AND REGISTERED USER ne menjati nista
 	@RequestMapping(value={"/getallpharmacists","/getallpharmacists/{id}"}, method = RequestMethod.GET)
 	public ResponseEntity<List<PharmacistDetailsProjection>> getAllPharmacist(@PathVariable(required = false) Long id,@RequestHeader("usertype") String type){
 		if("PHARMACY_ADMINISTRATOR".equals(type)){
@@ -58,7 +59,7 @@ public class PharmacistController {
 	
 	
 	
-	//moze samo pharmacy admin
+	//moze samo pharmacy admin, ne menjati nista 
 	@RequestMapping(value="/getpharmacistdata/{id}", method = RequestMethod.GET)
 	public ResponseEntity<List<PharmacistDetailsProjection>> getPharmacistData(@PathVariable("id") Long id){
 		

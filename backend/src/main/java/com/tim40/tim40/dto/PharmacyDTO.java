@@ -1,5 +1,5 @@
 package com.tim40.tim40.dto;
-
+//ne menjati koristi se
 import com.tim40.tim40.model.Address;
 import com.tim40.tim40.model.Pharmacy;
 
