@@ -11,9 +11,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.tim40.tim40.dto.MedicationDTO;
+import com.tim40.tim40.dto.MedicationQuantityDTO;
 import com.tim40.tim40.model.Medication;
 import com.tim40.tim40.model.Pharmacy;
 import com.tim40.tim40.model.QuantityMedication;
+import com.tim40.tim40.model.enums.MedicationForm;
 import com.tim40.tim40.repository.MedicationRepository;
 import com.tim40.tim40.repository.PharmacyRepository;
 
@@ -41,6 +43,17 @@ public class MedicationService implements IMedicationService{
 		Medication createdMedication = medicationRepository.save(medication);
 		return new MedicationDTO(createdMedication);
 	}
+	//ne menjati
+	public Medication createMedicationWithoutReplacement (MedicationQuantityDTO medicationDTO) {
+		
+		Set<Medication> replacementMedications = new HashSet<Medication>();
+
+		Medication medication = new Medication(medicationDTO.getName(),medicationDTO.getCode(),medicationDTO.getTypeOfMedication(),medicationDTO.getStructure(),medicationDTO.getContraindications(),medicationDTO.getRecommendedIntake(),medicationDTO.getDescription(),medicationDTO.getManufacturer()
+				,medicationDTO.getMedicationForm(),medicationDTO.getPrescriptionRegime());
+		Medication createdMedication = medicationRepository.save(medication);
+		return createdMedication;
+	}
+
 
 	@Override
 	public ResponseEntity<List<Medication>> getReplacementMedication(Long pharmacyId, Long medicationId) {

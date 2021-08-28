@@ -2,10 +2,18 @@ package com.tim40.tim40.controller;
 
 import java.util.List;
 
+import java.util.Set;
+
+import org.springframework.transaction.annotation.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,13 +23,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tim40.tim40.dto.AbsenceDetailedDTO;
+import com.tim40.tim40.dto.AcceptOfferDTO;
+import com.tim40.tim40.dto.MedicationDTO;
+import com.tim40.tim40.dto.MedicationQuantityDTO;
 import com.tim40.tim40.dto.PatientAllergedDTO;
 import com.tim40.tim40.dto.PharmacyDTO;
 import com.tim40.tim40.dto.PharmacyProfileDTO;
+import com.tim40.tim40.dto.PurchaseOrderDTO;
+import com.tim40.tim40.dto.RejectedAcceptedDTO;
+import com.tim40.tim40.model.Absence;
 import com.tim40.tim40.model.Medication;
+import com.tim40.tim40.model.Offer;
 import com.tim40.tim40.model.Pharmacy;
+import com.tim40.tim40.model.PurchaseOrder;
+import com.tim40.tim40.model.QuantityMedication;
 import com.tim40.tim40.service.PharmacyService;
-
+@EnableTransactionManagement
 @RestController
 @RequestMapping(value = "api/pharmacy")
 public class PharmacyController {
@@ -50,7 +68,7 @@ public class PharmacyController {
 	{
 		return pharmacyService.isMedicationAvailable(patientAllergedDTO.getPatientId(), patientAllergedDTO.getMedicationId());
 	}
-	
+	//ne menjati koristi se za funkcionalnost 
 	@GetMapping(value = "/getpharmacy/{id}",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
     public PharmacyProfileDTO getPharmacyById(@PathVariable(name="id") String stringId){
@@ -63,5 +81,97 @@ public class PharmacyController {
 
         return pharmacyDTO;
     }
+	//ne menjati
+	@GetMapping(value = "/getsubscribersbypharmacyid/{id}",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseStatus(HttpStatus.OK)
+	public List<String> getAllSubscribers(@PathVariable(name="id") String stringId){
+		long id = Long.valueOf(stringId);
+		return this.pharmacyService.getAllSubscribers(id);
+	}
+	
+	//ne menjati
+	@GetMapping(value = "/getpharmacyidbyuser/{id}",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseStatus(HttpStatus.OK)
+	public Long getPharmacyIdbyUserId(@PathVariable(name="id") String stringId) {
+		long id = Long.valueOf(stringId);
+		return this.pharmacyService.getPharmacyIdByUserId(id);
+		
+	}
+	//ne menjati
+	@PostMapping(value="purchaseorder-create/{id}",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseStatus(HttpStatus.OK)
+	public boolean CreatePurchaseOrder(@PathVariable(name="id") String stringId,@RequestBody PurchaseOrderDTO dto) {
+		long id = Long.valueOf(stringId);
+		Pharmacy pharmacy = this.pharmacyService.getById(id);	
+		return this.pharmacyService.CreatePurchaseOrder(pharmacy,dto);
+		
+	}
+	//ne menjati
+	@PostMapping(value="purchaseorder-create-new-medication/{id}",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseStatus(HttpStatus.OK)
+	public boolean CreatePurchaseOrderForNewMedication(@PathVariable(name="id") String stringId,@RequestBody PurchaseOrderDTO dto) {
+		long id = Long.valueOf(stringId);
+		Pharmacy pharmacy = this.pharmacyService.getById(id);	
+		return this.pharmacyService.CreatePurchaseOrderForNewMedication(pharmacy,dto);
+		
+	}
+	//ne menjati
+	@GetMapping(value = "/get-purchase-order/{id}",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseStatus(HttpStatus.OK)
+	public Set<PurchaseOrder> getAllPurchaseOrders(@PathVariable("id") Long id){
+	 Set<PurchaseOrder> purchaseOrders = this.pharmacyService.getAllPurchaseOrders(id);
+		return purchaseOrders;
+	}
+	
+	
+	//ne menjati
+	@Transactional()
+	@PostMapping(value="/delete-purchase-order/{id}",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseStatus(HttpStatus.OK)
+	public boolean deletePurchaseOrder(@RequestBody Long id,@PathVariable("id") Long pharmacyId) {
+		return this.pharmacyService.deletePurchaseOrder(id, pharmacyId);
+	}
+	
+	
+	
+	//ne menjati
+	@PostMapping(value = "/accept-offer",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseStatus(HttpStatus.OK)
+	@Transactional(readOnly = false)
+	 //ovde je transakcija jer sta ako se desi da se ne apdejtuje purchase order status?! ->nekonzistentno
+	public List<Offer> acceptAndDeclineOffers(@RequestBody AcceptOfferDTO acceptOffer){
+		List<Offer> offers = this.pharmacyService.acceptOffer(acceptOffer);
+		return offers;
+	}
+	//ne menjati
+
+	@RequestMapping(method = RequestMethod.POST, path = "/delete-medication/{id}")
+	@ResponseStatus(HttpStatus.OK)
+	@Transactional(readOnly = false)
+	public boolean deleteMedication(@RequestBody Long medicationId,@PathVariable("id") Long id){
+		 System.out.println(id + " " + "PHARMACY ID");
+		Pharmacy pharmacy = this.pharmacyService.getById(id);
+		boolean success = this.pharmacyService.deleteMedication(id,medicationId);
+		return success;
+	}
+	
+	//ne menjati
+	@PostMapping(value = "/edit-medication/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public boolean editMedication(@RequestBody MedicationQuantityDTO dto,@PathVariable("id") Long pharmacyId){
+		return this.pharmacyService.editMedication(dto, pharmacyId);
+	}
+	
+	@ResponseStatus(HttpStatus.OK)
+	@GetMapping(value="/get-all-unapproved-absences/{id}",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public Set<AbsenceDetailedDTO> getAbsencesForPharmacyId(@PathVariable("id") Long id){
+		return this.pharmacyService.getAllUnapprovedAbsencesByPharmacyId(id);
+	}
+	
+	@ResponseStatus(HttpStatus.OK)
+	@GetMapping(value="/get-all-approved-absences/{id}",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public Set<Absence> getApprovedAbsencesForPharmacyId(@PathVariable("id") Long id){
+		return this.pharmacyService.getAllApprovedAbsencesByPharmacyId(id);
+	}
+	
 
 }

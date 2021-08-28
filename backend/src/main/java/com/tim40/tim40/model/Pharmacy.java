@@ -1,8 +1,15 @@
 package com.tim40.tim40.model;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+<<<<<<< HEAD
 
+=======
+import javax.persistence.ManyToMany;
+import javax.persistence.CascadeType;
+>>>>>>> 69abdcb991a0bde17260c870f785f5e30ea3f47e
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -71,8 +78,8 @@ public class Pharmacy {
 //    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pharmacy")
 //    private final Set<Appointment> appointments = new HashSet<Appointment>();
 
-//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pharmacy")
-//    private final Set<Medication> medications = new HashSet<Medication>();
+//    @OneToMany(fetch = FetchType.LAZY)
+//    private final Set<QuantityMedication> medications = new HashSet<QuantityMedication>();
 
 //    @OneToMany(fetch = FetchType.LAZY,mappedBy="pharmacy")
 //	  private final Set<PharmacyAdministrator> pharmacyAdministrators = new HashSet<PharmacyAdministrator>();
@@ -89,15 +96,18 @@ public class Pharmacy {
 //    @OneToMany(fetch = FetchType.LAZY,mappedBy="pharmacy")
 //    private Set<PharmacyRating> ratings = new HashSet<PharmacyRating>();
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY,mappedBy="pharmacy",cascade = CascadeType.ALL)
    	private final Set<QuantityMedication> medicationQuantity = new HashSet<QuantityMedication>();
     
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY,mappedBy="pharmacy",cascade = CascadeType.ALL)
    	private final Set<PurchaseOrder> purchaseOrders = new HashSet<PurchaseOrder>(); 
     
-    @OneToMany(fetch = FetchType.LAZY,mappedBy="pharmacy")
-   	private final Set<Sale> sales = new HashSet<Sale>();
+    @OneToMany(fetch = FetchType.LAZY,mappedBy="pharmacy",cascade = CascadeType.ALL)
+   	private final Set<Absence> absences = new HashSet<Absence>(); 
     
+//    @OneToMany(fetch = FetchType.LAZY,mappedBy="pharmacy")
+//   	private final Set<Sale> sales = new HashSet<Sale>();
+//    
     @OneToMany(fetch = FetchType.LAZY)
     private final Set<User> subscribers = new HashSet<User>();
     
@@ -108,7 +118,25 @@ public class Pharmacy {
         this.address = address;
         this.avgRating = 0.0;
     }
+    //ne menjati
+    public List<Medication> getAllMedication() {
+    	List<Medication> medication = new ArrayList<Medication>();
+    	for (QuantityMedication quantityMedication : medicationQuantity) {
+			medication.add(quantityMedication.getMedication());
+		}
+		return medication;
+    }
     
+    public PurchaseOrder update(PurchaseOrder po) {
+    	for (PurchaseOrder purchaseOrder : purchaseOrders) {
+			if(po.getId().equals(purchaseOrder.getId())) {
+			    purchaseOrder.setOffers(po.getOffers());
+			    purchaseOrder.setPurchaseOrderStatus(po.getPurchaseOrderStatus());
+			}
+		}
+		return po;
+    	
+    }
     
 
 }

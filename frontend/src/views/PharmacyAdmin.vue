@@ -55,6 +55,12 @@ export default {
       return this.$store.getters.isRegistered;
     },
   },
+  data(){
+    return{
+
+    }
+
+  },
   //   User() {
   //     return this.$store.getters.getUser;
   //   },
@@ -65,6 +71,30 @@ export default {
   //     return this.$store.getters.isRegisteredUser;
   //   },
   // },
+methods:{
+    getPharmacyIdbyUserId(id) {
+      fetch(`http://localhost:9005/api/pharmacy/getpharmacyidbyuser/${id}`, {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        method: "GET",
+      })
+        .then(function(response) {
+          if (response.ok) {
+            return response.json();
+          } else {
+            return Promise.reject(response);
+          }
+        })
+        .then((data) => ( this.$store.dispatch("updatePharmacy",data)))
+        .catch(function(error) {
+          console.warn(error);
+        });
+    },
+  
+}
+
 };
 </script>
 <style scoped>

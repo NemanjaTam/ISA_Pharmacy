@@ -17,7 +17,7 @@ public interface PharmacyAdministratorRepository extends JpaRepository<PharmacyA
     PharmacyAdministrator findById(long id);
     PharmacyAdministrator findByEmail(String email);
     List<PharmacyAdministrator> findAll();
-    
+    //ne menjati nista
     @Query(value="SELECT USERS.name, PHARMACIES.id from USERS, PHARMACIES WHERE USERS.id = :ID AND USERS.pharmacy_id = PHARMACIES.id",nativeQuery = true)
     public PharmacyProjection getPharmacy(@Param("ID") Long id);
     @Modifying

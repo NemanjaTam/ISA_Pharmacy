@@ -30,6 +30,10 @@ import settingsPage from "../views/SettingsPage.vue";
 import PharmacyAdminHome from "../views/PharmacyAdminHome.vue";
 import Pharmacy from "../views/Pharmacy.vue";
 import SearchListFilter from "../components/SearchListFilter.vue";
+import Action from "../components/Action.vue";
+import PurchaseOrder from "../components/PurchaseOrder.vue"
+import Medication from "../views/MedicationList.vue"
+import Absences from "../components/Absences.vue"
 Vue.use(VueRouter);
 
 const routes = [
@@ -182,6 +186,24 @@ const routes = [
         path: "list",
         name: "list",
         component: SearchListFilter,
+      },
+      {
+        path: "action",
+        name: "action",
+        component: Action,
+      },
+      {
+        path:"purchaseorder",
+        name:"purchaseOrder",
+        component: PurchaseOrder,
+      },{
+        path:"medication",
+        name:"medication",
+        component: Medication,
+      },{
+        path:"absences",
+        name:"absences",
+        component: Absences,
       },
     ],
   },

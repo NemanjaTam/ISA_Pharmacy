@@ -5,4 +5,5 @@ public interface DermatologistProjection {
 	  String getName();
 	  String getSurname();
 	  String getEmail();
+	  String getPharmacyName();
 }
