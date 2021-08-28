@@ -93,9 +93,39 @@ insert into medications (code, contraindications, description, manufacturer, med
 
 
 insert into medication_quantity (quantity, medication_id,pharmacy_id) values (10, 1,1)
+insert into medication_quantity (quantity, medication_id,pharmacy_id) values (20, 5,1)
+insert into medication_quantity (quantity, medication_id,pharmacy_id) values (10, 6,1)
+insert into medication_quantity (quantity, medication_id,pharmacy_id) values (10, 4,1)
 insert into medication_quantity (quantity, medication_id,pharmacy_id) values (10, 2,1)
 insert into medication_quantity (quantity, medication_id,pharmacy_id) values (10, 3,1)
+
+
+
+insert into medication_quantity (quantity, medication_id,pharmacy_id) values (10, 1,2)
+insert into medication_quantity (quantity, medication_id,pharmacy_id) values (20, 5,2)
+insert into medication_quantity (quantity, medication_id,pharmacy_id) values (10, 6,2)
 insert into medication_quantity (quantity, medication_id,pharmacy_id) values (10, 4,2)
+insert into medication_quantity (quantity, medication_id,pharmacy_id) values (10, 2,2)
+insert into medication_quantity (quantity, medication_id,pharmacy_id) values (10, 3,2)
+
+
+
+insert into medication_quantity (quantity, medication_id,pharmacy_id) values (10, 1,3)
+insert into medication_quantity (quantity, medication_id,pharmacy_id) values (20, 5,3)
+insert into medication_quantity (quantity, medication_id,pharmacy_id) values (10, 6,3)
+insert into medication_quantity (quantity, medication_id,pharmacy_id) values (10, 4,3)
+insert into medication_quantity (quantity, medication_id,pharmacy_id) values (10, 2,3)
+insert into medication_quantity (quantity, medication_id,pharmacy_id) values (10, 3,3)
+
+
+
+insert into medication_quantity (quantity, medication_id,pharmacy_id) values (10, 1,4)
+insert into medication_quantity (quantity, medication_id,pharmacy_id) values (20, 5,4)
+insert into medication_quantity (quantity, medication_id,pharmacy_id) values (10, 6,4)
+insert into medication_quantity (quantity, medication_id,pharmacy_id) values (10, 4,4)
+insert into medication_quantity (quantity, medication_id,pharmacy_id) values (10, 2,4)
+insert into medication_quantity (quantity, medication_id,pharmacy_id) values (10, 3,4)
+
 
 
 insert into patient_allerged_on_medications(patient_id, medication_id) values (21, 1)
@@ -463,3 +493,37 @@ insert into providers(name,email,info) values('Dobavljac 3','boyanacroft@yahoo.c
 insert into offers(status,price,purchase_order_id, provider_id) values ('CEKA',200,1,1)
 insert into offers(status,price,purchase_order_id,provider_id) values ('CEKA',150,1,2)
 insert into offers(status,price,purchase_order_id,provider_id) values ('CEKA',150,1,3)
+
+
+insert into price_list_medications(active,start_time,pharmacy_id) values (true,'2021-08-28',1)
+insert into price_list_medications(active,start_time,pharmacy_id) values (true,'2021-08-28',2)
+insert into price_list_medications(active,start_time,pharmacy_id) values (true,'2021-08-28',3)
+insert into price_list_medications(active,start_time,pharmacy_id) values (true,'2021-08-28',4)
+
+insert into price_medications(price,medication_id,price_list_medication_id) values(220,1,1)
+insert into price_medications(price,medication_id,price_list_medication_id) values(400,2,1)
+insert into price_medications(price,medication_id,price_list_medication_id) values(300,3,1)
+insert into price_medications(price,medication_id,price_list_medication_id) values(150,4,1)
+insert into price_medications(price,medication_id,price_list_medication_id) values(100,5,1)
+insert into price_medications(price,medication_id,price_list_medication_id) values(200,6,1)
+
+insert into price_medications(price,medication_id,price_list_medication_id) values(220,1,2)
+insert into price_medications(price,medication_id,price_list_medication_id) values(500,2,2)
+insert into price_medications(price,medication_id,price_list_medication_id) values(450,3,2)
+insert into price_medications(price,medication_id,price_list_medication_id) values(300,4,2)
+insert into price_medications(price,medication_id,price_list_medication_id) values(200,5,2)
+insert into price_medications(price,medication_id,price_list_medication_id) values(100,6,2)
+
+insert into price_medications(price,medication_id,price_list_medication_id) values(220,1,3)
+insert into price_medications(price,medication_id,price_list_medication_id) values(145,2,3)
+insert into price_medications(price,medication_id,price_list_medication_id) values(130,3,3)
+insert into price_medications(price,medication_id,price_list_medication_id) values(350,4,3)
+insert into price_medications(price,medication_id,price_list_medication_id) values(235,5,3)
+insert into price_medications(price,medication_id,price_list_medication_id) values(180,6,3)
+
+insert into price_medications(price,medication_id,price_list_medication_id) values(220,1,4)
+insert into price_medications(price,medication_id,price_list_medication_id) values(250,2,4)
+insert into price_medications(price,medication_id,price_list_medication_id) values(260,3,4)
+insert into price_medications(price,medication_id,price_list_medication_id) values(270,4,4)
+insert into price_medications(price,medication_id,price_list_medication_id) values(280,5,4)
+insert into price_medications(price,medication_id,price_list_medication_id) values(290,6,4)

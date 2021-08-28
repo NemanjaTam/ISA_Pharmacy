@@ -1,6 +1,8 @@
 package com.tim40.tim40.model;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.*;
 
 @Entity
@@ -22,9 +24,10 @@ public class PriceMedication {
 	@JoinColumn(name = "medication_id", nullable = false)  //unidirekciona veza
 	private Medication medication; 
 
-//	@ManyToOne //vlasnik veze ima i strani kljuc
-//	@JoinColumn(name = "price_list_medication_id", nullable = false)
-//	private PriceListMedication priceListMedication;
+	@JsonIgnore
+	@ManyToOne //vlasnik veze ima i strani kljuc
+	@JoinColumn(name = "price_list_medication_id", nullable = false)
+	private PriceListMedication priceListMedication;
 		
 	
 }
