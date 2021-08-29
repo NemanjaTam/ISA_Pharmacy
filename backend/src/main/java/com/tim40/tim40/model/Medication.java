@@ -122,6 +122,24 @@ public class Medication {
         this.manufacturer = manufacturer;
         this.medicationForm = medicationForm;
         this.prescriptionRegime = prescriptionRegime;
-
+        
+    }
+    
+    public Medication (String name, String code, TypeOfMedication typeOfMedication, String structure, String contraindications,
+            String recommendedIntake,String description,String manufacturer,MedicationForm medicationForm,PrescriptionRegime prescriptionRegime,
+            List<Medication> replacementMedications)
+    {
+        super();
+        this.name = name;
+        this.code = code;
+        this.typeOfMedication = typeOfMedication;
+        this.structure = structure;
+        this.contraindications = contraindications;
+        this.recommendedIntake = recommendedIntake;
+        this.description = description;
+        this.manufacturer = manufacturer;
+        this.medicationForm = medicationForm;
+        this.prescriptionRegime = prescriptionRegime;
+        this.replacementMedications = replacementMedications;
     }
 }
