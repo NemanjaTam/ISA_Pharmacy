@@ -54,7 +54,12 @@ public class MedicationController {
 		return new ResponseEntity<> (newMeds, HttpStatus.OK);
 	}
 	
-
+	@GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)  
+	 public ResponseEntity<List<MedicationDTO>> getAllMedications() throws Exception
+	{
+		List<MedicationDTO> medications = medicationService.getAllMedications();
+		return new ResponseEntity<List<MedicationDTO>> (medications, HttpStatus.OK);
+	}
 	
 	
 }

@@ -70,4 +70,14 @@ public class MedicationService implements IMedicationService{
 		}
 		return new ResponseEntity<List<Medication>>(medication.getReplacementMedications(), HttpStatus.OK);
 	}
+
+	public List<MedicationDTO> getAllMedications() {
+		List<Medication> medications = medicationRepository.findAll();
+		List<MedicationDTO> medicationDTOs = new ArrayList<MedicationDTO>();
+		
+		for(Medication m : medications) {
+			medicationDTOs.add(new MedicationDTO(m));
+		}
+		return medicationDTOs;
+	}
 }
