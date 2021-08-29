@@ -20,7 +20,7 @@
                   quantityMedication
                 )
               "
-              v-if="user === purchaseOrderCreator"
+              v-if="user === purchaseOrderCreator && status!== statusCode "
             >
               ACCEPT
             </b-button>
@@ -42,6 +42,7 @@ export default {
     "purchaseOrderCreator",
     "purchaseOrder",
     "quantityMedication",
+    "status",
   ],
   computed: {},
   data() {
@@ -51,6 +52,7 @@ export default {
       errors: [],
       mailcontent: [],
       respondedOffers: [],
+      statusCode:"OBRADJENA",
     };
   },
   // this.$store.getters.getSelectedMedicineForEdit
@@ -141,6 +143,7 @@ export default {
           })
           .then(function(response) {
             if (response.ok) {
+              alert("Successful!");
               return response.json();
             } else {
               return Promise.reject(response);

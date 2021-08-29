@@ -21,7 +21,7 @@
           </b-button>
         </template>
         <template #cell(offer)="row">
-             <ModalPurchaseOrder  :selected="row.item.offers" :id="Pharmacy" :user="userId" :purchaseOrderCreator="row.item.adminPharmacy.id" :purchaseOrder="row.item"
+             <ModalPurchaseOrder  :status="row.item.purchaseOrderStatus" :selected="row.item.offers" :id="Pharmacy" :user="userId" :purchaseOrderCreator="row.item.adminPharmacy.id" :purchaseOrder="row.item"
              :quantityMedication="row.item.quantityMedicationsPurchase"></ModalPurchaseOrder>
         </template>
         <div></div>
@@ -106,6 +106,7 @@ export default {
 
       removeItem(item) {
       var vm = this;
+      if(item.offers.length <= 0){
       fetch(
         `http://localhost:9005/api/pharmacy/delete-purchase-order/${this.Pharmacy}`,
         {
@@ -119,6 +120,7 @@ export default {
       )
         .then(function(response) {
           if (response.ok) {
+            alert("Successful!");
             return response.json();
           } else {
             return Promise.reject(response);
@@ -144,7 +146,9 @@ export default {
 
         .catch(function(error) {
           console.warn(error);
-        });
+        });}else{
+          alert("Cannot delete purchase order with offers!");
+        }
 
       // this.$store.dispatch("removeMedicine",item);
     },
