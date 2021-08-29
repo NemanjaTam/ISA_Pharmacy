@@ -24,6 +24,10 @@ import PurchaseOrder from "../components/PurchaseOrder.vue"
 import Medication from "../views/MedicationList.vue"
 import Absences from "../components/Absences.vue"
 import PriceList from "../components/PriceList.vue"
+import Medications from "../components/Medications.vue"
+import RegistrationSystemAdmin from "../components/RegistrationSystemAdmin.vue"
+import AddMedication from "../components/AddMedication.vue"
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -146,6 +150,21 @@ const routes = [
       }
     ],
   },
+      {
+        path: '/add-medication',
+        name: 'AddMedication',
+        component: AddMedication
+      },
+      {
+        path: '/medications',
+        name: 'Medications',
+        component: Medications
+      },
+      {
+        path: '/registration-by-system-admin',
+        name: 'RegistrationSystemAdmin',
+        component: RegistrationSystemAdmin
+      }
 ];
 
 export const router = new VueRouter({
