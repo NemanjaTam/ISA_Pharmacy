@@ -51,6 +51,8 @@ export const store = new Vuex.Store({
     seletedMedicineForEdit:{},
     unnaprovedAbsences:[],
     approvedAbsences:[],
+    priceListActive:[],
+    priceListInactive:[],
   },
   //methods that return data (state)
   getters: {
@@ -119,12 +121,24 @@ export const store = new Vuex.Store({
     },
     getApprovedAbsences(state){
       return state.approvedAbsences;
-    }
+    },
+    getPriceListActive(state){
+      return state.priceListActive;
+    },
+    getPriceListInactive(state){
+      return state.priceListInactive;
+    },
   },
   //methods for changing date (state)
   mutations: {
     updateUser(state, user) {
       state.user = user;
+    },
+    updatePriceListActive(state,pricelist){
+      state.priceListActive = pricelist
+    },
+    updatePriceListInactive(state,pricelist){
+      state.priceListInactive = pricelist
     },
     updateSelectedOffer(state, selectedOffer) {
       state.selectedOffer = selectedOffer;
@@ -194,6 +208,12 @@ export const store = new Vuex.Store({
   actions: {
     updateUser(context, user) {
       context.commit("updateUser", user);
+    },
+    updatePriceListActive(context,price){
+      context.commit("updatePriceListActive",price);
+    },
+    updatePriceListInactive(context,price){
+      context.commit("updatePriceListInactive",price);
     },
     updatePharmacy(context, pharmacy) {
       //ne menjati ovo se koristi vec!

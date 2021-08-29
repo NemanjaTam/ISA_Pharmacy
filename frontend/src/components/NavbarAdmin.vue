@@ -37,6 +37,11 @@
               >PROMOTION</router-link
             ></b-dropdown-item
           >
+                    <b-dropdown-item class="dropdaun" href="#"
+            ><router-link to="/pharmacyAdminPage/pricelist" class="routerlink"
+              >PRICE LIST</router-link
+            ></b-dropdown-item
+          >
         </b-nav-item-dropdown>
 
         <b-nav-item-dropdown text="User" class="ml-auto" right>

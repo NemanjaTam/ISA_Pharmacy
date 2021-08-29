@@ -495,10 +495,10 @@ insert into offers(status,price,purchase_order_id,provider_id) values ('CEKA',15
 insert into offers(status,price,purchase_order_id,provider_id) values ('CEKA',150,1,3)
 
 
-insert into price_list_medications(active,start_time,pharmacy_id) values (true,'2021-08-28',1)
-insert into price_list_medications(active,start_time,pharmacy_id) values (true,'2021-08-28',2)
-insert into price_list_medications(active,start_time,pharmacy_id) values (true,'2021-08-28',3)
-insert into price_list_medications(active,start_time,pharmacy_id) values (true,'2021-08-28',4)
+insert into price_list_medications(status,start_time,pharmacy_id) values ('ACTIVE','2021-08-28 00:00:00-08',1)
+insert into price_list_medications(status,start_time,pharmacy_id) values ('ACTIVE','2021-08-28 00:00:00-08',2)
+insert into price_list_medications(status,start_time,pharmacy_id) values ('ACTIVE','2021-08-28 00:00:00-08',3)
+insert into price_list_medications(status,start_time,pharmacy_id) values ('ACTIVE','2021-08-28 00:00:00-08',4)
 
 insert into price_medications(price,medication_id,price_list_medication_id) values(220,1,1)
 insert into price_medications(price,medication_id,price_list_medication_id) values(400,2,1)

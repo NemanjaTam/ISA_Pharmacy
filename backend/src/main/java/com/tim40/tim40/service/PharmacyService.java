@@ -187,7 +187,7 @@ public class PharmacyService implements IPharmacyService {
 		Set<PurchaseOrder> purchaseOrdersDTO = new HashSet<PurchaseOrder>();
 		Pharmacy pharmacy = this.pharmacyRepository.getById(id);
 		for (PurchaseOrder purchaseOrder : pharmacy.getPurchaseOrders()) {
-			if(purchaseOrder.getPurchaseOrderStatus().equals(PurchaseOrderStatus.CEKA_PONUDE)) {
+			if(purchaseOrder.getPurchaseOrderStatus().equals(PurchaseOrderStatus.CEKA_PONUDE) || purchaseOrder.getPurchaseOrderStatus().equals(PurchaseOrderStatus.OBRADJENA)) {
 				purchaseOrdersDTO.add(purchaseOrder);
 			}
 		}
