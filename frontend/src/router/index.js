@@ -23,6 +23,7 @@ import Action from "../components/Action.vue";
 import PurchaseOrder from "../components/PurchaseOrder.vue"
 import Medication from "../views/MedicationList.vue"
 import Absences from "../components/Absences.vue"
+import PriceList from "../components/PriceList.vue"
 Vue.use(VueRouter);
 
 const routes = [
@@ -138,7 +139,11 @@ const routes = [
         path:"absences",
         name:"absences",
         component: Absences,
-      },
+      },{
+        path:"pricelist",
+        name:"pricelist",
+        component: PriceList,
+      }
     ],
   },
 ];

@@ -61,7 +61,7 @@
                   v-bind:key="index"
                   class="medication_list_scrollable"
                 >
-                  <b-list-group-item>
+                  <b-list-group-item button @click="remove(listItem)">
                     {{ listItem.name }}
                     {{ listItem.quantity }}</b-list-group-item
                   >
@@ -92,11 +92,7 @@
               <!-- </div> -->
             </div>
           </b-tab>
-          <b-tab
-            title="Order new medication"
-            active
-           
-          >
+          <b-tab title="Order new medication" active>
             <div role="group">
               <label for="input-live">Name:</label>
               <b-form-input
@@ -104,9 +100,9 @@
                 v-model="newMedication.name"
                 aria-describedby="input-live-help input-live-feedback"
                 :state="nameState"
-                placeholder="Enter your name"
+                v-on:keypress="isLetter($event)"
+                placeholder="Enter medication name"
                 trim
-              
               ></b-form-input>
 
               <label for="input-live">Quantity:</label>
@@ -173,19 +169,23 @@
               <label for="input-live">Manufacturer:</label>
               <b-form-input
                 id="input-live"
+                type="text"
                 v-model="newMedication.manufacturer"
                 aria-describedby="input-live-help input-live-feedback"
                 placeholder="Enter manufacturer"
+                v-on:keypress="isLetter($event)"
                 :state="manufacturerState"
                 trim
               ></b-form-input>
               <label for="input-live">Decription:</label>
               <b-form-input
                 id="input-live"
+                pattern="[a-zA-Z]+"
                 v-model="newMedication.description"
                 aria-describedby="input-live-help input-live-feedback"
                 placeholder="Enter description"
                 :state="descriptionState"
+                v-on:keypress="isLetter($event)"
                 trim
               ></b-form-input>
 
@@ -209,8 +209,12 @@
               <b-button variant="warning" @click="clearField"
                 >Clear fields</b-button
               >
-              <b-button variant="danger" @click="resetFormNewMedication">Reset </b-button>
-              <b-button variant="success" @click="sendPurchaseOrderAndCreateMedication"
+              <b-button variant="danger" @click="resetFormNewMedication"
+                >Reset
+              </b-button>
+              <b-button
+                variant="success"
+                @click="sendPurchaseOrderAndCreateMedication"
                 >Submit</b-button
               >
               <br />
@@ -220,7 +224,7 @@
                 v-bind:key="index"
                 class="medication_list_scrollable"
               >
-                <b-list-group-item>
+                <b-list-group-item button @click="removeNew(listItem)">
                   {{ listItem.name }}
                   {{ listItem.quantity }}</b-list-group-item
                 >
@@ -228,8 +232,8 @@
             </div>
           </b-tab>
           <b-tab title="All orders">
-           <!-- <PurchaseOrderList/>-->
-           <List/>
+            <!-- <PurchaseOrderList/>-->
+            <List />
           </b-tab>
         </b-tabs>
       </b-card>
@@ -237,14 +241,11 @@
   </div>
 </template>
 
-
 <script>
-
-import List from "../components/ListOfPurchaseOrders.vue"
+import List from "../components/ListOfPurchaseOrders.vue";
 export default {
   name: "PurchaseOrder",
   components: {
-    
     List,
   },
   computed: {
@@ -312,7 +313,7 @@ export default {
           quantity: 0,
         },
       ],
-      newMedicationOrder:[],
+      newMedicationOrder: [],
       medicationOrder: [
         {
           id: 0,
@@ -355,6 +356,15 @@ export default {
     };
   },
   methods: {
+    isLetter(e) {
+      let char = String.fromCharCode(e.keyCode);
+      if (/^[A-Za-z ]+$/.test(char)) {
+        return true;
+      } else {
+        alert("Letters only!");
+        e.preventDefault();
+      }
+    },
     getPharmacyIdbyUserID(id) {
       var vm = this;
       fetch(`http://localhost:9005/api/pharmacy/getpharmacyidbyuser/${id}`, {
@@ -394,6 +404,12 @@ export default {
           console.warn(error);
         });
     },
+    remove(item) {
+      this.medicationOrder.splice(this.medicationOrder.indexOf(item), 1);
+    },
+    removeNew(item) {
+      this.newMedicationOrder.splice(this.newMedicationOrder.indexOf(item), 1);
+    },
     resetForm() {
       this.currentMedication = "";
       this.currentQuantity = 0;
@@ -401,8 +417,8 @@ export default {
       this.datepicker_1 = new Date();
       this.datepicker_2 = new Date();
     },
-    resetFormNewMedication(){
-      this.newMedicationOrder = []
+    resetFormNewMedication() {
+      this.newMedicationOrder = [];
     },
     clearField() {
       this.newMedication.id = 0;
@@ -498,7 +514,7 @@ export default {
     },
     sendPurchaseOrderAndCreateMedication() {
       var vm = this;
-                  const body = {
+      const body = {
         startTime: vm.datepicker_1,
         endTime: vm.datepicker_2,
         medicationDTO: this.newMedicationOrder,
@@ -506,26 +522,48 @@ export default {
         adminId: vm.userId,
       };
 
-            fetch(
-            `http://localhost:9005/api/pharmacy/purchaseorder-create-new-medication/${vm.pharmacy_id}`,
-            {
-              headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-              },
-              method: "POST",
-              body: JSON.stringify(body),
-            }
-          )
+      fetch(
+        `http://localhost:9005/api/pharmacy/purchaseorder-create-new-medication/${vm.pharmacy_id}`,
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          method: "POST",
+          body: JSON.stringify(body),
+        }
+      )
         .then(function(response) {
           if (response.ok) {
             alert("Purchase order made");
+
             return response.json();
           } else {
             return Promise.reject(response);
           }
         })
-
+        .then(function(data) {
+          return fetch(
+            `http://localhost:9005/api/pharmacy/get-purchase-order/${vm.Pharmacy}`,
+            {
+              headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+              },
+              method: "GET",
+            }
+          );
+        })
+        .then(function(response) {
+          if (response.ok) {
+            return response.json();
+          } else {
+            return Promise.reject(response);
+          }
+        })
+        .then((data) => this.$store.dispatch("updatePurchaseOrders", data))
+        .catch();
+      //dodati ovdeee
 
       // fetch(`http://localhost:9005/api/medication/addMultiple`, {
       //   headers: {
@@ -577,6 +615,7 @@ export default {
     },
 
     sendPurchaseOrder() {
+      var vm = this;
       if (this.medicationOrder.length > 0) {
         const body = {
           startTime: this.datepicker_1,
@@ -599,11 +638,32 @@ export default {
           .then(function(response) {
             if (response.ok) {
               alert("Purchase order made");
+
               return response.json();
             } else {
               return Promise.reject(response);
             }
           })
+          .then(function(data) {
+            return fetch(
+              `http://localhost:9005/api/pharmacy/get-purchase-order/${vm.Pharmacy}`,
+              {
+                headers: {
+                  Accept: "application/json",
+                  "Content-Type": "application/json",
+                },
+                method: "GET",
+              }
+            );
+          })
+          .then(function(response) {
+            if (response.ok) {
+              return response.json();
+            } else {
+              return Promise.reject(response);
+            }
+          })
+          .then((data) => this.$store.dispatch("updatePurchaseOrders", data))
           .catch(function(error) {
             console.warn(error);
           });
