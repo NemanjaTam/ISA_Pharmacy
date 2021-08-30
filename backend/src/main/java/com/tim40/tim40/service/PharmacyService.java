@@ -277,16 +277,50 @@ public class PharmacyService implements IPharmacyService {
 	//ne menjati
 	@Override
 	public boolean deleteMedication(Long id,Long medicationId) {
-		Pharmacy pharmacy = pharmacyRepository.findById(id).get();
-		List<Reservation> reservations = this.reservationRepository.findAll();
-		for (Reservation reservation : reservations) {
-			if(reservation.getMedication().getId().equals(medicationId) && reservation.isDone()) {
-			return false;
-			}
-		}
+		Pharmacy pharmacy = pharmacyRepository.getById(id);
+//		List<Reservation> reservations = this.reservationRepository.findAll();
+//		List<Reservation> reservationsFilteredById = new ArrayList<Reservation>();
+//		for (Reservation reservation : reservations) {
+//			if(reservation.getPharmacy().getId().equals(pharmacy.getId())) {
+//				reservationsFilteredById.add(reservation);
+//			}
+//		}
+//		for (Reservation reservation : reservationsFilteredById) {
+//			if(reservation.getMedication().getId().equals(medicationId)) {
+//				if(!reservation.isDone()) {
+//					return false;
+//				}
+//			}
+//			
+//			
+//		}
 		this.quantityRepository.deleteById(medicationId, pharmacy.getId());		
 		return true;
+		
 	}
+	
+	public boolean isReserved(Long id,Long medicationId) {
+		boolean exist = false;
+		Pharmacy pharmacy = pharmacyRepository.getById(id);
+		List<Reservation> reservations = this.reservationRepository.findAll();
+		List<Reservation> reservationsFilteredById = new ArrayList<Reservation>();
+		for (Reservation reservation : reservations) {
+			if(reservation.getPharmacy().getId().equals(pharmacy.getId())) {
+				reservationsFilteredById.add(reservation);
+			}
+		}
+		for (Reservation reservation : reservationsFilteredById) {
+			if(reservation.getMedication().getId().equals(medicationId)) {
+				if(!reservation.isDone()) {
+					exist = true;
+				}
+			}
+		}	
+		return exist;	
+		
+	}
+	
+	
 //ne menjati
 	@Override
 	public boolean editMedication(MedicationQuantityDTO dto, Long id) {

@@ -371,84 +371,50 @@ insert into medications_replacement_medications (medication_id, replacement_medi
 --insert into replacement_medications (medication_id, replacement_medication_id) values (19,18)
 --insert into replacement_medications (medication_id, replacement_medication_id) values (19,5)
 
-insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, 'SN1345', '2021-06-30 00:00:00-08', '2021-06-01 00:00:00-08', 1,21,1)
-insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, 'SN1345', '2021-06-30 00:00:00-08', '2021-06-01 00:00:00-08', 1,21,1)
-insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-08-30 00:00:00-08', '2021-08-01 00:00:00-08', 1,21,1)
-insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, 'SN1315', '2021-06-30 00:00:00-08', '2021-06-01 00:00:00-08', 2,22,1)
-insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, 'SN1245', '2021-06-09 00:00:00-08', '2021-06-03 00:00:00-08', 3,23,1)
-insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, 'SN1465', '2021-06-05 00:00:00-08', '2021-06-03 00:00:00-08', 4,24,1)
-insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, 'SN1465', '2021-06-05 00:00:00-08', '2021-06-03 00:00:00-08', 1,24,1)
+insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-06-30 00:00:00-08', '2021-06-01 00:00:00-08', 1,21,1)
+insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1315', '2021-06-30 00:00:00-08', '2021-06-01 00:00:00-08', 2,22,1)
+insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1245', '2021-06-09 00:00:00-08', '2021-06-03 00:00:00-08', 3,23,1)
+insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1465', '2021-06-05 00:00:00-08', '2021-06-03 00:00:00-08', 4,24,1)
+insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, 'SN1465', '2021-06-05 00:00:00-08', '2021-06-03 00:00:00-08', 6,24,1)
 
-
-insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-09-01 00:00:00-08', '2021-09-01 00:00:00-08', 1,21,1)
 insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-08-01 00:00:00-08', '2021-09-01 00:00:00-08', 1,21,2)
 insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-08-01 00:00:00-08', '2021-09-01 00:00:00-08', 1,21,3)
 insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-08-01 00:00:00-08', '2021-09-01 00:00:00-08', 1,21,4)
 
-insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-02-01 00:00:00-08', '2021-02-01 00:00:00-08', 1,21,1)
+
 insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-02-01 00:00:00-08', '2021-02-01 00:00:00-08', 1,21,2)
 insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-02-01 00:00:00-08', '2021-02-01 00:00:00-08', 1,21,3)
 insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-02-01 00:00:00-08', '2021-02-01 00:00:00-08', 1,21,4)
 
-insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-07-01 00:00:00-08', '2021-07-01 00:00:00-08', 1,21,1)
+
 insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-07-01 00:00:00-08', '2021-07-01 00:00:00-08', 1,21,2)
 insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-07-01 00:00:00-08', '2021-07-01 00:00:00-08', 1,21,3)
 insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-07-01 00:00:00-08', '2021-07-01 00:00:00-08', 1,21,4)
 
 insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-07-01 00:00:00-08', '2021-07-01 00:00:00-08', 1,21,2)
-insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-07-01 00:00:00-08', '2021-07-01 00:00:00-08', 1,21,2)
-insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-07-01 00:00:00-08', '2021-07-01 00:00:00-08', 1,21,2)
-insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-07-01 00:00:00-08', '2021-07-01 00:00:00-08', 1,21,2)
 
 
-insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-07-01 00:00:00-08', '2021-07-01 00:00:00-08', 1,21,3)
-insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-07-01 00:00:00-08', '2021-07-01 00:00:00-08', 1,21,3)
-insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-07-01 00:00:00-08', '2021-07-01 00:00:00-08', 1,21,3)
 insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-07-01 00:00:00-08', '2021-07-01 00:00:00-08', 1,21,3)
 
 
 insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-07-01 00:00:00-08', '2021-07-01 00:00:00-08', 1,21,4)
-insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-07-01 00:00:00-08', '2021-07-01 00:00:00-08', 1,21,4)
-insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-07-01 00:00:00-08', '2021-07-01 00:00:00-08', 1,21,4)
-insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-07-01 00:00:00-08', '2021-07-01 00:00:00-08', 1,21,4)
 
-
-
-insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-08-01 00:00:00-08', '2021-08-01 00:00:00-08', 1,21,1)
 insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-08-01 00:00:00-08', '2021-08-01 00:00:00-08', 1,21,2)
 insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-08-01 00:00:00-08', '2021-08-01 00:00:00-08', 1,21,3)
 insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-08-01 00:00:00-08', '2021-08-01 00:00:00-08', 1,21,4)
 
-
-insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-09-01 00:00:00-08', '2021-09-01 00:00:00-08', 1,21,1)
 insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-09-01 00:00:00-08', '2021-09-01 00:00:00-08', 1,21,2)
 insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-09-01 00:00:00-08', '2021-09-01 00:00:00-08', 1,21,3)
 insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-09-01 00:00:00-08', '2021-09-01 00:00:00-08', 1,21,4)
 
-insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-02-01 00:00:00-08', '2021-02-01 00:00:00-08', 1,21,1)
 insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-02-01 00:00:00-08', '2021-02-01 00:00:00-08', 1,21,2)
 insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-02-01 00:00:00-08', '2021-02-01 00:00:00-08', 1,21,3)
 insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-02-01 00:00:00-08', '2021-02-01 00:00:00-08', 1,21,4)
-insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-07-01 00:00:00-08', '2021-07-01 00:00:00-08', 1,21,1)
 insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-07-01 00:00:00-08', '2021-07-01 00:00:00-08', 1,21,2)
 insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-07-01 00:00:00-08', '2021-07-01 00:00:00-08', 1,21,3)
 insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-07-01 00:00:00-08', '2021-07-01 00:00:00-08', 1,21,4)
 
 
---insert into reservations (is_done, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, '2021-07-03 00:00:00-08', '2021-07-21 00:00:00-08', 5,25,2)
---insert into reservations (is_done, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, '2021-07-03 00:00:00-08', '2021-07-21 00:00:00-08', 6,26,2)
---insert into reservations (is_done, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, '2021-07-03 00:00:00-08', '2021-07-21 00:00:00-08', 7,27,2)
---insert into reservations (is_done, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, '2021-07-03 00:00:00-08', '2021-07-04 00:00:00-08', 8,28,2)
---
---insert into reservations (is_done, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, '2021-07-03 00:00:00-08', '2021-07-21 00:00:00-08', 9,29,3)
---insert into reservations (is_done, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, '2021-07-03 00:00:00-08', '2021-07-21 00:00:00-08', 10,30,3)
---insert into reservations (is_done, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, '2021-07-03 00:00:00-08', '2021-07-21 00:00:00-08', 11,31,3)
---insert into reservations (is_done, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, '2021-07-03 00:00:00-08', '2021-07-04 00:00:00-08', 12,32,3)
---
---insert into reservations (is_done, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, '2021-07-03 00:00:00-08', '2021-07-21 00:00:00-08', 13,33,4)
---insert into reservations (is_done, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, '2021-07-03 00:00:00-08', '2021-07-21 00:00:00-08', 14,34,4)
---insert into reservations (is_done, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, '2021-07-03 00:00:00-08', '2021-07-21 00:00:00-08', 15,35,4)
---insert into reservations (is_done, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, '2021-07-03 00:00:00-08', '2021-07-04 00:00:00-08', 16,36,4)
 
 insert into workdays (endtime, starttime, user_id) values ('2021-06-13 14:00:00-08', '2021-06-13 07:00:00-08', 1)
 insert into workdays (endtime, starttime, user_id) values ('2021-06-14 14:00:00-08', '2021-06-14 07:00:00-08', 1)

@@ -198,6 +198,17 @@ public class PharmacyController {
 			}
 		
 	}
+	
+	@RequestMapping(value="/is-medication-reserved/{id}", method = RequestMethod.POST)
+	public  ResponseEntity<?> GetPharmacyRatings(@RequestBody Long medicationId,@PathVariable("id") Long id,@RequestHeader("usertype") String type){
+		if("PHARMACY_ADMINISTRATOR".equals(type)){
+			return new ResponseEntity<>( this.pharmacyService.isReserved(id, medicationId),HttpStatus.OK);
+			}
+			else {
+				return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+			}
+		
+	}
 
 	
 
