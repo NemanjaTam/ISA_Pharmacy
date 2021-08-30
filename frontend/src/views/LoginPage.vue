@@ -94,7 +94,25 @@ export default {
                 localStorage.setItem("user", user);
                 this.$router.push({ name: "PharmacyAdminPage" });
               }
-            } else {
+            } 
+            else if (user.userType == "SYSTEM_ADMINISTRATOR") {
+              if (user.firstTimeLogging) {
+                this.$store.dispatch("updateUser", user);
+                this.$router.push({ name: "FirstTimeLogging" });
+              } else {
+                this.$store.dispatch("updateUser", user);
+                this.$router.push({ name: "SystemAdminHome" });
+              }
+            } 
+            else {
+              if (user.firstTimeLogging) {
+                this.$store.dispatch("updateUser", user);
+                this.$router.push({ name: "FirstTimeLogging" });
+              } else {
+                this.$store.dispatch("updateUser", user);
+                this.$router.push({ name: "SupplierHome" });
+              }
+            } /*else {
               if (user.firstTimeLogging) {
                 this.$store.dispatch("updateUser", user);
                 this.$router.push({ name: "FirstTimeLogging" });
@@ -104,7 +122,8 @@ export default {
               }
               // alert("Pharmacist profile is still under development!")
               return;
-            }
+            } 
+          }*/
           }
         });
     },

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tim40.tim40.dto.MedicationDTO;
+import com.tim40.tim40.dto.MedicationDTO2;
 import com.tim40.tim40.dto.MedicationQuantityDTO;
 import com.tim40.tim40.dto.PatientAllergedDTO;
 import com.tim40.tim40.dto.PurchaseOrderDTO;
@@ -34,9 +35,9 @@ public class MedicationController {
 	}
 	
 	@PostMapping(value = "/add", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	 public ResponseEntity<?> addMedication(@RequestBody MedicationDTO medicationDTO)
+	 public ResponseEntity<?> addMedication(@RequestBody MedicationDTO2 medicationDTO2)
 	{
-		MedicationDTO createdMedication = medicationService.createMedication(medicationDTO);
+		MedicationDTO2 createdMedication = medicationService.createMedication(medicationDTO2);
 		return new ResponseEntity<> (createdMedication, HttpStatus.OK);
  	}
 	
@@ -53,7 +54,12 @@ public class MedicationController {
 		return new ResponseEntity<> (newMeds, HttpStatus.OK);
 	}
 	
-
+	@GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)  
+	 public ResponseEntity<List<MedicationDTO2>> getAllMedications() throws Exception
+	{
+		List<MedicationDTO2> medications = medicationService.getAllMedications();
+		return new ResponseEntity<List<MedicationDTO2>> (medications, HttpStatus.OK);
+	}
 	
 	
 }
