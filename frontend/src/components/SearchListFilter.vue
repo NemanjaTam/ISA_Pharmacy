@@ -8,22 +8,30 @@
     </div>
     <b-card no-body>
       <b-tabs card>
-        <!-- <b-input v-model="filter" placeholder="Search"></b-input> -->
         <b-tab title="Pharmacists" active>
-          <b-input v-model="filter" placeholder="Search"></b-input>
+           <b-form-input
+              id="filter-input"
+              v-model="filter"
+              type="search"
+              placeholder="Type to Search"
+            ></b-form-input>
+          <!-- <b-input v-model="filter" placeholder="Search"></b-input> -->
           <div>
             <b-table
-              striped
-              hover
-              :filter="filter"
-              :filter-included-fields="[
-                'name',
-                'surname',
-                'email',
-                'pharmacyName',
-              ]"
+
+      :fields="fields"
+   
+        :filter="filter"
+      :filter-included-fields="filterOn"
+  
+ 
+ 
+    
+      show-empty
+      small
+      @filtered="onFiltered"
               :items="pharmacists"
-              :fields="fields"
+        
             ></b-table>
           </div>
         </b-tab>
@@ -68,10 +76,19 @@ export default {
     isRegisteredUser() {
       return this.$store.getters.isRegistered;
     },
+         sortOptions() {
+        // Create an options list from our fields
+        return this.fields
+          .filter(f => f.sortable)
+          .map(f => {
+            return { text: f.label, value: f.key }
+          })
+      }
   },
   data() {
     return {
-      filter: "",
+    filter: null,
+        filterOn: [],
       pharmacy: null,
       dermatologists: [
         {
@@ -135,7 +152,7 @@ export default {
           sortable: true,
         },
         {
-          key: "pharmacies.pharmName",
+          key: "pharmacyName",
           label: "Pharmacies",
           sortable: true,
           // Variant applies to the whole column, including the header and footer
@@ -152,9 +169,12 @@ export default {
       };
       headers["usertype"] = type;
       if (this.userType == "PHARMACY_ADMINISTRATOR") {
-        fetch(`http://localhost:9005/api/pharmacist/getallpharmacists/${id}`, {
-          headers,
-        })
+        fetch(
+          `http://localhost:9005/api/pharmacist/get-pharmacist-rating/${id}`,
+          {
+            headers,
+          }
+        )
           .then((response) => response.json())
           .then((data) => (this.pharmacists = data));
       } else if (this.userType == "PATIENT") {
@@ -183,7 +203,7 @@ export default {
       headers["usertype"] = type;
       if (this.userType == "PHARMACY_ADMINISTRATOR") {
         fetch(
-          `http://localhost:9005/api/dermatologist/getalldermatologist/${id}`,
+          `http://localhost:9005/api/dermatologist/get-dermatologist-rating/${id}`,
           {
             headers,
           }
@@ -206,6 +226,23 @@ export default {
           });
       }
     },
+    filterTable: function(tableRow, filter) {
+      if (filter[0] !== null && filter[1] !== null) {
+        //both filters set
+        return (
+          tableRow.columnOne == filter[0] && tableRow.columnTwo == filter[1]
+        );
+      } else {
+        return (
+          tableRow.columnOne == filter[0] || tableRow.columnTwo == filter[1]
+        );
+      }
+    },
+     onFiltered(filteredItems) {
+        // Trigger pagination to update the number of buttons/pages due to filtering
+        this.totalRows = filteredItems.length
+        this.currentPage = 1
+      },
   },
 
   async created() {

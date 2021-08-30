@@ -35,17 +35,17 @@
             ><router-link
               to="/pharmacyAdminPage/purchaseorder"
               class="routerlink"
-              >PURCHASE ORDER</router-link
+              >Purchase order</router-link
             >
           </b-dropdown-item>
           <b-dropdown-item class="dropdaun" href="#"
             ><router-link to="/pharmacyAdminPage/action" class="routerlink"
-              >PROMOTION</router-link
+              >Promotion</router-link
             ></b-dropdown-item
           >
           <b-dropdown-item class="dropdaun" href="#"
             ><router-link to="/pharmacyAdminPage/pricelist" class="routerlink"
-              >PRICE LIST</router-link
+              >Price list</router-link
             ></b-dropdown-item
           >
                     <b-dropdown-item class="dropdaun" href="#"

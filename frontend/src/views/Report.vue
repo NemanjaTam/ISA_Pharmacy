@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-button @click="showReport">SHOW APPOINTMENT DATA</b-button>
+    <b-button variant="success" @click="showReport">APPOINTMENT DATA</b-button>
 
     <br />
     <div>
@@ -35,7 +35,7 @@
         ></LineChart>
       </div>
       <br />
-      <b-button @click="showReportMedication">SHOW MEDICATION DATA</b-button>
+      <b-button variant="success" @click="showReportMedication">MEDICATION DATA</b-button>
       <div class="div-color-report" v-if="showMedication">
         <label>Medication data</label>
         <BarChart
@@ -66,18 +66,17 @@
           :chartColors="monthlyColors"
         ></BarChart>
       </div>
-      <br />
-      <b-button @click="showPharmacyData">SHOW RATINGS</b-button>
-      <div v-if="showRating" >
+      <br/>
+      <br>
+      <b-button variant="success" @click="showPharmacyData">RATINGS DATA</b-button>
+      <br/>
+      <div v-if="showRating">
         <div class="div-color-report">
           <label>Pharmacy</label>
           <b-table
             striped
             hover
-            :filter-included-fields="[
-              'name',
-              'rating',
-            ]"
+            :filter-included-fields="['name', 'rating']"
             :items="pharmacyRating"
             :fields="fieldsPharmacy"
           ></b-table>
@@ -135,7 +134,7 @@ export default {
   },
   data() {
     return {
-      pharmacyRating:[],
+      pharmacyRating: [],
       dermatologists: [],
       pharmacists: [],
       show: false,
@@ -211,7 +210,7 @@ export default {
           sortable: true,
         },
       ],
-          fieldsPharmacy: [
+      fieldsPharmacy: [
         {
           key: "name",
           sortable: true,
@@ -225,7 +224,7 @@ export default {
     };
   },
   methods: {
-    async getYearlyAppointments() {
+    getYearlyAppointments() {
       var vm = this;
       fetch(
         `http://localhost:9005/api/appointment/get-report-for-year/${this.Pharmacy}`,
@@ -254,7 +253,7 @@ export default {
         .catch();
     },
 
-    async getQuartalAppointments() {
+    getQuartalAppointments() {
       var vm = this;
       fetch(
         `http://localhost:9005/api/appointment/get-report-for-quartal/${this.Pharmacy}`,
@@ -283,7 +282,7 @@ export default {
         .catch();
     },
 
-    async getMonthlyAppointments() {
+    getMonthlyAppointments() {
       var vm = this;
       fetch(
         `http://localhost:9005/api/appointment/get-report-for-month/${this.Pharmacy}`,
@@ -401,6 +400,9 @@ export default {
     showReport() {
       if (!this.show) {
         this.show = true;
+        this.getYearlyAppointments();
+        this.getQuartalAppointments();
+        this.getMonthlyAppointments();
       } else {
         this.show = false;
       }
@@ -408,6 +410,9 @@ export default {
     showReportMedication() {
       if (!this.showMedication) {
         this.showMedication = true;
+        this.getYearlyMedicaton();
+        this.getQuartalMedicaton();
+        this.getMonthlyMedicaton();
       } else {
         this.showMedication = false;
       }
@@ -422,7 +427,7 @@ export default {
         this.showRating = false;
       }
     },
-    getPharmacyRatings(){
+    getPharmacyRatings() {
       fetch(
         `http://localhost:9005/api/pharmacy/get-pharmacy-rating/${this.Pharmacy}`,
         {
@@ -479,14 +484,7 @@ export default {
     },
   },
 
-  async created() {
-    await this.getYearlyAppointments();
-    await this.getQuartalAppointments();
-    await this.getMonthlyAppointments();
-    await this.getYearlyMedicaton();
-    await this.getQuartalMedicaton();
-    await this.getMonthlyMedicaton();
-  },
+  async created() {},
 };
 </script>
 <style scoped>

@@ -521,7 +521,7 @@ export default {
 
         adminId: vm.userId,
       };
-
+      if(this.newMedicationOrder.length > 0){
       fetch(
         `http://localhost:9005/api/pharmacy/purchaseorder-create-new-medication/${vm.pharmacy_id}`,
         {
@@ -562,7 +562,9 @@ export default {
           }
         })
         .then((data) => this.$store.dispatch("updatePurchaseOrders", data))
-        .catch();
+        .catch();}else{
+          alert("Please add new medication");
+        }
       //dodati ovdeee
 
       // fetch(`http://localhost:9005/api/medication/addMultiple`, {
