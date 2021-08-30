@@ -2,6 +2,7 @@ package com.tim40.tim40.service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.springframework.http.ResponseEntity;
@@ -14,4 +15,8 @@ public interface IAppointmentService {
 	ResponseEntity<Appointment> finishAppointment(Long id, String report, Set<Therapy> therapies);
 	ResponseEntity<List<Appointment>> getAvailableAppointments(LocalDateTime start, LocalDateTime end, Long pharmacyId, Long patientId, Long dermatologistId);
 	ResponseEntity<Appointment> scheduleAppointment(Long appointmentId, Long patientId, Long dermatologistId);
+	public Map<String,Integer> getDoneAppointmentsForYear(Long id);
+	public Map<String,Integer> getDoneAppointmentsForQuartal(Long id);
+	public Map<String,Integer> getDoneAppointmentsForMonth(Long id);
+	List<Appointment> getAllAppointmentsByPharmacyId(Long id);
 }

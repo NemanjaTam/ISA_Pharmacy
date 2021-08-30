@@ -3,7 +3,9 @@ package com.tim40.tim40.service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.tim40.tim40.model.Appointment;
 import com.tim40.tim40.model.Consultation;
 import com.tim40.tim40.model.Dermatologist;
@@ -175,5 +178,90 @@ public class AppointmentService implements IAppointmentService {
 		appointment.setTaken(true);
 		appointmentRepository.save(appointment);
 		return new ResponseEntity<Appointment>(appointment,HttpStatus.OK);
+	}
+
+	@Override
+	public Map<String,Integer> getDoneAppointmentsForYear(Long id) {
+		List<Appointment>finishedAppointments = getAllAppointmentsByPharmacyId(id);
+		LocalDateTime now = LocalDateTime.now();
+		int value = 1;
+		Map<String, Integer> map = new HashMap<>();
+		LocalDateTime yearBefore = LocalDateTime.of(now.getYear() - 1, now.getMonthValue(), now.getDayOfMonth(), 0, 0);
+		System.out.println(yearBefore);
+	    for (Appointment appointment : finishedAppointments) {
+	    	System.out.println(appointment.getPeriod().getEndTime() + "VREME");
+			if(appointment.getPeriod().getEndTime().isAfter(yearBefore) && appointment.getPeriod().getEndTime().isBefore(now)) {
+				if(map.containsKey(appointment.getPeriod().getEndTime().getMonth().toString())) {
+					map.put(appointment.getPeriod().getEndTime().getMonth().toString(),map.get(appointment.getPeriod().getEndTime().getMonth().toString()) + 1);
+					
+				}else {
+					map.put(appointment.getPeriod().getEndTime().getMonth().toString(),value);
+				}
+		
+				
+			}
+		}
+	
+		return map;
+	}
+
+	@Override
+	public Map<String,Integer> getDoneAppointmentsForQuartal(Long id) {
+		List<Appointment>finishedAppointments = getAllAppointmentsByPharmacyId(id);
+		LocalDateTime now = LocalDateTime.now();
+		int value = 1;
+		Map<String, Integer> map = new HashMap<>();
+		LocalDateTime yearBefore = LocalDateTime.of(now.getYear(), now.getMonthValue() - 4, now.getDayOfMonth(), 0, 0);
+		System.out.println(yearBefore);
+	    for (Appointment appointment : finishedAppointments) {
+	    	System.out.println(appointment.getPeriod().getEndTime() + "VREME");
+			if(appointment.getPeriod().getEndTime().isAfter(yearBefore) && appointment.getPeriod().getEndTime().isBefore(now)) {
+				if(map.containsKey(appointment.getPeriod().getEndTime().getMonth().toString())) {
+					map.put(appointment.getPeriod().getEndTime().getMonth().toString(),map.get(appointment.getPeriod().getEndTime().getMonth().toString()) + 1);
+					
+				}else {
+					map.put(appointment.getPeriod().getEndTime().getMonth().toString(),value);
+				}
+		
+				
+			}
+		}
+		return map;
+	}
+
+	@Override
+	public Map<String,Integer> getDoneAppointmentsForMonth(Long id) {
+		List<Appointment>finishedAppointments = getAllAppointmentsByPharmacyId(id);
+		LocalDateTime now = LocalDateTime.now();
+		int value = 1;
+		Map<String, Integer> map = new HashMap<>();
+		LocalDateTime yearBefore = LocalDateTime.of(now.getYear(), now.getMonthValue(), now.getDayOfMonth(), 0, 0);
+		System.out.println(yearBefore);
+	    for (Appointment appointment : finishedAppointments) {
+	    	System.out.println(appointment.getPeriod().getEndTime() + "VREME");
+			if(appointment.getPeriod().getEndTime().getMonth().equals(yearBefore.getMonth()) && appointment.getPeriod().getEndTime().getYear() == yearBefore.getYear()) {
+				if(map.containsKey(appointment.getPeriod().getEndTime().getMonth().toString())) {
+					map.put(appointment.getPeriod().getEndTime().getMonth().toString(),map.get(appointment.getPeriod().getEndTime().getMonth().toString()) + 1);
+					
+				}else {
+					map.put(appointment.getPeriod().getEndTime().getMonth().toString(),value);
+				}
+		
+				
+			}
+		}
+		return map;
+	}
+//FINISHED APPOINTMENTS
+	@Override
+	public List<Appointment> getAllAppointmentsByPharmacyId(Long id) {
+		List<Appointment> appointments = this.appointmentRepository.findAll();
+		List<Appointment> finishedAppointments = new ArrayList<Appointment>();
+		for (Appointment appointment : appointments) {
+			if(appointment.isFinished() && appointment.getPharmacy().getId().equals(id)) {
+				finishedAppointments.add(appointment);
+			}
+		}
+		return finishedAppointments;
 	}
 }

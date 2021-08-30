@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tim40.tim40.dto.DermatologistRatingDTO;
+import com.tim40.tim40.dto.PharmacistRatingDTO;
 import com.tim40.tim40.model.Patient;
 import com.tim40.tim40.model.Pharmacist;
 import com.tim40.tim40.projections.PharmacistDetailsProjection;
@@ -67,6 +69,16 @@ public class PharmacistController {
 	
 	}
 
+	@RequestMapping(value="/get-pharmacist-rating/{id}", method = RequestMethod.GET)
+	public  ResponseEntity<List<PharmacistRatingDTO>> GetPharmacistRatings(@PathVariable("id") Long id ,@RequestHeader("usertype") String type){
+		if("PHARMACY_ADMINISTRATOR".equals(type)){
+			return new ResponseEntity<List<PharmacistRatingDTO>>(this.pharmacistService.getPharmacistRatings(id,"PHARMACIST"),HttpStatus.OK);
+			}
+			else {
+				return new ResponseEntity<List<PharmacistRatingDTO>>(HttpStatus.UNAUTHORIZED);
+			}
+		
+	}
 	
 	
 }

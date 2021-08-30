@@ -55,7 +55,7 @@ public class Pharmacy {
 
 //    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pharmacy")
 //    private final Set<Pharmacist> pharmacists = new HashSet<Pharmacist>();
-    
+//    
 //    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pharmacy")
 //    private final Set<Consultation> consultations = new HashSet<Consultation>();
 
