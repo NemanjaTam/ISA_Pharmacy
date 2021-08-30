@@ -1,8 +1,7 @@
 <template>
-<div>  
-  <div class="background">
-   <b-navbar toggleable="lg" type="dark" variant="dark">
-            <b-navbar-brand>NavBar</b-navbar-brand>
+   <div>  
+       <b-navbar toggleable="lg" type="dark" variant="dark">
+           <b-form class="routerlink">{{ userType }}</b-form>
 
             <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -40,27 +39,22 @@
                 </b-navbar-nav>
 
                 <b-navbar-nav class="ml-auto">
-                    <b-nav-form v-if="userType">
-                        <b-form-input size="sm" class="mr-sm-2" placeholder="Search"></b-form-input>
-                        <b-button size="sm" class="my-2 my-sm-0" type="submit">{{myCount}}</b-button>
-                    </b-nav-form>
+                   <b-nav-item>
+                     <router-link to="/view-profile" class="routerlink">Profile</router-link>
+                   </b-nav-item>
 
-                        <b-nav-item>
-                           <router-link to="/login" class="routerlink">Login</router-link>
-                        </b-nav-item>
+                    <b-nav-item>
+                        <router-link to="/edit-profile" class="routerlink">Edit Profile</router-link>
+                     </b-nav-item>
 
-                        <b-nav-item>
-                           <router-link to="/registration" class="routerlink">Registration</router-link>
-                        </b-nav-item>
-
-
+                   <b-nav-item>
+                     <b-button style="background-color:red" v-on:click="logout">Logout</b-button>
+                  </b-nav-item>
                 </b-navbar-nav>
             </b-collapse>
 
      </b-navbar>     
     </div>
-
-  </div>
 </template>
 
 <style scoped>
@@ -83,11 +77,17 @@
 <script>
 export default {
   name: "NavbarSystemAdmin",
-   data() {
-    return {
-       userType: false
-    };
+  computed: {
+    userType() {
+      return this.$store.getters.getUserType;
+    }
+  },
+   methods: {
+    logout() {
+      this.$store.dispatch("logout");
+      this.$router.push("LoginPage");
+      localStorage.setItem("user", null);
+    }
   }
- 
-  }
+};
 </script>

@@ -33,7 +33,6 @@ public class MedicationService implements IMedicationService{
 	}
 
 	public MedicationDTO2 createMedication (MedicationDTO2 medicationDTO2) {
-		Pharmacy pharmacy = pharmacyRepository.findById(medicationDTO2.getPharmacyID()).get();
 		List<Medication> replacementMedications = new ArrayList<Medication>();
 		for(Long med : medicationDTO2.getReplacementMedicationsIDs()) {
 			replacementMedications.add(this.medicationRepository.findById(med).get());
@@ -71,12 +70,12 @@ public class MedicationService implements IMedicationService{
 		return new ResponseEntity<List<Medication>>(medication.getReplacementMedications(), HttpStatus.OK);
 	}
 
-	public List<MedicationDTO> getAllMedications() {
+	public List<MedicationDTO2> getAllMedications() {
 		List<Medication> medications = medicationRepository.findAll();
-		List<MedicationDTO> medicationDTOs = new ArrayList<MedicationDTO>();
+		List<MedicationDTO2> medicationDTOs = new ArrayList<MedicationDTO2>();
 		
 		for(Medication m : medications) {
-			medicationDTOs.add(new MedicationDTO(m));
+			medicationDTOs.add(new MedicationDTO2(m));
 		}
 		return medicationDTOs;
 	}

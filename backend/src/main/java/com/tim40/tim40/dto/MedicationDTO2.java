@@ -22,7 +22,7 @@ public class MedicationDTO2 {
     private String structure; 
     private String contraindications;  
     private String recommendedIntake;  
-    private Long pharmacyID;
+  //  private Long pharmacyID;
     private Set<Long> replacementMedicationsIDs = new HashSet<Long>();
     private String manufacturer; 
     private PrescriptionRegime prescriptionRegime;
@@ -39,7 +39,7 @@ public class MedicationDTO2 {
     	this.structure = medication.getStructure();
     	this.contraindications = medication.getContraindications();
     	this.recommendedIntake = medication.getRecommendedIntake();
-    ///	this.pharmacyID = medication
+     //	this.pharmacyID = 
     	this.manufacturer = medication.getManufacturer();
     	this.prescriptionRegime = medication.getPrescriptionRegime();
     	this.description = medication.getDescription();
@@ -47,7 +47,7 @@ public class MedicationDTO2 {
     	for(Medication m : medication.getReplacementMedications()) {
     		this.replacementMedicationsIDs.add(m.getId());
     	}
-    }
+    } 
 
 	
 }

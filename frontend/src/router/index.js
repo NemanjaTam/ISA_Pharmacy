@@ -27,6 +27,10 @@ import PriceList from "../components/PriceList.vue"
 import Medications from "../components/Medications.vue"
 import RegistrationSystemAdmin from "../components/RegistrationSystemAdmin.vue"
 import AddMedication from "../components/AddMedication.vue"
+import SystemAdminHome from "../views/SystemAdminHome.vue"
+import SupplierHome from "../views/SupplierHome.vue"
+import EditProfile from "../views/EditProfile.vue"
+import ViewProfile from "../views/ViewProfile.vue"
 
 Vue.use(VueRouter);
 
@@ -150,6 +154,26 @@ const routes = [
       }
     ],
   },
+      {
+        path: '/system-admin-home',
+        name: 'SystemAdminHome',
+        component: SystemAdminHome
+      },
+      {
+        path: '/supplier-home',
+        name: 'SupplierHome',
+        component: SupplierHome
+      },
+      {
+        path: '/edit-profile',
+        name: 'EditProfile',
+        component: EditProfile
+      },
+      {
+        path: '/view-profile',
+        name: 'ViewProfile',
+        component: ViewProfile
+      },
       {
         path: '/add-medication',
         name: 'AddMedication',
