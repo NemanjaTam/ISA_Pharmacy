@@ -36,7 +36,7 @@ insert into dermatologist_pharmacy(pharmacy_id, dermatologist_id) values (4,10)
 
 
 
-insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Pharmacist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic11@gmail.com', true, 'Savo', 'kinzo','+381613238249', 'Savic', 'PHARMACIST', null, 1)
+insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Pharmacist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic11@gmail.com', true, 'Marko', 'kinzo','+381613238249', 'Savic', 'PHARMACIST', null, 1)
 insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Pharmacist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic12@gmail.com', true, 'Marko', 'kinzo','+381613238249', 'Markovic', 'PHARMACIST', null, 1)
 insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Pharmacist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic13@gmail.com', true, 'Jovan', 'kinzo','+381613238249', 'Jovanovic', 'PHARMACIST', null, 1)
 insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Pharmacist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic14@gmail.com', true, 'Mateja', 'kinzo','+381613238249', 'Matejic', 'PHARMACIST', null, 2)
