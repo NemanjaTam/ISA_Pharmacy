@@ -83,12 +83,15 @@ export default {
       )
         .then(function(response) {
           if (response.ok) {
+           
             return response.json();
           } else {
             return Promise.reject(response);
           }
         })
-        .then((data) => this.$store.dispatch("updatePriceListActive", data))
+        .then((data) => {this.$store.dispatch("updatePriceListActive", data)
+        location.reload;
+        })
         .catch();
     },
 

@@ -48,10 +48,10 @@ public class PriceListService implements IPriceListMedication{
 	    for (PriceListMedication priceListMedication : list) {
 			if(priceListMedication.getStatus().equals(PriceListType.NOT_YET_ACTIVE) || priceListMedication.getStatus().equals(PriceListType.INACTIVE)) {
 				active.add(priceListMedication);
-				return active;
+				
 			}
 		}
-		return null;
+		return active;
 	}
 	
 	
