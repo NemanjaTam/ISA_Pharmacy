@@ -34,6 +34,7 @@ import SystemAdminHome from "../views/SystemAdminHome.vue"
 import SupplierHome from "../views/SupplierHome.vue"
 import EditProfile from "../views/EditProfile.vue"
 import ViewProfile from "../views/ViewProfile.vue"
+import EditAdmin from "../components/EditAdmin.vue"
 
 Vue.use(VueRouter);
 
@@ -158,7 +159,11 @@ const routes = [
         path:"report",
         name:"report",
         component: Report,
-      }
+      },      {
+        path: 'edit-profile-admin',
+        name: 'EditAdmin',
+        component: EditAdmin
+      },
     ],
   },
       {
