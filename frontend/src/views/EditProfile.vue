@@ -52,7 +52,10 @@ export default {
     computed: {
         User() {
             return this.$store.getters.getUser
-        }
+        },
+         userType() {
+      return this.$store.getters.getUserType;
+    },
     },
     data() {
         return {

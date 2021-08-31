@@ -44,16 +44,16 @@ export const store = new Vuex.Store({
         offers: [],
       },
     ],
-    //ne menjati nista 
-    medicines:[{}],
+    //ne menjati nista
+    medicines: [{}],
     //ne menjaj ovo
     selectedOffer: {},
-    seletedMedicineForEdit:{},
-    unnaprovedAbsences:[],
-    approvedAbsences:[],
-    priceListActive:[],
-    priceListInactive:[],
-    medications: [ ]
+    seletedMedicineForEdit: {},
+    unnaprovedAbsences: [],
+    approvedAbsences: [],
+    priceListActive: [],
+    priceListInactive: [],
+    medications: [],
   },
   //methods that return data (state)
   getters: {
@@ -73,11 +73,11 @@ export const store = new Vuex.Store({
     getSelectedOfer(state) {
       return state.selectedOffer;
     },
-    getSelectedMedicineForEdit(state){
+    getSelectedMedicineForEdit(state) {
       return state.seletedMedicineForEdit;
     },
-    getMedicines(state){
-      return state.medicines
+    getMedicines(state) {
+      return state.medicines;
     },
     isUserLogged(state) {
       if (state.user.id != null) {
@@ -114,19 +114,19 @@ export const store = new Vuex.Store({
     getId(state) {
       return state.user.id;
     },
-    getOffer(state){
+    getOffer(state) {
       return state.purchaseOrders.offers;
     },
-    getUnnaprovedAbsences(state){
+    getUnnaprovedAbsences(state) {
       return state.unnaprovedAbsences;
     },
-    getApprovedAbsences(state){
+    getApprovedAbsences(state) {
       return state.approvedAbsences;
     },
-    getPriceListActive(state){
+    getPriceListActive(state) {
       return state.priceListActive;
     },
-    getPriceListInactive(state){
+    getPriceListInactive(state) {
       return state.priceListInactive;
     },
   },
@@ -135,11 +135,35 @@ export const store = new Vuex.Store({
     updateUser(state, user) {
       state.user = user;
     },
-    updatePriceListActive(state,pricelist){
-      state.priceListActive = pricelist
+    updateName(state, name) {
+      state.user.name = name;
     },
-    updatePriceListInactive(state,pricelist){
-      state.priceListInactive = pricelist
+    updateEmail(state, surname) {
+      state.user.surname = surname;
+    },
+    updatePassword(state, password) {
+      state.user.password = password;
+    },
+    updatePhone(state, phone) {
+      state.user.phone = phone;
+    },
+    updateCity(state, city) {
+      state.user.address.city = city;
+    },
+    updateState(state, stat) {
+      state.user.address.state = stat;
+    },
+    updateNumber(state, number) {
+      state.user.address.number = number;
+    },
+    updatePostalCode(state, postalCode) {
+      state.user.address.postalCode = postalCode;
+    },
+    updatePriceListActive(state, pricelist) {
+      state.priceListActive = pricelist;
+    },
+    updatePriceListInactive(state, pricelist) {
+      state.priceListInactive = pricelist;
     },
     updateSelectedOffer(state, selectedOffer) {
       state.selectedOffer = selectedOffer;
@@ -156,7 +180,7 @@ export const store = new Vuex.Store({
     updatePurchaseOrders(state, purchaseOrders) {
       state.purchaseOrders = purchaseOrders;
     },
-    updateSelectedMedicineForEdit(state,edit){
+    updateSelectedMedicineForEdit(state, edit) {
       state.seletedMedicineForEdit = edit;
     },
     updatePharmacy(state, pharmacy) {
@@ -179,45 +203,83 @@ export const store = new Vuex.Store({
       state.user.userType = report;
     },
     updatePurchaseOrderElement(state, payload) {
-      const index = state.getPurchaseOrders.findIndex((item) => item.id === payload.id);
+      const index = state.getPurchaseOrders.findIndex(
+        (item) => item.id === payload.id
+      );
       if (index !== -1) {
         Vue.set(state.getPurchaseOrders, index, payload);
       }
     },
-    updateMedicines(state,medicines){
+    updateMedicines(state, medicines) {
       state.medicines = medicines;
     },
-    updatePurchaseOrderOffer(state,payload){
-     state.purchaseOrders.forEach(element => {
-      const index = element.offers.findIndex((item) => item.id === payload.id);
-      if (index !== -1) {
-        Vue.set(element.offers, index, payload);
-      }
-     });
+    updatePurchaseOrderOffer(state, payload) {
+      state.purchaseOrders.forEach((element) => {
+        const index = element.offers.findIndex(
+          (item) => item.id === payload.id
+        );
+        if (index !== -1) {
+          Vue.set(element.offers, index, payload);
+        }
+      });
     },
-    removeMedicine(state,medicine){
+    removeMedicine(state, medicine) {
       state.medicines.splice(state.medicines.indexOf(medicine), 1);
     },
-    updateUnapprovedAbsences(state,absence){
+    updateUnapprovedAbsences(state, absence) {
       state.unnaprovedAbsences = absence;
     },
-    updateApprovedAbsences(state,absence){
+    updateApprovedAbsences(state, absence) {
       state.approvedAbsences = absence;
     },
-    setMedications (state, medications) {
+    setMedications(state, medications) {
       state.medications = medications;
-    } 
+    },
   },
   //always on components dispatch action which commit some mutations. Never commit mutations from component because of async
   actions: {
     updateUser(context, user) {
       context.commit("updateUser", user);
     },
-    updatePriceListActive(context,price){
-      context.commit("updatePriceListActive",price);
+    updateName(context, name) {
+      context.commit("updateName", name);
     },
-    updatePriceListInactive(context,price){
-      context.commit("updatePriceListInactive",price);
+    updateSurname(context, surname) {
+      context.commit("updateSurname", surname);
+    },
+    updateEmail(context, email) {
+      context.commit("updateEmail", email);
+    },
+    updatePhone(context, phone) {
+      context.commit("updatePhone", phone);
+    },
+
+    updatePassword(context, password) {
+      context.commit("updatePassword", password);
+    },
+
+    updateState(context, state) {
+      context.commit("updateState", state);
+    },
+    updateCity(context, city) {
+      context.commit("updateCity", city);
+    },
+    updateStreet(context, street) {
+      context.commit("updateStreet", street);
+    },
+    updateNumber(context, number) {
+      context.commit("updateNumber", number);
+    },
+    updatePostalCode(context, postalCode) {
+      context.commit("updatePostalCode", postalCode);
+    },
+
+
+    updatePriceListActive(context, price) {
+      context.commit("updatePriceListActive", price);
+    },
+    updatePriceListInactive(context, price) {
+      context.commit("updatePriceListInactive", price);
     },
     updatePharmacy(context, pharmacy) {
       //ne menjati ovo se koristi vec!
@@ -238,8 +300,8 @@ export const store = new Vuex.Store({
     updateAppointments(context, appointments) {
       context.commit("updateAppointments", appointments);
     },
-    updateSelectedMedicineForEdit(context,edit){
-      context.commit("updateSelectedMedicineForEdit",edit);
+    updateSelectedMedicineForEdit(context, edit) {
+      context.commit("updateSelectedMedicineForEdit", edit);
     },
     updateCurrentAppointment(context, appointment) {
       context.commit("updateCurrentAppointment", appointment);
@@ -250,26 +312,26 @@ export const store = new Vuex.Store({
     addReport(context, report) {
       context.commit("addReport", report);
     },
-    updatePurchaseOrderElement(context,elemet){
-      context.commit("updatePurchaseOrderElement",elemet);
+    updatePurchaseOrderElement(context, elemet) {
+      context.commit("updatePurchaseOrderElement", elemet);
     },
-    updatePurchaseOrderOffer(context,element){
-      context.commit("updatePurchaseOrderOffer",element);
+    updatePurchaseOrderOffer(context, element) {
+      context.commit("updatePurchaseOrderOffer", element);
     },
-    updateMedicines(context,element){
-      context.commit("updateMedicines",element);
+    updateMedicines(context, element) {
+      context.commit("updateMedicines", element);
     },
-    removeMedicine(context,medicine){
-      context.commit("removeMedicine",medicine);
+    removeMedicine(context, medicine) {
+      context.commit("removeMedicine", medicine);
     },
-    updateUnapprovedAbsences(context,absence){
-      context.commit("updateUnapprovedAbsences",absence);
-    },    
-    updateApprovedAbsences(context,absence){
-      context.commit("updateApprovedAbsences",absence);
+    updateUnapprovedAbsences(context, absence) {
+      context.commit("updateUnapprovedAbsences", absence);
     },
-    setMedications (context, medications) {
-      context.commit('setMedications', medications);
+    updateApprovedAbsences(context, absence) {
+      context.commit("updateApprovedAbsences", absence);
+    },
+    setMedications(context, medications) {
+      context.commit("setMedications", medications);
     },
 
     logout(context) {

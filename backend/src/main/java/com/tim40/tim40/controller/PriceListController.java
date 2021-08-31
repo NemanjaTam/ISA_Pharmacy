@@ -48,6 +48,20 @@ public class PriceListController {
 			}
 	}
 	
+	@GetMapping(value="/get-non-active-pricelist/{id}",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<PriceListMedication>> getNonActivePriceList(@PathVariable("id") Long id,@RequestHeader("usertype") String type){
+			if("PHARMACY_ADMINISTRATOR".equals(type)){
+				return new ResponseEntity<List<PriceListMedication>>(this.priceListService.getNonActivePriceList(id), HttpStatus.OK);
+			
+		
+			}
+			else {
+				return new ResponseEntity<List<PriceListMedication>>(HttpStatus.UNAUTHORIZED);
+			}
+	}
+	
+	
+	
 	
 	@PostMapping(value="/edit/{id}",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<PriceListMedication>> editPriceList(@RequestBody PriceListMedicationDTO plm,@RequestHeader("usertype") String type,@PathVariable("id") Long id){

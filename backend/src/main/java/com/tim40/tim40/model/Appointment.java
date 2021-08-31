@@ -46,11 +46,12 @@ public class Appointment {
 	@Column(nullable = false)
 	private boolean isFinished; 
 	
-	@ManyToOne
+	@ManyToOne()
     @JoinColumn(name = "pharmacy_id", nullable = false)
     private Pharmacy pharmacy;
 	
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "dermatologist_id", nullable = true)
     private  Dermatologist dermatologist;
     
