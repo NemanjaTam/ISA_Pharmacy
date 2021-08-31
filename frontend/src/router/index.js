@@ -24,6 +24,9 @@ import PurchaseOrder from "../components/PurchaseOrder.vue"
 import Medication from "../views/MedicationList.vue"
 import Absences from "../components/Absences.vue"
 import PriceList from "../components/PriceList.vue"
+
+import Report from "../views/Report.vue"
+
 import Medications from "../components/Medications.vue"
 import RegistrationSystemAdmin from "../components/RegistrationSystemAdmin.vue"
 import AddMedication from "../components/AddMedication.vue"
@@ -151,6 +154,10 @@ const routes = [
         path:"pricelist",
         name:"pricelist",
         component: PriceList,
+      },{
+        path:"report",
+        name:"report",
+        component: Report,
       }
     ],
   },

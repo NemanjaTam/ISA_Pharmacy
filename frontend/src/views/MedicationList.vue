@@ -46,6 +46,9 @@ export default {
     getSelectedMed() {
       return this.$store.getters.getSelectedMedicineForEdit;
     },
+    userType() {
+      return this.$store.getters.getUserType;
+    },
   },
   data() {
     return {
@@ -105,11 +108,12 @@ export default {
     removeItem(item) {
       var vm = this;
       fetch(
-        `http://localhost:9005/api/pharmacy/delete-medication/${this.Pharmacy}`,
+        `http://localhost:9005/api/pharmacy/is-medication-reserved/${this.Pharmacy}`,
         {
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
+            usertype: this.userType,
           },
           method: "POST",
           body: JSON.stringify(item.id),
@@ -123,6 +127,28 @@ export default {
           }
         })
         .then(function(data) {
+          console.log(data);
+          if (!data) {
+            return fetch(
+              `http://localhost:9005/api/pharmacy/delete-medication/${vm.Pharmacy}`,
+              {
+                headers: {
+                  Accept: "application/json",
+                  "Content-Type": "application/json",
+                },
+                method: "POST",
+                body: JSON.stringify(item.id),
+              }
+            )  .then(function(response) {
+          return response.json();
+        });
+          } else {
+            alert("Medication reserved!");
+          }
+        })
+      
+        .then(function(data) {
+          console.log(data);
           return fetch(
             `http://localhost:9005/api/pharmacy/get-medications/${vm.Pharmacy}`,
             {

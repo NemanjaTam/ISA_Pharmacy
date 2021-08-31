@@ -8,6 +8,7 @@ import java.util.Set;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tim40.tim40.dto.DermatologistDTO;
 import com.tim40.tim40.dto.DermatologistDetailsDTO;
+import com.tim40.tim40.dto.DermatologistRatingDTO;
 import com.tim40.tim40.model.*;
 import com.tim40.tim40.projections.DermatologistDetailsProjection;
 import com.tim40.tim40.projections.DermatologistProjection;
@@ -57,6 +59,18 @@ public class DermatologistController {
 				}
 				else {
 					return new ResponseEntity<List<DermatologistDetailsDTO>>(HttpStatus.UNAUTHORIZED);
+				}
+			
+		}
+		
+		
+		@RequestMapping(value="/get-dermatologist-rating/{id}", method = RequestMethod.GET)
+		public  ResponseEntity<List<DermatologistRatingDTO>> GetDermatologistsRatings(@PathVariable("id") Long id ,@RequestHeader("usertype") String type){
+			if("PHARMACY_ADMINISTRATOR".equals(type)){
+				return new ResponseEntity<List<DermatologistRatingDTO>>( dermatologistService.getRatingsForDermatologists(id),HttpStatus.OK);
+				}
+				else {
+					return new ResponseEntity<List<DermatologistRatingDTO>>(HttpStatus.UNAUTHORIZED);
 				}
 			
 		}

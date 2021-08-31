@@ -59,8 +59,10 @@ export default {
         method: "POST",
       })        .then(function(response) {
           if (response.ok) {
+            alert("Successful!");
             return response.json();
           } else {
+            
             return Promise.reject(response);
           }
         })

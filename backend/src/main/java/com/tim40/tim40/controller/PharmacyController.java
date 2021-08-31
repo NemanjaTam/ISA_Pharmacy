@@ -27,11 +27,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tim40.tim40.dto.AbsenceDetailedDTO;
 import com.tim40.tim40.dto.AcceptOfferDTO;
 import com.tim40.tim40.dto.DermatologistDetailsDTO;
+import com.tim40.tim40.dto.DermatologistRatingDTO;
 import com.tim40.tim40.dto.MedicationDTO;
 import com.tim40.tim40.dto.MedicationQuantityDTO;
 import com.tim40.tim40.dto.PatientAllergedDTO;
 import com.tim40.tim40.dto.PharmacyDTO;
 import com.tim40.tim40.dto.PharmacyProfileDTO;
+import com.tim40.tim40.dto.PharmacyRatingDTO;
 import com.tim40.tim40.dto.PurchaseOrderDTO;
 import com.tim40.tim40.dto.RejectedAcceptedDTO;
 import com.tim40.tim40.model.Absence;
@@ -47,6 +49,7 @@ import com.tim40.tim40.service.PharmacyService;
 public class PharmacyController {
 	
 	private PharmacyService pharmacyService;
+	
 
 	@Autowired
 	public PharmacyController(PharmacyService pharmacyService) {
@@ -184,6 +187,28 @@ public class PharmacyController {
 			}
 	}
 	
+
+	@RequestMapping(value="/get-pharmacy-rating/{id}", method = RequestMethod.GET)
+	public  ResponseEntity<List<PharmacyRatingDTO>> GetPharmacyRatings(@PathVariable("id") Long id ,@RequestHeader("usertype") String type){
+		if("PHARMACY_ADMINISTRATOR".equals(type)){
+			return new ResponseEntity<List<PharmacyRatingDTO>>( this.pharmacyService.getPharmacyRatings(id),HttpStatus.OK);
+			}
+			else {
+				return new ResponseEntity<List<PharmacyRatingDTO>>(HttpStatus.UNAUTHORIZED);
+			}
+		
+	}
+	
+	@RequestMapping(value="/is-medication-reserved/{id}", method = RequestMethod.POST)
+	public  ResponseEntity<?> GetPharmacyRatings(@RequestBody Long medicationId,@PathVariable("id") Long id,@RequestHeader("usertype") String type){
+		if("PHARMACY_ADMINISTRATOR".equals(type)){
+			return new ResponseEntity<>( this.pharmacyService.isReserved(id, medicationId),HttpStatus.OK);
+			}
+			else {
+				return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+			}
+		
+	}
 
 	
 

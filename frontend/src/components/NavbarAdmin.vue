@@ -19,27 +19,38 @@
             ></b-dropdown-item
           >
           <b-dropdown-item class="dropdaun" href="#"
-            ><router-link to="/pharmacyAdminPage/medication" class="routerlink">Medication</router-link></b-dropdown-item
+            ><router-link to="/pharmacyAdminPage/medication" class="routerlink"
+              >Medication</router-link
+            ></b-dropdown-item
           >
           <b-dropdown-item class="dropdaun" href="#"
-            ><router-link to="/pharmacyAdminPage/absences" class="routerlink">Absences</router-link></b-dropdown-item
+            ><router-link to="/pharmacyAdminPage/absences" class="routerlink"
+              >Absences</router-link
+            ></b-dropdown-item
           >
         </b-nav-item-dropdown>
 
         <b-nav-item-dropdown text="More" left>
           <b-dropdown-item class="dropdaun" href="#"
-            ><router-link to="/pharmacyAdminPage/purchaseorder" class="routerlink"
-              >PURCHASE ORDER</router-link>
-            </b-dropdown-item
-          >
+            ><router-link
+              to="/pharmacyAdminPage/purchaseorder"
+              class="routerlink"
+              >Purchase order</router-link
+            >
+          </b-dropdown-item>
           <b-dropdown-item class="dropdaun" href="#"
             ><router-link to="/pharmacyAdminPage/action" class="routerlink"
-              >PROMOTION</router-link
+              >Promotion</router-link
+            ></b-dropdown-item
+          >
+          <b-dropdown-item class="dropdaun" href="#"
+            ><router-link to="/pharmacyAdminPage/pricelist" class="routerlink"
+              >Price list</router-link
             ></b-dropdown-item
           >
                     <b-dropdown-item class="dropdaun" href="#"
-            ><router-link to="/pharmacyAdminPage/pricelist" class="routerlink"
-              >PRICE LIST</router-link
+            ><router-link to="/pharmacyAdminPage/report" class="routerlink"
+              >Report</router-link
             ></b-dropdown-item
           >
         </b-nav-item-dropdown>

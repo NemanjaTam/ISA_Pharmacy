@@ -80,8 +80,10 @@ export default {
         method: "POST",
       })        .then(function(response) {
           if (response.ok) {
+            alert("Successful!");
             return response.json();
           } else {
+            alert("Unsuccessful!");
             return Promise.reject(response);
           }
         })

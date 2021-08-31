@@ -9,6 +9,8 @@ import java.util.Set;
 
 import javax.persistence.Tuple;
 import java.util.stream.Collectors;
+
+import org.hibernate.internal.build.AllowSysOut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,22 +18,27 @@ import org.springframework.stereotype.Service;
 
 import com.tim40.tim40.dto.DermatologistDTO;
 import com.tim40.tim40.dto.DermatologistDetailsDTO;
+import com.tim40.tim40.dto.DermatologistRatingDTO;
 import com.tim40.tim40.model.Dermatologist;
+import com.tim40.tim40.model.DermatologistRating;
 import com.tim40.tim40.model.Patient;
 import com.tim40.tim40.model.Pharmacy;
 import com.tim40.tim40.projections.DermatologistDetailsProjection;
 import com.tim40.tim40.projections.DermatologistProjection;
+import com.tim40.tim40.repository.DermatologistRatingRepository;
 import com.tim40.tim40.repository.DermatologistRepository;
 
 @Service
 public class DermatologistService implements IDermatologistService {
 
 	private DermatologistRepository dermatologistRepository;
+	private DermatologistRatingRepository dermatologistRatingRepository;
 
 
 	@Autowired
-	public DermatologistService(DermatologistRepository dermatologistRepository) {
+	public DermatologistService(DermatologistRepository dermatologistRepository,DermatologistRatingRepository dermatologistRatingRepository) {
 		this.dermatologistRepository = dermatologistRepository;
+		this.dermatologistRatingRepository = dermatologistRatingRepository;
 	}
 
 	@Override
@@ -72,5 +79,31 @@ public class DermatologistService implements IDermatologistService {
 
    		 	
 		}
-	return new ResponseEntity<List<DermatologistDetailsDTO>>(dtoList, HttpStatus.OK);}
+	return new ResponseEntity<List<DermatologistDetailsDTO>>(dtoList, HttpStatus.OK);
+	}
+	public List<DermatologistRatingDTO> getRatingsForDermatologists(Long id){
+		List<DermatologistRatingDTO> dermatologistsWithRatings = new ArrayList<DermatologistRatingDTO>();
+		List<DermatologistRating> ratings = this.dermatologistRatingRepository.findAll();
+		for (DermatologistProjection dermatologistProjection : this.dermatologistRepository.getAllByPharmacyId(id)) {
+			int rated = 0;
+			int size = 0;
+			for (DermatologistRating dermatologistRating : ratings) {
+				if(dermatologistRating.getDermatologist().getId() == dermatologistProjection.getId()) {
+					
+					rated = rated + dermatologistRating.getRating();
+				
+					size = size + 1;				
+				}
+			}
+	    System.out.println(rated);
+		double avg = Double.valueOf(rated) / Double.valueOf(size);
+		System.out.println(avg);
+		System.out.println(size);
+		DermatologistRatingDTO dto = new DermatologistRatingDTO(dermatologistProjection.getName(), dermatologistProjection.getSurname(), avg,dermatologistProjection.getEmail(),dermatologistProjection.getPharmacyName());
+			dermatologistsWithRatings.add(dto);
+		}
+		return dermatologistsWithRatings;
+	}
 }
+
+
