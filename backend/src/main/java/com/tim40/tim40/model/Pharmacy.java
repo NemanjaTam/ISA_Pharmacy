@@ -57,11 +57,15 @@ public class Pharmacy {
 //    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pharmacy")
 //    private final Set<Pharmacist> pharmacists = new HashSet<Pharmacist>();
 //    
-//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pharmacy")
-//    private final Set<Consultation> consultations = new HashSet<Consultation>();
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pharmacy")
+    private final Set<Consultation> consultations = new HashSet<Consultation>();
 
-//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pharmacy")
-//    private final Set<Appointment> appointments = new HashSet<Appointment>();
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pharmacy")
+    private final Set<Appointment> appointments = new HashSet<Appointment>();
+    
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pharmacy")
+    private final Set<WorkDay> workDays = new HashSet<WorkDay>();
+    
 
 //    @OneToMany(fetch = FetchType.LAZY)
 //    private final Set<QuantityMedication> medications = new HashSet<QuantityMedication>();

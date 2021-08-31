@@ -16,29 +16,53 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+
 import com.tim40.tim40.dto.DermatologistDTO;
 import com.tim40.tim40.dto.DermatologistDetailsDTO;
 import com.tim40.tim40.dto.DermatologistRatingDTO;
+import com.tim40.tim40.model.Absence;
+import com.tim40.tim40.model.Appointment;
+import com.tim40.tim40.model.Consultation;
 import com.tim40.tim40.model.Dermatologist;
 import com.tim40.tim40.model.DermatologistRating;
 import com.tim40.tim40.model.Patient;
+import com.tim40.tim40.model.PharmacistRating;
 import com.tim40.tim40.model.Pharmacy;
+import com.tim40.tim40.model.WorkDay;
 import com.tim40.tim40.projections.DermatologistDetailsProjection;
 import com.tim40.tim40.projections.DermatologistProjection;
+import com.tim40.tim40.projections.PharmacistDetailsProjection;
+import com.tim40.tim40.repository.AbsenceRepository;
+import com.tim40.tim40.repository.AppointmentRepository;
 import com.tim40.tim40.repository.DermatologistRatingRepository;
 import com.tim40.tim40.repository.DermatologistRepository;
+import com.tim40.tim40.repository.PharmacyRepository;
+import com.tim40.tim40.repository.UserRepository;
+import com.tim40.tim40.repository.WorkDayRepository;
 
 @Service
 public class DermatologistService implements IDermatologistService {
 
 	private DermatologistRepository dermatologistRepository;
 	private DermatologistRatingRepository dermatologistRatingRepository;
+	private UserRepository userRepository;
+	private WorkDayRepository workDayRepository;
+	private AppointmentRepository appointmentRepository;
+	private PharmacyRepository pharmacyRepository;
+	private AbsenceRepository absenceRepository;
 
 
 	@Autowired
-	public DermatologistService(DermatologistRepository dermatologistRepository,DermatologistRatingRepository dermatologistRatingRepository) {
+	public DermatologistService(DermatologistRepository dermatologistRepository,DermatologistRatingRepository dermatologistRatingRepository,
+			UserRepository userRepository,WorkDayRepository workDayRepository, AppointmentRepository appointmentRepository,
+			PharmacyRepository pharmacyRepository, AbsenceRepository absenceRepository) {
 		this.dermatologistRepository = dermatologistRepository;
 		this.dermatologistRatingRepository = dermatologistRatingRepository;
+		this.userRepository = userRepository;
+		this.workDayRepository = workDayRepository;
+		this.appointmentRepository = appointmentRepository;
+		this.pharmacyRepository = pharmacyRepository;
+		this.absenceRepository = absenceRepository;
 	}
 
 	@Override
@@ -103,6 +127,91 @@ public class DermatologistService implements IDermatologistService {
 			dermatologistsWithRatings.add(dto);
 		}
 		return dermatologistsWithRatings;
+	}
+	
+	public Integer removeDermatologist(Long pharmacyId,String email) {
+	
+		String str = email.substring(1, email.length() - 1);
+		Long id = (long) 0;
+		for(DermatologistProjection proj : this.dermatologistRepository.getAllByPharmacyId(pharmacyId)) {
+			System.out.println(proj.getEmail());
+			if(proj.getEmail().trim().equals(str)) {
+				System.out.println("USLO OVDE 2");
+			 id = proj.getId();
+			}
+		}
+		if(id !=0) {
+			System.out.println("USLO OVDE 3	");
+		Pharmacy pharm = extracted(pharmacyId, id);
+		boolean hasAppointments = hasAppointment(id, pharm);
+		if(!hasAppointments) {
+		deleteAppointment(id, pharm);
+
+		deleteRatings(id);
+		deleteWorkDays(id);
+		this.dermatologistRepository.deleteById(id, pharmacyId);
+		return 1;
+		}
+		return 0;
+		}
+		return 0;
+	}
+
+	public void deleteWorkDays(Long id) {
+		List<WorkDay> days = this.workDayRepository.findAll();
+		for (WorkDay workDay : days) {
+			if(workDay.getUser().getId() == id) {
+				this.workDayRepository.delete(workDay);
+			}
+		}
+	}
+
+	public void deleteRatings(Long id) {
+		List<DermatologistRating> ratings = this.dermatologistRatingRepository.findAll();
+		for (DermatologistRating rating : ratings) {
+			if(rating.getDermatologist().getId() == id) {
+				this.dermatologistRatingRepository.delete(rating);
+			}
+		}
+	}
+
+	public void deleteAppointment(Long id, Pharmacy pharm) {
+		Set<Appointment> cons = pharm.getAppointments();
+
+		for (Appointment consultation : cons) {
+			if(consultation.getDermatologist().getId() == id) {
+				this.appointmentRepository.delete(consultation);
+			}
+		}
+	}
+	
+	public boolean hasAppointment(Long id, Pharmacy pharm) {
+		Set<Appointment> cons = pharm.getAppointments();
+
+		for (Appointment consultation : cons) {
+			System.out.println(consultation.getId());
+			if(consultation.getDermatologist().getId() == id) {
+				System.out.println(consultation.isFinished() + "DA LI JE ZAVRSENO");
+				if(!consultation.isFinished()) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
+
+	public Pharmacy extracted(Long pharmacyId, Long id) {
+		Pharmacy pharm = this.pharmacyRepository.getById(pharmacyId);
+		Set<Absence> absences = pharm.getAbsences();
+			for (Absence abs :absences ) {
+				if(abs.getUser().getId() == id) {
+					//this.absenceRepository.deleteById(abs.getId());
+					System.out.println(abs.getUser().getEmail());
+					this.absenceRepository.deleteByManyProperties(abs.getUser().getId(), abs.getId());
+				}
+			}
+		return pharm;
 	}
 }
 

@@ -52,6 +52,7 @@ public class Consultation {
     private Pharmacy pharmacy;
 	
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "pharmacist_id", nullable = false)
     private  Pharmacist pharmacist;
     
