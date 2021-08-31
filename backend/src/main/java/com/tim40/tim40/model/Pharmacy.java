@@ -13,7 +13,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -22,6 +22,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import javax.persistence.JoinColumn;
 
 @Entity
 @Table(name = "pharmacies")
@@ -95,6 +96,14 @@ public class Pharmacy {
     @OneToMany(fetch = FetchType.LAZY)
     private final Set<User> subscribers = new HashSet<User>();
     
+    @ManyToMany
+    @JoinTable
+    (
+        name = "pharmacy_suppliers",
+        joinColumns = @JoinColumn(name = "pharmacy_id"),
+        inverseJoinColumns = @JoinColumn(name = "supplier_id")
+    )
+	private final Set<Supplier> suppliers = new HashSet<Supplier>();
     
     public Pharmacy(String name, Address address)
     {

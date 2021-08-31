@@ -92,6 +92,19 @@ public class User{
 		this.isFirstTimeLogging = isFirstTimeLogging;
 	}
 
+	public User(String name, String surname, String email, String password, Address address,
+			UserType userType, boolean isFirstTimeLogging, String phone) {
+		super();
+		this.name = name;
+		this.surname = surname;
+		this.email = email;
+		this.password = password;
+		this.address = address;
+		this.userType = userType;
+		this.isFirstTimeLogging = isFirstTimeLogging;
+		this.phone = phone;
+	}
+	
 	public void update(UserDTO userDTO) {
 		this.name = userDTO.getName();
 		this.surname = userDTO.getSurname();

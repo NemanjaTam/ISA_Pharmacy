@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.tim40.tim40.dto.MedicationDTO;
+import com.tim40.tim40.dto.MedicationDTO2;
 import com.tim40.tim40.dto.MedicationQuantityDTO;
 import com.tim40.tim40.model.Medication;
 import com.tim40.tim40.model.Pharmacy;
@@ -31,17 +32,16 @@ public class MedicationService implements IMedicationService{
 		this.pharmacyRepository = pharmacyRepository;
 	}
 
-	public MedicationDTO createMedication (MedicationDTO medicationDTO) {
-		Pharmacy pharmacy = pharmacyRepository.findById(medicationDTO.getPharmacyID()).get();
-		Set<Medication> replacementMedications = new HashSet<Medication>();
-		for(Long med : medicationDTO.getReplacementMedicationsIDs()) {
+	public MedicationDTO2 createMedication (MedicationDTO2 medicationDTO2) {
+		List<Medication> replacementMedications = new ArrayList<Medication>();
+		for(Long med : medicationDTO2.getReplacementMedicationsIDs()) {
 			replacementMedications.add(this.medicationRepository.findById(med).get());
 		}
-		Medication medication = new Medication(medicationDTO.getName(), medicationDTO.getCode(), medicationDTO.getTypeOfMedication(),
-				medicationDTO.getStructure(), medicationDTO.getContraindications(), medicationDTO.getRecommendedIntake(), 
-				pharmacy, replacementMedications);
+		Medication medication = new Medication(medicationDTO2.getName(), medicationDTO2.getCode(), medicationDTO2.getTypeOfMedication(),
+				 medicationDTO2.getStructure(), medicationDTO2.getContraindications(), medicationDTO2.getRecommendedIntake(), medicationDTO2.getDescription(), 
+				 medicationDTO2.getManufacturer(), medicationDTO2.getMedicationForm(), medicationDTO2.getPrescriptionRegime(), replacementMedications);
 		Medication createdMedication = medicationRepository.save(medication);
-		return new MedicationDTO(createdMedication);
+		return new MedicationDTO2(createdMedication);
 	}
 	//ne menjati
 	public Medication createMedicationWithoutReplacement (MedicationQuantityDTO medicationDTO) {
@@ -68,5 +68,15 @@ public class MedicationService implements IMedicationService{
 			}
 		}
 		return new ResponseEntity<List<Medication>>(medication.getReplacementMedications(), HttpStatus.OK);
+	}
+
+	public List<MedicationDTO2> getAllMedications() {
+		List<Medication> medications = medicationRepository.findAll();
+		List<MedicationDTO2> medicationDTOs = new ArrayList<MedicationDTO2>();
+		
+		for(Medication m : medications) {
+			medicationDTOs.add(new MedicationDTO2(m));
+		}
+		return medicationDTOs;
 	}
 }

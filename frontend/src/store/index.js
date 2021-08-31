@@ -53,6 +53,7 @@ export const store = new Vuex.Store({
     approvedAbsences:[],
     priceListActive:[],
     priceListInactive:[],
+    medications: [ ]
   },
   //methods that return data (state)
   getters: {
@@ -203,6 +204,9 @@ export const store = new Vuex.Store({
     updateApprovedAbsences(state,absence){
       state.approvedAbsences = absence;
     },
+    setMedications (state, medications) {
+      state.medications = medications;
+    } 
   },
   //always on components dispatch action which commit some mutations. Never commit mutations from component because of async
   actions: {
@@ -263,6 +267,9 @@ export const store = new Vuex.Store({
     },    
     updateApprovedAbsences(context,absence){
       context.commit("updateApprovedAbsences",absence);
+    },
+    setMedications (context, medications) {
+      context.commit('setMedications', medications);
     },
 
     logout(context) {
