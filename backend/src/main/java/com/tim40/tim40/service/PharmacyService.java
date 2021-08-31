@@ -411,6 +411,12 @@ public class PharmacyService implements IPharmacyService {
 		list.add(dto);
 		return list;
 	}
+
+	@Override
+	public Integer subscribe( Long userId,Long pharmacyId) {
+		Integer id = this.pharmacyRepository.subscribe(userId, pharmacyId);
+		return id;
+	}
 	
 
 	
