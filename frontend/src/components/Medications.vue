@@ -1,243 +1,150 @@
 <template>
   <div>
     <NavbarSystemAdmin/>
-      <div class = "background"> 
-        <div class="container">
-            <div class="row" id="ads" v-if="medications">
-                <div class="col-md-4" v-for="fp in medications" :key="fp.id">
-                  <div class="card rounded">       
-            		<div class="card-body text-center">
-                  <h5 class="card-title m-0 p-0 font-weight-bolder text-secondary">{{fp.name}}</h5>
-                  <div class="card-body text-left">
-										<p class="card-text">
-                  <h6>Type: {{fp.typeOfMedication}}</h6>
-                </div>
-                <div class="class1">
-                <button class="btn btn-danger"><a class="moreLink" style="color:white">Reserve</a></button> 
-                </div>
-                <div>
-                <button class="btn btn-danger"><a class="moreLink" style="color:white">Specification</a></button>
-                </div>
-              </div>
-            </div>
-          </div>
-       </div>
-         </div>
-         </div>
-       </div>
+     <div class = "background">
+  <div>
+    <b-input v-model="filter" placeholder="Search"></b-input>
+    <div>
+      <b-table
+        :items="this.getMedications"
+        :filter="filter"
+        :fields="fields"
+        responsive="sm"
+        ref="selectableTable"
+        @row-selected="onRowSelected"
+        @row-unselected="onRowUnselected"
+        :filter-included-fields="[
+          'name',
+          'description',
+          'manufacturer',
+          'typeOfMedication',
+          'medicationForm',
+        ]"
+      >
+        <template #cell(show_details)="row">
+          <Modal2 :selected="row.item" :id="Pharmacy"></Modal2>
+        </template>
+        <div></div>
+      </b-table>
+    </div>
+  </div>
+</div>
+</div>
 </template>
 
-<style scoped>
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800%7CRaleway:100,200,300,400,600,700,800,900%7CMontserrat:100,200,300,400,500,600,700,800,900");
-.box-shadow {
-  box-shadow: 0px 0px 18px -3px rgba(143, 143, 143, 0.5);
-}
- .background {
-  background-image: url("../assets/img/medicine.jpg");
-  position: cover; 
-  top: 0; 
-  left: 0; 
-  min-width: 100%;
-  min-height: 100%;
-} 
-.class1 {
-  margin-bottom: 2px;
-}
-.card:hover {
-  box-shadow: 0px 0px 20px -3px rgba(143, 143, 143, 0.75);
-}
-
-.box-shadow-dark {
-  box-shadow: 3px 3px 11px -3px rgba(0, 0, 0, 0.25);
-}
-
-body {
-  background-color: yellow;
-  font-family: "Open Sans", Arial, Verdana;
-}
-
-section {
-  padding-top: 2rem;
-  padding-bottom: 2rem;
-}
-
-h6 {
-  color: #363535;
-}
-
-.font-weight-bolder {
-  font-weight: 900;
-}
-
-.display-1,
-.display-2,
-.display-3,
-.display-4 {
-  font-weight: 900;
-}
-
-.heading-big {
-  font-weight: 800;
-  text-transform: uppercase;
-  color: red;
-  margin: 0;
-  padding: 0.15rem 0;
-  line-height: 1.2;
-  font-size: 2rem;
-  transition: color 0.5s ease-in, border-color 0.5s ease-in-out;
-}
-.heading-big-square {
-  padding: 1rem 1rem;
-  border: 10px solid red;
-  margin: 0.5rem auto 1rem auto;
-}
-.heading-big:hover {
-  color: #ff9900;
-  border-color: #ff9900;
-}
-
-.card {
-  transition: 0.5s ease;
-  border-radius: 0;
-  transform: perspective(3em) rotateX(0deg) rotateY(-1.175deg) rotateZ(-1deg);
-  margin: 1rem;
-}
-.card-header {
-  border-radius: 0;
-}
-.card-footer {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-}
-.card-header, .card-footer {
-  transition: 0.5s ease;
-}
-.card:hover {
-  border-color: #ffc107;
-  transform: perspective(0em) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
-}
-.card:hover .card-header,
-.card:hover .card-footer {
-  color: #ba8b00;
-  border-color: #ffc107;
-  background-color: #ffeeba;
-}
-.card:hover .promotion-promo {
-  transform: scale(1.175) translateY(2.5px);
-  transform-origin: left center;
-}
-.card:hover .promotion-price {
-  transform: translate(2.5px, 17.5px) scale(1.15);
-  transform-origin: center right;
-}
-.card-body {
-  position: relative;
-  z-index: 0;
-  overflow: hidden;
-  padding-top: 2rem;
-  padding-bottom: 2rem;
-}
-.card .btn {
-  font-weight: bold;
-  text-transform: uppercase;
-}
-
-.promotion-promo {
-  font-weight: 700;
-  font-size: 1.15rem;
-  color: #ffc107;
-  font-family: "Montserrat", sans-serif;
-  text-decoration: line-through;
-  transition: 0.25s linear;
-}
-.promotion-price {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  background: #ffc107;
-  width: 92px;
-  height: 92px;
-  padding-bottom: 0rem;
-  padding-top: 1.25rem;
-  text-align: center;
-  font-weight: 700;
-  font-family: "Montserrat", sans-serif;
-  font-size: 1.1rem;
-  border-radius: 5rem;
-  color: #fff;
-  z-index: -1;
-  transform: translate(5px, 27.5px) rotate(-9deg);
-  border: 1px dashed #fff;
-  transition: 0.25s linear;
-  line-height: 1.15;
-}
-.promotion-price-desc {
-  padding: 0;
-  margin: 0 auto;
-  text-transform: uppercase;
-  font-size: 0.9rem;
-  display: block;
-}
-.promotion-price-text {
-  padding: 0;
-  margin: 0 auto;
-  font-weight: 900;
-}
-
-.card-animate {
-  counter-reset: section;
-}
-.card-animate .card-body:before {
-  transition: 0.5s ease;
-  counter-increment: section;
-  content: "" counter(section) "";
-  display: block;
-  font-size: 15rem;
-  font-weight: 900;
-  position: absolute;
-  bottom: 5rem;
-  line-height: 0;
-  left: -0.85rem;
-  padding: 0;
-  margin: 0;
-  color: rgba(0, 0, 0, 0.1);
-  z-index: 0;
-}
-.card-animate .card:hover .card-body:before {
-  transform: translate(10px, -10px);
-}
-.card-animate .card-text {
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-}
-.card-animate .card-title {
-  margin: 100px;
-  text-transform: uppercase;
-}
-</style>
-
-
 <script>
+import Modal2 from "../components/Modal2.vue";
+import NavbarSystemAdmin from '../components/NavbarSystemAdmin';
 import axios from 'axios';
-import NavbarSystemAdmin from '../components/NavbarSystemAdmin'
 
 export default {
   name: "Medications",
-  components: {
-        NavbarSystemAdmin
-    },
+  components: { 
+    Modal2,
+    NavbarSystemAdmin
+   },
   computed: {
-    medications () {
+      medications () {
       console.log(this.$store.state.medications)
       return this.$store.state.medications
-    }
+    },
+    Pharmacy() {
+      return this.$store.getters.getPharmacy;
+    },
+    getMedicines() {
+      return this.$store.getters.getMedicines;
+    },
+    getMedications() {
+      return this.$store.getters.getMedications;
+    },
+    getSelectedMed() {
+      return this.$store.getters.getSelectedMedicineForEdit;
+    },
+  },
+  data() {
+    return {
+      fields: [
+        {
+          key: "name",
+          sortable: true,
+        },
+        {
+          key: "manufacturer",
+          sortable: true,
+        },
+        {
+          key: "description",
+          sortable: true,
+        },
+        {
+          key: "medicationForm",
+          sortable: true,
+        },
+        {
+          key: "typeOfMedication",
+          sortable: true,
+        },
+
+        "show_details",
+
+      ],
+      search: "",
+      filter: "",
+      modalData: "",
+      med: [{}],
+      selectMode: "single",
+      selected: [],
+    };
+  },
+  methods: {
+    onRowSelected(items) {
+      console.log("klinkuto!!");
+      this.selected = items; //u selected se nalazi
+      this.$store.dispatch("updateSelectedMedicineForEdit", items[0]);
+    },
+    onRowUnselected() {
+      this.selected = [];
+
+      this.$store.dispatch("updateSelectedMedicineForEdit", null);
+    },
+
+    setItem(item) {
+      this.med = item;
+    },
+    modalContextMenu(data) {
+      this.modalData = data;
+      this.modalShow = true;
+    },
+    getMedication() {
+      //  /get-medications/{id}
+      fetch(
+        `http://localhost:9005/api/pharmacy/get-medications/${this.Pharmacy}`,
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          method: "GET",
+        }
+      )
+        .then(function(response) {
+          if (response.ok) {
+            return response.json();
+          } else {
+            return Promise.reject(response);
+          }
+        })
+        .then((data) => this.$store.dispatch("updateMedicines", data))
+        .catch(function(error) {
+          console.warn(error);
+        });
+    },
   },
   mounted: function() {
 	  axios.get("http://localhost:9005/api/medication/all").then((el)=>el.data).then((elem)=>{
 		  console.log(elem);
 		  this.$store.dispatch('setMedications', elem);
 	  })
-
   }
 };
 </script>

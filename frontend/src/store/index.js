@@ -53,7 +53,7 @@ export const store = new Vuex.Store({
     approvedAbsences:[],
     priceListActive:[],
     priceListInactive:[],
-    medications: [ ]
+    medications: [{} ]
   },
   //methods that return data (state)
   getters: {
@@ -78,6 +78,9 @@ export const store = new Vuex.Store({
     },
     getMedicines(state){
       return state.medicines
+    },
+    getMedications(state){
+      return state.medications
     },
     isUserLogged(state) {
       if (state.user.id != null) {
