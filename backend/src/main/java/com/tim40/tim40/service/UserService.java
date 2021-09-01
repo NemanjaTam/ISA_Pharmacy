@@ -1,21 +1,28 @@
 package com.tim40.tim40.service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.tim40.tim40.dto.LoginDTO;
+import com.tim40.tim40.dto.PharmacyDTO;
 import com.tim40.tim40.dto.UserDTO;
 import com.tim40.tim40.model.Address;
+import com.tim40.tim40.model.Pharmacy;
 import com.tim40.tim40.model.User;
+import com.tim40.tim40.repository.PharmacyRepository;
 import com.tim40.tim40.repository.UserRepository;
 
 @Service
 public class UserService implements IUserService {
 
 	private UserRepository userRepository;
+	private PharmacyRepository pharmacyRepository;
 	
 	@Autowired
 	public UserService(UserRepository userRepository) {
@@ -89,8 +96,28 @@ public class UserService implements IUserService {
 		}
 	}
 
+	public ResponseEntity<List<PharmacyDTO>> subscribeToPharmacy(Long userID, Long pharmacyID) {
+		User user = userRepository.getById(userID);
+		Pharmacy pharmacy = pharmacyRepository.getById(pharmacyID);
+		List<PharmacyDTO> pharmacies = new ArrayList<>();
+		
+		if(user == null || pharmacy == null) {
+			return new ResponseEntity<List<PharmacyDTO>>(pharmacies, HttpStatus.BAD_REQUEST);
+		}
+		user.getSubscriptions().add(pharmacy);
+		userRepository.save(user);
+		
+		Set<Pharmacy> subscriptions = user.getSubscriptions();
+		for(Pharmacy p: subscriptions) {
+			pharmacies.add(new PharmacyDTO(p));
+		}
+		
+		return new ResponseEntity<List<PharmacyDTO>>(pharmacies, HttpStatus.OK);
+	}
+	
 	@Override
 	public User findByEmail(String email) {
 		return userRepository.findByEmail(email).orElse(null);
+
 	}
 }

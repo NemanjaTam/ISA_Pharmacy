@@ -34,6 +34,10 @@ public class PurchaseOrder {
 	@JoinColumn(name = "pharmacy_administrator_id", nullable = false)
 	private PharmacyAdministrator adminPharmacy;
 	
+	@ManyToOne
+	@JoinColumn(name = "system_administrator_id", nullable = false)
+	private SystemAdmin systemAdmin;
+	
 	@Column(name = "purchase_status", nullable = false)
 	@Enumerated(EnumType.STRING)
 	private PurchaseOrderStatus purchaseOrderStatus;

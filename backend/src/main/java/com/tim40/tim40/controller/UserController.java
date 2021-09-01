@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tim40.tim40.dto.LoginDTO;
+import com.tim40.tim40.dto.PharmacyDTO;
 import com.tim40.tim40.dto.UserDTO;
 import com.tim40.tim40.model.User;
 import com.tim40.tim40.service.UserService;
@@ -67,5 +68,9 @@ public class UserController {
 		return userService.checkIsEmailTaken(email);
 	}
 	
-	
+	@GetMapping(value = "/subscribe/{userID}/{pharmacyID}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<PharmacyDTO>> subscribeToPharmacy(@PathVariable("userID") Long userID, @PathVariable("pharmacyID") Long pharmacyID)
+	{
+		return userService.subscribeToPharmacy(userID, pharmacyID);
+	}
 }
