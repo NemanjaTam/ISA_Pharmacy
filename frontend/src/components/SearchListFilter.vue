@@ -76,9 +76,10 @@
 <script>
 import ModalEditPharmacist from "../components/ModalEditPharmacist.vue"
 import ModalAddAppointment from "../components/ModalAddAppointments.vue"
+import ModalAddWorker from "../components/ModalAddWorker.vue"
 export default {
   name: "SearchListFilter",
-  components:{ModalEditPharmacist,ModalAddAppointment},
+  components:{ModalEditPharmacist,ModalAddAppointment,ModalAddWorker},
   computed: {
     User() {
       this.$store.getters.getUser;

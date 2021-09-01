@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tim40.tim40.dto.AddNewWorkerDTO;
 import com.tim40.tim40.dto.LoginDTO;
 import com.tim40.tim40.dto.UserDTO;
 import com.tim40.tim40.model.User;
@@ -67,5 +68,13 @@ public class UserController {
 		return userService.checkIsEmailTaken(email);
 	}
 	
+	
+	@PostMapping(value = "/register-by-pharmacy-admin/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Long> registerByPharmacyAdmin(@RequestBody AddNewWorkerDTO userDTO,@PathVariable("id") Long pharmacyId) throws Exception
+	{
+		Long registeredUser = userService.registerByPharmacyAdmin(userDTO,pharmacyId);
+		
+		return new ResponseEntity<Long>(registeredUser, HttpStatus.OK);
+	}
 	
 }
