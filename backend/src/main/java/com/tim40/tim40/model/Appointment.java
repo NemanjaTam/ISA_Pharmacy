@@ -59,6 +59,9 @@ public class Appointment {
     @JoinColumn(name = "patient_id", nullable = true)
     private Patient patient;
     
+    @Column(name="price")
+    private int price;
+    
     @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     private Set<Therapy> therapies = new HashSet<Therapy>();
     

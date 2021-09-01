@@ -96,4 +96,15 @@ public class AppointmentController {
 	}
 	
 	
+	@PostMapping(value="/create-appointment/{id}",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Integer> createAppointment(@PathVariable("id") Long id,@RequestHeader("usertype") String type){
+		if("PHARMACY_ADMINISTRATOR".equals(type)){
+			return new ResponseEntity<Integer>( HttpStatus.OK);
+			}
+			else {
+				return new ResponseEntity<Integer>(HttpStatus.UNAUTHORIZED);
+			}
+		
+	}
+	
 }

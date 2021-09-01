@@ -88,5 +88,18 @@ public class DermatologistController {
 			
 		}
 		
+		@RequestMapping(value="/get-by-email/{id}", method = RequestMethod.POST)
+		public ResponseEntity<Long> getByEmail(@PathVariable("id") Long id ,@RequestHeader("usertype") String type,@RequestBody String email){
+			if("PHARMACY_ADMINISTRATOR".equals(type)){
+				return new ResponseEntity<Long>(this.dermatologistService.getIdByEmail(email, id),HttpStatus.OK);
+				}
+				else {
+					return new ResponseEntity<Long>(HttpStatus.UNAUTHORIZED);
+				}
+		}
+		
+		
+		
+		
 		
 }

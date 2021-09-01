@@ -34,12 +34,14 @@ public class WorkDay {
 	private Period period;
 	
 	
-	@JsonIgnore
+	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "pharmacy_id", nullable = true)
+	@JsonIgnore
 	private Pharmacy pharmacy;
 	
 	@ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
+	@JsonIgnore
 	private User user;
 }

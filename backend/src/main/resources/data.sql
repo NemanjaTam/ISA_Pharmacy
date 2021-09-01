@@ -426,7 +426,9 @@ insert into workdays (endtime, starttime,pharmacy_id, user_id) values ('2021-06-
 insert into workdays (endtime, starttime, pharmacy_id,user_id) values ('2021-06-22 22:00:00-08', '2021-06-22 14:00:00-08',1, 1)
 insert into workdays (endtime, starttime,pharmacy_id, user_id) values ('2021-09-05 14:00:00-08', '2021-09-05 07:00:00-08',1, 1)
 insert into workdays (endtime, starttime,pharmacy_id, user_id) values ('2021-09-13 14:00:00-08', '2021-09-13 07:00:00-08',1, 2)
-insert into workdays (endtime, starttime,pharmacy_id, user_id) values ('2021-09-13 14:00:00-08', '2021-09-13 07:00:00-08',2, 4)
+insert into workdays (endtime, starttime,pharmacy_id, user_id) values ('2021-09-11 14:00:00-08', '2021-09-11 07:00:00-08',1, 2)
+insert into workdays (endtime, starttime,pharmacy_id, user_id) values ('2021-09-10 14:00:00-08', '2021-09-10 07:00:00-08',1, 2)
+insert into workdays (endtime, starttime,pharmacy_id, user_id) values ('2021-09-16 14:00:00-08', '2021-09-16 07:00:00-08',2, 4)
 insert into workdays (endtime, starttime,pharmacy_id, user_id) values ('2021-06-13 14:00:00-08', '2021-06-13 07:00:00-08',1, 11)
 insert into workdays (endtime, starttime,pharmacy_id, user_id) values ('2021-06-14 14:00:00-08', '2021-06-14 07:00:00-08',1, 11)
 insert into workdays (endtime, starttime,pharmacy_id, user_id) values ('2021-06-15 14:00:00-08', '2021-06-15 07:00:00-08',1, 11)
@@ -437,67 +439,67 @@ insert into workdays (endtime, starttime,pharmacy_id, user_id) values ('2021-06-
 insert into workdays (endtime, starttime,pharmacy_id, user_id) values ('2021-06-20 22:00:00-08', '2021-06-20 14:00:00-08',1, 11)
 insert into workdays (endtime, starttime,pharmacy_id, user_id) values ('2021-06-21 22:00:00-08', '2021-06-21 14:00:00-08',1, 11)
 insert into workdays (endtime, starttime,pharmacy_id, user_id) values ('2021-06-22 22:00:00-08', '2021-06-22 14:00:00-08',1, 11)
-insert into workdays (endtime, starttime,pharmacy_id, user_id) values ('2021-07-13 14:00:00-08', '2021-07-13 07:00:00-08',1, 11)
+insert into workdays (endtime, starttime,pharmacy_id, user_id) values ('2021-09-13 14:00:00-08', '2021-09-13 07:00:00-08',1, 11)
 --
---insert into workdays (endtime, starttime,pharmacy_id, user_id) values ('2021-06-13 07:00:00-08', '2021-06-13 14:00:00-08', 11)
---insert into workdays (endtime, starttime,pharmacy_id, user_id) values ('2021-06-13 07:00:00-08', '2021-06-13 14:00:00-08', 12)
---insert into workdays (endtime, starttime,pharmacy_id, user_id) values ('2021-06-13 07:00:00-08', '2021-06-13 14:00:00-08', 13)
---insert into workdays (endtime, starttime,pharmacy_id, user_id) values ('2021-06-13 07:00:00-08', '2021-06-13 14:00:00-08', 14)
---insert into workdays (endtime, starttime,pharmacy_id, user_id) values ('2021-06-13 07:00:00-08', '2021-06-13 14:00:00-08', 15)
---insert into workdays (endtime, starttime,pharmacy_id, user_id) values ('2021-06-13 14:00:00-08', '2021-06-13 22:00:00-08', 16)
---insert into workdays (endtime, starttime,pharmacy_id, user_id) values ('2021-06-13 14:00:00-08', '2021-06-13 22:00:00-08', 17)
---insert into workdays (endtime, starttime,pharmacy_id, user_id) values ('2021-06-13 14:00:00-08', '2021-06-13 22:00:00-08', 18)
---insert into workdays (endtime, starttime,pharmacy_id, user_id) values ('2021-06-13 14:00:00-08', '2021-06-13 22:00:00-08', 19)
---insert into workdays (endtime, starttime,pharmacy_id, user_id) values ('2021-06-13 14:00:00-08', '2021-06-13 22:00:00-08', 20)
+--insert into workdays (endtime, starttime,pharmacy_id, user_id) values ('2021-09-13 07:00:00-08', '2021-09-13 14:00:00-08', 11)
+--insert into workdays (endtime, starttime,pharmacy_id, user_id) values ('2021-09-13 07:00:00-08', '2021-09-13 14:00:00-08', 12)
+--insert into workdays (endtime, starttime,pharmacy_id, user_id) values ('2021-09-13 07:00:00-08', '2021-09-13 14:00:00-08', 13)
+--insert into workdays (endtime, starttime,pharmacy_id, user_id) values ('2021-09-13 07:00:00-08', '2021-09-13 14:00:00-08', 14)
+--insert into workdays (endtime, starttime,pharmacy_id, user_id) values ('2021-09-13 07:00:00-08', '2021-09-13 14:00:00-08', 15)
+--insert into workdays (endtime, starttime,pharmacy_id, user_id) values ('2021-09-13 14:00:00-08', '2021-09-13 22:00:00-08', 16)
+--insert into workdays (endtime, starttime,pharmacy_id, user_id) values ('2021-09-13 14:00:00-08', '2021-09-13 22:00:00-08', 17)
+--insert into workdays (endtime, starttime,pharmacy_id, user_id) values ('2021-09-13 14:00:00-08', '2021-09-13 22:00:00-08', 18)
+--insert into workdays (endtime, starttime,pharmacy_id, user_id) values ('2021-09-13 14:00:00-08', '2021-09-13 22:00:00-08', 19)
+--insert into workdays (endtime, starttime,pharmacy_id, user_id) values ('2021-09-13 14:00:00-08', '2021-09-13 22:00:00-08', 20)
 
 
 
-insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (false, true, '2021-06-13 10:00:00-08', '2021-06-13 09:30:00-08', '', 1, 21, 1)
-insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (true, true, '2021-05-13 10:00:00-08', '2021-05-13 09:30:00-08', '', 1, 21, 1)
-insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (true, true, '2021-05-13 10:00:00-08', '2021-05-13 09:30:00-08', '', 10, 21, 4)
-insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (true, true, '2021-04-13 10:00:00-08', '2021-04-13 09:30:00-08', '', 1, 21, 1)
-insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (false, true, '2021-06-13 10:30:00-08', '2021-06-13 10:00:00-08', '', 1, 22, 1)
-insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (false, true, '2021-06-13 11:00:00-08', '2021-06-13 10:30:00-08', '', 1, 23, 1)
-insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (false, true, '2021-06-13 11:30:00-08', '2021-06-13 11:00:00-08', '', 1, 24, 1)
-insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (false, true, '2021-06-13 12:00:00-08', '2021-06-13 11:30:00-08', '', 1, 25, 1)
-insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (false, true, '2021-06-13 12:30:00-08', '2021-06-13 12:00:00-08', '', 1, 26, 1)
-insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (false, true, '2021-06-13 13:00:00-08', '2021-06-13 12:30:00-08', '', 1, 27, 1)
-insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (true, true, '2021-01-13 13:00:00-08', '2021-01-13 12:30:00-08', '', 2, 27, 1)
-insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (false, true, '2021-06-13 13:30:00-08', '2021-06-13 13:00:00-08', '', 1, 21, 1)
+insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id,price) values (false, true, '2021-06-13 10:00:00-08', '2021-06-13 09:30:00-08', '', 1, 21, 1,200)
+insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id,price) values (true, true, '2021-05-13 10:00:00-08', '2021-05-13 09:30:00-08', '', 1, 21, 1,200)
+insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id,price) values (true, true, '2021-05-13 10:00:00-08', '2021-05-13 09:30:00-08', '', 10, 21, 4,200)
+insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id,price) values (true, true, '2021-04-13 10:00:00-08', '2021-04-13 09:30:00-08', '', 1, 21, 1,200)
+insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id,price) values (false, true, '2021-06-13 10:30:00-08', '2021-06-13 10:00:00-08', '', 1, 22, 1,200)
+insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id,price) values (false, true, '2021-06-13 11:00:00-08', '2021-06-13 10:30:00-08', '', 1, 23, 1,200)
+insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id,price) values (false, true, '2021-06-13 11:30:00-08', '2021-06-13 11:00:00-08', '', 1, 24, 1,200)
+insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id,price) values (false, true, '2021-06-13 12:00:00-08', '2021-06-13 11:30:00-08', '', 1, 25, 1,200)
+insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id,price) values (false, true, '2021-06-13 12:30:00-08', '2021-06-13 12:00:00-08', '', 1, 26, 1,200)
+insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id,price) values (false, true, '2021-06-13 13:00:00-08', '2021-06-13 12:30:00-08', '', 1, 27, 1,200)
+insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id,price) values (true, true, '2021-01-13 13:00:00-08', '2021-01-13 12:30:00-08', '', 2, 27, 1,200)
+insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id,price) values (false, true, '2021-06-13 13:30:00-08', '2021-06-13 13:00:00-08', '', 1, 21, 1,200)
 
 
 
-insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (true, true, '2021-04-13 13:30:00-08', '2021-04-13 13:00:00-08', '', 1, 21, 1)
-insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (true, true, '2021-05-10 13:30:00-08', '2021-05-10 13:00:00-08', '', 1, 21, 1)
-insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (true, true, '2021-06-10 13:30:00-08', '2021-06-10 13:00:00-08', '', 1, 21, 1)
+insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id,price) values (true, true, '2021-04-13 13:30:00-08', '2021-04-13 13:00:00-08', '', 1, 21, 1,200)
+insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id,price) values (true, true, '2021-05-10 13:30:00-08', '2021-05-10 13:00:00-08', '', 1, 21, 1,200)
+insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id,price) values (true, true, '2021-06-10 13:30:00-08', '2021-06-10 13:00:00-08', '', 1, 21, 1,200)
 
 
-insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (true, true, '2021-02-13 13:30:00-08', '2021-02-13 13:00:00-08', '', 1, 21, 1)
-insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (true, true, '2021-03-10 13:30:00-08', '2021-03-10 13:00:00-08', '', 1, 21, 1)
-insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (true, true, '2021-04-10 13:30:00-08', '2021-04-10 13:00:00-08', '', 1, 21, 1)
+insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id,price) values (true, true, '2021-02-13 13:30:00-08', '2021-02-13 13:00:00-08', '', 1, 21, 1,200)
+insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id,price) values (true, true, '2021-03-10 13:30:00-08', '2021-03-10 13:00:00-08', '', 1, 21, 1,200)
+insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id,price) values (true, true, '2021-04-10 13:30:00-08', '2021-04-10 13:00:00-08', '', 1, 21, 1,200)
 
 
-insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (true, true, '2021-05-13 13:30:00-08', '2021-05-13 13:00:00-08', '', 1, 21, 1)
-insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (true, true, '2021-06-12 13:30:00-08', '2021-06-12 13:00:00-08', '', 1, 21, 1)
-insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (true, true, '2021-09-10 13:30:00-08', '2021-09-10 13:00:00-08', '', 1, 21, 1)
+insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id,price) values (true, true, '2021-05-13 13:30:00-08', '2021-05-13 13:00:00-08', '', 1, 21, 1,200)
+insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id,price) values (true, true, '2021-06-12 13:30:00-08', '2021-06-12 13:00:00-08', '', 1, 21, 1,200)
+insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id,price) values (true, true, '2021-09-10 13:30:00-08', '2021-09-10 13:00:00-08', '', 1, 21, 1,200)
 
 
-insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (true, true, '2021-04-13 13:30:00-08', '2021-04-13 13:00:00-08', '', 2, 21, 2)
-insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (true, true, '2021-05-10 13:30:00-08', '2021-05-10 13:00:00-08', '', 2, 21, 2)
-insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (true, true, '2021-06-10 13:30:00-08', '2021-06-10 13:00:00-08', '', 2, 21, 2)
+insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id,price) values (true, true, '2021-04-13 13:30:00-08', '2021-04-13 13:00:00-08', '', 2, 21, 2,200)
+insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id,price) values (true, true, '2021-05-10 13:30:00-08', '2021-05-10 13:00:00-08', '', 2, 21, 2,200)
+insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id,price) values (true, true, '2021-06-10 13:30:00-08', '2021-06-10 13:00:00-08', '', 2, 21, 2,200)
 
-insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (true, true, '2021-04-13 13:30:00-08', '2021-04-13 13:00:00-08', '', 7, 21, 3)
-insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (true, true, '2021-05-10 13:30:00-08', '2021-05-10 13:00:00-08', '', 7, 21, 3)
-insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (true, true, '2021-06-10 13:30:00-08', '2021-06-10 13:00:00-08', '', 7, 21, 3)
-
-
+insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id,price) values (true, true, '2021-04-13 13:30:00-08', '2021-04-13 13:00:00-08', '', 7, 21, 3,200)
+insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id,price) values (true, true, '2021-05-10 13:30:00-08', '2021-05-10 13:00:00-08', '', 7, 21, 3,200)
+insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id,price) values (true, true, '2021-06-10 13:30:00-08', '2021-06-10 13:00:00-08', '', 7, 21, 3,200)
 
 
 
-insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (false, false, '2021-06-13 10:00:00-08', '2021-06-13 09:30:00-08', '', 1, 23, 1)
-insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (false, false, '2021-06-13 10:30:00-08', '2021-06-13 10:00:00-08', '', 1, 23, 1)
-insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (false, false, '2021-06-13 11:00:00-08', '2021-06-13 10:30:00-08', '', 1, 23, 1)
-insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (false, false, '2021-07-13 11:30:00-08', '2021-07-13 11:00:00-08', '', 1, 23, 1)
+
+
+insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id,price) values (false, false, '2021-06-13 10:00:00-08', '2021-06-13 09:30:00-08', '', 1, 23, 1,200)
+insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id,price) values (false, false, '2021-06-13 10:30:00-08', '2021-06-13 10:00:00-08', '', 1, 23, 1,200)
+insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id,price) values (false, false, '2021-06-13 11:00:00-08', '2021-06-13 10:30:00-08', '', 1, 23, 1,200)
+insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id,price) values (false, false, '2021-07-13 11:30:00-08', '2021-07-13 11:00:00-08', '', 1, 23, 1,200)
 
 
 

@@ -54,6 +54,7 @@ export const store = new Vuex.Store({
     priceListActive: [],
     priceListInactive: [],
     medications: [],
+    workingDays:[],
   },
   //methods that return data (state)
   getters: {
@@ -66,6 +67,9 @@ export const store = new Vuex.Store({
     getPharmacy(state) {
       //ne menjati ovo se koristi vec!
       return state.pharmacy;
+    },
+    getWorkingDays(state){
+      return state.workingDays;
     },
     getFullName(state) {
       return state.user.name + " " + state.user.surname;
@@ -137,6 +141,9 @@ export const store = new Vuex.Store({
     },
     updateName(state, name) {
       state.user.name = name;
+    },
+    updateWorkingDays(state,workingDays){
+      state.workingDays = workingDays;
     },
     updateEmail(state, surname) {
       state.user.surname = surname;
@@ -258,8 +265,8 @@ export const store = new Vuex.Store({
       context.commit("updatePassword", password);
     },
 
-    updateState(context, state) {
-      context.commit("updateState", state);
+    updateWorkingDays(context, state) {
+      context.commit("updateWorkingDays", state);
     },
     updateCity(context, city) {
       context.commit("updateCity", city);

@@ -1,6 +1,7 @@
 package com.tim40.tim40.service;
 
 import java.math.BigInteger;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -212,6 +213,23 @@ public class DermatologistService implements IDermatologistService {
 				}
 			}
 		return pharm;
+	}
+	
+	
+	public Object createAppointment(LocalDateTime start,LocalDateTime end,Integer price,Long dermatologistId) {
+		return null;
+	}
+	
+	public Long getIdByEmail(String email,Long pharmacyId) {
+		String str = email.substring(1, email.length() - 1);
+		Long id = (long) 0;
+		for(DermatologistProjection proj : this.dermatologistRepository.getAllByPharmacyId(pharmacyId)) {
+			System.out.println(proj.getEmail());
+			if(proj.getEmail().trim().equals(str)) {
+			 id = proj.getId();
+			}
+		}
+		return id;
 	}
 }
 
