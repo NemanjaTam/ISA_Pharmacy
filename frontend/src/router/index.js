@@ -25,12 +25,16 @@ import Medication from "../views/MedicationList.vue"
 import Absences from "../components/Absences.vue"
 import PriceList from "../components/PriceList.vue"
 import Medications from "../components/Medications.vue"
-import RegistrationSystemAdmin from "../components/RegistrationSystemAdmin.vue"
+import RegistrationBySystemAdmin from "../views/RegistrationBySystemAdmin.vue"
 import AddMedication from "../components/AddMedication.vue"
 import SystemAdminHome from "../views/SystemAdminHome.vue"
 import SupplierHome from "../views/SupplierHome.vue"
 import EditProfile from "../views/EditProfile.vue"
 import ViewProfile from "../views/ViewProfile.vue"
+import RegistrationDermatologist from "../components/RegistrationDermatologist.vue"
+import RegistrationPharmacyAdmin from "../components/RegistrationPharmacyAdmin.vue"
+import RegistrationSupplier from "../components/RegistrationSupplier.vue"
+import RegistrationSystemAdmin from "../components/RegistrationSystemAdmin.vue"
 
 Vue.use(VueRouter);
 
@@ -186,6 +190,26 @@ const routes = [
       },
       {
         path: '/registration-by-system-admin',
+        name: 'RegistrationBySystemAdmin',
+        component: RegistrationBySystemAdmin
+      },
+      {
+        path: '/registration-pharmacy-admin',
+        name: 'RegistrationPharmacyAdmin',
+        component: RegistrationPharmacyAdmin
+      },
+      {
+        path: '/registration-dermatologist',
+        name: 'RegistrationDermatologist',
+        component: RegistrationDermatologist
+      },
+      {
+        path: '/registration-supplier',
+        name: 'RegistrationSupplier',
+        component: RegistrationSupplier
+      },
+      {
+        path: '/registration-system-admin',
         name: 'RegistrationSystemAdmin',
         component: RegistrationSystemAdmin
       }

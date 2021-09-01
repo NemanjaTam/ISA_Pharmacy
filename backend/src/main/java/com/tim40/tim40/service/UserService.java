@@ -37,7 +37,7 @@ public class UserService implements IUserService {
 		Address address = new Address(userDTO.getAddress().getState(), userDTO.getAddress().getCity(),
 				userDTO.getAddress().getStreet(), userDTO.getAddress().getNumber(), userDTO.getAddress().getPostalCode());
 		
-		User user = new User(userDTO.getName(), userDTO.getSurname(), userDTO.getEmail(), userDTO.getPassword(), address, userDTO.getUserType(),true);
+		User user = new User(userDTO.getName(), userDTO.getSurname(), userDTO.getEmail(), userDTO.getPassword(), address, userDTO.getUserType(),true, userDTO.getPhone());
 		user = this.userRepository.save(user);
 		return new UserDTO (user);
 	}

@@ -25,7 +25,7 @@
                         </b-nav-item>
 
                    <b-nav-item>
-                           <router-link to="/registration-by-admin" class="routerlink">Registration</router-link>
+                           <router-link to="/registration-by-system-admin" class="routerlink">Registration</router-link>
                         </b-nav-item>
 
                     <b-nav-item>

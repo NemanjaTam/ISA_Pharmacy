@@ -1,5 +1,6 @@
 <template>
-  <div>
+ <div class = "background">
+    <RegistrationBySystemAdmin/>  
   <div class = "card"  >
   
     <p class="title">Registration supplier </p>
@@ -74,7 +75,7 @@
   <b-form-group class = "foo2" id="input-group-5" label-for="input-5">
         <b-form-input
           id="input-5"
-          v-model="user.state"
+          v-model="user.address.state"
           placeholder="Enter supplier state"
           style="font-style:italic"
           required
@@ -84,7 +85,7 @@
   <b-form-group class = "foo2" id="input-group-6" label-for="input-6">
         <b-form-input
           id="input-6"
-          v-model="user.city"
+          v-model="user.address.city"
           placeholder="Enter supplier city"
           style="font-style:italic"
           required
@@ -94,7 +95,7 @@
       <b-form-group class = "foo2"  id="input-group-7" label-for="input-7">
         <b-form-input
           id="input-7"
-          v-model="user.postalCode"
+          v-model="user.address.postalCode"
           placeholder="Enter supplier postal code"
           style="font-style:italic"
           required
@@ -104,7 +105,7 @@
   <b-form-group class = "foo2" id="input-group-8" label-for="input-8">
         <b-form-input
           id="input-8"
-          v-model="user.street"
+          v-model="user.address.street"
           placeholder="Enter supplier street"
           style="font-style:italic"
           required
@@ -114,7 +115,7 @@
  <b-form-group class = "foo2"  id="input-group-9" label-for="input-9">
         <b-form-input
           id="input-9"
-          v-model="user.houseNumber"
+          v-model="user.address.number"
           placeholder="Enter supplier number of house/building"
           style="font-style:italic"
           required
@@ -132,21 +133,27 @@
       </b-form-group>
 
       <b-button class = "foo3" type="submit" variant="primary">Register</b-button>
-      <b-button class = "foo4" type="reset" variant="danger">Cancel</b-button>
     </b-form>
   </div>
-  </div>
+</div>
 </template>
 
 <style scoped>
-
+.background {
+      background-image: url("../assets/img/medicine.jpg");
+      position: absolute; 
+      top: 0; 
+      left: 0; 
+      min-width: 100%;
+      min-height: 100%;
+  }
 .card {
 
   box-shadow: 10px 4px 8px 0 rgba(0,0,0,0.2);
   transition: 15s;
   width: 50%;
   border-radius: 20px; 
-  margin-top: 40px; 
+  margin-top: 230px; 
   margin-bottom: 50px; 
   margin-right: 500px;
   margin-left: 500px;
@@ -183,10 +190,14 @@
 
 <script>
 import axios from 'axios';
+import RegistrationBySystemAdmin from '../views/RegistrationBySystemAdmin.vue'
 
 export default {
   name: "RegistrationSupplier",
-  data() {
+    components: {
+    RegistrationBySystemAdmin
+  },
+   data() {
     return {
       user: {
        email: "",
@@ -194,12 +205,16 @@ export default {
        confirmPassword: "",
        name: "",
        surname: "",
-       state: "",
-       city: "",
-       postalCode: "",
-       street: "",
-       houseNumber: "",
-       phone: ""
+       userType: "SUPPLIER",
+       address: {
+            state: "",
+            city: "",
+            postalCode: "",
+            street: "",
+            number: ""
+       },
+       phone: "",
+       isFirstTimeLogging: false
       },
   
       show: true,
@@ -213,7 +228,7 @@ export default {
         alert("Passwords don't match!");
         return;
       }
-      console.log(this.user);
+      axios.post("http://localhost:9005/api/user/register", this.user);
 
     },
     onReset(event) {
@@ -227,15 +242,6 @@ export default {
       validation() {
         return this.user.password.length > 7 ? true : false
       }
-    },
-
-  mounted() {
-    axios.get("http://localhost:9005/api/user/all").then((response)=>{
-      console.log(response);
-      return response.json();
-    }).then((responseJSON)=>{
-      console.log(responseJSON);
-    })
   }
 };
 </script>
