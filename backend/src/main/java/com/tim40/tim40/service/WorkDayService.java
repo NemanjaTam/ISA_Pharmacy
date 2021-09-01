@@ -68,7 +68,7 @@ public class WorkDayService implements IWorkDayService {
 
 			
 			LocalDateTime start = LocalDateTime.of(shift.getStartTime().getYear(),shift.getStartTime().getMonthValue(),shift.getStartTime().getDayOfMonth(),shift.getStartShift(),0);
-			LocalDateTime end = LocalDateTime.of(shift.getStartTime().getYear(),shift.getStartTime().getMonthValue(),hift.getStartTime().getDayOfMonth(),shift.getEndShift(),0);
+			LocalDateTime end = LocalDateTime.of(shift.getStartTime().getYear(),shift.getStartTime().getMonthValue(),shift.getStartTime().getDayOfMonth(),shift.getEndShift(),0);
 			Period newPeriod = new Period(start,end);
 			newWorkDay.setPeriod(newPeriod);
 			newWorkDay.setPharmacy(pharm);
