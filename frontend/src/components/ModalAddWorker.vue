@@ -142,7 +142,7 @@ import axios from "axios";
 const moment = require("moment");
 export default {
   name: "ModalAddWorker",
-  props: ["selected", "id", "workerType"],
+  props: ["selected", "id", "workerType","type"],
   computed: {},
   data() {
     const now = new Date();
@@ -223,9 +223,11 @@ export default {
       else return false;
     },
     AddWorkDay() {
+     var startFormatted = moment(this.datepicker_1).format()
+          var new_string = startFormatted.slice(0, 19);
       var workingDay = {
-        start: this.datepicker_1,
-        end: this.datepicker_2,
+        startTime: new_string ,
+        endTime:  new_string,
         startShift: this.startShift,
         endShift: this.endShift,
       };
@@ -239,6 +241,7 @@ export default {
       );
     },
     createNewUser() {
+      var vm = this;
       if (this.check()) {
         this.formValid = false;
         this.formMessage = "Check all input fields";
@@ -262,6 +265,10 @@ export default {
         phone: this.newWorker.phone,
         userType:"PHARMACIST",
         isFirstTimeLogging:true,
+      }
+      var ShiftDTO = {
+        shifts: this.newWorker.workingDays,
+        userType: "PHARMACIST",
       }
       //  axios.post("", );
          fetch(
@@ -288,14 +295,15 @@ export default {
               
             
             return fetch(
-              `http://localhost:9005/api/pharmacist/get-pharmacist-rating/${vm.Pharmacy}`,
+              `http://localhost:9005/api/workday/create-working-days/${vm.id}/${data}`,
               {
                 headers: {
                   Accept: "application/json",
                   "Content-Type": "application/json",
-                  usertype: vm.userType,
+                  usertype: vm.type,
                 },
-                method: "GET",
+                  method: "POST",
+                 body: JSON.stringify(ShiftDTO),
               }
             );
           }})

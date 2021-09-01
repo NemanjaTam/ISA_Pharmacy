@@ -19,7 +19,7 @@
             >EDIT</b-button
           > -->
          
-          <ModalAddWorker :selected="selectedDerm[0]" :id="Pharmacy" :workerType="'PHARMACIST'"></ModalAddWorker>
+          <ModalAddWorker :selected="selectedDerm[0]" :id="Pharmacy" :workerType="'PHARMACIST'" :type="userType"></ModalAddWorker>
            <!-- <ModalEditPharmacist :selected="selected[0]" :id="Pharmacy"></ModalEditPharmacist> -->
           <div>
             <b-table

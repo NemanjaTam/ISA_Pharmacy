@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tim40.tim40.dto.AbsenceCheckDTO;
+import com.tim40.tim40.dto.NewWorkDaysDTO;
 import com.tim40.tim40.model.Period;
 import com.tim40.tim40.model.WorkDay;
 import com.tim40.tim40.service.WorkDayService;
@@ -43,6 +44,16 @@ public class WorkDayController {
 			}
 			else {
 				return new ResponseEntity<List<Period>>(HttpStatus.UNAUTHORIZED);
+			}
+	} 
+	
+	@PostMapping(value="/create-working-days/{id}/{iduser}",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Integer> createWorkDays(@PathVariable("iduser") Long id,@PathVariable("id") Long pharmacyId,@RequestHeader("usertype") String type,@RequestBody NewWorkDaysDTO dto){
+		if("PHARMACY_ADMINISTRATOR".equals(type)){
+			return new ResponseEntity<Integer>(this.workDayService.createWorkDays(dto,id, pharmacyId), HttpStatus.OK);
+			}
+			else {
+				return new ResponseEntity<Integer>(HttpStatus.UNAUTHORIZED);
 			}
 	} 
 
