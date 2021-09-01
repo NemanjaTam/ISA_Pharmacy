@@ -20,6 +20,7 @@ import com.tim40.tim40.dto.AbsenceCheckDTO;
 import com.tim40.tim40.dto.AbsenceDetailedDTO;
 import com.tim40.tim40.dto.AppointmentSchedulingDTO;
 import com.tim40.tim40.dto.FinishAppointmentDTO;
+import com.tim40.tim40.dto.NewAppointmentDTO;
 import com.tim40.tim40.dto.ScheduleDTO;
 import com.tim40.tim40.model.Appointment;
 import com.tim40.tim40.service.AppointmentService;
@@ -96,10 +97,10 @@ public class AppointmentController {
 	}
 	
 	
-	@PostMapping(value="/create-appointment/{id}",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Integer> createAppointment(@PathVariable("id") Long id,@RequestHeader("usertype") String type){
+	@PostMapping(value="/create-appointment/",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Integer> createAppointment(@RequestHeader("usertype") String type,@RequestBody NewAppointmentDTO dto){
 		if("PHARMACY_ADMINISTRATOR".equals(type)){
-			return new ResponseEntity<Integer>( HttpStatus.OK);
+			return new ResponseEntity<Integer>( this.appointmentService.createAppointment(dto) ,HttpStatus.OK);
 			}
 			else {
 				return new ResponseEntity<Integer>(HttpStatus.UNAUTHORIZED);

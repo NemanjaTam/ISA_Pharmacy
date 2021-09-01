@@ -28,6 +28,8 @@
             class="mb-2 mr-sm-2 mb-sm-0"
             :options="['15', '30', '35', '40', '45', '60']"
           ></b-form-select>
+          <label>Select price:</label>
+          <b-input type="number" :min="minimumPrice" v-model="priceAppointment"></b-input>
         </b-form>
              <b-button variant="success" @click="createAppointment">CREATE</b-button>
       </div>
@@ -52,6 +54,8 @@ export default {
       idDerm: 0,
       duration: "",
         hours:0,
+        priceAppointment:50,
+        minimumPrice:50,
       timeMin:0,
       timeMax:0,
       selectedAppointment: "",
@@ -68,6 +72,8 @@ export default {
   methods: {
     onshow(selected) {
       var vm = this;
+      this.hours = 0;
+      this.priceAppointment =0;
       this.show = true;
       if (selected == null) {
         this.show = false;
@@ -139,6 +145,7 @@ export default {
           maximum = parseInt(nestoEnd);
        
       }
+     
       this.hours = minimum;
       this.timeMin = minimum;
       this.timeMax = maximum - 1;
@@ -147,7 +154,43 @@ export default {
     clearSelected() {
       this.$refs.selectableTableAppointments.clearSelected();
     },
+
+    createAppointment(){
+        var dto = {
+            dermatologistId:this.idDerm,
+            pharmacyId: this.id,
+            startTime: this.selectedAppointment.startTime,
+            duration: this.duration,
+            hours: this.hours,
+            price: this.priceAppointment
+
+        }
+          fetch(`http://localhost:9005/api/appointment/create-appointment/`, {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          usertype: this.type,
+        },
+        method: "POST",
+         body: JSON.stringify(dto),
+      })        .then(function(response) {
+          if (response.ok) {
+           
+            return response.json();
+          } else {
+            
+            return Promise.reject(response);
+          }
+        }).then((data) => {if(data == 0){
+            alert("Dermatologist already has appointment for that date and duration!");
+        }else{
+            alert("Successfully created an appointment!");
+        }
+        })
+  }
   },
+
+  
 };
 </script>
 <style scoped></style>

@@ -440,6 +440,8 @@ insert into workdays (endtime, starttime,pharmacy_id, user_id) values ('2021-06-
 insert into workdays (endtime, starttime,pharmacy_id, user_id) values ('2021-06-21 22:00:00-08', '2021-06-21 14:00:00-08',1, 11)
 insert into workdays (endtime, starttime,pharmacy_id, user_id) values ('2021-06-22 22:00:00-08', '2021-06-22 14:00:00-08',1, 11)
 insert into workdays (endtime, starttime,pharmacy_id, user_id) values ('2021-09-13 14:00:00-08', '2021-09-13 07:00:00-08',1, 11)
+insert into workdays (endtime, starttime,pharmacy_id, user_id) values ('2021-09-13 14:00:00-08', '2021-09-10 07:00:00-08',1, 11)
+insert into workdays (endtime, starttime,pharmacy_id, user_id) values ('2021-09-10 14:00:00-08', '2021-09-10 07:00:00-08',1, 12)
 --
 --insert into workdays (endtime, starttime,pharmacy_id, user_id) values ('2021-09-13 07:00:00-08', '2021-09-13 14:00:00-08', 11)
 --insert into workdays (endtime, starttime,pharmacy_id, user_id) values ('2021-09-13 07:00:00-08', '2021-09-13 14:00:00-08', 12)
@@ -481,7 +483,7 @@ insert into appointments (is_finished, is_taken, endtime, starttime, report, der
 
 insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id,price) values (true, true, '2021-05-13 13:30:00-08', '2021-05-13 13:00:00-08', '', 1, 21, 1,200)
 insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id,price) values (true, true, '2021-06-12 13:30:00-08', '2021-06-12 13:00:00-08', '', 1, 21, 1,200)
-insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id,price) values (true, true, '2021-09-10 13:30:00-08', '2021-09-10 13:00:00-08', '', 1, 21, 1,200)
+insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id,price) values (false, true, '2021-09-10 13:30:00-08', '2021-09-10 13:00:00-08', '', 1, 21, 1,200)
 
 
 insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id,price) values (true, true, '2021-04-13 13:30:00-08', '2021-04-13 13:00:00-08', '', 2, 21, 2,200)
