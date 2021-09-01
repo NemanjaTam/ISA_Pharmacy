@@ -49,6 +49,7 @@
             v-if="userType == 'PHARMACY_ADMINISTRATOR'"
             >DELETE</b-button
           >
+          <ModalAddAppointment :selected="selectedDerm[0]" :id="Pharmacy" :type="userType"></ModalAddAppointment>
            <ModalAddWorker :selected="selectedDerm[0]" :id="Pharmacy" :workerType="'DERMATOLOGIST'"></ModalAddWorker>
            <!-- <ModalEditPharmacist :selected="selectedDerm[0]" :id="Pharmacy"></ModalEditPharmacist> -->
           <div>
@@ -74,10 +75,10 @@
 </template>
 <script>
 import ModalEditPharmacist from "../components/ModalEditPharmacist.vue"
-import ModalAddWorker from "../components/ModalAddWorker.vue"
+import ModalAddAppointment from "../components/ModalAddAppointments.vue"
 export default {
   name: "SearchListFilter",
-  components:{ModalEditPharmacist,ModalAddWorker},
+  components:{ModalEditPharmacist,ModalAddAppointment},
   computed: {
     User() {
       this.$store.getters.getUser;
