@@ -208,6 +208,9 @@ export default {
     },
   },
   async mounted() {
+       if(this.userType != "PHARMACY_ADMINISTRATOR"){
+       this.$router.push("/LoginPage").catch(()=>{});
+    }
     await this.getPharmacyIdbyUserId(this.userId);
     console.log(this.userId);
   },

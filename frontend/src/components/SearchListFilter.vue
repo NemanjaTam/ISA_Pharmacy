@@ -19,7 +19,7 @@
             >EDIT</b-button
           > -->
          
-          <ModalAddWorker :selected="selectedDerm[0]" :id="Pharmacy" :workerType="'PHARMACIST'"></ModalAddWorker>
+          <ModalAddWorker :selected="selectedDerm[0]" :id="Pharmacy" :workerType="'PHARMACIST'" :type="userType"></ModalAddWorker>
            <!-- <ModalEditPharmacist :selected="selected[0]" :id="Pharmacy"></ModalEditPharmacist> -->
           <div>
             <b-table
@@ -50,7 +50,8 @@
             >DELETE</b-button
           >
           <ModalAddAppointment :selected="selectedDerm[0]" :id="Pharmacy" :type="userType"></ModalAddAppointment>
-           <ModalAddWorker :selected="selectedDerm[0]" :id="Pharmacy" :workerType="'DERMATOLOGIST'"></ModalAddWorker>
+          <ModalAddDermatologist :selected="selectedDerm[0]" :id="Pharmacy" :type="userType"></ModalAddDermatologist>
+           <!-- <ModalAddWorker :selected="selectedDerm[0]" :id="Pharmacy" :workerType="'DERMATOLOGIST'"></ModalAddWorker> -->
            <!-- <ModalEditPharmacist :selected="selectedDerm[0]" :id="Pharmacy"></ModalEditPharmacist> -->
           <div>
             <b-table striped show-empty :items="filteredDermatologist"
@@ -76,9 +77,11 @@
 <script>
 import ModalEditPharmacist from "../components/ModalEditPharmacist.vue"
 import ModalAddAppointment from "../components/ModalAddAppointments.vue"
+import ModalAddWorker from "../components/ModalAddWorker.vue"
+import ModalAddDermatologist from "../components/ModalAddDermatologist.vue"
 export default {
   name: "SearchListFilter",
-  components:{ModalEditPharmacist,ModalAddAppointment},
+  components:{ModalEditPharmacist,ModalAddAppointment,ModalAddWorker,ModalAddDermatologist},
   computed: {
     User() {
       this.$store.getters.getUser;
@@ -455,5 +458,8 @@ export default {
     console.log("pharmacy id:");
     console.log(this.pharmacy);
   },
+  mounted(){
+     
+  }
 };
 </script>

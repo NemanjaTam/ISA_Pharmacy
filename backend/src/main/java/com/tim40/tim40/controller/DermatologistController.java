@@ -97,7 +97,15 @@ public class DermatologistController {
 					return new ResponseEntity<Long>(HttpStatus.UNAUTHORIZED);
 				}
 		}
-		
+		@RequestMapping(value="/get-all-not-in-pharmacy/{id}", method = RequestMethod.GET)
+		public ResponseEntity<List<DermatologistDTO>> getAllDermatologistExceptForThisPharmacy(@PathVariable("id") Long id ,@RequestHeader("usertype") String type){
+			if("PHARMACY_ADMINISTRATOR".equals(type)){
+				return new ResponseEntity<List<DermatologistDTO>>(this.dermatologistService.getAllDermatologistNotInThisPharmacy(id) ,HttpStatus.OK);
+				}
+				else {
+					return new ResponseEntity<List<DermatologistDTO>>(HttpStatus.UNAUTHORIZED);
+				}
+		}
 		
 		
 		

@@ -1,5 +1,7 @@
 <template>
+
   <div class="background">
+    <NavbarAdmin></NavbarAdmin>
     <div class="container">
       <div class="row">
         <div class="col-md-6">
@@ -128,10 +130,11 @@
 
 <script>
 import axios from "axios";
+import NavbarAdmin from "../components/NavbarAdmin.vue"
 
 export default {
   name: "EditAdmin",
-  components: {},
+  components: {NavbarAdmin},
   computed: {
     User() {
       return this.$store.getters.getUser;
@@ -267,6 +270,12 @@ export default {
     this.userData.send = user.send;
     this.userData.inbox = user.inbox;
   },
+
+  mounted(){
+    if(this.userType != "PHARMACY_ADMINISTRATOR"){
+       this.$router.push("/LoginPage").catch(()=>{});
+    }
+  }
 };
 </script>
 

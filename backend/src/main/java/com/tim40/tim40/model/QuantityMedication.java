@@ -25,4 +25,7 @@ public class QuantityMedication {
 	@ManyToOne
     @JoinColumn(name = "pharmacy_id", nullable = false)
 	private Pharmacy pharmacy;
+	
+	@Version
+	private Long version;
 }

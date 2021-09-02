@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tim40.tim40.model.enums.OfferStatus;
@@ -49,4 +50,7 @@ public class Offer {
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "provider_id", nullable = true)
 	private Provider provider;
+	
+	@Version
+	private Long version;
 }

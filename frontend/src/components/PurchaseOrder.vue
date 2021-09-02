@@ -675,6 +675,9 @@ export default {
     },
   },
   mounted() {
+       if(this.userType != "PHARMACY_ADMINISTRATOR"){
+       this.$router.push("/LoginPage").catch(()=>{});
+    }
     this.getPharmacyIdbyUserID(this.userId);
     this.resetForm();
   },

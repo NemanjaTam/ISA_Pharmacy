@@ -18,7 +18,17 @@
 import NavbarAdmin from "../components/NavbarAdmin.vue";
 export default {
   name: "PharmacyAdminHome",
+  computed:{
+    userType() {
+      return this.$store.getters.getUserType;
+    },
+  },
   components: {},
+  mounted(){
+       if(this.userType != "PHARMACY_ADMINISTRATOR"){
+       this.$router.push("/LoginPage").catch(()=>{});
+    }
+  }
 };
 </script>
 <style scoped>

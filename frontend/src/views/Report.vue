@@ -485,6 +485,11 @@ export default {
   },
 
   async created() {},
+  mounted(){
+         if(this.userType != "PHARMACY_ADMINISTRATOR"){
+       this.$router.push("/LoginPage").catch(()=>{});
+    }
+  }
 };
 </script>
 <style scoped>

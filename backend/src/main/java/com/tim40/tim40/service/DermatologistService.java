@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -31,6 +32,7 @@ import com.tim40.tim40.model.PharmacistRating;
 import com.tim40.tim40.model.Pharmacy;
 import com.tim40.tim40.model.WorkDay;
 import com.tim40.tim40.projections.DermatologistDetailsProjection;
+import com.tim40.tim40.projections.DermatologistPharmacyProjection;
 import com.tim40.tim40.projections.DermatologistProjection;
 import com.tim40.tim40.projections.PharmacistDetailsProjection;
 import com.tim40.tim40.repository.AbsenceRepository;
@@ -230,6 +232,34 @@ public class DermatologistService implements IDermatologistService {
 			}
 		}
 		return id;
+	}
+	//ZA DERMATOLOGE DOBAVLJAM --> ODRADITI	
+	public List<DermatologistDTO> getAllDermatologistNotInThisPharmacy(Long id){
+		
+		List<DermatologistDTO> newDermatologists = new ArrayList<DermatologistDTO>();
+		List<Dermatologist> all = this.dermatologistRepository.findAll();
+		List<DermatologistPharmacyProjection> relationships = this.dermatologistRepository.getDermatologistPharmacy();
+		for (Dermatologist derm : all) {
+			boolean exists = false;
+			for (DermatologistPharmacyProjection proj : relationships) {
+				
+				System.out.println(proj.getDermatologistId());
+				System.out.println(proj.getPharmacyId());
+				if((proj.getPharmacyId() == id) && (proj.getDermatologistId() == derm.getId())) {
+					System.out.println("USLO OVDE");
+					exists = true;
+					
+				}
+			}
+			if(!exists) {
+				
+				DermatologistDTO dto = new DermatologistDTO(derm.getId(),derm.getName(),derm.getSurname(),derm.getEmail());
+				newDermatologists.add(dto);
+				System.out.println("uslo je u if");
+			}
+		}
+		
+		return newDermatologists;
 	}
 }
 

@@ -38,7 +38,7 @@ public class PriceListController {
 
 	@GetMapping(value="/get-active-pricelist/{id}",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<PriceListMedication>> getActivePriceList(@PathVariable("id") Long id,@RequestHeader("usertype") String type){
-			if("PHARMACY_ADMINISTRATOR".equals(type)){
+			if(("PHARMACY_ADMINISTRATOR".equals(type) || ("PATIENT".equals(type)))){
 				return new ResponseEntity<List<PriceListMedication>>(this.priceListService.getActivePriceList(id), HttpStatus.OK);
 			
 		

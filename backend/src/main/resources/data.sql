@@ -2,10 +2,10 @@
 
 
 
-insert into pharmacies(city, number, postalcode, state, street, avg_rating, name) values ('Novi Sad', '6', 21000, 'Srbija', 'Trg Dositeja Obradovića', 9, 'Pharmacy 1')
-insert into pharmacies(city, number, postalcode, state, street, avg_rating, name) values ('Sabac', '5', 21000, 'Srbija', 'Trg Dositeja Obradovića', 9, 'Pharmacy 2')
-insert into pharmacies(city, number, postalcode, state, street, avg_rating, name) values ('Nis', '7', 21000, 'Srbija', 'Trg Dositeja Obradovića', 9, 'Pharmacy 3')
-insert into pharmacies(city, number, postalcode, state, street, avg_rating, name) values ('Beograd', '8', 21000, 'Srbija', 'Trg Dositeja Obradovića', 9, 'Pharmacy 4')
+insert into pharmacies(city, number, postalcode, state, street, avg_rating, name,version) values ('Novi Sad', '6', 21000, 'Srbija', 'Trg Dositeja Obradovića', 9, 'Pharmacy 1',1)
+insert into pharmacies(city, number, postalcode, state, street, avg_rating, name,version) values ('Sabac', '5', 21000, 'Srbija', 'Trg Dositeja Obradovića', 9, 'Pharmacy 2',1)
+insert into pharmacies(city, number, postalcode, state, street, avg_rating, name,version) values ('Nis', '7', 21000, 'Srbija', 'Trg Dositeja Obradovića', 9, 'Pharmacy 3',1)
+insert into pharmacies(city, number, postalcode, state, street, avg_rating, name,version) values ('Beograd', '8', 21000, 'Srbija', 'Trg Dositeja Obradovića', 9, 'Pharmacy 4',1)
 
 
 insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Dermatologist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic1@gmail.com', true, 'Nikola', 'kinzo','+381613238249', 'Antonic', 'DERMATOLOGIST', null, null)
@@ -539,15 +539,15 @@ insert into absences( endtime,is_approved,is_finished, starttime,type,pharmacy_i
 insert into absences( endtime,is_approved,is_finished, starttime,type,pharmacy_id ,user_id) values ( '2021-08-08',false, false, '2021-08-08','PROCESSING',4,20)
 
 
-insert into purchase_order_list(endtime,purchase_status,starttime,pharmacy_administrator_id,pharmacy_id) values('2021-08-08','CEKA_PONUDE','2021-01-01',42,1)
+insert into purchase_order_list(endtime,purchase_status,starttime,pharmacy_administrator_id,pharmacy_id,version) values('2021-08-08','CEKA_PONUDE','2021-01-01',42,1,1)
 insert into medication_quantity_of_purchase_order(quantity,medication_id) values (10,1)
 insert into purchase_order_list_quantity_medications_purchase(purchase_order_id,quantity_medications_purchase_id) values(1,1)
 
-insert into purchase_order_list(endtime,purchase_status,starttime,pharmacy_administrator_id,pharmacy_id) values('2021-08-08','CEKA_PONUDE','2021-01-01',43,1)
+insert into purchase_order_list(endtime,purchase_status,starttime,pharmacy_administrator_id,pharmacy_id,version) values('2021-08-08','CEKA_PONUDE','2021-01-01',43,1,1)
 insert into medication_quantity_of_purchase_order(quantity,medication_id) values (10,2)
 insert into purchase_order_list_quantity_medications_purchase(purchase_order_id,quantity_medications_purchase_id) values(2,2)
 
-insert into purchase_order_list(endtime,purchase_status,starttime,pharmacy_administrator_id,pharmacy_id) values('2021-08-08','CEKA_PONUDE','2021-01-01',44,1)
+insert into purchase_order_list(endtime,purchase_status,starttime,pharmacy_administrator_id,pharmacy_id,version) values('2021-08-08','CEKA_PONUDE','2021-01-01',44,1,1)
 insert into medication_quantity_of_purchase_order(quantity,medication_id) values (10,3)
 insert into purchase_order_list_quantity_medications_purchase(purchase_order_id,quantity_medications_purchase_id) values(3,3)
 
@@ -556,9 +556,9 @@ insert into providers(name,email,info) values('Dobavljac 1','boyanasixxhalliwell
 insert into providers(name,email,info) values('Dobavljac 2','blabla@gmail.com','Ekstra cene pun kvalitet')
 insert into providers(name,email,info) values('Dobavljac 3','boyanacroft@yahoo.com','Lek za stek')
 
-insert into offers(status,price,purchase_order_id, provider_id) values ('CEKA',200,1,1)
-insert into offers(status,price,purchase_order_id,provider_id) values ('CEKA',150,1,2)
-insert into offers(status,price,purchase_order_id,provider_id) values ('CEKA',150,1,3)
+insert into offers(status,price,purchase_order_id, provider_id,version) values ('CEKA',200,1,1,1)
+insert into offers(status,price,purchase_order_id,provider_id,version) values ('CEKA',150,1,2,1)
+insert into offers(status,price,purchase_order_id,provider_id,version) values ('CEKA',150,1,3,1)
 
 
 insert into price_list_medications(status,start_time,pharmacy_id) values ('ACTIVE','2021-08-28 00:00:00-08',1)
