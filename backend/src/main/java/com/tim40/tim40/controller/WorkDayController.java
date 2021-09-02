@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -47,7 +49,8 @@ public class WorkDayController {
 				return new ResponseEntity<List<Period>>(HttpStatus.UNAUTHORIZED);
 			}
 	} 
-	@Transactional()
+	//TRANSAKCIJA
+	@Transactional(propagation = Propagation.REQUIRES_NEW,isolation = Isolation.READ_UNCOMMITTED)
 	@PostMapping(value="/create-working-days/{id}/{iduser}",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Integer> createWorkDays(@PathVariable("iduser") Long id,@PathVariable("id") Long pharmacyId,@RequestHeader("usertype") String type,@RequestBody NewWorkDaysDTO dto){
 		if("PHARMACY_ADMINISTRATOR".equals(type)){

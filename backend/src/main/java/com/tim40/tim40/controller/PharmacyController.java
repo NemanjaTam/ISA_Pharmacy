@@ -13,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -142,7 +143,7 @@ public class PharmacyController {
 	//ne menjati
 	@PostMapping(value = "/accept-offer",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.OK)
-	@Transactional(readOnly = false)
+@Transactional()
 	 //ovde je transakcija jer sta ako se desi da se ne apdejtuje purchase order status?! ->nekonzistentno
 	public List<Offer> acceptAndDeclineOffers(@RequestBody AcceptOfferDTO acceptOffer){
 		List<Offer> offers = this.pharmacyService.acceptOffer(acceptOffer);
@@ -152,7 +153,7 @@ public class PharmacyController {
 
 	@RequestMapping(method = RequestMethod.POST, path = "/delete-medication/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	@Transactional(readOnly = false)
+	@Transactional(propagation = Propagation.REQUIRES_NEW,isolation = Isolation.READ_UNCOMMITTED,rollbackFor = Exception.class)
 	public boolean deleteMedication(@RequestBody Long medicationId,@PathVariable("id") Long id){
 		 System.out.println(id + " " + "PHARMACY ID");
 		Pharmacy pharmacy = this.pharmacyService.getById(id);
@@ -160,7 +161,8 @@ public class PharmacyController {
 		return success;
 	}
 	
-	//ne menjati
+	//ne menjati , da bih sprecila LOST UPDATE -> optimistic lock(version u modelu) + read_uncommited da bi se videle promene
+	@Transactional(propagation = Propagation.REQUIRES_NEW,isolation = Isolation.READ_UNCOMMITTED,rollbackFor = Exception.class) //standardni izolacioni nivo + optimisticko zakljucavanje
 	@PostMapping(value = "/edit-medication/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public boolean editMedication(@RequestBody MedicationQuantityDTO dto,@PathVariable("id") Long pharmacyId){
 		return this.pharmacyService.editMedication(dto, pharmacyId);

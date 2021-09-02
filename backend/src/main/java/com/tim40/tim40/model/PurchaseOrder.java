@@ -28,8 +28,7 @@ public class PurchaseOrder {
 
 	@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	private final Set<QuantityMedicationPurchaseOrder> quantityMedicationsPurchase = new HashSet<QuantityMedicationPurchaseOrder>();
-	
-	
+
 	@ManyToOne
 	@JoinColumn(name = "pharmacy_administrator_id", nullable = false)
 	private PharmacyAdministrator adminPharmacy;
@@ -55,4 +54,7 @@ public class PurchaseOrder {
 
 	@OneToMany(fetch = FetchType.LAZY,mappedBy="purchaseOrder",cascade = CascadeType.ALL)
 	private List<Offer> offers;
+	
+	@Version
+	private Long version;
 }
