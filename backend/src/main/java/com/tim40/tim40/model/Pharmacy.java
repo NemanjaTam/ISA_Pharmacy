@@ -40,10 +40,10 @@ public class Pharmacy {
     @Column(nullable = false)
     private String name;
 
-    @Embedded
-    private Address address;
+	@Embedded
+	private Address address;
 
-    @Column(name = "avg_rating", nullable = false)
+    @Column(name = "avg_rating")
     private double avgRating;
     
 

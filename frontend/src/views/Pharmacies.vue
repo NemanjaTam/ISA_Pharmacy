@@ -1,10 +1,9 @@
 <template>
  <div class = "background">
     <NavbarSystemAdmin/>
-    <b-input v-model="filter" placeholder="Search"></b-input>
     <div>
       <b-table
-        :items="this.getMedications"
+        :items="this.getPharmacies"
         :filter="filter"
         :fields="fields"
         responsive="sm"
@@ -13,15 +12,9 @@
         @row-unselected="onRowUnselected"
         :filter-included-fields="[
           'name',
-          'description',
-          'manufacturer',
-          'typeOfMedication',
-          'medicationForm',
+          'State'
         ]"
       >
-        <template #cell(show_details)="row">
-          <Modal2 :selected="row.item" :id="Pharmacy"></Modal2>
-        </template>
         <div></div>
       </b-table>
     </div>
@@ -29,33 +22,25 @@
 </template>
 
 <script>
-import Modal2 from "../components/Modal2.vue";
 import NavbarSystemAdmin from '../components/NavbarSystemAdmin';
 import axios from 'axios';
 
 export default {
-  name: "Medications",
+  name: "Pharmacies",
   components: { 
-    Modal2,
     NavbarSystemAdmin
    },
   computed: {
-      medications () {
-      console.log(this.$store.state.medications)
-      return this.$store.state.medications
+      pharmacies () {
+      console.log(this.$store.state.pharmacies)
+      return this.$store.state.pharmacies
     },
     Pharmacy() {
       return this.$store.getters.getPharmacy;
     },
-    getMedicines() {
-      return this.$store.getters.getMedicines;
-    },
-    getMedications() {
-      return this.$store.getters.getMedications;
-    },
-    getSelectedMed() {
-      return this.$store.getters.getSelectedMedicineForEdit;
-    },
+    getPharmacies() {
+      return this.$store.getters.getPharmacies;
+    }
   },
   data() {
     return {
@@ -64,29 +49,31 @@ export default {
           key: "name",
           sortable: true,
         },
-        {
-          key: "manufacturer",
-          sortable: true,
-        },
-        {
-          key: "description",
-          sortable: true,
-        },
-        {
-          key: "medicationForm",
-          sortable: true,
-        },
-        {
-          key: "typeOfMedication",
+         {
+          key: "address.state",
+          label: "State",
           sortable: true,
         },
          {
-          key: "prescriptionRegime",
+          key: "address.city",
+          label: "City",
           sortable: true,
         },
-
-        "show_details",
-
+         {
+          key: "address.postalCode",
+          label: "Postal code",
+          sortable: true,
+        },
+        {
+          key: "address.street",
+          label: "Street",
+          sortable: true,
+        },
+         {
+          key: "address.number",
+          label: "Number of building",
+          sortable: true,
+        },
       ],
       search: "",
       filter: "",
@@ -115,35 +102,11 @@ export default {
       this.modalData = data;
       this.modalShow = true;
     },
-    getMedication() {
-      //  /get-medications/{id}
-      fetch(
-        `http://localhost:9005/api/pharmacy/get-medications/${this.Pharmacy}`,
-        {
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          method: "GET",
-        }
-      )
-        .then(function(response) {
-          if (response.ok) {
-            return response.json();
-          } else {
-            return Promise.reject(response);
-          }
-        })
-        .then((data) => this.$store.dispatch("updateMedicines", data))
-        .catch(function(error) {
-          console.warn(error);
-        });
-    },
   },
   mounted: function() {
-	  axios.get("http://localhost:9005/api/medication/all").then((el)=>el.data).then((elem)=>{
+	  axios.get("http://localhost:9005/api/pharmacy/all").then((el)=>el.data).then((elem)=>{
 		  console.log(elem);
-		  this.$store.dispatch('setMedications', elem);
+		  this.$store.dispatch('setPharmacies', elem);
 	  })
   }
 };

@@ -27,13 +27,20 @@ import PriceList from "../components/PriceList.vue"
 import AddLoyalty from "../components/AddLoyalty.vue"
 import Report from "../views/Report.vue"
 import Medications from "../components/Medications.vue"
-import RegistrationSystemAdmin from "../components/RegistrationSystemAdmin.vue"
+import RegistrationBySystemAdmin from "../views/RegistrationBySystemAdmin.vue"
 import AddMedication from "../components/AddMedication.vue"
 import SystemAdminHome from "../views/SystemAdminHome.vue"
 import SupplierHome from "../views/SupplierHome.vue"
 import EditProfile from "../views/EditProfile.vue"
 import ViewProfile from "../views/ViewProfile.vue"
 import SubList from "../components/SubList.vue"
+import RegistrationDermatologist from "../components/RegistrationDermatologist.vue"
+import RegistrationPharmacyAdmin from "../components/RegistrationPharmacyAdmin.vue"
+import RegistrationSupplier from "../components/RegistrationSupplier.vue"
+import RegistrationSystemAdmin from "../components/RegistrationSystemAdmin.vue"
+import AddPharmacy from "../components/AddPharmacy.vue"
+import Pharmacies from "../views/Pharmacies.vue"
+import EditAdmin from "../components/EditAdmin.vue"
 
 Vue.use(VueRouter);
 
@@ -196,6 +203,26 @@ const routes = [{
     },
     {
         path: '/registration-by-system-admin',
+        name: 'RegistrationBySystemAdmin',
+        component: RegistrationBySystemAdmin
+      },
+      {
+        path: '/registration-pharmacy-admin',
+        name: 'RegistrationPharmacyAdmin',
+        component: RegistrationPharmacyAdmin
+      },
+      {
+        path: '/registration-dermatologist',
+        name: 'RegistrationDermatologist',
+        component: RegistrationDermatologist
+      },
+      {
+        path: '/registration-supplier',
+        name: 'RegistrationSupplier',
+        component: RegistrationSupplier
+      },
+      {
+        path: '/registration-system-admin',
         name: 'RegistrationSystemAdmin',
         component: RegistrationSystemAdmin
     },
@@ -204,6 +231,18 @@ const routes = [{
         name: 'SubList',
         component: SubList
     }
+      },
+      {
+        path: '/add-pharmacy',
+        name: 'AddPharmacy',
+        component: AddPharmacy
+      },
+      {
+        path: '/pharmacies',
+        name: 'Pharmacies',
+        component: Pharmacies
+      }
+
 ];
 
 export const router = new VueRouter({

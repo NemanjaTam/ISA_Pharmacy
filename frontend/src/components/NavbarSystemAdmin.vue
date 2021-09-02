@@ -8,7 +8,7 @@
             <b-collapse id="nav-collapse" is-nav>
                 <b-navbar-nav>
                     <b-nav-item> 
-                      <router-link to="" class="routerlink">Pharmacies</router-link>
+                      <router-link to="/pharmacies" v-if="userType == 'SYSTEM_ADMINISTRATOR'" class="routerlink">Pharmacies</router-link>
                     </b-nav-item>
 
                     <b-nav-item>
@@ -16,39 +16,39 @@
                         </b-nav-item>
 
                     <b-nav-item>
-                           <router-link to="" class="routerlink">Add pharmacy</router-link>
+                           <router-link to="/add-pharmacy" v-if="userType == 'SYSTEM_ADMINISTRATOR'" class="routerlink">Add pharmacy</router-link>
                         </b-nav-item>
 
 
                     <b-nav-item>
-                           <router-link to="/add-medication" class="routerlink">Add medication</router-link>
+                           <router-link to="/add-medication" v-if="userType == 'SYSTEM_ADMINISTRATOR'" class="routerlink">Add medication</router-link>
                         </b-nav-item>
 
                    <b-nav-item>
-                           <router-link to="/registration-by-admin" class="routerlink">Registration</router-link>
+                           <router-link to="/registration-by-system-admin" v-if="userType == 'SYSTEM_ADMINISTRATOR'" class="routerlink">Registration</router-link>
                         </b-nav-item>
 
                     <b-nav-item>
-                           <router-link to="/add-loyalty" class="routerlink">Loyality program</router-link>
+                           <router-link to="/add-loyalty" v-if="userType == 'SYSTEM_ADMINISTRATOR'" class="routerlink">Loyality program</router-link>
                         </b-nav-item>
 
                         <b-nav-item>
-                           <router-link to="" class="routerlink">Complaints</router-link>
+                           <router-link to="" v-if="userType == 'SYSTEM_ADMINISTRATOR'" class="routerlink">Complaints</router-link>
                         </b-nav-item>
 
                 </b-navbar-nav>
 
                 <b-navbar-nav class="ml-auto">
                    <b-nav-item>
-                     <router-link to="/view-profile" class="routerlink">Profile</router-link>
+                     <router-link to="/view-profile" v-if="userType == 'SYSTEM_ADMINISTRATOR'" class="routerlink">Profile</router-link>
                    </b-nav-item>
 
                     <b-nav-item>
-                        <router-link to="/edit-profile" class="routerlink">Edit Profile</router-link>
+                        <router-link to="/edit-profile" v-if="userType == 'SYSTEM_ADMINISTRATOR'" class="routerlink">Edit Profile</router-link>
                      </b-nav-item>
 
                    <b-nav-item>
-                     <b-button style="background-color:red" v-on:click="logout">Logout</b-button>
+                     <b-button style="background-color:red" v-if="userType == 'SYSTEM_ADMINISTRATOR'" v-on:click="logout">Logout</b-button>
                   </b-nav-item>
                 </b-navbar-nav>
             </b-collapse>

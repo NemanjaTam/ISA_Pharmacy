@@ -24,7 +24,6 @@
                 style="font-style:italic"
                 required
               />
-               
               <br />
               <label v-if="show" style="color: red;">{{ message }}</label>
               <label v-else style="color: green;">{{ message }}</label>
