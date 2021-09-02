@@ -24,7 +24,7 @@
                 style="font-style:italic"
                 required
               />
-              <a class="forgot text-muted" href="#">Forgot password?</a>
+               
               <br />
               <label v-if="show" style="color: red;">{{ message }}</label>
               <label v-else style="color: green;">{{ message }}</label>

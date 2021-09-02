@@ -24,11 +24,8 @@ import PurchaseOrder from "../components/PurchaseOrder.vue"
 import Medication from "../views/MedicationList.vue"
 import Absences from "../components/Absences.vue"
 import PriceList from "../components/PriceList.vue"
-
 import AddLoyalty from "../components/AddLoyalty.vue"
-
 import Report from "../views/Report.vue"
-
 import Medications from "../components/Medications.vue"
 import RegistrationSystemAdmin from "../components/RegistrationSystemAdmin.vue"
 import AddMedication from "../components/AddMedication.vue"
@@ -36,6 +33,7 @@ import SystemAdminHome from "../views/SystemAdminHome.vue"
 import SupplierHome from "../views/SupplierHome.vue"
 import EditProfile from "../views/EditProfile.vue"
 import ViewProfile from "../views/ViewProfile.vue"
+import SubList from "../components/SubList.vue"
 
 Vue.use(VueRouter);
 
@@ -200,6 +198,11 @@ const routes = [{
         path: '/registration-by-system-admin',
         name: 'RegistrationSystemAdmin',
         component: RegistrationSystemAdmin
+    },
+    {
+        path: '/subscription-list',
+        name: 'SubList',
+        component: SubList
     }
 ];
 

@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import com.tim40.tim40.dto.AbsenceDetailedDTO;
 import com.tim40.tim40.dto.AcceptOfferDTO;
 import com.tim40.tim40.dto.MedicationQuantityDTO;
+import com.tim40.tim40.dto.PharmacyDTO;
 import com.tim40.tim40.dto.PurchaseOrderDTO;
 import com.tim40.tim40.model.Absence;
 import com.tim40.tim40.model.Dermatologist;
@@ -38,6 +39,7 @@ public interface IPharmacyService {
 	public Set<Absence> getAllApprovedAbsencesByPharmacyId(Long id);
 	public void subscribe(long idPatient, long idPharm);
 	public void unsubscribe(long idPatient, long idPharm);
+	List<PharmacyDTO> getPharmaciesSub(long idPatient);
 	
 
 	

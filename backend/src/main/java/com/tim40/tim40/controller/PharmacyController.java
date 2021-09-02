@@ -15,6 +15,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Isolation;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -190,12 +191,14 @@ public class PharmacyController {
 			}
 	}
 	
+	@CrossOrigin(origins = "http://localhost:8080") 
 	@PutMapping(value="/subscriber/{idPat}/{idPharm}")
 	public String subscribePharm(@PathVariable("idPat") long idPat, @PathVariable("idPharm") long idPharm) {
 		pharmacyService.subscribe(idPat, idPharm);
 		return "OK";
 	}
 	
+	@CrossOrigin(origins = "http://localhost:8080") 
 	@PutMapping(value="/unsubscriber/{idPat}/{idPharm}")
 	public String unsubscribePharm(@PathVariable("idPat") long idPat, @PathVariable("idPharm") long idPharm) {
 		pharmacyService.unsubscribe(idPat, idPharm);
@@ -223,6 +226,11 @@ public class PharmacyController {
 				return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 			}
 		
+	}
+	
+	@GetMapping(value="/getSubs/{id}")
+	public List<PharmacyDTO> getSubscribePharms(@PathVariable("id") long id) {
+		return pharmacyService.getPharmaciesSub(id);
 	}
 
 	

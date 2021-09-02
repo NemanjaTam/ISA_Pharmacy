@@ -444,6 +444,26 @@ public class PharmacyService implements IPharmacyService {
 		userRepository.save(u);
 		
 	}
+
+	@Override
+	public List<PharmacyDTO> getPharmaciesSub(long idPatient) {
+		// TODO Auto-generated method stub
+		List<Pharmacy> pharms = pharmacyRepository.findAll();
+		List<PharmacyDTO> phDto = new ArrayList<PharmacyDTO>();
+		for (Pharmacy p : pharms) {
+			boolean isSub = false;
+			for (User u : p.getSubscribers()) {
+				if(u.getId() == idPatient) {
+					isSub = true;
+					break;
+				}
+			}
+			PharmacyDTO ph = new PharmacyDTO(p);
+			ph.setSubscribed(isSub);
+			phDto.add(ph);
+		}
+		return phDto;
+	}
 	
 
 	
