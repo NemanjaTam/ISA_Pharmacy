@@ -210,17 +210,6 @@ public class PharmacyController {
 		
 	}
 
-	@RequestMapping(value="/subscribe/{id}", method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public  ResponseEntity<Integer> subscribe(@RequestBody Long userId,@PathVariable("id") Long id,@RequestHeader("usertype") String type){
-		if("PATIENT".equals(type)){
-			return new ResponseEntity<Integer>( this.pharmacyService.subscribe(userId,id),HttpStatus.OK);
-			}
-			else {
-				return new ResponseEntity<Integer>(HttpStatus.UNAUTHORIZED);
-			}
-		
-	}
-
 	
 
 }

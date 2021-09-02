@@ -36,7 +36,6 @@ public interface IPharmacyService {
 	//absence
 	public Set<AbsenceDetailedDTO> getAllUnapprovedAbsencesByPharmacyId(Long id);
 	public Set<Absence> getAllApprovedAbsencesByPharmacyId(Long id);
-	public Integer subscribe(Long pharmacyId,Long userId);
 	
 
 	

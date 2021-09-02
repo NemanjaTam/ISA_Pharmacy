@@ -11,9 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -76,30 +74,4 @@ public class DermatologistController {
 				}
 			
 		}
-		@Transactional()
-		@RequestMapping(value="/remove-dermatologist/{id}", method = RequestMethod.POST)
-		public  ResponseEntity<Integer> removeDermatologist(@PathVariable("id") Long id ,@RequestHeader("usertype") String type,@RequestBody String email){
-			if("PHARMACY_ADMINISTRATOR".equals(type)){
-				return new ResponseEntity<Integer>( dermatologistService.removeDermatologist(id,email),HttpStatus.OK);
-				}
-				else {
-					return new ResponseEntity<Integer>(HttpStatus.UNAUTHORIZED);
-				}
-			
-		}
-		
-		@RequestMapping(value="/get-by-email/{id}", method = RequestMethod.POST)
-		public ResponseEntity<Long> getByEmail(@PathVariable("id") Long id ,@RequestHeader("usertype") String type,@RequestBody String email){
-			if("PHARMACY_ADMINISTRATOR".equals(type)){
-				return new ResponseEntity<Long>(this.dermatologistService.getIdByEmail(email, id),HttpStatus.OK);
-				}
-				else {
-					return new ResponseEntity<Long>(HttpStatus.UNAUTHORIZED);
-				}
-		}
-		
-		
-		
-		
-		
 }

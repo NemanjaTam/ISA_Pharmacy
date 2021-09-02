@@ -57,8 +57,8 @@
 
         <b-nav-item-dropdown text="User" class="ml-auto" right>
           <b-dropdown-item class="dropdaun">
-            <router-link to="/pharmacyAdminPage/edit-profile-admin" class="routerlink"
-              >Edit profile</router-link
+            <router-link to="/pharmacyAdminPage/settingsPage" class="routerlink"
+              >Settings</router-link
             ></b-dropdown-item
           >
           <b-dropdown-item class="dropdaun" href="#">Log out</b-dropdown-item>

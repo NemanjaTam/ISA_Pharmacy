@@ -3,13 +3,16 @@ package com.tim40.tim40.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,6 +29,9 @@ public class Patient extends User {
 	
 	@Column(nullable = true)
 	private Long penalties;
+	
+	@Column(nullable = true)
+	private Integer points;
 	
 //	@OneToMany(mappedBy = "patient")
 //	private Set<Consultation> consultations = new HashSet<Consultation>();
@@ -59,4 +65,8 @@ public class Patient extends User {
         inverseJoinColumns = @JoinColumn(name = "medication_id")
     )
 	private Set<Medication> allergedOnMedications = new HashSet<Medication>();
+	
+	@OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+	@JoinColumn(name = "loyalty_type_id", referencedColumnName = "id")
+	private LoyaltyProgram lp;
 }

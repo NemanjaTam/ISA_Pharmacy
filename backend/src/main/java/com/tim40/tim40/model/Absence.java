@@ -3,7 +3,6 @@ package com.tim40.tim40.model;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -56,9 +55,8 @@ public class Absence {
 	@Column()
 	@Enumerated(EnumType.STRING)
 	private AbsenceType type;
-
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
 	private User user;
 
