@@ -30,7 +30,17 @@ export const store = new Vuex.Store({
     },
     appointments: [],
     appointmentProcess: null,
-    pharmacy: 0, //ne menjati ovo se koristi vec!
+    pharmacy: {
+      id: 1,
+      name: "",
+      address: {
+        state: "",
+        city: "",
+        street: "",
+        number: "",
+        postalCode: null,
+      }
+    },
     //ne menjaj ovo
     purchaseOrders: [
       {
@@ -48,13 +58,14 @@ export const store = new Vuex.Store({
     medicines: [{}],
     //ne menjaj ovo
     selectedOffer: {},
-    seletedMedicineForEdit: {},
-    unnaprovedAbsences: [],
-    approvedAbsences: [],
-    priceListActive: [],
-    priceListInactive: [],
-    medications: [],
-    workingDays:[],
+    seletedMedicineForEdit:{},
+    unnaprovedAbsences:[],
+    approvedAbsences:[],
+    priceListActive:[],
+    priceListInactive:[],
+    medications: [{} ],
+    pharmacies: [{}],
+    workingDays:[]
   },
   //methods that return data (state)
   getters: {
@@ -82,6 +93,12 @@ export const store = new Vuex.Store({
     },
     getMedicines(state) {
       return state.medicines;
+    },
+    getMedications(state){
+      return state.medications
+    },
+    getPharmacies(state){
+      return state.pharmacies
     },
     isUserLogged(state) {
       if (state.user.id != null) {
@@ -241,6 +258,9 @@ export const store = new Vuex.Store({
     },
     setMedications(state, medications) {
       state.medications = medications;
+    } ,
+    setPharmacies (state, pharmacies) {
+      state.pharmacies = pharmacies;
     },
   },
   //always on components dispatch action which commit some mutations. Never commit mutations from component because of async
@@ -340,7 +360,12 @@ export const store = new Vuex.Store({
     setMedications(context, medications) {
       context.commit("setMedications", medications);
     },
-
+    setPharmacy (context, pharmacies) {
+      context.commit('setPharmacies', pharmacies);
+    },
+    setPharmacies (contex, pharmacies) {
+      contex.commit('setPharmacies', pharmacies);
+    } ,
     logout(context) {
       var user = {
         id: null,
