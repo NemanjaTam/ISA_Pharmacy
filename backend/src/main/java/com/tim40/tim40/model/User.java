@@ -17,6 +17,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 import com.tim40.tim40.dto.UserDTO;
 import com.tim40.tim40.model.enums.UserType;
@@ -41,6 +42,9 @@ public class User{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@Version 
+	private Long version;
 	
 	@Column(name = "name", nullable = false)
 	private String name;

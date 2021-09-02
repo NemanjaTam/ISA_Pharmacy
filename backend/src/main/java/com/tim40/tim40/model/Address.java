@@ -20,6 +20,8 @@ public class Address {
 	@Column(name = "postalcode", nullable = false)
 	private int postalCode;
 
+	
+	
 	public Address() {
 		super();
 	}

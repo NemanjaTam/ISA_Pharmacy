@@ -27,7 +27,7 @@ public class MedicationDTO {
     private String recommendedIntake; 
     private Long pharmacyID;
     private Set<Long> replacementMedicationsIDs = new HashSet<Long>();
-    private String notes;
+    private String description;
     private String manufacturer;
  
   // private final Set<Patient> patients = new HashSet<Patient>();
@@ -40,7 +40,7 @@ public class MedicationDTO {
     	this.structure = medication.getStructure();
     	this.contraindications = medication.getContraindications();
     	this.recommendedIntake = medication.getRecommendedIntake();
-    	this.notes = medication.getNotes();
+    	this.description = medication.getDescription();
     	this.manufacturer = medication.getManufacturer();
     	this.medicationForm = medication.getMedicationForm();
 //    	this.pharmacyID = medication.getPharmacy().getId();

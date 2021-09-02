@@ -201,7 +201,7 @@ public class PharmacyService implements IPharmacyService {
 		PurchaseOrder purchaseOrder = new PurchaseOrder();
 		for (PurchaseOrder purchaseOrders : pharmacy.getPurchaseOrders()) {
 			if(purchaseOrders.getId().equals(dto.getPurchaseOrderId())) {
-				 purchaseOrder.setAdminPharmacy(purchaseOrders.getAdminPharmacy());
+			//	 purchaseOrder.setAdminPharmacy(purchaseOrders.getAdminPharmacy());
 				 purchaseOrder.setEndTime(purchaseOrders.getEndTime());
 				 purchaseOrder.setStartTime(purchaseOrders.getStartTime());
 				 purchaseOrder.setId(purchaseOrders.getId());

@@ -73,7 +73,7 @@ public class Medication {
     private String recommendedIntake; 
 
     @Column (nullable = false)
-    private String notes; 
+    private String description; 
     
 //    @ManyToOne
 //    @JoinColumn(name = "pharmacy_id", nullable = false)
@@ -95,7 +95,7 @@ public class Medication {
 	private List<Medication> replacementMedications = new ArrayList<Medication>();
     
     public Medication (String name, String code, String structure, String contraindications,
-            String recommendedIntake, Pharmacy pharmacy, Set<Medication> replacementMedications, String notes, String manufacturer,MedicationForm medicationForm ,TypeOfMedication typeOfMedication)
+            String recommendedIntake, Pharmacy pharmacy, Set<Medication> replacementMedications, String description, String manufacturer,MedicationForm medicationForm ,TypeOfMedication typeOfMedication)
     {
         super();
         this.name = name;
@@ -104,7 +104,7 @@ public class Medication {
         this.structure = structure;
         this.contraindications = contraindications;
         this.recommendedIntake = recommendedIntake;
-        this.notes = notes;
+        this.description = description;
         this.manufacturer = manufacturer;
         this.medicationForm = medicationForm;
 //        this.pharmacy = pharmacy; 

@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.tim40.tim40.dto.OfferDTO;
 import com.tim40.tim40.dto.OfferFilterDTO;
@@ -50,7 +52,7 @@ public class SupplierService implements ISupplierService {
 		purchaseOrderOffer.setSupplier(s);
 		
 		boolean supplierHasAllInStock = true;
-		for(QuantityMedication qm : p.getQuantityMedications()) {
+		/*for(QuantityMedication qm : p.getQuantityMedications()) {
 			int quantityRemaining = qm.getQuantity();
 			
 			for(Pharmacy pharmacy : s.getPharmacies()) {
@@ -64,7 +66,7 @@ public class SupplierService implements ISupplierService {
 				supplierHasAllInStock = false;
 				break;
 			}
-		}
+		}*/
 		if(supplierHasAllInStock == false) {
 			return new ResponseEntity<PurchaseOrderOfferDTO>(new PurchaseOrderOfferDTO(null), HttpStatus.BAD_REQUEST);
 		}
@@ -74,6 +76,7 @@ public class SupplierService implements ISupplierService {
 		return new ResponseEntity<PurchaseOrderOfferDTO>(new PurchaseOrderOfferDTO(created), HttpStatus.OK);
 	}
 
+	@Transactional(isolation = Isolation.SERIALIZABLE, readOnly = true)
 	public ResponseEntity<List<PurchaseOrderOfferDTO>> getPurchaseOrderOffers(Long id) {
 		Set<PurchaseOrderOffer> lista = (Set<PurchaseOrderOffer>) supplierRepository.getById(id).getPurchaseOrderOffers();
 		List<PurchaseOrderOfferDTO> lista2 = new ArrayList<>();
@@ -84,14 +87,12 @@ public class SupplierService implements ISupplierService {
 		return new ResponseEntity<List<PurchaseOrderOfferDTO>>(lista2, HttpStatus.OK);
 	}
 
+	@Transactional(isolation = Isolation.SERIALIZABLE, readOnly = true, noRollbackFor = NullPointerException.class)
 	public ResponseEntity<List<OfferDTO>> getSupplierOffers(Long id, OfferFilterDTO offerFilterDTO) {
 		Supplier supplier = supplierRepository.getById(id);
 		Set<PurchaseOrderOffer> purchaseOrderOffers = new HashSet<>();
 		List<OfferDTO> offers = new ArrayList<>();
 		
-		if(supplier == null) {
-			return new ResponseEntity<List<OfferDTO>>(offers, HttpStatus.BAD_REQUEST);
-		}
 		purchaseOrderOffers = supplier.getPurchaseOrderOffers();
 		
 		for(PurchaseOrderOffer p : purchaseOrderOffers) {
@@ -123,7 +124,7 @@ public class SupplierService implements ISupplierService {
 		poo.setSupplier(s);
 		
 		boolean supplierHasAllInStock = true;
-		for(QuantityMedication qm : p.getQuantityMedications()) {
+	/*	for(QuantityMedication qm : p.getQuantityMedications()) {
 			int quantityRemaining = qm.getQuantity();
 			
 			for(Pharmacy pharmacy : s.getPharmacies()) {
@@ -137,7 +138,7 @@ public class SupplierService implements ISupplierService {
 				supplierHasAllInStock = false;
 				break;
 			}
-		}
+		}*/
 		if(supplierHasAllInStock == false) {
 			return new ResponseEntity<PurchaseOrderOfferDTO>(new PurchaseOrderOfferDTO(null), HttpStatus.BAD_REQUEST);
 		}

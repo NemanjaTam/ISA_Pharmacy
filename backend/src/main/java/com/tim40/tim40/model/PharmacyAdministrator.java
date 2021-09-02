@@ -22,9 +22,9 @@ public class PharmacyAdministrator extends User{
 
 	/*@OneToMany(fetch = FetchType.LAZY,mappedBy="adminPharmacy")
 	private  Set<PurchaseOrder> purchaseOrderMade = new HashSet<PurchaseOrder>();*/
-	@JsonIgnore
-	@OneToMany(fetch = FetchType.LAZY,mappedBy="adminPharmacy")
-	private  Set<PurchaseOrder> purchaseOrderMade = new HashSet<PurchaseOrder>();
+//	@JsonIgnore
+//	@OneToMany(fetch = FetchType.LAZY,mappedBy="adminPharmacy")
+//	private  Set<PurchaseOrder> purchaseOrderMade = new HashSet<PurchaseOrder>();
 
 
 }
