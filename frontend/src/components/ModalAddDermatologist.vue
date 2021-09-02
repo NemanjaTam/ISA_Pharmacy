@@ -77,7 +77,7 @@
 const moment = require("moment");
 export default {
   name: "ModalAddDermatologist",
-  props: ["selected", "id", "type", "usertype"],
+  props: ["selected", "id", "type", "usertype","list"],
   computed: {},
   data() {
     const now = new Date();
@@ -99,9 +99,13 @@ export default {
       timeMax: 22,
       workingDays:[],
       respons :null,
+      derm:[],
     };
   },
   methods: {
+
+
+
     addDermatologist(name, id, surname) {
       if (this.selectedDermatologist.length < 1) {
         this.currentDermatologist = name + " " + surname;
@@ -155,21 +159,21 @@ export default {
         endShift: this.endShift,
       };
     var same = false;
-    for(var i = 0;i < thisworkingDays.length;i++){
-    console.log()
+    for(var i = 0;i < this.workingDays.length;i++){
+
     if(this.workingDays[i].startTime == new_string){
       
         same = true;
     }
-
   }
-   if(!same){   this.workingDays.push(workingDay);}else{
+   if(!same){  
+      this.workingDays.push(workingDay);}else{
       alert("The date is already chosen, please choose another! ")
    }
 
    
     },
-
+  
     removeNew(item) {
       this.workingDays.splice(
         this.workingDays.indexOf(item),
@@ -207,8 +211,35 @@ export default {
         }
       )
          }).then((response) => response.json())
-         .then((data) => {vm.dermatologists = data 
-         if(vm.respons){ alert("Dermatologist is working!")}})
+          .then(function(data) {
+         
+            return fetch(
+              `http://localhost:9005/api/dermatologist/get-dermatologist-rating/${vm.id}`,
+              {
+                headers: {
+                  Accept: "application/json",
+                  "Content-Type": "application/json",
+                  usertype: vm.type,
+                },
+                method: "GET",
+              }
+            );
+          }) .then((response) => response.json())
+          .then((data) => {   vm.$emit('updateparent', data)})
+          .catch();
+         
+         
+         
+         
+        //  .then((response) => response.json())
+        //  .then((data) => vm.dermatologists = data)
+        //  if(vm.respons == 0){
+        //    alert("Dermatologist is working!");
+        //  }else{
+        //    alert("Dermatologist added!");
+       
+        //    this.show = false;
+        //  }
           }
     
   },

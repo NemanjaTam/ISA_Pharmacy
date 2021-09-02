@@ -58,8 +58,8 @@ export default {
                     this.$router.push({name: 'PharmacyAdminPage'})
                 } else if(this.User.userType == "SYSTEM_ADMINISTRATOR"){
                     this.$router.push({name: 'SystemAdminHome'})
-                } else if(this.User.userType == "SUPPLIER"){
-                    this.$router.push({name: 'SupplierHome'})
+                } else if(this.User.userType == "PATIENT"){
+                     this.$router.push({ name: "PatientHomePage" });
                 } else
                 {
                 this.$router.push({name: 'HomePage'})}

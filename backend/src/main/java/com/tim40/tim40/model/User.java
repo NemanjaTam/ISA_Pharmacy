@@ -117,8 +117,8 @@ public class User{
 		this.send = userDTO.getSend();
 	}
 
-	 @Version
-	 private Long version;
+//	 @Version
+//	 private Long version;
 //    @ManyToMany(fetch = FetchType.EAGER)
 //    @JoinTable(name = "user_authority",
 //            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
