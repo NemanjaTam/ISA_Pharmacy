@@ -98,6 +98,7 @@ export default {
       timeMin: 6,
       timeMax: 22,
       workingDays:[],
+      respons :null,
     };
   },
   methods: {
@@ -180,6 +181,7 @@ export default {
                  body: JSON.stringify(ShiftDTO),
               }
             ).then(function(data) {
+              vm.respons = data;
               return   fetch(
         `http://localhost:9005/api/dermatologist/get-all-not-in-pharmacy/${vm.id}`,
         {
@@ -192,7 +194,8 @@ export default {
         }
       )
          }).then((response) => response.json())
-         .then((data) => this.dermatologists = data)
+         .then((data) => {vm.dermatologists = data 
+         if(vm.respons){ alert("Dermatologist is working!")}})
           }
     
   },

@@ -19,8 +19,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-
+import javax.persistence.Version;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tim40.tim40.dto.UserDTO;
@@ -118,7 +117,8 @@ public class User{
 		this.send = userDTO.getSend();
 	}
 
-
+	 @Version
+	 private Long version;
 //    @ManyToMany(fetch = FetchType.EAGER)
 //    @JoinTable(name = "user_authority",
 //            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
