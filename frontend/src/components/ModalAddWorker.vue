@@ -9,6 +9,7 @@
           id="input-live"
           v-model="newWorker.name"
           placeholder="Enter name"
+          v-on:keypress="isLetter($event)"
           type="text"
           required
           trim
@@ -17,6 +18,7 @@
           id="input-live"
           v-model="newWorker.surname"
           placeholder="Enter surname"
+          v-on:keypress="isLetter($event)"
           type="text"
           required
           trim
@@ -37,6 +39,7 @@
           id="input-live"
           v-model="newWorker.state"
           placeholder="Enter state"
+          v-on:keypress="isLetter($event)"
           type="text"
           required
           trim
@@ -45,6 +48,7 @@
           id="input-live"
           v-model="newWorker.city"
           placeholder="Enter city"
+          v-on:keypress="isLetter($event)"
           type="text"
           required
           trim
@@ -53,6 +57,7 @@
           id="input-live"
           v-model="newWorker.street"
           placeholder="Enter street"
+          v-on:keypress="isLetter($event)"
           type="text"
           required
           trim
@@ -61,6 +66,7 @@
           id="input-live"
           v-model="newWorker.number"
           placeholder="Enter number"
+          v-on:keypress="isNumber($event)"
           type="text"
           required
           trim
@@ -69,6 +75,7 @@
           id="input-live"
           v-model="newWorker.postalCode"
           placeholder="Enter postalCode"
+          v-on:keypress="isNumber($event)"
           type="text"
           required
           trim
@@ -77,6 +84,7 @@
           id="input-live"
           v-model="newWorker.phone"
           placeholder="Enter phone number"
+          v-on:keypress="isNumber($event)"
           type="text"
           required
           trim
@@ -173,6 +181,26 @@ export default {
     };
   },
   methods: {
+        isLetter(e) {
+      let char = String.fromCharCode(e.keyCode);
+      if (/^[A-Za-z ]+$/.test(char)) {
+        return true;
+      } else {
+        alert("Letters only!");
+        e.preventDefault();
+      }
+    },
+            isNumber(e) {
+      let char = String.fromCharCode(e.keyCode);
+      if (/^[0-9]+$/.test(char)) {
+        return true;
+      } else {
+        alert("Numbers only!");
+        e.preventDefault();
+      }
+    },
+
+
     onshow(selected) {
       this.show = true;
     },
@@ -234,7 +262,7 @@ export default {
 
   }
   if(!same){ this.newWorker.workingDays.push(workingDay);}else{
-    alert("The date is already chosen, please chose another! ")
+    alert("The date is already chosen, please choose another! ")
   }
      
     },
