@@ -229,7 +229,24 @@ export default {
         return;
       }
       axios.post("http://localhost:9005/api/user/register", this.user);
-
+      this.user = {
+       email: "",
+       password: "",
+       confirmPassword: "",
+       name: "",
+       surname: "",
+       userType: "DERMATOLOGIST",
+       address: {
+            state: "",
+            city: "",
+            postalCode: "",
+            street: "",
+            number: ""
+       },
+       phone: "",
+       isFirstTimeLogging: false
+      }
+      alert("User is successfully added!")
     },
     onReset(event) {
       event.preventDefault();

@@ -38,7 +38,9 @@
                                 <option value="TRANQUILIZER">TRANQUILIZER</option>
                     </b-form-select> 
                     <b-form-input type="text" v-model="medication.manufacturer" placeholder="enter manufacturer" style="font-style:italic" required/>
-                    <b-form-input type="text" v-model="medication.replacementMedicationsIDs" placeholder="enter replacement medications" style="font-style:italic"/>
+                    <b-form-select size="sm" v-model="medication.replacementMedicationsIDs" multiple name="" style="font-style:italic" :options="options">
+                               
+                    </b-form-select>                    
                     <b-form-input type="text" v-model="medication.description" placeholder="enter description" style="font-style:italic" required/>
                     <b-form-select size="sm" v-model="medication.prescriptionRegime" id="prescriptionRegime" name="" style="font-style:italic" required>
                                 <option value="NA_RECEPT">WITH RECEPT</option>
@@ -164,19 +166,24 @@ export default {
        recommendedIntake: "",
        medicationForm: "",
        manufacturer: "",
-       replacementMedicationsIDs: "",
+       replacementMedicationsIDs: [],
        description: "",
        prescriptionRegime: ""
       },
-  
+      options: [],
+
       show: true,
     };
   },
   methods: {
     onSubmit(event) {
       event.preventDefault();
-      const replacementMedicationsStr = this.medication.replacementMedicationsIDs.split(",");
-      const replacementMedications = replacementMedicationsStr.map(rm => +rm);
+
+      if(!this.medication.name || !this.medication.code) {
+        alert("Ime i kod su obavezni");
+        return;
+      }
+
       const medicationForSend = {
               name: this.medication.name,
               code: this.medication.code,
@@ -187,9 +194,10 @@ export default {
               recommendedIntake: this.medication.recommendedIntake,
               medicationForm: this.medication.medicationForm,
               manufacturer: this.medication.manufacturer,
-              replacementMedicationsIDs: replacementMedications,
+              replacementMedicationsIDs: this.medication.replacementMedicationsIDs,
               description: this.medication.description
               };
+      console.log(medicationForSend);
       axios.post("http://localhost:9005/api/medication/add", medicationForSend).then(res => {
         console.log(res);
          this.$store.dispatch('setMedications', res);
@@ -198,6 +206,18 @@ export default {
      },
     
   }, 
+  mounted: function() {
+       axios.get("http://localhost:9005/api/medication/all").then((el)=>el.data).then(res => {
+        console.log(res);
+        this.options = res.map((el) => {
+          return {
+            value: el.id, 
+            text: el.name,
+
+          }
+        });
+      });
+  },
   computed: {
       validation() {
        // return this.user.password.length > 7 ? true : false
