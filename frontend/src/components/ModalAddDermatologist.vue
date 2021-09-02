@@ -17,35 +17,48 @@
           {{ listItem.name + " " + listItem.surname }}
         </b-list-group-item>
       </b-list-group>
-      <!-- <b-form-datepicker
-        class="mb-2 datepicker_b"
-        :min="minDatePicker_1"
-        v-model="datepicker_1"
-        :format="'dd-MM-yyyy'"
-      ></b-form-datepicker>
-      <b-form-datepicker
-        :format="'dd-MM-yyyy'"
-        :min="datepicker_1"
-        :max="datepicker_1"
-        class="datepicker_b"
-        v-model="datepicker_2"
-      ></b-form-datepicker>
-      <label>Work shift start:</label>
-      <b-input
-        type="number"
-        :min="timeMin"
-        :max="timeMax2"
-        v-model="startShift"
-      ></b-input>
-      <label>Work shift end:</label>
-      <b-input
-        type="number"
-        :min="timeMin"
-        :max="timeMax"
-        v-model="endShift"
-      ></b-input> -->
-      <!-- <b-button variant="success" @click="AddWorkDay"> ADD WORKDAYS</b-button> -->
-     <br/>
+
+      <div>
+        <b-form-group>
+          <b-form-datepicker
+            class="mb-2 datepicker_b"
+            :min="minDatePicker_1"
+            v-model="datepicker_1"
+            :format="'dd-MM-yyyy'"
+          ></b-form-datepicker>
+          <label>Work shift start:</label>
+          <b-input type="number" :min="timeMin" v-model="startShift"></b-input>
+          <label>Work shift end:</label>
+          <b-input
+            type="number"
+            :min="timeMin"
+            :max="timeMax"
+            v-model="endShift"
+          ></b-input>
+
+          <b-button variant="success" @click="AddWorkDay">
+            ADD WORKDAYS</b-button
+          >
+        </b-form-group>
+        <label>Working days:</label>
+        <b-list-group
+          v-for="(listItem, index) in workingDays"
+          v-bind:key="index + 'wd'"
+        >
+          <b-list-group-item button @click="removeNew(listItem)">
+            {{
+              "From:" +
+                " " +
+                listItem.startShift +
+                " " +
+                "To:" +
+                " " +
+                listItem.endShift
+            }}
+          </b-list-group-item>
+        </b-list-group>
+      </div>
+      <label> Dermatologist selected:</label>
       <b-list-group
         v-for="(listItem, key) in selectedDermatologist"
         v-bind:key="key"
@@ -54,31 +67,37 @@
           {{ listItem.name }}
         </b-list-group-item>
       </b-list-group>
+      <br/>
+      <b-button variant="success" @click="createNewWorkingDays">CREATE</b-button>
     </b-modal>
   </div>
 </template>
 
 <script>
+const moment = require("moment");
 export default {
   name: "ModalAddDermatologist",
   props: ["selected", "id", "type", "usertype"],
   computed: {},
   data() {
-        const now = new Date();
+    const now = new Date();
     const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     const minDate = new Date(today);
     return {
       show: false,
       text: "",
       dermatologists: [],
-      startShift: 0,
-      endShift: 10,
+      startShift: 6,
+      endShift: 22,
       currentId: "",
       currentDermatologist: "",
       selectedDermatologist: [],
-      // datepicker_1: new Date(),
-      // datepicker_2: new Data(),
-       minDatePicker_1: minDate,
+      datepicker_1: new Date(),
+      datepicker_2: new Date(),
+      minDatePicker_1: minDate,
+      timeMin: 6,
+      timeMax: 22,
+      workingDays:[],
     };
   },
   methods: {
@@ -113,7 +132,7 @@ export default {
       )
         .then(function(response) {
           if (response.ok) {
-            alert("Created!");
+           
             return response.json();
           } else {
             return Promise.reject(response);
@@ -124,6 +143,58 @@ export default {
         })
         .catch();
     },
+
+    AddWorkDay() {
+     var startFormatted = moment(this.datepicker_1).format()
+          var new_string = startFormatted.slice(0, 19);
+      var workingDay = {
+        startTime: new_string ,
+        endTime:  new_string,
+        startShift: this.startShift,
+        endShift: this.endShift,
+      };
+      this.workingDays.push(workingDay);
+    },
+
+    removeNew(item) {
+      this.workingDays.splice(
+        this.workingDays.indexOf(item),
+        1
+      );
+    },
+    createNewWorkingDays(){
+      var vm = this
+            var ShiftDTO = {
+        shifts: this.workingDays,
+        userType: "DERMATOLOGIST",
+      }
+      fetch(
+              `http://localhost:9005/api/workday/create-working-days/${vm.id}/${this.selectedDermatologist[0].id}`,
+              {
+                headers: {
+                  Accept: "application/json",
+                  "Content-Type": "application/json",
+                  usertype: vm.type,
+                },
+                  method: "POST",
+                 body: JSON.stringify(ShiftDTO),
+              }
+            ).then(function(data) {
+              return   fetch(
+        `http://localhost:9005/api/dermatologist/get-all-not-in-pharmacy/${vm.id}`,
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            userType: vm.type,
+          },
+          method: "GET",
+        }
+      )
+         }).then((response) => response.json())
+         .then((data) => this.dermatologists = data)
+          }
+    
   },
 };
 </script>
