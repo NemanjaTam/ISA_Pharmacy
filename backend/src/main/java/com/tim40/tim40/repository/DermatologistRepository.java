@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import com.tim40.tim40.dto.DermatologistDTO;
 import com.tim40.tim40.model.Dermatologist;
 import com.tim40.tim40.projections.DermatologistDetailsProjection;
+import com.tim40.tim40.projections.DermatologistPharmacyProjection;
 import com.tim40.tim40.projections.DermatologistProjection;
 
 public interface DermatologistRepository extends JpaRepository<Dermatologist, Long>{
@@ -47,7 +48,15 @@ public interface DermatologistRepository extends JpaRepository<Dermatologist, Lo
 			+ "AND u .id = DERMATOLOGIST_PHARMACY.dermatologist_id ",nativeQuery = true)
 	public List<DermatologistDetailsProjection> getDummy();
 	
+	@Query(value = "SELECT email,u.id, u.name,surname, PHARMACIES.name AS pharmacyName FROM USERS AS u FULL OUTER JOIN "
+			+ "DERMATOLOGIST_PHARMACY ON u.id = DERMATOLOGIST_PHARMACY.dermatologist_id FULL OUTER JOIN PHARMACIES"
+			+ " ON PHARMACIES.id = DERMATOLOGIST_PHARMACY.pharmacy_id WHERE DERMATOLOGIST_PHARMACY.pharmacy_id != :ID", 
+			  nativeQuery = true)
+	public List<DermatologistProjection> getAllNotInPharmacy(@Param("ID") Long id);
 	
+	@Query(value = "SELECT u.name,u.email,u.surname,u.id as dermatologistId,p.id as pharmacyId FROM USERS AS u INNER JOIN DERMATOLOGIST_PHARMACY as dp  ON  u.id = dp.dermatologist_id INNER JOIN PHARMACIES as p ON p.id = dp.pharmacy_id",
+			  nativeQuery = true)
+	public List<DermatologistPharmacyProjection> getDermatologistPharmacy();
 	
     @Modifying
     @Query(value= "delete from dermatologist_pharmacy as dp  where dp.dermatologist_id = :id and dp.pharmacy_id =:idobject",nativeQuery = true)
