@@ -30,10 +30,6 @@ insert into dermatologist_pharmacy(pharmacy_id, dermatologist_id) values (3,8)
 insert into dermatologist_pharmacy(pharmacy_id, dermatologist_id) values (3,9)
 insert into dermatologist_pharmacy(pharmacy_id, dermatologist_id) values (4,10)
 
-
-
-
-
 insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Pharmacist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic11@gmail.com', true, 'Marko', 'kinzo','+381613238249', 'Savic', 'PHARMACIST', null, 1)
 insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Pharmacist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic12@gmail.com', true, 'Marko', 'kinzo','+381613238249', 'Markovic', 'PHARMACIST', null, 1)
 insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Pharmacist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic13@gmail.com', true, 'Jovan', 'kinzo','+381613238249', 'Jovanovic', 'PHARMACIST', null, 1)
@@ -523,26 +519,26 @@ insert into absences( endtime,is_approved,is_finished, starttime,type,pharmacy_i
 insert into absences( endtime,is_approved,is_finished, starttime,type,pharmacy_id ,user_id) values ( '2021-08-08',false, false, '2021-08-08','PROCESSING',4,20)
 
 
-insert into purchase_order_list(endtime,purchase_status,starttime,pharmacy_administrator_id,pharmacy_id) values('2021-08-08','CEKA_PONUDE','2021-01-01',43,1)
-insert into medication_quantity_of_purchase_order(quantity,medication_id) values (10,1)
-insert into purchase_order_list_quantity_medications_purchase(purchase_order_id,quantity_medications_purchase_id) values(1,1)
+--insert into purchase_order_list(endtime,purchase_status,starttime,pharmacy_administrator_id,pharmacy_id) values('2021-08-08','CEKA_PONUDE','2021-01-01',43,1)
+--insert into medication_quantity_of_purchase_order(quantity,medication_id) values (10,1)
+--insert into purchase_order_list_quantity_medications_purchase(purchase_order_id,quantity_medications_purchase_id) values(1,1)
 
-insert into purchase_order_list(endtime,purchase_status,starttime,pharmacy_administrator_id,pharmacy_id) values('2021-08-08','CEKA_PONUDE','2021-01-01',43,1)
-insert into medication_quantity_of_purchase_order(quantity,medication_id) values (10,2)
-insert into purchase_order_list_quantity_medications_purchase(purchase_order_id,quantity_medications_purchase_id) values(2,2)
+--insert into purchase_order_list(endtime,purchase_status,starttime,pharmacy_administrator_id,pharmacy_id) values('2021-08-08','CEKA_PONUDE','2021-01-01',43,1)
+--insert into medication_quantity_of_purchase_order(quantity,medication_id) values (10,2)
+--insert into purchase_order_list_quantity_medications_purchase(purchase_order_id,quantity_medications_purchase_id) values(2,2)
 
-insert into purchase_order_list(endtime,purchase_status,starttime,pharmacy_administrator_id,pharmacy_id) values('2021-08-08','CEKA_PONUDE','2021-01-01',44,1)
-insert into medication_quantity_of_purchase_order(quantity,medication_id) values (10,3)
-insert into purchase_order_list_quantity_medications_purchase(purchase_order_id,quantity_medications_purchase_id) values(3,3)
+--insert into purchase_order_list(endtime,purchase_status,starttime,pharmacy_administrator_id,pharmacy_id) values('2021-08-08','CEKA_PONUDE','2021-01-01',44,1)
+--insert into medication_quantity_of_purchase_order(quantity,medication_id) values (10,3)
+---insert into purchase_order_list_quantity_medications_purchase(purchase_order_id,quantity_medications_purchase_id) values(3,3)
 
 
 insert into providers(name,email,info) values('Dobavljac 1','boyanasixxhalliwell@gmail.com','Najbolji dobavljac na svetu')
 insert into providers(name,email,info) values('Dobavljac 2','blabla@gmail.com','Ekstra cene pun kvalitet')
 insert into providers(name,email,info) values('Dobavljac 3','boyanacroft@yahoo.com','Lek za stek')
 
-insert into offers(status,price,purchase_order_id, provider_id) values ('CEKA',200,1,1)
-insert into offers(status,price,purchase_order_id,provider_id) values ('CEKA',150,1,2)
-insert into offers(status,price,purchase_order_id,provider_id) values ('CEKA',150,1,3)
+--insert into offers(status,price,purchase_order_id, provider_id) values ('CEKA',200,1,1)
+--insert into offers(status,price,purchase_order_id,provider_id) values ('CEKA',150,1,2)
+--insert into offers(status,price,purchase_order_id,provider_id) values ('CEKA',150,1,3)
 
 
 insert into price_list_medications(status,start_time,pharmacy_id) values ('ACTIVE','2021-08-28 00:00:00-08',1)
@@ -627,6 +623,6 @@ insert into users(dtype, city, number, postalcode, state, street, email, is_firs
 
 insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id, loyalty_type_id, points) values ('Patient', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic21@gmail.com', true, 'Milos', 'kinzo','+381613238249', 'Antonic', 'PATIENT', 0, null, 1, 40) 
 
---insert into loyalty_category(type, min_points) values ('REGULAR', 10)
---insert into loyalty_category(type, min_points) values ('SILVER', 20)
---insert into loyalty_category(type, min_points) values ('GOLD', 30)
+insert into pharmacy_suppliers(pharmacy_id, supplier_id) values (1,47)
+
+insert into purchase_order_list(endtime, starttime, purchase_status, pharmacy_administrator_id) values ('2021-06-13 14:00:00-08', '2021-06-13 07:00:00-08', 'CEKA_PONUDE', 43)

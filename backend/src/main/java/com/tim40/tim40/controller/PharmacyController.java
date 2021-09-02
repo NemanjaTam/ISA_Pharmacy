@@ -145,18 +145,18 @@ public class PharmacyController {
 	}
 	
 	
-	//ne menjati
+/*/ne menjati
 	@Transactional()
 	@PostMapping(value="/delete-purchase-order/{id}",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.OK)
 	public boolean deletePurchaseOrder(@RequestBody Long id,@PathVariable("id") Long pharmacyId) {
 		return this.pharmacyService.deletePurchaseOrder(id, pharmacyId);
-	}
+	}*/
 	
 	
 	
 	//ne menjati
-	@PostMapping(value = "/accept-offer",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+/*	@PostMapping(value = "/accept-offer",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.OK)
 	@Transactional(readOnly = false)
 	 //ovde je transakcija jer sta ako se desi da se ne apdejtuje purchase order status?! ->nekonzistentno
@@ -164,7 +164,7 @@ public class PharmacyController {
 		List<Offer> offers = this.pharmacyService.acceptOffer(acceptOffer);
 		return offers;
 	}
-	//ne menjati
+	//ne menjati*/
 
 	@RequestMapping(method = RequestMethod.POST, path = "/delete-medication/{id}")
 	@ResponseStatus(HttpStatus.OK)

@@ -27,8 +27,7 @@ public class PurchaseOrder {
 	private Long id;
 
 	@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-	private final Set<QuantityMedicationPurchaseOrder> quantityMedicationsPurchase = new HashSet<QuantityMedicationPurchaseOrder>();
-	
+	private final Set<QuantityMedication> quantityMedications= new HashSet<QuantityMedication>();
 	
 	@ManyToOne
 	@JoinColumn(name = "pharmacy_administrator_id", nullable = false)
@@ -38,21 +37,27 @@ public class PurchaseOrder {
 	@Enumerated(EnumType.STRING)
 	private PurchaseOrderStatus purchaseOrderStatus;
 	
+	// @OneToMany(fetch = FetchType.LAZY, mappedBy = "purchaseOrder")
+	// private final Set<PurchaseOrderOffer> purchaseOrderOffers = new HashSet<PurchaseOrderOffer>();
+
+	@Embedded
+	private Period period;
+	
 //	@Embedded
 //	private Period period;
-	@JsonDeserialize(using = UnixToLocalDateTimeConverter.class)
-	@Column(name = "starttime", nullable = true)
+	//@JsonDeserialize(using = UnixToLocalDateTimeConverter.class)
+/*	@Column(name = "starttime", nullable = true)
 	private LocalDate startTime;
 	
 	@JsonDeserialize(using = UnixToLocalDateTimeConverter.class)
 	@Column(name = "endtime", nullable = true)
-	private LocalDate endTime;
+	private LocalDate endTime;*/
 	
-	@JsonIgnore
+/*	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "pharmacy_id", nullable = false)
-	private Pharmacy pharmacy;
+	private Pharmacy pharmacy;*/
 
-	@OneToMany(fetch = FetchType.LAZY,mappedBy="purchaseOrder",cascade = CascadeType.ALL)
-	private List<Offer> offers;
+	/*@OneToMany(fetch = FetchType.LAZY,mappedBy="purchaseOrder",cascade = CascadeType.ALL)
+	private List<Offer> offers;*/
 }

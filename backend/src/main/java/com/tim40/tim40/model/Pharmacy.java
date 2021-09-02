@@ -86,7 +86,7 @@ public class Pharmacy {
     @ManyToMany(fetch = FetchType.LAZY,mappedBy="pharmacy",cascade = CascadeType.ALL)
    	private final Set<QuantityMedication> medicationQuantity = new HashSet<QuantityMedication>();
     
-    @OneToMany(fetch = FetchType.LAZY,mappedBy="pharmacy",cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY)
    	private final Set<PurchaseOrder> purchaseOrders = new HashSet<PurchaseOrder>(); 
     
     @OneToMany(fetch = FetchType.LAZY,mappedBy="pharmacy",cascade = CascadeType.ALL)
@@ -122,16 +122,16 @@ public class Pharmacy {
 		return medication;
     }
     
-    public PurchaseOrder update(PurchaseOrder po) {
+ /*   public PurchaseOrder update(PurchaseOrder po) {
     	for (PurchaseOrder purchaseOrder : purchaseOrders) {
 			if(po.getId().equals(purchaseOrder.getId())) {
 			    purchaseOrder.setOffers(po.getOffers());
 			    purchaseOrder.setPurchaseOrderStatus(po.getPurchaseOrderStatus());
 			}
 		}
-		return po;
+		return po;*/
     	
-    }
+    //}
     
 
 }
