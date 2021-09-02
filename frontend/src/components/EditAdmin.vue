@@ -270,6 +270,12 @@ export default {
     this.userData.send = user.send;
     this.userData.inbox = user.inbox;
   },
+
+  mounted(){
+    if(this.userType != "PHARMACY_ADMINISTRATOR"){
+       this.$router.push("/LoginPage").catch(()=>{});
+    }
+  }
 };
 </script>
 

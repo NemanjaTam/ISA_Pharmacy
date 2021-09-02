@@ -167,6 +167,9 @@ export default {
     },
   },
   mounted() {
+       if(this.userType != "PHARMACY_ADMINISTRATOR"){
+       this.$router.push("/LoginPage").catch(()=>{});
+    }
     this.getUnnaproved();
   },
 };

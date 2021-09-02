@@ -458,5 +458,8 @@ export default {
     console.log("pharmacy id:");
     console.log(this.pharmacy);
   },
+  mounted(){
+     
+  }
 };
 </script>
