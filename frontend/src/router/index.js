@@ -35,7 +35,8 @@ import RegistrationDermatologist from "../components/RegistrationDermatologist.v
 import RegistrationPharmacyAdmin from "../components/RegistrationPharmacyAdmin.vue"
 import RegistrationSupplier from "../components/RegistrationSupplier.vue"
 import RegistrationSystemAdmin from "../components/RegistrationSystemAdmin.vue"
-
+import AddPharmacy from "../components/AddPharmacy.vue"
+import Pharmacies from "../views/Pharmacies.vue"
 Vue.use(VueRouter);
 
 const routes = [
@@ -212,6 +213,16 @@ const routes = [
         path: '/registration-system-admin',
         name: 'RegistrationSystemAdmin',
         component: RegistrationSystemAdmin
+      },
+      {
+        path: '/add-pharmacy',
+        name: 'AddPharmacy',
+        component: AddPharmacy
+      },
+      {
+        path: '/pharmacies',
+        name: 'Pharmacies',
+        component: Pharmacies
       }
 ];
 

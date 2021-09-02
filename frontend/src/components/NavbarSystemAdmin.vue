@@ -8,7 +8,7 @@
             <b-collapse id="nav-collapse" is-nav>
                 <b-navbar-nav>
                     <b-nav-item> 
-                      <router-link to="" class="routerlink">Pharmacies</router-link>
+                      <router-link to="/pharmacies" class="routerlink">Pharmacies</router-link>
                     </b-nav-item>
 
                     <b-nav-item>
@@ -16,7 +16,7 @@
                         </b-nav-item>
 
                     <b-nav-item>
-                           <router-link to="" class="routerlink">Add pharmacy</router-link>
+                           <router-link to="/add-pharmacy" class="routerlink">Add pharmacy</router-link>
                         </b-nav-item>
 
 

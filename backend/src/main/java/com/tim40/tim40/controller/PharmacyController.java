@@ -1,5 +1,6 @@
 package com.tim40.tim40.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import java.util.Set;
@@ -13,6 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Isolation;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,18 +30,21 @@ import com.tim40.tim40.dto.AbsenceDetailedDTO;
 import com.tim40.tim40.dto.AcceptOfferDTO;
 import com.tim40.tim40.dto.DermatologistDetailsDTO;
 import com.tim40.tim40.dto.MedicationDTO;
+import com.tim40.tim40.dto.MedicationDTO2;
 import com.tim40.tim40.dto.MedicationQuantityDTO;
 import com.tim40.tim40.dto.PatientAllergedDTO;
 import com.tim40.tim40.dto.PharmacyDTO;
 import com.tim40.tim40.dto.PharmacyProfileDTO;
 import com.tim40.tim40.dto.PurchaseOrderDTO;
 import com.tim40.tim40.dto.RejectedAcceptedDTO;
+import com.tim40.tim40.dto.UserDTO;
 import com.tim40.tim40.model.Absence;
 import com.tim40.tim40.model.Medication;
 import com.tim40.tim40.model.Offer;
 import com.tim40.tim40.model.Pharmacy;
 import com.tim40.tim40.model.PurchaseOrder;
 import com.tim40.tim40.model.QuantityMedication;
+import com.tim40.tim40.model.User;
 import com.tim40.tim40.service.PharmacyService;
 @EnableTransactionManagement
 @RestController
@@ -58,6 +63,14 @@ public class PharmacyController {
 	{
 		PharmacyDTO createdPharmacy = pharmacyService.createPharmacy(pharmacyDTO);
 		return new ResponseEntity<> (createdPharmacy, HttpStatus.OK);
+	}
+	
+	//@CrossOrigin(origins = "http://localhost:8081")
+	@GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<PharmacyDTO>> getAllPharmacies()
+	{
+		List<PharmacyDTO> pharmacies = pharmacyService.getAllPharmacies();
+		return new ResponseEntity<List<PharmacyDTO>> (pharmacies, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/get-medications/{id}", method = RequestMethod.GET)

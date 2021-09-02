@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import com.tim40.tim40.dto.AbsenceDetailedDTO;
 import com.tim40.tim40.dto.AcceptOfferDTO;
+import com.tim40.tim40.dto.MedicationDTO2;
 import com.tim40.tim40.dto.MedicationQuantityDTO;
 import com.tim40.tim40.dto.PharmacyDTO;
 import com.tim40.tim40.dto.PurchaseOrderDTO;
@@ -25,6 +26,7 @@ import com.tim40.tim40.dto.PurchaseOrderDetailedDTO;
 import com.tim40.tim40.model.enums.AbsenceType;
 import com.tim40.tim40.email.service.MailService;
 import com.tim40.tim40.model.Absence;
+import com.tim40.tim40.model.Address;
 import com.tim40.tim40.model.Dermatologist;
 import com.tim40.tim40.model.Medication;
 import com.tim40.tim40.model.Offer;
@@ -65,8 +67,11 @@ public class PharmacyService implements IPharmacyService {
 	}
 	
 	public PharmacyDTO createPharmacy (PharmacyDTO pharmacyDTO) {
-		Pharmacy pharmacy = new Pharmacy(pharmacyDTO.getName(), pharmacyDTO.getAddress());
-		Pharmacy createdPharmacy = pharmacyRepository.save(pharmacy); 
+		Address address = new Address(pharmacyDTO.getAddress().getState(), pharmacyDTO.getAddress().getCity(),
+				pharmacyDTO.getAddress().getStreet(), pharmacyDTO.getAddress().getNumber(), pharmacyDTO.getAddress().getPostalCode());
+		
+		Pharmacy pharmacy = new Pharmacy(pharmacyDTO.getName(), address);
+		Pharmacy createdPharmacy = pharmacyRepository.save(pharmacy);
 		return new PharmacyDTO(createdPharmacy);
 	}
 	
@@ -350,6 +355,16 @@ public class PharmacyService implements IPharmacyService {
 			}
 		}
 		return approved;
+	}
+
+	public List<PharmacyDTO> getAllPharmacies() {
+		List<Pharmacy> pharmacies = pharmacyRepository.findAll();
+		List<PharmacyDTO> pharmacyDTOs = new ArrayList<PharmacyDTO>();
+		
+		for(Pharmacy p : pharmacies) {
+			pharmacyDTOs.add(new PharmacyDTO(p));
+		}
+		return pharmacyDTOs;
 	}
 
 	
