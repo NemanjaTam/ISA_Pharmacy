@@ -80,6 +80,10 @@ export default {
           key: "typeOfMedication",
           sortable: true,
         },
+         {
+          key: "prescriptionRegime",
+          sortable: true,
+        },
 
         "show_details",
 

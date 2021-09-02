@@ -179,8 +179,9 @@ export default {
     onSubmit(event) {
       event.preventDefault();
 
-      if(!this.medication.name || !this.medication.code) {
-        alert("Ime i kod su obavezni");
+      if(!this.medication.name || !this.medication.code || !this.medication.typeOfMedication || !this.medication.structure || !this.medication.contraindications
+      || !this.medication.recommendedIntake || !this.medication.medicationForm || !this.medication.manufacturer || !this.medication.description || !this.medication.prescriptionRegime) {
+        alert("All fields are required!");
         return;
       }
 
@@ -202,6 +203,7 @@ export default {
         console.log(res);
          this.$store.dispatch('setMedications', res);
       });
+      alert("Medication is added!")
       this.$router.push({path:'medications'})
      },
     

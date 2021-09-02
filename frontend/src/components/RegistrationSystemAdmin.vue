@@ -229,7 +229,24 @@ export default {
         return;
       }
       axios.post("http://localhost:9005/api/user/register", this.user);
-
+      this.user = {
+       email: "",
+       password: "",
+       confirmPassword: "",
+       name: "",
+       surname: "",
+       userType: "SYSTEM_ADMINISTRATOR",
+       address: {
+            state: "",
+            city: "",
+            postalCode: "",
+            street: "",
+            number: ""
+       },
+       phone: "",
+       isFirstTimeLogging: false
+      }
+      alert("System administrator is successfully added!")
     },
     onReset(event) {
       event.preventDefault();

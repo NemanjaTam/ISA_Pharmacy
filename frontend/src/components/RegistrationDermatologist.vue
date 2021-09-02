@@ -246,7 +246,7 @@ export default {
        phone: "",
        isFirstTimeLogging: false
       }
-      alert("User is successfully added!")
+      alert("Dermatologist is successfully added!")
     },
     onReset(event) {
       event.preventDefault();
