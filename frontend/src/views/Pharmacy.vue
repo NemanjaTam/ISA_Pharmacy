@@ -1,6 +1,6 @@
 <template>
   <div class="background">
-    <!-- <TopMenuForDP/> -->
+    <PatientNavBar/>
     <div>
       <b-card no-body>
         <b-tabs card>
@@ -63,11 +63,12 @@
                       disabled
                     ></b-form-input>
                   </div>
-                  <b-button variant="success" @click="subscribe">SUBSCRIBE</b-button>
+                  <b-button variant="success" @click="subscribe"
+                    >SUBSCRIBE</b-button
+                  >
                   <div>
                     <GmapMap
-                    
-                     :center="{lat:this.lat, lng:this.long}"
+                      :center="{ lat: this.lat, lng: this.long }"
                       :zoom="15"
                       map-type-id="terrain"
                       style="width: 500px; height: 300px"
@@ -104,6 +105,25 @@
               <button @click.prevent="remove(index)">info</button>
             </p>
           </b-tab>
+          <b-tab title="Medication">
+            <b-button variant="success"> RESERVE</b-button>
+            <b-table
+              :items="this.priceList[0].medicationPrices"
+              :fields="fieldsmedication"
+              responsive="sm"
+            >
+            </b-table>
+          </b-tab>
+          <b-tab title="Appointments">
+            <b-button variant="success">RESERVE</b-button>
+            <b-table
+              :items="this.appointmentsForPharmacy"
+              :fields="fieldsAppointments"
+              responsive="sm"
+            >
+            </b-table>
+          </b-tab>
+          <b-tab title="eRecept"> </b-tab>
         </b-tabs>
       </b-card>
     </div>
@@ -112,21 +132,22 @@
 <script>
 import axios from "axios";
 import NavbarAdmin from "../components/NavbarAdmin.vue";
+import PatientNavBar from "../components/PatientNavBar.vue";
 export default {
   name: "Pharmacy",
-  computed:{
-        Pharmacy() {
+  computed: {
+    Pharmacy() {
       return this.$store.getters.getPharmacy;
     },
     userType() {
       return this.$store.getters.getUserType;
     },
-        userId() {
+    userId() {
       return this.$store.getters.getId;
     },
   },
   components: {
-    NavbarAdmin,
+    NavbarAdmin,PatientNavBar
   },
   data() {
     return {
@@ -156,54 +177,89 @@ export default {
           email: "",
         },
       ],
+ 
       message: "",
-      long:"",
-      lat:"",
-      accessToken:"sk.eyJ1IjoiZ2FsYWN0aWNxdWVlbmJvYmJ5IiwiYSI6ImNrc3hhbDNoNjI3em8ycXRmZGx0aGtwMjkifQ.sdCtLSKq_wS-3LPcorOk8w",
-       center: [0, 0],
+      long: "",
+      lat: "",
+      accessToken:
+        "sk.eyJ1IjoiZ2FsYWN0aWNxdWVlbmJvYmJ5IiwiYSI6ImNrc3hhbDNoNjI3em8ycXRmZGx0aGtwMjkifQ.sdCtLSKq_wS-3LPcorOk8w",
+      center: [0, 0],
       map: {},
+      pharmacyId:0,
+      priceList:[],
+      appointmentsForPharmacy:[],
+           fieldsmedication:[
+        {
+          key: "medication.name",
+          label:"Name",
+        },
+         {
+          key: "price",
+          label:"Price",
+          variant:"success",
+        }
+      ],
+        fieldsAppointments:[
+        {
+          key: "name",
+          label:"Name",
+        },
+                {
+          key: "surname",
+          label:"Surname",
+        },
+                {
+          key: "startTime",
+          label:"Start date",
+          variant:"warning"
+        },
+         {
+          key: "price",
+          label:"Price",
+          variant:"success",
+        }
+      ],
     };
   },
   methods: {
-    getLocation(){
-      
-        //  fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.address.number}+${this.address.street}+${this.address.city}+${this.address.postal}&key=AIzaSyAutFBlxBxeE1RhyTQNzZtrbaM5W2xiNkc`,{
-        //     method: "POST",
-        //  })
-        // .then((response) => response.json())
-        // .then(
-        //   (data) => {this.lat = data.results[0].geometry.location.lat,this.long = data.results[0].geometry.location.lng}
-        // );
-
-
-            
-         
+    getLocation() {
+      //  fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.address.number}+${this.address.street}+${this.address.city}+${this.address.postal}&key=AIzaSyAutFBlxBxeE1RhyTQNzZtrbaM5W2xiNkc`,{
+      //     method: "POST",
+      //  })
+      // .then((response) => response.json())
+      // .then(
+      //   (data) => {this.lat = data.results[0].geometry.location.lat,this.long = data.results[0].geometry.location.lng}
+      // );
     },
     async getPharmacyById(id) {
       var vm = this;
       const headers = { "Content-Type": "application/json" };
       fetch(`http://localhost:9005/api/pharmacy/getpharmacy/${id}`, { headers })
         .then((response) => response.json())
-        .then(
-          (data) => {
-            this.name = data.name,
-            this.address.state = data.address.state,
-            this.address.city = data.address.city,
-            this.address.street = data.address.street,
-            this.address.number = data.address.number,
-            this.address.postal = data.address.postalCode,
-            this.avgRating = data.avgRating}
-          ).then(function(data){
-            return fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${vm.address.number}+${vm.address.street}+${vm.address.city}+${vm.address.postal}&key=AIzaSyDnaQ57KEfX5q5hoRQBjo_WI-fRN5Bddms`,{
-            method: "POST",
-         });
+        .then((data) => {
+          (this.name = data.name),
+            (this.address.state = data.address.state),
+            (this.address.city = data.address.city),
+            (this.address.street = data.address.street),
+            (this.address.number = data.address.number),
+            (this.address.postal = data.address.postalCode),
+            (this.avgRating = data.avgRating);
+        })
+        .then(function(data) {
 
-          }).then((response) => response.json())
-        .then(
-          (data) => {vm.lat = data.results[0].geometry.location.lat,vm.long = data.results[0].geometry.location.lng,
-          console.log(vm.lat)}
-        );
-       
+          return fetch(
+            `https://maps.googleapis.com/maps/api/geocode/json?address=${vm.address.number}+${vm.address.street}+${vm.address.city}+${vm.address.postal}&key=AIzaSyDnaQ57KEfX5q5hoRQBjo_WI-fRN5Bddms`,
+            {
+              method: "POST",
+            }
+          );
+        })
+        .then((response) => response.json())
+        .then((data) => {
+          (vm.lat = data.results[0].geometry.location.lat),
+            (vm.long = data.results[0].geometry.location.lng),
+            console.log(vm.lat);
+        });
     },
 
     getDermatologists(id) {
@@ -227,40 +283,100 @@ export default {
         .then((response) => response.json())
         .then((data) => (this.pharmacists = data));
     },
-    subscribe(){
-         fetch(
-        `http://localhost:9005/api/pharmacy/subscribe/${this.Pharmacy}`,
-        {
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            usertype:this.userType
-          },
-          method: "POST",
-            body: JSON.stringify(this.userId),
-        }
-      )
+    subscribe() {
+      fetch(`http://localhost:9005/api/pharmacy/subscribe/${this.pharmacyId}`, {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          usertype: this.userType,
+        },
+        method: "POST",
+        body: JSON.stringify(this.userId),
+      })
         .then(function(response) {
           if (response.ok) {
-            
             return response.json();
           } else {
             return Promise.reject(response);
           }
-        }).then((data) => {if(data == this.userId) {alert("Subscribed!");}
-        else{alert("Something went wrong!");}})
+        })
+        .then((data) => {
+          if (data == this.userId) {
+            alert("Subscribed!");
+          } else {
+            alert("Something went wrong!");
+          }
+        })
         .catch(function(error) {
           console.warn(error);
         });
+    },
+    getQuantityMedication(){
+  
+    fetch(
+        `http://localhost:9005/api/pricelist/get-active-pricelist/${this.pharmacyId}`,
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            usertype: this.userType,
+          },
+          method: "GET",
+        }
+      )
+        .then(function(response) {
+          if (response.ok) {
+           
+            return response.json();
+          } else {
+            return Promise.reject(response);
+          }
+        })
+        .then((data) => {this.priceList = data;
+        console.log(this.priceList);
+        })
+        .catch();
+    },
+
+    //getAvailableAppointmentsForPharmacy
+    getAvailableAppointments(){
+ fetch(
+        `http://localhost:9005/api/appointment/get-unfinished-appointments/${this.pharmacyId}`,
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            usertype: this.userType,
+          },
+          method: "GET",
+        }
+      )
+        .then(function(response) {
+          if (response.ok) {
+           
+            return response.json();
+          } else {
+            return Promise.reject(response);
+          }
+        })
+        .then((data) => {this.appointmentsForPharmacy = data;
+       
+        })
+        .catch();
     }
   },
-async  mounted() {
+  async mounted() {
+    if(this.userType != "PATIENT"){
+       this.$router.push({ name: "/" });
+    }
     const id = this.$route.params.id;
+    this.pharmacyId = id;
     console.log(id);
-   await this.getPharmacyById(id);
+    await this.getPharmacyById(id);
     this.getDermatologists(id);
     this.getPharmacists(id);
-  
+    this.getQuantityMedication();
+    this.getAvailableAppointments();
   },
 };
 </script>

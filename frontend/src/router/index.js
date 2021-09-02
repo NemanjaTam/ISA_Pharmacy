@@ -24,6 +24,7 @@ import PurchaseOrder from "../components/PurchaseOrder.vue"
 import Medication from "../views/MedicationList.vue"
 import Absences from "../components/Absences.vue"
 import PriceList from "../components/PriceList.vue"
+import PatientHome from "../views/PatientHome.vue"
 
 import Report from "../views/Report.vue"
 
@@ -200,6 +201,11 @@ const routes = [
         path: '/registration-by-system-admin',
         name: 'RegistrationSystemAdmin',
         component: RegistrationSystemAdmin
+      },
+      {
+        path:'patient-home',
+        name: 'PatientHomePage',
+        component: PatientHome,
       }
 ];
 

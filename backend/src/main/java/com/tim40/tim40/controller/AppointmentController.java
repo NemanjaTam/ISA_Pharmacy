@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tim40.tim40.dto.AbsenceCheckDTO;
 import com.tim40.tim40.dto.AbsenceDetailedDTO;
+import com.tim40.tim40.dto.AppointmentDetailsDTO;
 import com.tim40.tim40.dto.AppointmentSchedulingDTO;
 import com.tim40.tim40.dto.FinishAppointmentDTO;
 import com.tim40.tim40.dto.NewAppointmentDTO;
@@ -95,7 +96,15 @@ public class AppointmentController {
 			}
 		
 	}
-	
+	@GetMapping(value="/get-unfinished-appointments/{id}",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<AppointmentDetailsDTO>> availableAppointmentForPharmacy(@RequestHeader("usertype") String type,@PathVariable("id") Long id){
+		if("PATIENT".equals(type)){
+			return new ResponseEntity<List<AppointmentDetailsDTO>>( this.appointmentService.getAvailableAppointmentsForPharmacy(id) ,HttpStatus.OK);
+			}
+			else {
+				return new ResponseEntity<List<AppointmentDetailsDTO>>(HttpStatus.UNAUTHORIZED);
+			}
+	}
 	
 	@PostMapping(value="/create-appointment/",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Integer> createAppointment(@RequestHeader("usertype") String type,@RequestBody NewAppointmentDTO dto){

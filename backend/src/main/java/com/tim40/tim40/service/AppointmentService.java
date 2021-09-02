@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.tim40.tim40.dto.AppointmentDetailsDTO;
 import com.tim40.tim40.dto.NewAppointmentDTO;
 import com.tim40.tim40.model.Appointment;
 import com.tim40.tim40.model.Consultation;
@@ -331,5 +332,22 @@ public class AppointmentService implements IAppointmentService {
 		
 		return 0;
 		
+	}
+	
+	public List<AppointmentDetailsDTO> getAvailableAppointmentsForPharmacy(Long id){
+		
+		Pharmacy pharm = this.pharmacyRepository.getById(id);
+		List<AppointmentDetailsDTO> availableAppointments = new ArrayList<AppointmentDetailsDTO>();
+		for (Appointment app : pharm.getAppointments()) {
+			AppointmentDetailsDTO dto = new AppointmentDetailsDTO();
+			if(!app.isFinished()) {
+				dto.setName(app.getDermatologist().getName());
+				dto.setSurname(app.getDermatologist().getSurname());
+				dto.setPrice(app.getPrice());
+				dto.setStartTime(app.getPeriod().getStartTime());
+				availableAppointments.add(dto);
+			}
+		}
+		return availableAppointments;
 	}
 }
