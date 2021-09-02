@@ -24,6 +24,7 @@ import PurchaseOrder from "../components/PurchaseOrder.vue"
 import Medication from "../views/MedicationList.vue"
 import Absences from "../components/Absences.vue"
 import PriceList from "../components/PriceList.vue"
+import AddLoyalty from "../components/AddLoyalty.vue"
 import Report from "../views/Report.vue"
 import Medications from "../components/Medications.vue"
 import RegistrationBySystemAdmin from "../views/RegistrationBySystemAdmin.vue"
@@ -32,6 +33,7 @@ import SystemAdminHome from "../views/SystemAdminHome.vue"
 import SupplierHome from "../views/SupplierHome.vue"
 import EditProfile from "../views/EditProfile.vue"
 import ViewProfile from "../views/ViewProfile.vue"
+import SubList from "../components/SubList.vue"
 import RegistrationDermatologist from "../components/RegistrationDermatologist.vue"
 import RegistrationPharmacyAdmin from "../components/RegistrationPharmacyAdmin.vue"
 import RegistrationSupplier from "../components/RegistrationSupplier.vue"
@@ -42,165 +44,164 @@ import EditAdmin from "../components/EditAdmin.vue"
 
 Vue.use(VueRouter);
 
-const routes = [
-  {
-    path: "/",
-    name: "Home",
-    component: Home,
-  },
-  {
-    path: "/registrationPage",
-    name: "RegistrationPage",
-    component: RegistrationPage,
-  },
-  {
-    path: "/loginPage",
-    name: "LoginPage",
-    component: LoginPage,
-  },
-  {
-    path: "/homePage",
-    name: "HomePage",
-    component: HomePage,
-  },
-  {
-    path: "/updateBasicInformation",
-    name: "UpdateBasicInformation",
-    component: UpdateBasicInformation,
-  },
-  {
-    path: "/firstTimeLogging",
-    name: "FirstTimeLogging",
-    component: FirstTimeLogging,
-  },
-  {
-    path: "/workCalendar",
-    name: "WorkCalendar",
-    component: WorkCalendar,
-  },
-  {
-    path: "/allClients",
-    name: "AllClients",
-    component: AllClients,
-  },
-  {
-    path: "/examinationCheck",
-    name: "ExaminationChcek",
-    component: ExaminationCheck,
-  },
-  {
-    path: "/scheduleExamination",
-    name: "ScheduleExamination",
-    component: ScheduleExamination,
-  },
-  {
-    path: "/perscriptionMedication",
-    name: "PerscriptionMedication",
-    component: PerscriptionMedication,
-  },
-  {
-    path: "/examinationProcess",
-    name: "ExaminationProcess",
-    component: ExaminationProcess,
-  },
-  {
-    path: "/medicationTherapy",
-    name: "MedicationTherapy",
-    component: MedicationTherapy,
-  },
-  {
-    path: "/calendar",
-    name: "Calendar",
-    component: Calendar,
-  },
-  {
-    path: "/pharmacy/:id",
-    name: "Pharmacy",
-    component: Pharmacy,
-  },
-  {
-    path: "/pharmacyAdminPage",
-    name: "PharmacyAdminPage",
-    component: PharmacyAdmin,
-    children: [
-      {
-        path: "settingsPage",
-        name: "settingsPage",
-        component: settingsPage,
-      },
-      {
-        path: "homeAdmin",
-        name: "homeAdmin",
-        component: PharmacyAdminHome,
-      },
-      {
-        path: "list",
-        name: "list",
-        component: SearchListFilter,
-      },
-      {
-        path: "action",
-        name: "action",
-        component: Action,
-      },
-      {
-        path:"purchaseorder",
-        name:"purchaseOrder",
-        component: PurchaseOrder,
-      },{
-        path:"medication",
-        name:"medication",
-        component: Medication,
-      },{
-        path:"absences",
-        name:"absences",
-        component: Absences,
-      },{
-        path:"pricelist",
-        name:"pricelist",
-        component: PriceList,
-      },{
-        path:"report",
-        name:"report",
-        component: Report,
-      },      {
-        path: 'edit-profile-admin',
-        name: 'EditAdmin',
-        component: EditAdmin
-      },
-    ],
-  },
-      {
+const routes = [{
+        path: "/",
+        name: "Home",
+        component: Home,
+    },
+    {
+        path: "/registrationPage",
+        name: "RegistrationPage",
+        component: RegistrationPage,
+    },
+    {
+        path: "/loginPage",
+        name: "LoginPage",
+        component: LoginPage,
+    },
+    {
+        path: "/homePage",
+        name: "HomePage",
+        component: HomePage,
+    },
+    {
+        path: "/updateBasicInformation",
+        name: "UpdateBasicInformation",
+        component: UpdateBasicInformation,
+    },
+    {
+        path: "/firstTimeLogging",
+        name: "FirstTimeLogging",
+        component: FirstTimeLogging,
+    },
+    {
+        path: "/workCalendar",
+        name: "WorkCalendar",
+        component: WorkCalendar,
+    },
+    {
+        path: "/allClients",
+        name: "AllClients",
+        component: AllClients,
+    },
+    {
+        path: "/examinationCheck",
+        name: "ExaminationChcek",
+        component: ExaminationCheck,
+    },
+    {
+        path: "/scheduleExamination",
+        name: "ScheduleExamination",
+        component: ScheduleExamination,
+    },
+    {
+        path: "/perscriptionMedication",
+        name: "PerscriptionMedication",
+        component: PerscriptionMedication,
+    },
+    {
+        path: "/examinationProcess",
+        name: "ExaminationProcess",
+        component: ExaminationProcess,
+    },
+    {
+        path: "/medicationTherapy",
+        name: "MedicationTherapy",
+        component: MedicationTherapy,
+    },
+    {
+        path: "/calendar",
+        name: "Calendar",
+        component: Calendar,
+    },
+    {
+        path: "/pharmacy/:id",
+        name: "Pharmacy",
+        component: Pharmacy,
+    },
+    {
+        path: "/pharmacyAdminPage",
+        name: "PharmacyAdminPage",
+        component: PharmacyAdmin,
+        children: [{
+                path: "settingsPage",
+                name: "settingsPage",
+                component: settingsPage,
+            },
+            {
+                path: "homeAdmin",
+                name: "homeAdmin",
+                component: PharmacyAdminHome,
+            },
+            {
+                path: "list",
+                name: "list",
+                component: SearchListFilter,
+            },
+            {
+                path: "action",
+                name: "action",
+                component: Action,
+            },
+            {
+                path: "purchaseorder",
+                name: "purchaseOrder",
+                component: PurchaseOrder,
+            }, {
+                path: "medication",
+                name: "medication",
+                component: Medication,
+            }, {
+                path: "absences",
+                name: "absences",
+                component: Absences,
+            }, {
+                path: "pricelist",
+                name: "pricelist",
+                component: PriceList,
+            }, {
+                path: "report",
+                name: "report",
+                component: Report,
+            }
+        ],
+    },
+    {
         path: '/system-admin-home',
         name: 'SystemAdminHome',
         component: SystemAdminHome
-      },
-      {
+    },
+    {
         path: '/supplier-home',
         name: 'SupplierHome',
         component: SupplierHome
-      },
-      {
+    },
+    {
         path: '/edit-profile',
         name: 'EditProfile',
         component: EditProfile
-      },
-      {
+    },
+    {
         path: '/view-profile',
         name: 'ViewProfile',
         component: ViewProfile
-      },
-      {
+    },
+    {
         path: '/add-medication',
         name: 'AddMedication',
         component: AddMedication
-      },
-      {
+    },
+    {
         path: '/medications',
         name: 'Medications',
         component: Medications
-      },
-      {
+    },
+    {
+        path: '/add-loyalty',
+        name: 'AddLoyalty',
+        component: AddLoyalty
+    },
+    {
         path: '/registration-by-system-admin',
         name: 'RegistrationBySystemAdmin',
         component: RegistrationBySystemAdmin
@@ -224,6 +225,12 @@ const routes = [
         path: '/registration-system-admin',
         name: 'RegistrationSystemAdmin',
         component: RegistrationSystemAdmin
+    },
+    {
+        path: '/subscription-list',
+        name: 'SubList',
+        component: SubList
+    }
       },
       {
         path: '/add-pharmacy',
@@ -235,12 +242,13 @@ const routes = [
         name: 'Pharmacies',
         component: Pharmacies
       }
+
 ];
 
 export const router = new VueRouter({
-  mode: "history",
-  base: process.env.BASE_URL,
-  routes,
+    mode: "history",
+    base: process.env.BASE_URL,
+    routes,
 });
 
 // router.beforeEach((to, from, next) => {

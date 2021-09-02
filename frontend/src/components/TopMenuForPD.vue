@@ -38,6 +38,13 @@
             >
           </b-nav-item>
         </b-navbar-nav>
+        <b-navbar-nav>
+        <b-nav-item>
+            <router-link to="/subscription-list" class="routerlink"
+              >Subscribe list</router-link
+            >
+          </b-nav-item>
+          </b-navbar-nav>
         <b-navbar-nav class="ml-auto">
           <b-nav-item>
             <b-button style="background-color:red" v-on:click="logout"

@@ -3,7 +3,6 @@ package com.tim40.tim40.model;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -27,7 +26,7 @@ public class Pharmacist extends User {
 	@OneToOne
     private Pharmacy pharmacy;
 	
-//	@OneToMany(mappedBy = "pharmacist",fetch =FetchType.LAZY,cascade = CascadeType.ALL)
+//	@OneToMany(mappedBy = "pharmacist")
 //	private Set<Consultation> consultations = new HashSet<Consultation>();
 		
 //	@OneToMany(fetch = FetchType.LAZY,mappedBy="pharmacist")

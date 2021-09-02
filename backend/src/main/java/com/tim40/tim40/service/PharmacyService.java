@@ -49,6 +49,7 @@ import com.tim40.tim40.repository.PharmacyRepository;
 import com.tim40.tim40.repository.PurchaseOrderRepository;
 import com.tim40.tim40.repository.QuantityMedicationRepository;
 import com.tim40.tim40.repository.ReservationRepository;
+import com.tim40.tim40.repository.UserRepository;
 
 
 
@@ -61,16 +62,18 @@ public class PharmacyService implements IPharmacyService {
 	private ReservationRepository reservationRepository;
 	private PurchaseOrderRepository purchaseOrderRepository;
 	private PharmacyRatingRepository ratingPharmacyRepository;
+	private UserRepository userRepository;
 
 	@Autowired
 	public PharmacyService(PharmacyRepository pharmacyRepository,MedicationRepository medicationRepository,QuantityMedicationRepository quantityRepository,ReservationRepository reservationRepository,
-			 PurchaseOrderRepository purchaseOrderRepository,PharmacyRatingRepository ratingPharmacyRepository) {
+			 PurchaseOrderRepository purchaseOrderRepository,PharmacyRatingRepository ratingPharmacyRepository, UserRepository usrp) {
 		this.pharmacyRepository = pharmacyRepository;
 		this.medicationRepository = medicationRepository;
 		this.quantityRepository = quantityRepository;
 		this.reservationRepository = reservationRepository;
 		this.purchaseOrderRepository = purchaseOrderRepository;
 		this.ratingPharmacyRepository = ratingPharmacyRepository;
+		this.userRepository = usrp;
 	}
 	
 	public PharmacyDTO createPharmacy (PharmacyDTO pharmacyDTO) {
@@ -428,9 +431,53 @@ public class PharmacyService implements IPharmacyService {
 	}
 
 	@Override
-	public Integer subscribe( Long userId,Long pharmacyId) {
-		Integer id = this.pharmacyRepository.subscribe(userId, pharmacyId);
-		return id;
+	public void subscribe(long idPatient, long idPharm) {
+		// TODO Auto-generated method stub
+		User u = userRepository.findById(idPatient).get();
+		Pharmacy p = pharmacyRepository.findById(idPharm).get();
+		Set<User> subs = p.getSubscribers();
+		subs.add(u);
+		p.setSubscribers(subs);
+		//System.out.println("OVO");
+		pharmacyRepository.save(p);
+		userRepository.save(u);
+		
+		
+		
+	}
+
+	@Override
+	public void unsubscribe(long idPatient, long idPharm) {
+		// TODO Auto-generated method stub
+		User u = userRepository.findById(idPatient).get();
+		Pharmacy p = pharmacyRepository.findById(idPharm).get();
+		Set<User> subs = p.getSubscribers();
+		subs.remove(u);
+		p.setSubscribers(subs);
+		//System.out.println("OVO");
+		pharmacyRepository.save(p);
+		userRepository.save(u);
+		
+	}
+
+	@Override
+	public List<PharmacyDTO> getPharmaciesSub(long idPatient) {
+		// TODO Auto-generated method stub
+		List<Pharmacy> pharms = pharmacyRepository.findAll();
+		List<PharmacyDTO> phDto = new ArrayList<PharmacyDTO>();
+		for (Pharmacy p : pharms) {
+			boolean isSub = false;
+			for (User u : p.getSubscribers()) {
+				if(u.getId() == idPatient) {
+					isSub = true;
+					break;
+				}
+			}
+			PharmacyDTO ph = new PharmacyDTO(p);
+			ph.setSubscribed(isSub);
+			phDto.add(ph);
+		}
+		return phDto;
 	}
 
 

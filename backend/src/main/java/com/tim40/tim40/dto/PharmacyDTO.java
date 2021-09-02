@@ -8,7 +8,8 @@ public class PharmacyDTO {
 	private String name;
     private Address address;
     private Long id;
-
+    private boolean subscribed;
+    
     public Long getId() {
 		return id;
 	}
@@ -54,6 +55,14 @@ public class PharmacyDTO {
 
 	public void setAvgRating(double avgRating) {
 		this.avgRating = avgRating;
+	}
+
+	public boolean isSubscribed() {
+		return subscribed;
+	}
+
+	public void setSubscribed(boolean subscribed) {
+		this.subscribed = subscribed;
 	}
     
 }

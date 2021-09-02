@@ -32,8 +32,7 @@ public class PharmacistRating {
 	@ManyToOne
     @JoinColumn(name = "pharmacist_id", nullable = false)
     private  Pharmacist pharmacist;
-	
-	
+
     @Column
     private int rating;
 

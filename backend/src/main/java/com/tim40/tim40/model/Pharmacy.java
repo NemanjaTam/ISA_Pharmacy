@@ -22,6 +22,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 import javax.persistence.JoinColumn;
 
 @Entity
@@ -44,6 +45,7 @@ public class Pharmacy {
 
     @Column(name = "avg_rating")
     private double avgRating;
+    
 
 //    @ManyToMany
 //    @JoinTable
@@ -57,15 +59,11 @@ public class Pharmacy {
 //    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pharmacy")
 //    private final Set<Pharmacist> pharmacists = new HashSet<Pharmacist>();
 //    
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pharmacy")
-    private final Set<Consultation> consultations = new HashSet<Consultation>();
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pharmacy")
+//    private final Set<Consultation> consultations = new HashSet<Consultation>();
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pharmacy")
-    private final Set<Appointment> appointments = new HashSet<Appointment>();
-    
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pharmacy")
-    private final Set<WorkDay> workDays = new HashSet<WorkDay>();
-    
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pharmacy")
+//    private final Set<Appointment> appointments = new HashSet<Appointment>();
 
 //    @OneToMany(fetch = FetchType.LAZY)
 //    private final Set<QuantityMedication> medications = new HashSet<QuantityMedication>();
@@ -97,8 +95,8 @@ public class Pharmacy {
 //    @OneToMany(fetch = FetchType.LAZY,mappedBy="pharmacy")
 //   	private final Set<Sale> sales = new HashSet<Sale>();
 //    
-    @OneToMany(fetch = FetchType.LAZY)
-    private final Set<User> subscribers = new HashSet<User>();
+    @ManyToMany
+    private Set<User> subscribers = new HashSet<User>();
     
     @ManyToMany
     @JoinTable
