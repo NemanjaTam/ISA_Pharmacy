@@ -61,31 +61,67 @@ public class WorkDayService implements IWorkDayService {
 	
 	public Integer createWorkDays(NewWorkDaysDTO dto,Long id,Long pharmacyId) {
 		if(dto.getUserType().equals(UserType.PHARMACIST)) {
-		
 		User user = this.userRepository.getById(id);
 		Pharmacy pharm = this.pharmacyRepository.getById(pharmacyId);
-		List<WorkDay> workDays = new ArrayList<WorkDay>();
-		
-        if(dto.getShifts().size()>0) {
-        	System.out.println("sve je u redu");
-        }
+	
+
+		List<WorkDay> workDaysDerm = new ArrayList<WorkDay>();
+		List<WorkDay> existingWorkDays = this.workDayRepository.findAll();
 	
 		for (ShiftsDTO shift : dto.getShifts()) {
 			WorkDay newWorkDay = new WorkDay();
+			boolean exists = false;
 			
-
 			
 			LocalDateTime start = LocalDateTime.of(shift.getStartTime().getYear(),shift.getStartTime().getMonthValue(),shift.getStartTime().getDayOfMonth(),shift.getStartShift(),0);
 			LocalDateTime end = LocalDateTime.of(shift.getStartTime().getYear(),shift.getStartTime().getMonthValue(),shift.getStartTime().getDayOfMonth(),shift.getEndShift(),0);
 			Period newPeriod = new Period(start,end);
 			newWorkDay.setPeriod(newPeriod);
-			newWorkDay.setPharmacy(pharm);
 			newWorkDay.setUser(user);
-			workDays.add(newWorkDay);
-			this.workDayRepository.save(newWorkDay);
+			LocalTime startTime = LocalTime.of(start.getHour(), start.getMinute(), start.getSecond());
+			LocalTime endTime =  LocalTime.of(end.getHour(), end.getMinute(), end.getSecond());
+			
+			for (WorkDay workDay : existingWorkDays) {
+				System.out.println("PRVA PETLJA");
+			
+				LocalTime startExisting = LocalTime.of(workDay.getPeriod().getStartTime().getHour(), workDay.getPeriod().getStartTime().getMinute(), workDay.getPeriod().getStartTime().getSecond());
+				LocalTime endExsisting = LocalTime.of(workDay.getPeriod().getEndTime().getHour(), workDay.getPeriod().getEndTime().getMinute(),workDay.getPeriod().getEndTime().getSecond());
+				System.out.println(workDay.getUser().getEmail());
+				if(workDay.getUser().getId() == Long.valueOf(id)) {
+					System.out.println("JEDNAKI IDJEVI");
+					if(workDay.getPeriod().getStartTime().getYear() == shift.getStartTime().getYear()) {
+						if(shift.getStartTime().getMonthValue() == workDay.getPeriod().getStartTime().getMonthValue()) {
+							if(shift.getStartTime().getDayOfMonth() == workDay.getPeriod().getStartTime().getDayOfMonth()) {
+								System.out.println("JEDNAKI DATUMI");
+								if(!(endTime.isBefore(startExisting) || startTime.isAfter(endExsisting)) ) {
+								
+									exists = true;
+									System.out.println("POSTOJI U BAZI");
+
+								}
+							}
+						}
+						
+						
+					}
+				}
+				}
+				
+				if(!exists) {
+					
+					newWorkDay.setPharmacy(pharm);
+					
+					workDaysDerm.add(newWorkDay);}
+				this.workDayRepository.save(newWorkDay);
+				
 		}
-//		this.workDayRepository.saveAll(workDays);
-		return workDays.size();
+	
+
+		
+	return workDaysDerm.size();
+	
+	
+
 		}else if (dto.getUserType().equals(UserType.DERMATOLOGIST)){
 			
 			Dermatologist user = this.dermatologistRepository.getById(id);
@@ -113,9 +149,6 @@ public class WorkDayService implements IWorkDayService {
 				
 					LocalTime startExisting = LocalTime.of(workDay.getPeriod().getStartTime().getHour(), workDay.getPeriod().getStartTime().getMinute(), workDay.getPeriod().getStartTime().getSecond());
 					LocalTime endExsisting = LocalTime.of(workDay.getPeriod().getEndTime().getHour(), workDay.getPeriod().getEndTime().getMinute(),workDay.getPeriod().getEndTime().getSecond());
-					System.out.println(startExisting + "start egzisting" + " " + startTime);
-					System.out.println(shift.getStartTime().getYear() + " "+ shift.getStartTime().getMonthValue() + "MONTH");
-					System.out.println(workDay.getPeriod().getStartTime().getYear() +" "+ workDay.getPeriod().getStartTime().getMonthValue() + "MONTH 2");
 					if(workDay.getUser().getId() == Long.valueOf(id)) {
 						System.out.println("JEDNAKI IDJEVI");
 						if(workDay.getPeriod().getStartTime().getYear() == shift.getStartTime().getYear()) {
@@ -126,9 +159,7 @@ public class WorkDayService implements IWorkDayService {
 									
 										exists = true;
 										System.out.println("POSTOJI U BAZI");
-//										if(!(timeEnd.isBefore(start) || timeStart.isAfter(end))) {
-//											exists = true;
-//										}
+
 									}
 								}
 							}

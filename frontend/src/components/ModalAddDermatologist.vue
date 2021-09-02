@@ -154,7 +154,20 @@ export default {
         startShift: this.startShift,
         endShift: this.endShift,
       };
-      this.workingDays.push(workingDay);
+    var same = false;
+    for(var i = 0;i < thisworkingDays.length;i++){
+    console.log()
+    if(this.workingDays[i].startTime == new_string){
+      
+        same = true;
+    }
+
+  }
+   if(!same){   this.workingDays.push(workingDay);}else{
+      alert("The date is already chosen, please choose another! ")
+   }
+
+   
     },
 
     removeNew(item) {

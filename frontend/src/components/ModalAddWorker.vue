@@ -87,13 +87,6 @@
           v-model="datepicker_1"
           :format="'dd-MM-yyyy'"
         ></b-form-datepicker>
-        <b-form-datepicker
-          :format="'dd-MM-yyyy'"
-          :min="datepicker_1"
-          :max="datepicker_1"
-          class="datepicker_b"
-          v-model="datepicker_2"
-        ></b-form-datepicker>
         <label>Work shift start:</label>
         <b-input
           type="number"
@@ -231,7 +224,19 @@ export default {
         startShift: this.startShift,
         endShift: this.endShift,
       };
-      this.newWorker.workingDays.push(workingDay);
+    var same = false;
+  for(var i = 0;i < this.newWorker.workingDays.length;i++){
+    console.log()
+    if(this.newWorker.workingDays[i].startTime == new_string){
+      
+        same = true;
+    }
+
+  }
+  if(!same){ this.newWorker.workingDays.push(workingDay);}else{
+    alert("The date is already chosen, please chose another! ")
+  }
+     
     },
 
     removeNew(item) {
@@ -285,7 +290,7 @@ export default {
         )
           .then(function(response) {
             if (response.ok) {
-              alert("Created!");
+           
               return response.json();
             } else {
               return Promise.reject(response);
@@ -293,7 +298,7 @@ export default {
           }).then(function(data) {
             if (data > 0) {
               
-            
+            alert("User created!");
             return fetch(
               `http://localhost:9005/api/workday/create-working-days/${vm.id}/${data}`,
               {
@@ -306,7 +311,10 @@ export default {
                  body: JSON.stringify(ShiftDTO),
               }
             );
-          }})
+          }else{
+            alert("User exists!");
+          }
+          })
     },
   },
 };

@@ -97,6 +97,12 @@ public class UserService implements IUserService {
 	}
 //BOJANA,normalna registracija nije radila?!
 	public Long registerByPharmacyAdmin(AddNewWorkerDTO userDTO,Long pharmacyId) throws Exception {
+		List<User> users = this.userRepository.findAll();
+		for (User user : users) {
+			if(user.getEmail().equals(userDTO.getEmail())) {
+				return (long) 0;
+			}
+		}
 		Address address = new Address(userDTO.getAddress().getState(), userDTO.getAddress().getCity(),
 				userDTO.getAddress().getStreet(), userDTO.getAddress().getNumber(), userDTO.getAddress().getPostalCode());
 		
