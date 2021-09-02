@@ -1,8 +1,6 @@
 <template>
-  <div>
+ <div class = "background">
     <NavbarSystemAdmin/>
-     <div class = "background">
-  <div>
     <b-input v-model="filter" placeholder="Search"></b-input>
     <div>
       <b-table
@@ -28,8 +26,6 @@
       </b-table>
     </div>
   </div>
-</div>
-</div>
 </template>
 
 <script>
@@ -148,3 +144,14 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.background {
+      background-image: url("../assets/img/medicine.jpg");
+      position: absolute; 
+      top: 0; 
+      left: 0; 
+      min-width: 100%;
+      min-height: 100%;
+  } 
+</style>
