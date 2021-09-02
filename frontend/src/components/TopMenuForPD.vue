@@ -38,7 +38,7 @@
             >
           </b-nav-item>
         </b-navbar-nav>
-        <b-navbar-nav>
+        <b-navbar-nav v-if="!isDermatologist">
         <b-nav-item>
             <router-link to="/subscription-list" class="routerlink"
               >Subscribe list</router-link

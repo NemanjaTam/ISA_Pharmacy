@@ -230,8 +230,7 @@ const routes = [{
         path: '/subscription-list',
         name: 'SubList',
         component: SubList
-    }
-      },
+    },
       {
         path: '/add-pharmacy',
         name: 'AddPharmacy',
