@@ -3,8 +3,10 @@ package com.tim40.tim40.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.tim40.tim40.model.Pharmacist;
 import com.tim40.tim40.projections.PharmacistDetailsProjection;
@@ -20,5 +22,11 @@ public interface PharmacistRepository extends JpaRepository<Pharmacist, Long> { 
 			  nativeQuery = true)
 	public List<PharmacistDetailsProjection> getAllPharmacist(@Param("type") String type);
 	
+	
+	
+    @Modifying
+    @Query(value= "delete from users as u  where u.email =:email and u.pharmacy_id=:pharmacyId and u.usertype='PHARMACIST'",nativeQuery = true)
+    void deleteByEmail(@Param("pharmacyId") Long pharmacyId,@Param("email") String email);
+    
   
 }

@@ -2,8 +2,12 @@ package com.tim40.tim40.service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,16 +15,21 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.tim40.tim40.dto.NewAppointmentDTO;
 import com.tim40.tim40.model.Appointment;
 import com.tim40.tim40.model.Consultation;
 import com.tim40.tim40.model.Dermatologist;
 import com.tim40.tim40.model.Patient;
+import com.tim40.tim40.model.Period;
+import com.tim40.tim40.model.Pharmacy;
 import com.tim40.tim40.model.Therapy;
 import com.tim40.tim40.model.WorkDay;
 import com.tim40.tim40.repository.AppointmentRepository;
 import com.tim40.tim40.repository.ConsultationRepository;
 import com.tim40.tim40.repository.DermatologistRepository;
 import com.tim40.tim40.repository.PatientRepository;
+import com.tim40.tim40.repository.PharmacyRepository;
 import com.tim40.tim40.repository.WorkDayRepository;
 
 @Service
@@ -31,16 +40,19 @@ public class AppointmentService implements IAppointmentService {
 	private DermatologistRepository dermatologistRepository;
 	private WorkDayRepository workDayRepository;
 	private PatientRepository patientRepository;
+	private PharmacyRepository pharmacyRepository;
 
 	@Autowired
 	public AppointmentService(AppointmentRepository appointmentRepository, DermatologistRepository dermatologistRepository, 
-			ConsultationRepository consultationRepository, WorkDayRepository workDayRepository, PatientRepository patientRepository) {
+			ConsultationRepository consultationRepository, WorkDayRepository workDayRepository, PatientRepository patientRepository,
+			 PharmacyRepository pharmacyRepository) {
 		
 		this.appointmentRepository = appointmentRepository;
 		this.dermatologistRepository = dermatologistRepository;
 		this.consultationRepository = consultationRepository;
 		this.workDayRepository = workDayRepository;
 		this.patientRepository = patientRepository;
+		this.pharmacyRepository = pharmacyRepository;
 	}
 
 	@Override
@@ -175,5 +187,149 @@ public class AppointmentService implements IAppointmentService {
 		appointment.setTaken(true);
 		appointmentRepository.save(appointment);
 		return new ResponseEntity<Appointment>(appointment,HttpStatus.OK);
+	}
+
+	@Override
+	public Map<String,Integer> getDoneAppointmentsForYear(Long id) {
+		List<Appointment>finishedAppointments = getAllAppointmentsByPharmacyId(id);
+		LocalDateTime now = LocalDateTime.now();
+		int value = 1;
+		Map<String, Integer> map = new HashMap<>();
+		LocalDateTime yearBefore = LocalDateTime.of(now.getYear() - 1, now.getMonthValue(), now.getDayOfMonth(), 0, 0);
+		System.out.println(yearBefore);
+	    for (Appointment appointment : finishedAppointments) {
+	    	System.out.println(appointment.getPeriod().getEndTime() + "VREME");
+			if(appointment.getPeriod().getEndTime().isAfter(yearBefore) && appointment.getPeriod().getEndTime().isBefore(now)) {
+				if(map.containsKey(appointment.getPeriod().getEndTime().getMonth().toString())) {
+					map.put(appointment.getPeriod().getEndTime().getMonth().toString(),map.get(appointment.getPeriod().getEndTime().getMonth().toString()) + 1);
+					
+				}else {
+					map.put(appointment.getPeriod().getEndTime().getMonth().toString(),value);
+				}
+		
+				
+			}
+		}
+	
+		return map;
+	}
+
+	@Override
+	public Map<String,Integer> getDoneAppointmentsForQuartal(Long id) {
+		List<Appointment>finishedAppointments = getAllAppointmentsByPharmacyId(id);
+		LocalDateTime now = LocalDateTime.now();
+		int value = 1;
+		Map<String, Integer> map = new HashMap<>();
+		LocalDateTime yearBefore = LocalDateTime.of(now.getYear(), now.getMonthValue() - 4, now.getDayOfMonth(), 0, 0);
+		System.out.println(yearBefore);
+	    for (Appointment appointment : finishedAppointments) {
+	    	System.out.println(appointment.getPeriod().getEndTime() + "VREME");
+			if(appointment.getPeriod().getEndTime().isAfter(yearBefore) && appointment.getPeriod().getEndTime().isBefore(now)) {
+				if(map.containsKey(appointment.getPeriod().getEndTime().getMonth().toString())) {
+					map.put(appointment.getPeriod().getEndTime().getMonth().toString(),map.get(appointment.getPeriod().getEndTime().getMonth().toString()) + 1);
+					
+				}else {
+					map.put(appointment.getPeriod().getEndTime().getMonth().toString(),value);
+				}
+		
+				
+			}
+		}
+		return map;
+	}
+
+	@Override
+	public Map<String,Integer> getDoneAppointmentsForMonth(Long id) {
+		List<Appointment>finishedAppointments = getAllAppointmentsByPharmacyId(id);
+		LocalDateTime now = LocalDateTime.now();
+		int value = 1;
+		Map<String, Integer> map = new HashMap<>();
+		LocalDateTime yearBefore = LocalDateTime.of(now.getYear(), now.getMonthValue(), now.getDayOfMonth(), 0, 0);
+		System.out.println(yearBefore);
+	    for (Appointment appointment : finishedAppointments) {
+	    	System.out.println(appointment.getPeriod().getEndTime() + "VREME");
+			if(appointment.getPeriod().getEndTime().getMonth().equals(yearBefore.getMonth()) && appointment.getPeriod().getEndTime().getYear() == yearBefore.getYear()) {
+				if(map.containsKey(appointment.getPeriod().getEndTime().getMonth().toString())) {
+					map.put(appointment.getPeriod().getEndTime().getMonth().toString(),map.get(appointment.getPeriod().getEndTime().getMonth().toString()) + 1);
+					
+				}else {
+					map.put(appointment.getPeriod().getEndTime().getMonth().toString(),value);
+				}
+		
+				
+			}
+		}
+		return map;
+	}
+//FINISHED APPOINTMENTS
+	@Override
+	public List<Appointment> getAllAppointmentsByPharmacyId(Long id) {
+		List<Appointment> appointments = this.appointmentRepository.findAll();
+		List<Appointment> finishedAppointments = new ArrayList<Appointment>();
+		for (Appointment appointment : appointments) {
+			if(appointment.isFinished() && appointment.getPharmacy().getId().equals(id)) {
+				finishedAppointments.add(appointment);
+			}
+		}
+		return finishedAppointments;
+	}
+	
+	
+	public Integer createAppointment(NewAppointmentDTO dto) {
+		List<Appointment> appointments = this.appointmentRepository.findAll();
+		LocalDateTime dateStart = LocalDateTime.of(dto.getStartTime().getYear(), dto.getStartTime().getMonthValue(),dto.getStartTime().getDayOfMonth(), dto.getHours(), 0);
+		LocalDateTime dateEnd;
+		LocalTime timeStart = LocalTime.of(dto.getHours(), 0,0);
+		LocalTime timeEnd;
+		if(dto.getDuration() == 60) {
+			dateEnd = LocalDateTime.of(dto.getStartTime().getYear(), dto.getStartTime().getMonthValue(),dto.getStartTime().getDayOfMonth(), dto.getHours() + 1, 0);
+			 timeEnd = LocalTime.of(dto.getHours() +1, 0,0);
+		}else {
+			dateEnd = LocalDateTime.of(dto.getStartTime().getYear(),dto.getStartTime().getMonthValue(), dto.getStartTime().getDayOfMonth(), dto.getHours(), dto.getDuration());
+			 timeEnd = LocalTime.of(dto.getHours(), dto.getDuration(),0);
+		}
+		boolean exists = false;
+		List<Appointment> appointmentsDermatologist = new ArrayList<Appointment>();
+		for (Appointment appointment : appointments) {
+			if((appointment.getDermatologist().getId() == dto.getDermatologistId()) && (appointment.getPharmacy().getId() == dto.getPharmacyId())) {
+				if(!appointment.isFinished()) {
+				appointmentsDermatologist.add(appointment);
+				}
+			}
+		}
+
+		for (Appointment appointment : appointmentsDermatologist) {
+			LocalTime start = LocalTime.of(appointment.getPeriod().getStartTime().getHour(), appointment.getPeriod().getStartTime().getMinute(), appointment.getPeriod().getStartTime().getSecond());
+			LocalTime end = LocalTime.of(appointment.getPeriod().getEndTime().getHour(), appointment.getPeriod().getEndTime().getMinute(),appointment.getPeriod().getEndTime().getSecond());
+					if((appointment.getPeriod().getStartTime().getYear() == dto.getStartTime().getYear()) &&(appointment.getPeriod().getStartTime().getMonthValue() == dto.getStartTime().getMonthValue())
+							&& (appointment.getPeriod().getStartTime().getDayOfMonth() == dto.getStartTime().getDayOfMonth())) {
+						
+						if(!(timeEnd.isBefore(start) || timeStart.isAfter(end))) {
+							exists = true;
+						}
+			
+				}
+			}
+		if(!exists) {
+		
+			Pharmacy pharm = this.pharmacyRepository.getById(dto.getPharmacyId());
+			Dermatologist derm = this.dermatologistRepository.getById(dto.getDermatologistId());
+			Period period = new Period(dateStart,dateEnd);
+			Set<Therapy> therapies = new HashSet<Therapy>();
+			
+			Appointment newAppointment = new Appointment();
+			newAppointment.setPharmacy(pharm);
+			newAppointment.setDermatologist(derm);
+			newAppointment.setFinished(false);
+			newAppointment.setPeriod(period);
+			newAppointment.setTaken(false);
+			newAppointment.setTherapies(therapies);
+			newAppointment.setPrice(dto.getPrice());
+			this.appointmentRepository.save(newAppointment);
+			return 1;
+		}
+		
+		return 0;
+		
 	}
 }

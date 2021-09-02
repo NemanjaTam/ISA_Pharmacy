@@ -3,46 +3,70 @@
     <div v-if="isRegisteredUser">
       <Navbar />
     </div>
-    <div v-else>
-      Now you don't
-    </div>
     <b-card no-body>
       <b-tabs card>
-        <!-- <b-input v-model="filter" placeholder="Search"></b-input> -->
         <b-tab title="Pharmacists" active>
-          <b-input v-model="filter" placeholder="Search"></b-input>
+          <b-button
+            variant="danger"
+            @click="deletePharmacist(selected)"
+            v-if="userType == 'PHARMACY_ADMINISTRATOR'"
+            >DELETE</b-button
+          >
+          <!-- <b-button
+            variant="warning"
+            @click="deleteItem(selected)"
+            v-if="userType == 'PHARMACY_ADMINISTRATOR'"
+            >EDIT</b-button
+          > -->
+         
+          <ModalAddWorker :selected="selectedDerm[0]" :id="Pharmacy" :workerType="'PHARMACIST'"></ModalAddWorker>
+           <!-- <ModalEditPharmacist :selected="selected[0]" :id="Pharmacy"></ModalEditPharmacist> -->
           <div>
             <b-table
               striped
-              hover
-              :filter="filter"
-              :filter-included-fields="[
-                'name',
-                'surname',
-                'email',
-                'pharmacyName',
-              ]"
-              :items="pharmacists"
-              :fields="fields"
-            ></b-table>
+              show-empty
+              :items="filteredPharmacists"
+              selectable
+              :select-mode="mode"
+              ref="selectableTable"
+              @row-selected="onRowSelected"
+            >
+              <template slot="top-row" slot-scope="{ fields }">
+                <td v-for="field in fields" :key="field.key">
+                  <input
+                    v-model="filters[field.key]"
+                    :placeholder="field.label"
+                  />
+                </td>
+              </template>
+            </b-table>
           </div>
         </b-tab>
         <b-tab title="Dermatologists" active>
-          <b-input v-model="filter" placeholder="Search"></b-input>
+           <b-button
+            variant="danger"
+            @click="deleteDermatologist(selectedDerm)"
+            v-if="userType == 'PHARMACY_ADMINISTRATOR'"
+            >DELETE</b-button
+          >
+          <ModalAddAppointment :selected="selectedDerm[0]" :id="Pharmacy" :type="userType"></ModalAddAppointment>
+           <ModalAddWorker :selected="selectedDerm[0]" :id="Pharmacy" :workerType="'DERMATOLOGIST'"></ModalAddWorker>
+           <!-- <ModalEditPharmacist :selected="selectedDerm[0]" :id="Pharmacy"></ModalEditPharmacist> -->
           <div>
-            <b-table
-              striped
-              hover
-              :filter="filter"
-              :filter-included-fields="[
-                'name',
-                'surname',
-                'email',
-                'pharmacies',
-              ]"
-              :items="dermatologists"
-              :fields="fieldsDerm"
-            ></b-table>
+            <b-table striped show-empty :items="filteredDermatologist"
+            selectable
+              :select-mode="mode"
+              @row-selected="onRowSelectedDerm"
+              ref="selectableTableDerm">
+              <template slot="top-row" slot-scope="{ fields }">
+                <td v-for="field in fields" :key="field.key">
+                  <input
+                    v-model="filters[field.key]"
+                    :placeholder="field.label"
+                  />
+                </td>
+              </template>
+            </b-table>
           </div>
         </b-tab>
       </b-tabs>
@@ -50,8 +74,11 @@
   </div>
 </template>
 <script>
+import ModalEditPharmacist from "../components/ModalEditPharmacist.vue"
+import ModalAddAppointment from "../components/ModalAddAppointments.vue"
 export default {
   name: "SearchListFilter",
+  components:{ModalEditPharmacist,ModalAddAppointment},
   computed: {
     User() {
       this.$store.getters.getUser;
@@ -68,10 +95,87 @@ export default {
     isRegisteredUser() {
       return this.$store.getters.isRegistered;
     },
+    filteredPharmacists() {
+      const filterededPharmacist = this.pharmacists.filter((pharmacist) => {
+        return Object.keys(this.filters).every((key) =>
+          String(pharmacist[key])
+            .toLowerCase()
+            .includes(this.filters[key].toLowerCase())
+        );
+      });
+      return filterededPharmacist.length > 0
+        ? filterededPharmacist
+        : [
+            {
+              name: "",
+              surname: "",
+              ratings: "",
+              email: "",
+              pharmacyName: "",
+              edit: "",
+            },
+          ];
+    },
+    filteredDermatologist() {
+      const filterededPharmacist = this.dermatologists.filter((pharmacist) => {
+        return Object.keys(this.filters).every((key) =>
+          String(pharmacist[key])
+            .toLowerCase()
+            .includes(this.filters[key].toLowerCase())
+        );
+      });
+      return filterededPharmacist.length > 0
+        ? filterededPharmacist
+        : [
+            {
+              name: "",
+              surname: "",
+              ratings: "",
+              email: "",
+              pharmacyName: "",
+            },
+          ];
+    },
+    // filteredDermatologist() {
+    //   const filterededDermatologist = this.dermatologists.filter((dermatologist) => {
+    //     return Object.keys(this.filtersDerm).every((key) =>
+    //       String(dermatologist[key]).toLowerCase().includes(this.filtersDerm[key].toLowerCase())
+    //     );
+    //   });
+    //   return filterededDermatologist.length > 0
+    //     ? filterededDermatologist
+    //     : [
+    //         {
+    //           name: "",
+    //           surname: "",
+    //           ratings: "",
+    //           email: "",
+    //           pharmacyName: "",
+    //         },
+    //       ];
+    // },
   },
   data() {
     return {
-      filter: "",
+      mode: "single",
+      filters: {
+        name: "",
+        surname: "",
+        ratings: "",
+        email: "",
+        pharmacyName: "",
+        edit: "",
+      },
+      filtersDerm: {
+        name: "",
+        surname: "",
+        ratings: "",
+        email: "",
+        pharmacyName: "",
+      },
+
+      selected: [],
+      selectedDerm:[],
       pharmacy: null,
       dermatologists: [
         {
@@ -101,8 +205,12 @@ export default {
           sortable: true,
         },
         {
-          key: "description",
+          key: "name",
 
+          sortable: true,
+        },
+        {
+          key: "ratings",
           sortable: true,
         },
         {
@@ -115,9 +223,11 @@ export default {
           label: "Pharmacy",
           sortable: true,
           // Variant applies to the whole column, including the header and footer
-          variant: "danger",
         },
-        ,
+        {
+          key: "edit",
+          label: "Edit",
+        },
       ],
       fieldsDerm: [
         {
@@ -126,7 +236,11 @@ export default {
         },
         {
           key: "name",
-          sortable: false,
+
+          sortable: true,
+        },
+        {
+          key: "ratings",
           sortable: true,
         },
         {
@@ -135,26 +249,120 @@ export default {
           sortable: true,
         },
         {
-          key: "pharmacies.pharmName",
-          label: "Pharmacies",
+          key: "pharmacyName",
+          label: "Pharmacy",
           sortable: true,
           // Variant applies to the whole column, including the header and footer
-          variant: "danger",
         },
       ],
       search: "",
     };
   },
   methods: {
+    deletePharmacist(selected) {
+      var vm = this;
+      if (selected!=null) {
+        console.log(selected[0].email);
+        fetch(
+          `http://localhost:9005/api/pharmacist/remove-pharmacist/${this.Pharmacy}`,
+          {
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+              usertype: vm.userType,
+            },
+            method: "POST",
+            body: JSON.stringify(selected[0].email),
+          }
+        )
+          .then(function(response) {
+            if (response.ok) {
+              return response.json();
+            } else {
+              return Promise.reject(response);
+            }
+          })
+          .then(function(data) {
+            if (data == 0) {
+              alert("Pharmacist has unfinished consultations!");
+            }
+            return fetch(
+              `http://localhost:9005/api/pharmacist/get-pharmacist-rating/${vm.Pharmacy}`,
+              {
+                headers: {
+                  Accept: "application/json",
+                  "Content-Type": "application/json",
+                  usertype: vm.userType,
+                },
+                method: "GET",
+              }
+            );
+          }) .then((response) => response.json())
+          .then((data) => (vm.pharmacists = data))
+          .catch();
+      }else{
+        alert("To delete please select row from table!")
+      }
+    },
+     deleteDermatologist(selectedDerm) {
+      var vm = this;
+      if (selectedDerm!=null) {
+        console.log(selectedDerm[0].email);
+        fetch(
+          `http://localhost:9005/api/dermatologist/remove-dermatologist/${this.Pharmacy}`,
+          {
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+              usertype: vm.userType,
+            },
+            method: "POST",
+            body: JSON.stringify(selectedDerm[0].email),
+          }
+        )
+          .then(function(response) {
+            if (response.ok) {
+              return response.json();
+            } else {
+              return Promise.reject(response);
+            }
+          })
+          .then(function(data) {
+            if (data == 0) {
+              alert("Dermatologist has unfinished appointments!");
+            }
+            return fetch(
+              `http://localhost:9005/api/dermatologist/get-dermatologist-rating/${vm.Pharmacy}`,
+              {
+                headers: {
+                  Accept: "application/json",
+                  "Content-Type": "application/json",
+                  usertype: vm.userType,
+                },
+                method: "GET",
+              }
+            );
+          }) .then((response) => response.json())
+          .then((data) => (vm.dermatologists = data))
+          .catch();
+      }else{
+        alert("To delete please select row from table!")
+      }
+    },
+
+
     getPharmacists(id, type) {
       const headers = {
         "Content-Type": "application/json",
       };
       headers["usertype"] = type;
       if (this.userType == "PHARMACY_ADMINISTRATOR") {
-        fetch(`http://localhost:9005/api/pharmacist/getallpharmacists/${id}`, {
-          headers,
-        })
+        fetch(
+          `http://localhost:9005/api/pharmacist/get-pharmacist-rating/${id}`,
+          {
+            headers,
+          }
+        )
           .then((response) => response.json())
           .then((data) => (this.pharmacists = data));
       } else if (this.userType == "PATIENT") {
@@ -183,7 +391,7 @@ export default {
       headers["usertype"] = type;
       if (this.userType == "PHARMACY_ADMINISTRATOR") {
         fetch(
-          `http://localhost:9005/api/dermatologist/getalldermatologist/${id}`,
+          `http://localhost:9005/api/dermatologist/get-dermatologist-rating/${id}`,
           {
             headers,
           }
@@ -205,6 +413,30 @@ export default {
             // this.$router.push("/loginPage");
           });
       }
+    },
+    filterTable: function(tableRow, filter) {
+      if (filter[0] !== null && filter[1] !== null) {
+        //both filters set
+        return (
+          tableRow.columnOne == filter[0] && tableRow.columnTwo == filter[1]
+        );
+      } else {
+        return (
+          tableRow.columnOne == filter[0] || tableRow.columnTwo == filter[1]
+        );
+      }
+    },
+    onRowSelected(item) {
+      this.selected = item;
+    },
+    onRowSelectedDerm(item){
+      this.selectedDerm = item
+    },
+    clearSelectedDerm(){
+      this.$refs.selectableTableDerm.clearSelectedDerm();
+    },
+    clearSelected() {
+      this.$refs.selectableTable.clearSelected();
     },
   },
 

@@ -16,13 +16,25 @@
         responsive="sm"
       >
         <template #cell(delete)="row">
-          <b-button size="sm" @click="removeItem(row.item)" class="mr-2">
+          <b-button
+            size="sm"
+            @click="removeItem(row.item)"
+            class="mr-2"
+            v-if="userId == row.item.adminPharmacy.id"
+          >
             Delete
           </b-button>
         </template>
         <template #cell(offer)="row">
-             <ModalPurchaseOrder  :status="row.item.purchaseOrderStatus" :selected="row.item.offers" :id="Pharmacy" :user="userId" :purchaseOrderCreator="row.item.adminPharmacy.id" :purchaseOrder="row.item"
-             :quantityMedication="row.item.quantityMedicationsPurchase"></ModalPurchaseOrder>
+          <ModalPurchaseOrder
+            :status="row.item.purchaseOrderStatus"
+            :selected="row.item.offers"
+            :id="Pharmacy"
+            :user="userId"
+            :purchaseOrderCreator="row.item.adminPharmacy.id"
+            :purchaseOrder="row.item"
+            :quantityMedication="row.item.quantityMedicationsPurchase"
+          ></ModalPurchaseOrder>
         </template>
         <div></div>
       </b-table>
@@ -31,10 +43,10 @@
 </template>
 
 <script>
-import ModalPurchaseOrder from "../components/ModalPurchaseOrder.vue"
+import ModalPurchaseOrder from "../components/ModalPurchaseOrder.vue";
 export default {
   name: "ListOfPurchaseOrders",
-  components:{ModalPurchaseOrder},
+  components: { ModalPurchaseOrder },
   computed: {
     Pharmacy() {
       return this.$store.getters.getPharmacy;
@@ -44,6 +56,9 @@ export default {
     },
     getPurchaseOrders() {
       return this.$store.getters.getPurchaseOrders;
+    },
+    userType() {
+      return this.$store.getters.getUserType;
     },
   },
   data() {
@@ -104,58 +119,58 @@ export default {
         });
     },
 
-      removeItem(item) {
+    removeItem(item) {
       var vm = this;
-      if(item.offers.length <= 0){
-      fetch(
-        `http://localhost:9005/api/pharmacy/delete-purchase-order/${this.Pharmacy}`,
-        {
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          method: "POST",
-          body: JSON.stringify(item.id),
-        }
-      )
-        .then(function(response) {
-          if (response.ok) {
-            alert("Successful!");
-            return response.json();
-          } else {
-            return Promise.reject(response);
+      if (item.offers.length <= 0) {
+        fetch(
+          `http://localhost:9005/api/pharmacy/delete-purchase-order/${this.Pharmacy}`,
+          {
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            method: "POST",
+            body: JSON.stringify(item.id),
           }
-        })
-        .then(function(data) {
-           
-          return fetch(
-            `http://localhost:9005/api/pharmacy/get-purchase-order/${vm.Pharmacy}`,
-            {
-              headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-              },
-              method: "GET",
+        )
+          .then(function(response) {
+            if (response.ok) {
+              alert("Successful!");
+              return response.json();
+            } else {
+              return Promise.reject(response);
             }
-          );
-        })
-        .then(function(response) {
-          return response.json();
-        })
-           .then((data) => this.$store.dispatch("updatePurchaseOrders", data))
+          })
+          .then(function(data) {
+            return fetch(
+              `http://localhost:9005/api/pharmacy/get-purchase-order/${vm.Pharmacy}`,
+              {
+                headers: {
+                  Accept: "application/json",
+                  "Content-Type": "application/json",
+                },
+                method: "GET",
+              }
+            );
+          })
+          .then(function(response) {
+            return response.json();
+          })
+          .then((data) => this.$store.dispatch("updatePurchaseOrders", data))
 
-        .catch(function(error) {
-          console.warn(error);
-        });}else{
-          alert("Cannot delete purchase order with offers!");
-        }
+          .catch(function(error) {
+            console.warn(error);
+          });
+      } else {
+        alert("Cannot delete purchase order with offers!");
+      }
 
       // this.$store.dispatch("removeMedicine",item);
     },
   },
-  mounted(){
-      this.getAllOrders();
-  }
+  mounted() {
+    this.getAllOrders();
+  },
 };
 </script>
 <style scoped></style>

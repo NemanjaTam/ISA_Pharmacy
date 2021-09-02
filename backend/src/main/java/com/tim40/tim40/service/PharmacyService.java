@@ -3,6 +3,7 @@ package com.tim40.tim40.service;
 import java.math.BigInteger;
 
 
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -21,6 +22,7 @@ import com.tim40.tim40.dto.AcceptOfferDTO;
 import com.tim40.tim40.dto.MedicationDTO2;
 import com.tim40.tim40.dto.MedicationQuantityDTO;
 import com.tim40.tim40.dto.PharmacyDTO;
+import com.tim40.tim40.dto.PharmacyRatingDTO;
 import com.tim40.tim40.dto.PurchaseOrderDTO;
 import com.tim40.tim40.dto.PurchaseOrderDetailedDTO;
 import com.tim40.tim40.model.enums.AbsenceType;
@@ -31,7 +33,9 @@ import com.tim40.tim40.model.Dermatologist;
 import com.tim40.tim40.model.Medication;
 import com.tim40.tim40.model.Offer;
 import com.tim40.tim40.model.Patient;
+import com.tim40.tim40.model.PharmacistRating;
 import com.tim40.tim40.model.Pharmacy;
+import com.tim40.tim40.model.PharmacyRating;
 import com.tim40.tim40.model.PurchaseOrder;
 import com.tim40.tim40.model.QuantityMedication;
 import com.tim40.tim40.model.QuantityMedicationPurchaseOrder;
@@ -40,6 +44,7 @@ import com.tim40.tim40.model.User;
 import com.tim40.tim40.model.enums.OfferStatus;
 import com.tim40.tim40.model.enums.PurchaseOrderStatus;
 import com.tim40.tim40.repository.MedicationRepository;
+import com.tim40.tim40.repository.PharmacyRatingRepository;
 import com.tim40.tim40.repository.PharmacyRepository;
 import com.tim40.tim40.repository.PurchaseOrderRepository;
 import com.tim40.tim40.repository.QuantityMedicationRepository;
@@ -55,15 +60,17 @@ public class PharmacyService implements IPharmacyService {
 	private QuantityMedicationRepository quantityRepository;
 	private ReservationRepository reservationRepository;
 	private PurchaseOrderRepository purchaseOrderRepository;
+	private PharmacyRatingRepository ratingPharmacyRepository;
 
 	@Autowired
 	public PharmacyService(PharmacyRepository pharmacyRepository,MedicationRepository medicationRepository,QuantityMedicationRepository quantityRepository,ReservationRepository reservationRepository,
-			 PurchaseOrderRepository purchaseOrderRepository) {
+			 PurchaseOrderRepository purchaseOrderRepository,PharmacyRatingRepository ratingPharmacyRepository) {
 		this.pharmacyRepository = pharmacyRepository;
 		this.medicationRepository = medicationRepository;
 		this.quantityRepository = quantityRepository;
 		this.reservationRepository = reservationRepository;
 		this.purchaseOrderRepository = purchaseOrderRepository;
+		this.ratingPharmacyRepository = ratingPharmacyRepository;
 	}
 	
 	public PharmacyDTO createPharmacy (PharmacyDTO pharmacyDTO) {
@@ -275,16 +282,50 @@ public class PharmacyService implements IPharmacyService {
 	//ne menjati
 	@Override
 	public boolean deleteMedication(Long id,Long medicationId) {
-		Pharmacy pharmacy = pharmacyRepository.findById(id).get();
-		List<Reservation> reservations = this.reservationRepository.findAll();
-		for (Reservation reservation : reservations) {
-			if(reservation.getMedication().getId().equals(medicationId) && reservation.isDone()) {
-			return false;
-			}
-		}
+		Pharmacy pharmacy = pharmacyRepository.getById(id);
+//		List<Reservation> reservations = this.reservationRepository.findAll();
+//		List<Reservation> reservationsFilteredById = new ArrayList<Reservation>();
+//		for (Reservation reservation : reservations) {
+//			if(reservation.getPharmacy().getId().equals(pharmacy.getId())) {
+//				reservationsFilteredById.add(reservation);
+//			}
+//		}
+//		for (Reservation reservation : reservationsFilteredById) {
+//			if(reservation.getMedication().getId().equals(medicationId)) {
+//				if(!reservation.isDone()) {
+//					return false;
+//				}
+//			}
+//			
+//			
+//		}
 		this.quantityRepository.deleteById(medicationId, pharmacy.getId());		
 		return true;
+		
 	}
+	
+	public boolean isReserved(Long id,Long medicationId) {
+		boolean exist = false;
+		Pharmacy pharmacy = pharmacyRepository.getById(id);
+		List<Reservation> reservations = this.reservationRepository.findAll();
+		List<Reservation> reservationsFilteredById = new ArrayList<Reservation>();
+		for (Reservation reservation : reservations) {
+			if(reservation.getPharmacy().getId().equals(pharmacy.getId())) {
+				reservationsFilteredById.add(reservation);
+			}
+		}
+		for (Reservation reservation : reservationsFilteredById) {
+			if(reservation.getMedication().getId().equals(medicationId)) {
+				if(!reservation.isDone()) {
+					exist = true;
+				}
+			}
+		}	
+		return exist;	
+		
+	}
+	
+	
 //ne menjati
 	@Override
 	public boolean editMedication(MedicationQuantityDTO dto, Long id) {
@@ -356,7 +397,26 @@ public class PharmacyService implements IPharmacyService {
 		}
 		return approved;
 	}
-
+   
+	public List<PharmacyRatingDTO> getPharmacyRatings(Long id) {
+		Pharmacy pharmacy = this.pharmacyRepository.getById(id);
+		List<PharmacyRatingDTO> list = new ArrayList<PharmacyRatingDTO>();
+		List<PharmacyRating> ratings = this.ratingPharmacyRepository.findAll();
+		double avg = 0;
+		int rated = 0;
+		int size = 0;
+		for (PharmacyRating pharmacyRating : ratings) {
+			if(pharmacyRating.getPharmacy().getId().equals(pharmacy.getId())) {
+				size = size + 1;
+				rated = rated + pharmacyRating.getRating();
+			}
+		}
+		avg = Double.valueOf(rated) / Double.valueOf(size);
+		PharmacyRatingDTO dto = new PharmacyRatingDTO(pharmacy.getName(), avg);
+		list.add(dto);
+		return list;
+	}
+  
 	public List<PharmacyDTO> getAllPharmacies() {
 		List<Pharmacy> pharmacies = pharmacyRepository.findAll();
 		List<PharmacyDTO> pharmacyDTOs = new ArrayList<PharmacyDTO>();
@@ -367,7 +427,12 @@ public class PharmacyService implements IPharmacyService {
 		return pharmacyDTOs;
 	}
 
-	
+	@Override
+	public Integer subscribe( Long userId,Long pharmacyId) {
+		Integer id = this.pharmacyRepository.subscribe(userId, pharmacyId);
+		return id;
+	}
+
 
 	
 }

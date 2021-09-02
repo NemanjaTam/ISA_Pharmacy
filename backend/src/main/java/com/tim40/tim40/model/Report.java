@@ -25,5 +25,7 @@ public class Report {
 	
 	@OneToMany(fetch = FetchType.LAZY)
 	private final Set<PharmacistAverageRating> pharmacistAvgRating = new HashSet<PharmacistAverageRating>();
+	
+	
 
 }

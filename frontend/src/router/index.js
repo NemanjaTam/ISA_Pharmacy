@@ -24,6 +24,7 @@ import PurchaseOrder from "../components/PurchaseOrder.vue"
 import Medication from "../views/MedicationList.vue"
 import Absences from "../components/Absences.vue"
 import PriceList from "../components/PriceList.vue"
+import Report from "../views/Report.vue"
 import Medications from "../components/Medications.vue"
 import RegistrationBySystemAdmin from "../views/RegistrationBySystemAdmin.vue"
 import AddMedication from "../components/AddMedication.vue"
@@ -37,6 +38,8 @@ import RegistrationSupplier from "../components/RegistrationSupplier.vue"
 import RegistrationSystemAdmin from "../components/RegistrationSystemAdmin.vue"
 import AddPharmacy from "../components/AddPharmacy.vue"
 import Pharmacies from "../views/Pharmacies.vue"
+import EditAdmin from "../components/EditAdmin.vue"
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -156,7 +159,15 @@ const routes = [
         path:"pricelist",
         name:"pricelist",
         component: PriceList,
-      }
+      },{
+        path:"report",
+        name:"report",
+        component: Report,
+      },      {
+        path: 'edit-profile-admin',
+        name: 'EditAdmin',
+        component: EditAdmin
+      },
     ],
   },
       {

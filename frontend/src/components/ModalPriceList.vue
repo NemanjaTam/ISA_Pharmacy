@@ -24,11 +24,13 @@
         :fields="fields"
         responsive="sm"
       >
-        <template #cell(new_price)="row">
+        <template #cell(new_price)="row" v-if="selected.status == 'ACTIVE'">
           <b-input type="number" :min="1" v-model="row.item.price"></b-input>
         </template>
       </b-table>
-      <b-button @click="editPriceList">OK</b-button>
+      <b-button @click="editPriceList" v-if="selected.status == 'ACTIVE'"
+        >OK</b-button
+      >
     </b-modal>
   </div>
 </template>
@@ -91,39 +93,54 @@ export default {
   },
   // this.$store.getters.getSelectedMedicineForEdit
   methods: {
+    editPriceList() {
+      var vm = this;
+      this.momentFormatted = moment(this.datepicker_1).format();
+      var new_string = this.momentFormatted.slice(0, 19);
+      var editPriceList = {
+        id: this.selected.id,
+        startTime: new_string,
+        medicationPrices: this.pricesList.medicationPrices,
+        status: this.selected.status,
+      };
+      console.log(this.momentFormatted);
 
-    editPriceList(){
-        this.momentFormatted = moment(this.datepicker_1).format();
-         var new_string  =  this.momentFormatted.slice(0, 19) 
-        var editPriceList = {
-            id:this.selected.id,
-            startTime: new_string,
-            medicationPrices: this.pricesList.medicationPrices,
-            status: this.selected.status,
-            
-        }
-        console.log(this.momentFormatted);
-
-
-        fetch(`http://localhost:9005/api/pricelist/edit/${this.id}`, {
+      fetch(`http://localhost:9005/api/pricelist/edit/${this.id}`, {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
-          usertype: this.type,
+          usertype: vm.type,
         },
         method: "POST",
         body: JSON.stringify(editPriceList),
       })
         .then(function(response) {
           if (response.ok) {
-              alert("Succesful!");
             return response.json();
           } else {
             return Promise.reject(response);
           }
-        }).then((data)=> this.$store.dispatch("updatePriceListActive", data))
-        .catch();
-
+        })
+        .then(function(data) {
+          vm.$store.dispatch("updatePriceListActive", data);
+          return fetch(
+            `http://localhost:9005/api/pricelist/get-non-active-pricelist/${vm.id}`,
+            {
+              headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                usertype: vm.type,
+              },
+              method: "GET",
+            }
+          )
+    })
+                    .then(function(response) {
+            return response.json();
+          })
+            .then((data) =>
+              vm.$store.dispatch("updatePriceListInactive", data)
+            ).catch()
     },
     clearList() {
       var md = [

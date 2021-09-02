@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.persistence.Tuple;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
@@ -45,4 +46,10 @@ public interface DermatologistRepository extends JpaRepository<Dermatologist, Lo
 	@Query(value ="SELECT PHARMACIES.name as pharmaciesNames,u.id as id,u.name as name,u.email as email,u.surname as surname FROM PHARMACIES,DERMATOLOGIST_PHARMACY,USERS AS u LEFT JOIN USERS as h on u.id != h.id AND u.email = h.email WHERE PHARMACIES.id = DERMATOLOGIST_PHARMACY.pharmacy_id "
 			+ "AND u .id = DERMATOLOGIST_PHARMACY.dermatologist_id ",nativeQuery = true)
 	public List<DermatologistDetailsProjection> getDummy();
+	
+	
+	
+    @Modifying
+    @Query(value= "delete from dermatologist_pharmacy as dp  where dp.dermatologist_id = :id and dp.pharmacy_id =:idobject",nativeQuery = true)
+    void deleteById(@Param("id") Long id,@Param("idobject") Long idobject);
 }

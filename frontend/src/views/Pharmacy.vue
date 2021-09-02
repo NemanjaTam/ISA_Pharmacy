@@ -63,6 +63,17 @@
                       disabled
                     ></b-form-input>
                   </div>
+                  <b-button variant="success" @click="subscribe">SUBSCRIBE</b-button>
+                  <div>
+                    <GmapMap
+                    
+                     :center="{lat:this.lat, lng:this.long}"
+                      :zoom="15"
+                      map-type-id="terrain"
+                      style="width: 500px; height: 300px"
+                    >
+                    </GmapMap>
+                  </div>
                 </b-form>
               </div>
             </div>
@@ -103,6 +114,17 @@ import axios from "axios";
 import NavbarAdmin from "../components/NavbarAdmin.vue";
 export default {
   name: "Pharmacy",
+  computed:{
+        Pharmacy() {
+      return this.$store.getters.getPharmacy;
+    },
+    userType() {
+      return this.$store.getters.getUserType;
+    },
+        userId() {
+      return this.$store.getters.getId;
+    },
+  },
   components: {
     NavbarAdmin,
   },
@@ -135,24 +157,53 @@ export default {
         },
       ],
       message: "",
+      long:"",
+      lat:"",
+      accessToken:"sk.eyJ1IjoiZ2FsYWN0aWNxdWVlbmJvYmJ5IiwiYSI6ImNrc3hhbDNoNjI3em8ycXRmZGx0aGtwMjkifQ.sdCtLSKq_wS-3LPcorOk8w",
+       center: [0, 0],
+      map: {},
     };
   },
   methods: {
-    getPharmacyById(id) {
+    getLocation(){
+      
+        //  fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.address.number}+${this.address.street}+${this.address.city}+${this.address.postal}&key=AIzaSyAutFBlxBxeE1RhyTQNzZtrbaM5W2xiNkc`,{
+        //     method: "POST",
+        //  })
+        // .then((response) => response.json())
+        // .then(
+        //   (data) => {this.lat = data.results[0].geometry.location.lat,this.long = data.results[0].geometry.location.lng}
+        // );
+
+
+            
+         
+    },
+    async getPharmacyById(id) {
+      var vm = this;
       const headers = { "Content-Type": "application/json" };
       fetch(`http://localhost:9005/api/pharmacy/getpharmacy/${id}`, { headers })
         .then((response) => response.json())
         .then(
-          (data) => (
-            (this.name = data.name),
-            (this.address.state = data.address.state),
-            (this.address.city = data.address.city),
-            (this.address.street = data.address.street),
-            (this.address.number = data.address.number),
-            (this.address.postal = data.address.postalCode),
-            (this.avgRating = data.avgRating)
-          )
+          (data) => {
+            this.name = data.name,
+            this.address.state = data.address.state,
+            this.address.city = data.address.city,
+            this.address.street = data.address.street,
+            this.address.number = data.address.number,
+            this.address.postal = data.address.postalCode,
+            this.avgRating = data.avgRating}
+          ).then(function(data){
+            return fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${vm.address.number}+${vm.address.street}+${vm.address.city}+${vm.address.postal}&key=AIzaSyDnaQ57KEfX5q5hoRQBjo_WI-fRN5Bddms`,{
+            method: "POST",
+         });
+
+          }).then((response) => response.json())
+        .then(
+          (data) => {vm.lat = data.results[0].geometry.location.lat,vm.long = data.results[0].geometry.location.lng,
+          console.log(vm.lat)}
         );
+       
     },
 
     getDermatologists(id) {
@@ -176,13 +227,40 @@ export default {
         .then((response) => response.json())
         .then((data) => (this.pharmacists = data));
     },
+    subscribe(){
+         fetch(
+        `http://localhost:9005/api/pharmacy/subscribe/${this.Pharmacy}`,
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            usertype:this.userType
+          },
+          method: "POST",
+            body: JSON.stringify(this.userId),
+        }
+      )
+        .then(function(response) {
+          if (response.ok) {
+            
+            return response.json();
+          } else {
+            return Promise.reject(response);
+          }
+        }).then((data) => {if(data == this.userId) {alert("Subscribed!");}
+        else{alert("Something went wrong!");}})
+        .catch(function(error) {
+          console.warn(error);
+        });
+    }
   },
-  mounted() {
+async  mounted() {
     const id = this.$route.params.id;
     console.log(id);
-    this.getPharmacyById(id);
+   await this.getPharmacyById(id);
     this.getDermatologists(id);
     this.getPharmacists(id);
+  
   },
 };
 </script>

@@ -16,4 +16,5 @@ public interface IDermatologistService {
 	ResponseEntity<Set<Patient>> getAllPatients(Long id);
 	ResponseEntity<List<DermatologistProjection>> getAllDermatologists(Long ID);
 	ResponseEntity<List<DermatologistDetailsProjection>> getAllDermatologistsForAllPharmacies();
+
 }

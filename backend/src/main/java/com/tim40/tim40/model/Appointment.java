@@ -16,6 +16,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -44,11 +46,12 @@ public class Appointment {
 	@Column(nullable = false)
 	private boolean isFinished; 
 	
-	@ManyToOne
+	@ManyToOne()
     @JoinColumn(name = "pharmacy_id", nullable = false)
     private Pharmacy pharmacy;
 	
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "dermatologist_id", nullable = true)
     private  Dermatologist dermatologist;
     
@@ -56,7 +59,12 @@ public class Appointment {
     @JoinColumn(name = "patient_id", nullable = true)
     private Patient patient;
     
+    @Column(name="price")
+    private int price;
+    
     @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     private Set<Therapy> therapies = new HashSet<Therapy>();
+    
+
     
 }

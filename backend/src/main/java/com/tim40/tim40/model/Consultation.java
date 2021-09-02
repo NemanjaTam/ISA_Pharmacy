@@ -16,6 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tim40.tim40.dto.ConsultationDTO;
 
 import lombok.AllArgsConstructor;
@@ -51,6 +52,7 @@ public class Consultation {
     private Pharmacy pharmacy;
 	
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "pharmacist_id", nullable = false)
     private  Pharmacist pharmacist;
     
@@ -61,6 +63,7 @@ public class Consultation {
     @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     private Set<Therapy> therapies = new HashSet<Therapy>();
     
+
 	public Consultation(ConsultationDTO consultationDTO) {
 		this.report = consultationDTO.getReport();
 		Period period = new Period();
