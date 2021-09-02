@@ -46,10 +46,6 @@ public interface PharmacyRepository extends JpaRepository<Pharmacy, Long> {
   
   @Query(value="select * from medication_quantity_of_purchase_order where as mq where mq.purchase_order_id =:id",nativeQuery = true)
   public  Set<QuantityMedicationPurchaseOrder> getAllOrderedQuantities();
-  
-  
-  @Query(value="insert into pharmacies_subscribers(pharmacy_id,subscribers_id) values(:id,:userId) returning subscribers_id",nativeQuery = true)
-  public Integer subscribe(@Param("userId") Long userId,@Param("id") Long id);
 }
 
 

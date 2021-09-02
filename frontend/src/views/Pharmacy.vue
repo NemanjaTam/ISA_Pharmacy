@@ -63,7 +63,6 @@
                       disabled
                     ></b-form-input>
                   </div>
-                  <b-button variant="success" @click="subscribe">SUBSCRIBE</b-button>
                   <div>
                     <GmapMap
                     
@@ -114,17 +113,6 @@ import axios from "axios";
 import NavbarAdmin from "../components/NavbarAdmin.vue";
 export default {
   name: "Pharmacy",
-  computed:{
-        Pharmacy() {
-      return this.$store.getters.getPharmacy;
-    },
-    userType() {
-      return this.$store.getters.getUserType;
-    },
-        userId() {
-      return this.$store.getters.getId;
-    },
-  },
   components: {
     NavbarAdmin,
   },
@@ -227,32 +215,6 @@ export default {
         .then((response) => response.json())
         .then((data) => (this.pharmacists = data));
     },
-    subscribe(){
-         fetch(
-        `http://localhost:9005/api/pharmacy/subscribe/${this.Pharmacy}`,
-        {
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            usertype:this.userType
-          },
-          method: "POST",
-            body: JSON.stringify(this.userId),
-        }
-      )
-        .then(function(response) {
-          if (response.ok) {
-            
-            return response.json();
-          } else {
-            return Promise.reject(response);
-          }
-        }).then((data) => {if(data == this.userId) {alert("Subscribed!");}
-        else{alert("Something went wrong!");}})
-        .catch(function(error) {
-          console.warn(error);
-        });
-    }
   },
 async  mounted() {
     const id = this.$route.params.id;

@@ -34,4 +34,5 @@ public class PatientController {
 	{
 		return patientService.isAlergedOnMedication(patientAllergedDTO.getPatientId(), patientAllergedDTO.getMedicationId());
 	}
+	
 }

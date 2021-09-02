@@ -29,7 +29,7 @@
                         </b-nav-item>
 
                     <b-nav-item>
-                           <router-link to="" class="routerlink">Loyality program</router-link>
+                           <router-link to="/add-loyalty" class="routerlink">Loyality program</router-link>
                         </b-nav-item>
 
                         <b-nav-item>

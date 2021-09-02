@@ -4,6 +4,8 @@ import java.util.List;
 
 import java.util.Set;
 
+import javax.websocket.server.PathParam;
+
 import org.springframework.transaction.annotation.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -187,6 +190,18 @@ public class PharmacyController {
 			}
 	}
 	
+	@PutMapping(value="/subscriber/{idPat}/{idPharm}")
+	public String subscribePharm(@PathVariable("idPat") long idPat, @PathVariable("idPharm") long idPharm) {
+		pharmacyService.subscribe(idPat, idPharm);
+		return "OK";
+	}
+	
+	@PutMapping(value="/unsubscriber/{idPat}/{idPharm}")
+	public String unsubscribePharm(@PathVariable("idPat") long idPat, @PathVariable("idPharm") long idPharm) {
+		pharmacyService.unsubscribe(idPat, idPharm);
+		return "OK";
+	}
+	
 
 	@RequestMapping(value="/get-pharmacy-rating/{id}", method = RequestMethod.GET)
 	public  ResponseEntity<List<PharmacyRatingDTO>> GetPharmacyRatings(@PathVariable("id") Long id ,@RequestHeader("usertype") String type){
@@ -206,17 +221,6 @@ public class PharmacyController {
 			}
 			else {
 				return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-			}
-		
-	}
-
-	@RequestMapping(value="/subscribe/{id}", method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public  ResponseEntity<Integer> subscribe(@RequestBody Long userId,@PathVariable("id") Long id,@RequestHeader("usertype") String type){
-		if("PATIENT".equals(type)){
-			return new ResponseEntity<Integer>( this.pharmacyService.subscribe(userId,id),HttpStatus.OK);
-			}
-			else {
-				return new ResponseEntity<Integer>(HttpStatus.UNAUTHORIZED);
 			}
 		
 	}
