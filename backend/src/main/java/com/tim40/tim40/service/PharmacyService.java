@@ -5,17 +5,27 @@ import java.math.BigInteger;
 
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+
+import javax.persistence.LockModeType;
+import javax.persistence.OptimisticLockException;
 
 import org.hibernate.internal.build.AllowSysOut;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Lock;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.tim40.tim40.dto.AbsenceDetailedDTO;
 import com.tim40.tim40.dto.AcceptOfferDTO;
@@ -27,6 +37,8 @@ import com.tim40.tim40.dto.PurchaseOrderDetailedDTO;
 import com.tim40.tim40.model.enums.AbsenceType;
 import com.tim40.tim40.email.service.MailService;
 import com.tim40.tim40.model.Absence;
+import com.tim40.tim40.model.Appointment;
+import com.tim40.tim40.model.Consultation;
 import com.tim40.tim40.model.Dermatologist;
 import com.tim40.tim40.model.Medication;
 import com.tim40.tim40.model.Offer;
@@ -34,16 +46,22 @@ import com.tim40.tim40.model.Patient;
 import com.tim40.tim40.model.PharmacistRating;
 import com.tim40.tim40.model.Pharmacy;
 import com.tim40.tim40.model.PharmacyRating;
+import com.tim40.tim40.model.PriceListMedication;
+import com.tim40.tim40.model.PriceMedication;
 import com.tim40.tim40.model.PurchaseOrder;
 import com.tim40.tim40.model.QuantityMedication;
 import com.tim40.tim40.model.QuantityMedicationPurchaseOrder;
 import com.tim40.tim40.model.Reservation;
 import com.tim40.tim40.model.User;
 import com.tim40.tim40.model.enums.OfferStatus;
+import com.tim40.tim40.model.enums.PriceListType;
 import com.tim40.tim40.model.enums.PurchaseOrderStatus;
+import com.tim40.tim40.repository.AppointmentRepository;
+import com.tim40.tim40.repository.ConsultationRepository;
 import com.tim40.tim40.repository.MedicationRepository;
 import com.tim40.tim40.repository.PharmacyRatingRepository;
 import com.tim40.tim40.repository.PharmacyRepository;
+import com.tim40.tim40.repository.PriceListMedicationRepository;
 import com.tim40.tim40.repository.PurchaseOrderRepository;
 import com.tim40.tim40.repository.QuantityMedicationRepository;
 import com.tim40.tim40.repository.ReservationRepository;
@@ -59,16 +77,22 @@ public class PharmacyService implements IPharmacyService {
 	private ReservationRepository reservationRepository;
 	private PurchaseOrderRepository purchaseOrderRepository;
 	private PharmacyRatingRepository ratingPharmacyRepository;
+	private AppointmentRepository appointmentRepository;
+	private ConsultationRepository consultationRepository;
+	private PriceListMedicationRepository priceListRepository;
 
 	@Autowired
 	public PharmacyService(PharmacyRepository pharmacyRepository,MedicationRepository medicationRepository,QuantityMedicationRepository quantityRepository,ReservationRepository reservationRepository,
-			 PurchaseOrderRepository purchaseOrderRepository,PharmacyRatingRepository ratingPharmacyRepository) {
+			 PurchaseOrderRepository purchaseOrderRepository,PharmacyRatingRepository ratingPharmacyRepository,AppointmentRepository appointmentRepository
+			 ,ConsultationRepository consultationRepository) {
 		this.pharmacyRepository = pharmacyRepository;
 		this.medicationRepository = medicationRepository;
 		this.quantityRepository = quantityRepository;
 		this.reservationRepository = reservationRepository;
 		this.purchaseOrderRepository = purchaseOrderRepository;
 		this.ratingPharmacyRepository = ratingPharmacyRepository;
+		this.appointmentRepository = appointmentRepository;
+		this.consultationRepository = consultationRepository;
 	}
 	
 	public PharmacyDTO createPharmacy (PharmacyDTO pharmacyDTO) {
@@ -323,24 +347,49 @@ public class PharmacyService implements IPharmacyService {
 	
 //ne menjati
 	@Override
-	public boolean editMedication(MedicationQuantityDTO dto, Long id) {
+	@Transactional(propagation =  Propagation.REQUIRES_NEW,isolation = Isolation.REPEATABLE_READ,rollbackFor = Exception.class,readOnly = false)
+	public Medication editMedication(MedicationQuantityDTO dto, Long id) {
 		Pharmacy pharmacy = this.pharmacyRepository.getById(id);
+		
+		Medication med = new Medication();
 		boolean found = false;
 		for(QuantityMedication qm : pharmacy.getMedicationQuantity()) {
 			if(qm.getMedication().getId().equals(dto.getId())) {
-				qm.getMedication().setCode(dto.getCode());
-				qm.getMedication().setName(dto.getName());
-				qm.getMedication().setDescription(dto.getDescription());
-				qm.getMedication().setManufacturer(dto.getManufacturer());
-				qm.getMedication().setMedicationForm(dto.getMedicationForm());
-				qm.getMedication().setTypeOfMedication(dto.getTypeOfMedication());
-				qm.getMedication().setPrescriptionRegime(dto.getPrescriptionRegime());
-				qm.getMedication().setContraindications(dto.getContraindications());
+			 med = this.medicationRepository.getById(qm.getMedication().getId());
+			 if(dto.getVersion() != med.getVersion()) {
+				   throw new OptimisticLockException();
+				   
+			 }
+				
+				med.setId(qm.getMedication().getId());
+				med.setCode(dto.getCode());
+				med.setName(dto.getName());
+				med.setDescription(dto.getDescription());
+				med.setManufacturer(dto.getManufacturer());
+				med.setMedicationForm(dto.getMedicationForm());
+				med.setTypeOfMedication(dto.getTypeOfMedication());
+				med.setPrescriptionRegime(dto.getPrescriptionRegime());
+				med.setContraindications(dto.getContraindications());
+				med.setRecommendedIntake(dto.getRecommendedIntake());
+			
+			
+			System.out.println(med.getName());
+//				qm.getMedication().setCode(dto.getCode());
+//				qm.getMedication().setName(dto.getName());
+//				qm.getMedication().setDescription(dto.getDescription());
+//				qm.getMedication().setManufacturer(dto.getManufacturer());
+//				qm.getMedication().setMedicationForm(dto.getMedicationForm());
+//				qm.getMedication().setTypeOfMedication(dto.getTypeOfMedication());
+//				qm.getMedication().setPrescriptionRegime(dto.getPrescriptionRegime());
+//				qm.getMedication().setContraindications(dto.getContraindications());
+//				this.quantityRepository.save(qm);
+				this.medicationRepository.save(med);
 				found = true;
 			}
 		}
-		this.pharmacyRepository.save(pharmacy);
-		return found;
+		
+//	this.pharmacyRepository.save(pharmacy);
+		return med;
 	}
 
 	@Override
@@ -418,6 +467,88 @@ public class PharmacyService implements IPharmacyService {
 		return id;
 	}
 	
-
+	public List<Appointment> getAllAppointmentsByPharmacyId(Long id,LocalDateTime start,LocalDateTime end) {
+		List<Appointment> appointments = this.appointmentRepository.findAll();
+		List<Appointment> finishedAppointments = new ArrayList<Appointment>();
+		for (Appointment appointment : appointments) {
+			if(appointment.isFinished() && appointment.getPharmacy().getId().equals(id)) {
+				if(appointment.getPeriod().getStartTime().isAfter(start)) {
+				finishedAppointments.add(appointment);}
+			}
+		}
+		return finishedAppointments;
+	}
 	
+	
+	public List<PriceListMedication> getActivePriceList(Long pharmacyId,LocalDateTime start,LocalDateTime end) {
+	    List<PriceListMedication> list = this.priceListRepository.getAllByPharmacyId(pharmacyId);
+	    if(list.size() > 0) {
+	    	System.out.println("DOBRO JE");
+	    }
+	    List<PriceListMedication> active = new ArrayList<PriceListMedication>();
+	    for (PriceListMedication priceListMedication : list) {
+			if((priceListMedication.getStartTime().isAfter(start))) {
+				active.add(priceListMedication);
+				
+			}
+		}
+		return active;
+	}
+	public List<Reservation> getAllReservationsByPharmacyId(Long id,LocalDateTime start,LocalDateTime end) {
+		List<Reservation> appointments = this.reservationRepository.findAll();
+	
+		List<Reservation> finishedAppointments = new ArrayList<Reservation>();
+		List<Double> prices = new ArrayList<Double>();
+		for (Reservation appointment : appointments) {
+			if(appointment.isDone() && appointment.getPharmacy().getId().equals(id)) {
+				if((appointment.getPeriod().getStartTime().isAfter(start) || appointment.getPeriod().getStartTime().equals(start)) &&
+						(appointment.getPeriod().getEndTime().isBefore(end) || appointment.getPeriod().getEndTime().equals(end))) {
+				finishedAppointments.add(appointment);
+				}
+			}
+		}
+		
+		return finishedAppointments;
+	}
+	public Map<String,Integer> getPharmacyIncome(Long id,LocalDateTime start,LocalDateTime end) {
+		List<Appointment> finishedAppointments = getAllAppointmentsByPharmacyId(id,start,end);
+		List<Reservation> finishedReservations = getAllReservationsByPharmacyId(id, start, end);
+//		List<PriceListMedication>  priceLists= getActivePriceList(id, start, end);
+		LocalDateTime now = LocalDateTime.now();
+		int value = 1;
+		Map<String, Integer> map = new HashMap<>();
+	
+	
+	    for (Appointment appointment : finishedAppointments) {		
+				if(map.containsKey(appointment.getPeriod().getEndTime().toString())) {
+					map.put(appointment.getPeriod().getEndTime().toString(),map.get(appointment.getPeriod().getEndTime().toString()) + appointment.getPrice());
+					
+				}else {
+					map.put(appointment.getPeriod().getEndTime().toString(),appointment.getPrice());
+				}	
+		}
+	    
+//	    for (PriceListMedication priceListMedication : priceLists) {
+//	    	for (PriceMedication price : priceListMedication.getMedicationPrices()) {
+//	    		for (Reservation reserv : finishedReservations) {
+//	   			 if(reserv.getMedication().getId() == price.getMedication().getId() && reserv.getPeriod().getStartTime().isAfter(priceListMedication.getStartTime())) {
+//	   				
+//	   				if(map.containsKey(reserv.getPeriod().getEndTime().toString())) {
+//	   				 map.put(reserv.getPeriod().getStartTime(), (int) (map.get(reserv.getPeriod().getStartTime().toString()) + price.getPrice()));
+//						
+//					}else {
+//						map.put(reserv.getPeriod().getEndTime(),(int)(price.getPrice()));
+//					}	
+//	   				 
+//	   				
+//	   			 }
+//	   			
+//	   		}
+//			}
+//		 
+//	    }
+	    
+
+		return map;
+	}
 }

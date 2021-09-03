@@ -147,7 +147,18 @@ public class PharmacistService implements IPharmacistService {
 		if(!hasConsultation) {
 		deleteConsultation(id, pharm);
 		deleteRatings(id);
-		deleteWorkDays(id);
+//		deleteWorkDays(id);
+		
+		List<WorkDay> days = this.workdayRepository.findAll();
+		for (WorkDay workDay : days) {
+			System.out.println(workDay.getUser().getId());
+			System.out.println(id);
+			if(workDay.getUser().getId() == id) {
+				this.workdayRepository.delete(workDay);
+				System.out.println("UPALO OVDE");
+			}
+		}
+		
 		this.userRepository.deleteById(id);
 		return 1;
 		}
@@ -161,6 +172,7 @@ public class PharmacistService implements IPharmacistService {
 		for (WorkDay workDay : days) {
 			if(workDay.getUser().getId() == id) {
 				this.workdayRepository.delete(workDay);
+				System.out.println("UPALO OVDE");
 			}
 		}
 	}

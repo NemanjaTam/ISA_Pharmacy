@@ -137,6 +137,7 @@ export default {
         recommendedIntake: "",
         ratings: [],
         quantity: 0,
+        version:0,
        
       },
       errors:[],
@@ -179,14 +180,18 @@ export default {
       )
         .then(function(response) {
           if (response.ok) {
-            alert("Successful!");
+          
             return response.json();
             
           } else {
             return Promise.reject(response);
           }
         }).then(function(data) {
-          if(data){
+          if(data==null){
+           alert("Cannot do that!");
+          }else{
+              alert("Successful!");
+          }
           return fetch(
             `http://localhost:9005/api/pharmacy/get-medications/${vm.id}`,
             {
@@ -197,7 +202,7 @@ export default {
               method: "GET",
             }
           );
-        }}).then(function(response) {
+        }).then(function(response) {
           return response.json();
         })
         .then((data) => this.$store.dispatch("updateMedicines", data))
@@ -224,6 +229,7 @@ export default {
       this.changedMedication.ratings = selected.ratings;
       this.changedMedication.recommendedIntake = selected.recommendedIntake;
       this.changedMedication.quantity = selected.quantity;
+      this.changedMedication.version = selected.version;
        
     },
   },

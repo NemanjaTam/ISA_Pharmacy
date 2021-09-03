@@ -1,8 +1,11 @@
 package com.tim40.tim40.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
-
+import java.util.Map;
 import java.util.Set;
+
+import javax.persistence.OptimisticLockException;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,6 +14,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
@@ -32,6 +36,7 @@ import com.tim40.tim40.dto.DermatologistRatingDTO;
 import com.tim40.tim40.dto.MedicationDTO;
 import com.tim40.tim40.dto.MedicationQuantityDTO;
 import com.tim40.tim40.dto.PatientAllergedDTO;
+import com.tim40.tim40.dto.PeriodDTO;
 import com.tim40.tim40.dto.PharmacyDTO;
 import com.tim40.tim40.dto.PharmacyProfileDTO;
 import com.tim40.tim40.dto.PharmacyRatingDTO;
@@ -162,10 +167,17 @@ public class PharmacyController {
 	}
 	
 	//ne menjati , da bih sprecila LOST UPDATE -> optimistic lock(version u modelu) + read_uncommited da bi se videle promene
-	@Transactional(propagation = Propagation.REQUIRES_NEW,isolation = Isolation.READ_UNCOMMITTED,rollbackFor = Exception.class) //standardni izolacioni nivo + optimisticko zakljucavanje
+	 //standardni izolacioni nivo + optimisticko zakljucavanje
+
 	@PostMapping(value = "/edit-medication/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public boolean editMedication(@RequestBody MedicationQuantityDTO dto,@PathVariable("id") Long pharmacyId){
-		return this.pharmacyService.editMedication(dto, pharmacyId);
+	public Medication editMedication(@RequestBody MedicationQuantityDTO dto,@PathVariable("id") Long pharmacyId){
+    try {
+        	return this.pharmacyService.editMedication(dto, pharmacyId);
+    }catch(OptimisticLockException e){
+    	return null;
+    }
+		
+		
 	}
 	
 
@@ -223,6 +235,17 @@ public class PharmacyController {
 		
 	}
 
+	@PostMapping(value="/get-report-period/{id}",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Map<String,Integer>> getIncome(@PathVariable("id") Long id,@RequestHeader("usertype") String type,@RequestBody PeriodDTO dto){
+		if("PHARMACY_ADMINISTRATOR".equals(type)){
+			return new ResponseEntity<Map<String,Integer>>(this.pharmacyService.getPharmacyIncome(id,dto.getStartTime(),dto.getEndTime()), HttpStatus.OK);
+			}
+			else {
+				return new ResponseEntity<Map<String,Integer>>(HttpStatus.UNAUTHORIZED);
+			}
+		
+	}
+	
 	
 
 }

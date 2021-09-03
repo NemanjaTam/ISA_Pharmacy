@@ -49,13 +49,14 @@
             v-if="userType == 'PHARMACY_ADMINISTRATOR'"
             >DELETE</b-button
           >
-          <ModalAddAppointment :selected="selectedDerm[0]" :id="Pharmacy" :type="userType"></ModalAddAppointment>
-          <ModalAddDermatologist :selected="selectedDerm[0]" :id="Pharmacy" :type="userType"></ModalAddDermatologist>
+          <ModalAddAppointment :selected="selectedDerm[0]" :id="Pharmacy" :type="userType" @updateparentPharmacist="changeParentPharmacist($event)"></ModalAddAppointment>
+          <ModalAddDermatologist :selected="selectedDerm[0]" :id="Pharmacy" :type="userType" :list="dermatologists" @updateparent="changeParent($event)"></ModalAddDermatologist>
            <!-- <ModalAddWorker :selected="selectedDerm[0]" :id="Pharmacy" :workerType="'DERMATOLOGIST'"></ModalAddWorker> -->
            <!-- <ModalEditPharmacist :selected="selectedDerm[0]" :id="Pharmacy"></ModalEditPharmacist> -->
           <div>
             <b-table striped show-empty :items="filteredDermatologist"
             selectable
+            
               :select-mode="mode"
               @row-selected="onRowSelectedDerm"
               ref="selectableTableDerm">
@@ -262,6 +263,12 @@ export default {
     };
   },
   methods: {
+ changeParent(variable) {
+        this.dermatologists = variable
+    },
+     changeParentPharmacist(variable) {
+        this.pharmacists = variable
+    },
     deletePharmacist(selected) {
       var vm = this;
       if (selected!=null) {
@@ -459,7 +466,7 @@ export default {
     console.log(this.pharmacy);
   },
   mounted(){
-     
+     this.$forceUpdate();
   }
 };
 </script>

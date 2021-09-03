@@ -9,6 +9,7 @@
           id="input-live"
           v-model="newWorker.name"
           placeholder="Enter name"
+          v-on:keypress="isLetter($event)"
           type="text"
           required
           trim
@@ -17,6 +18,7 @@
           id="input-live"
           v-model="newWorker.surname"
           placeholder="Enter surname"
+          v-on:keypress="isLetter($event)"
           type="text"
           required
           trim
@@ -37,6 +39,7 @@
           id="input-live"
           v-model="newWorker.state"
           placeholder="Enter state"
+          v-on:keypress="isLetter($event)"
           type="text"
           required
           trim
@@ -45,6 +48,7 @@
           id="input-live"
           v-model="newWorker.city"
           placeholder="Enter city"
+          v-on:keypress="isLetter($event)"
           type="text"
           required
           trim
@@ -53,6 +57,7 @@
           id="input-live"
           v-model="newWorker.street"
           placeholder="Enter street"
+          v-on:keypress="isLetter($event)"
           type="text"
           required
           trim
@@ -61,6 +66,7 @@
           id="input-live"
           v-model="newWorker.number"
           placeholder="Enter number"
+          v-on:keypress="isNumber($event)"
           type="text"
           required
           trim
@@ -69,6 +75,7 @@
           id="input-live"
           v-model="newWorker.postalCode"
           placeholder="Enter postalCode"
+          v-on:keypress="isNumber($event)"
           type="text"
           required
           trim
@@ -77,6 +84,7 @@
           id="input-live"
           v-model="newWorker.phone"
           placeholder="Enter phone number"
+          v-on:keypress="isNumber($event)"
           type="text"
           required
           trim
@@ -86,13 +94,6 @@
           :min="minDatePicker_1"
           v-model="datepicker_1"
           :format="'dd-MM-yyyy'"
-        ></b-form-datepicker>
-        <b-form-datepicker
-          :format="'dd-MM-yyyy'"
-          :min="datepicker_1"
-          :max="datepicker_1"
-          class="datepicker_b"
-          v-model="datepicker_2"
         ></b-form-datepicker>
         <label>Work shift start:</label>
         <b-input
@@ -180,6 +181,26 @@ export default {
     };
   },
   methods: {
+        isLetter(e) {
+      let char = String.fromCharCode(e.keyCode);
+      if (/^[A-Za-z ]+$/.test(char)) {
+        return true;
+      } else {
+        alert("Letters only!");
+        e.preventDefault();
+      }
+    },
+            isNumber(e) {
+      let char = String.fromCharCode(e.keyCode);
+      if (/^[0-9]+$/.test(char)) {
+        return true;
+      } else {
+        alert("Numbers only!");
+        e.preventDefault();
+      }
+    },
+
+
     onshow(selected) {
       this.show = true;
     },
@@ -231,7 +252,19 @@ export default {
         startShift: this.startShift,
         endShift: this.endShift,
       };
-      this.newWorker.workingDays.push(workingDay);
+    var same = false;
+  for(var i = 0;i < this.newWorker.workingDays.length;i++){
+    console.log()
+    if(this.newWorker.workingDays[i].startTime == new_string){
+      
+        same = true;
+    }
+
+  }
+  if(!same){ this.newWorker.workingDays.push(workingDay);}else{
+    alert("The date is already chosen, please choose another! ")
+  }
+     
     },
 
     removeNew(item) {
@@ -285,7 +318,7 @@ export default {
         )
           .then(function(response) {
             if (response.ok) {
-              alert("Created!");
+           
               return response.json();
             } else {
               return Promise.reject(response);
@@ -293,7 +326,7 @@ export default {
           }).then(function(data) {
             if (data > 0) {
               
-            
+            alert("User created!");
             return fetch(
               `http://localhost:9005/api/workday/create-working-days/${vm.id}/${data}`,
               {
@@ -306,7 +339,27 @@ export default {
                  body: JSON.stringify(ShiftDTO),
               }
             );
-          }})
+          }else{
+            alert("User exists!");
+          }
+          }).then((response) => response.json())
+          .then(function(data) {
+          
+            return fetch(
+              `http://localhost:9005/api/pharmacist/get-pharmacist-rating/${vm.id}`,
+              {
+                headers: {
+                  Accept: "application/json",
+                  "Content-Type": "application/json",
+                  usertype: vm.type,
+                },
+                method: "GET",
+              }
+            );
+          }) .then((response) => response.json())
+          .then((data) => {  vm.$emit('updateparentPharmacist', data)})
+          .catch();
+         
     },
   },
 };
