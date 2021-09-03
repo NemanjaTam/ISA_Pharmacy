@@ -556,9 +556,9 @@ insert into providers(name,email,info) values('Dobavljac 1','boyanasixxhalliwell
 insert into providers(name,email,info) values('Dobavljac 2','blabla@gmail.com','Ekstra cene pun kvalitet')
 insert into providers(name,email,info) values('Dobavljac 3','boyanacroft@yahoo.com','Lek za stek')
 
-insert into offers(status,price,purchase_order_id, provider_id,version) values ('CEKA',200,1,1,1)
-insert into offers(status,price,purchase_order_id,provider_id,version) values ('CEKA',150,1,2,1)
-insert into offers(status,price,purchase_order_id,provider_id,version) values ('CEKA',150,1,3,1)
+insert into offers(status,price,purchase_order_id, provider_id,version) values ('CEKA',200,1,1,0)
+insert into offers(status,price,purchase_order_id,provider_id,version) values ('CEKA',150,1,2,0)
+insert into offers(status,price,purchase_order_id,provider_id,version) values ('CEKA',150,1,3,0)
 
 
 insert into price_list_medications(status,start_time,pharmacy_id) values ('ACTIVE','2021-08-28 00:00:00-08',1)
