@@ -13,7 +13,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @Setter
 @Getter
-
 public class dermDTO {
 	private Long id;
 	private String name;

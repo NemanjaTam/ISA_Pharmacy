@@ -5,6 +5,7 @@ import java.util.Set;
 
 import org.springframework.http.ResponseEntity;
 
+import com.tim40.tim40.dto.PharmacistRatingDTO;
 import com.tim40.tim40.model.Patient;
 import com.tim40.tim40.model.Pharmacist;
 import com.tim40.tim40.projections.DermatologistProjection;
@@ -16,7 +17,7 @@ public interface IPharmacistService {
 	Long getPharmacy(Long id);
 	ResponseEntity<List<PharmacistDetailsProjection>> getAllPharamcistsNEW(Long ID);
 	ResponseEntity<List<PharmacistDetailsProjection>> getAllPharamcistsById(Long ID);
-	ResponseEntity<List<PharmacistDetailsProjection>> getAllPharamcists();
+	ResponseEntity<List<PharmacistRatingDTO>> getAllPharamcists();
 	ResponseEntity<List<PharmacistDetailsProjection>> getAllPharmacistData(Long ID);
 	
 }

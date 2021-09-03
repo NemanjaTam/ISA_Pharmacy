@@ -378,7 +378,7 @@ export default {
           .then((response) => response.json())
           .then((data) => (this.pharmacists = data));
       } else if (this.userType == "PATIENT") {
-        fetch(`http://localhost:9005/api/pharmacist/getallpharmacists/`, {
+        fetch(`http://localhost:9005/api/pharmacist/getallpharmacists`, {
           headers,
         })
           .then((response) => response.json())
