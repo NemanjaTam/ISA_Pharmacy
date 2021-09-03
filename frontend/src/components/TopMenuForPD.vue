@@ -85,7 +85,7 @@ export default {
   methods: {
     logout() {
       this.$store.dispatch("logout");
-      this.$router.push("LoginPage");
+      this.$router.push({path:"loginPage"})
       localStorage.setItem("user", null);
     },
   },

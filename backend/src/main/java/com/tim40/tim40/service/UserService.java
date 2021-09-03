@@ -103,7 +103,9 @@ public class UserService implements IUserService {
 	@Override
 	public ResponseEntity<UserDTO> updateUser(UserDTO userDTO) {
 		User user = userRepository.getById(userDTO.getId());
+		System.out.println(userDTO.getId());
 		user.update(userDTO);
+		
 		userRepository.save(user);
 		return new ResponseEntity<UserDTO>(new UserDTO(user), HttpStatus.OK);
 	}

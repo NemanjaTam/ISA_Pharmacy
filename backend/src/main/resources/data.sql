@@ -623,9 +623,9 @@ insert into pharmacy_rating(rating,patient_id,pharmacy_id) values (5,25,2)
 
 insert into loyalty_program(bodovi, naziv, popust) values (30, 'Neki naziv', 23.4)
 
-insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id, loyalty_type_id, points) values ('Patient', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic21@gmail.com', true, 'Nikola', 'kinzo','+381613238249', 'Antonic', 'PATIENT', 0, null, 1, 5) 
+insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id, loyalty_type_id, points) values ('Patient', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic51@gmail.com', true, 'Nikola', 'kinzo','+381613238249', 'Antonic', 'PATIENT', 0, null, 1, 5) 
 
-insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id, loyalty_type_id, points) values ('Patient', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic21@gmail.com', true, 'Milos', 'kinzo','+381613238249', 'Antonic', 'PATIENT', 0, null, 1, 40) 
+insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id, loyalty_type_id, points) values ('Patient', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic52@gmail.com', true, 'Milos', 'kinzo','+381613238249', 'Antonic', 'PATIENT', 0, null, 1, 40) 
 
 insert into complaints(reply, text, patient_id, system_admin_id) values('', 'Prva zalba', 41, null)
 
