@@ -155,6 +155,7 @@ export default {
          this.$store.dispatch('setMedications', res);
       });
       this.$router.push({path:'medications'})
+      
      },
      addType() {
          console.log(parseInt(this.loyalty.bodovi) + " " + this.loyalty.naziv);
