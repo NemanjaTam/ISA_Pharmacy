@@ -103,6 +103,15 @@ export default {
                 this.$router.push({ name: "SystemAdminHome" });
               }
             } 
+              else if (user.userType == "PATIENT") {
+              if (user.firstTimeLogging) {
+                this.$store.dispatch("updateUser", user);
+                this.$router.push({ name: "FirstTimeLogging" });
+              } else {
+                this.$store.dispatch("updateUser", user);
+                this.$router.push({ name: "HomePage" });
+              }
+            } 
             else {
               if (user.firstTimeLogging) {
                 this.$store.dispatch("updateUser", user);

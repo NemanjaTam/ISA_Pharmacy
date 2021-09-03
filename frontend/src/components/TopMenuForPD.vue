@@ -45,6 +45,20 @@
             >
           </b-nav-item>
           </b-navbar-nav>
+          <b-navbar-nav v-if="!isDermatologist">
+        <b-nav-item>
+            <router-link to="/sendComplaint" class="routerlink"
+              >Send complaint</router-link
+            >
+          </b-nav-item>
+          </b-navbar-nav>
+          <b-navbar-nav v-if="!isDermatologist">
+        <b-nav-item>
+            <router-link to="/complaintsUser" class="routerlink"
+              >Complaints</router-link
+            >
+          </b-nav-item>
+          </b-navbar-nav>
         <b-navbar-nav class="ml-auto">
           <b-nav-item>
             <b-button style="background-color:red" v-on:click="logout"
@@ -71,7 +85,7 @@ export default {
   methods: {
     logout() {
       this.$store.dispatch("logout");
-      this.$router.push("LoginPage");
+      this.$router.push({path:"loginPage"})
       localStorage.setItem("user", null);
     },
   },
