@@ -50,7 +50,9 @@ public class UserController {
 	public ResponseEntity<UserDTO> register(@RequestBody UserDTO userDTO) throws Exception
 	{
 		UserDTO registeredUser = userService.register(userDTO);
-		
+		if(registeredUser == null) {
+			return new ResponseEntity<UserDTO>(HttpStatus.BAD_REQUEST);
+		}
 		return new ResponseEntity<UserDTO>(registeredUser, HttpStatus.OK);
 	}
 	

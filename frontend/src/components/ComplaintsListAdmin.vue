@@ -1,6 +1,6 @@
 <template>
     <div class="background">
-        <TopMenuForDP/>
+        <NavbarSystemAdmin/>
         <div class="center">
             <table class="table table-striped table-inverse table-responsive align">
             <thead class="thead-inverse">
@@ -26,11 +26,12 @@
 
 <script>
 import axios from 'axios'
-import TopMenuForDP from '../components/TopMenuForPD.vue'
+import NavbarSystemAdmin from '../components/NavbarSystemAdmin.vue'
+
 export default {
     name: "ComplaintsListAdmin",
     components: {
-        TopMenuForDP
+        NavbarSystemAdmin
     },
     data() {
         return {

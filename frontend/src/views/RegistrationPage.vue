@@ -18,13 +18,13 @@
                           <b-form-input type="text" v-model="user.name" placeholder="enter name" style="font-style:italic" required/>
                           <b-form-input type="text" v-model="user.surname" placeholder="enter surname" style="font-style:italic" required/>
                           <b-form-input type="text" v-model="user.address.state" placeholder="enter state" style="font-style:italic" required/>
-                          <b-form-input type="text" v-model="user.address.citty" placeholder="enter city" style="font-style:italic" required/>
+                          <b-form-input type="text" v-model="user.address.city" placeholder="enter city" style="font-style:italic" required/>
                           <b-form-input type="text" v-model="user.address.postalCode" placeholder="enter postal code" style="font-style:italic" required/>
                           <b-form-input type="text" v-model="user.address.street" placeholder="enter street" style="font-style:italic" required/>
                           <b-form-input type="text" v-model="user.address.state" placeholder="enter state" style="font-style:italic" required/>
                           <b-form-input type="text" v-model="user.address.number" placeholder="enter number of house/building" style="font-style:italic" required/>
                           <b-form-input type="text" v-model="user.phone" placeholder="enter phone number" style="font-style:italic" required/>
-                          <input type="submit" style="color: white" name="" value="Register" href="#">
+                          <input type="submit" @click="onSubmit" style="color: white" name="" value="Register" href="#">
                       </form>
                   </div>
               </div>
@@ -50,7 +50,7 @@ export default {
        confirmPassword: "",
        name: "",
        surname: "",
-       usertype: "PATIENT",
+       userType: "PATIENT",
        address: {
             state: "",
             city: "",
@@ -72,7 +72,13 @@ export default {
         alert("Passwords don't match!");
         return;
       }
-      axios.post("http://localhost:9005/api/user/register", this.user);
+      axios.post("http://localhost:9005/api/user/register", this.user).catch(
+        error =>{
+          if(error.response.status == 400) {
+            alert("User with same email already exists!")
+          }
+        }
+      )
 
     },
     onReset(event) {

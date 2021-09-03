@@ -12,6 +12,8 @@
         description="We'll never share your email with anyone else."
         
       >
+       <b-form-select size="sm" v-model="pharmacy" name="" style="font-style:italic" :options="options">
+       </b-form-select>    
          <b-form-input 
           id="input-1"
           v-model="user.email"
@@ -215,9 +217,11 @@ export default {
             number: ""
        },
        phone: "",
-       isFirstTimeLogging: false
+       isFirstTimeLogging: false,
+       pharmacy: [],
+      
       },
-  
+   options: [],
       show: true,
     };
   },
@@ -245,6 +249,7 @@ export default {
             number: ""
        },
        phone: "",
+       pharmacy: [],
        isFirstTimeLogging: false
       }
       alert("Pharmacy admin is successfully added!")
@@ -255,6 +260,18 @@ export default {
     }
 
 
+  },
+   mounted: function() {
+       axios.get("http://localhost:9005/api/pharmacy/all").then((el)=>el.data).then(res => {
+        console.log(res);
+        this.options = res.map((el) => {
+          return {
+            value: el.id, 
+            text: el.name,
+
+          }
+        });
+      });
   },
   computed: {
       validation() {

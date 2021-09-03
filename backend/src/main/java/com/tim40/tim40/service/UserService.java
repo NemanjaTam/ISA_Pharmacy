@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.tim40.tim40.dto.ComplaintDTO;
 import com.tim40.tim40.dto.LoginDTO;
 import com.tim40.tim40.dto.UserDTO;
@@ -62,14 +64,18 @@ public class UserService implements IUserService {
 		return userRepository.findById(id).orElseGet(null);
 	}
 
+	@Transactional
 	@Override
 	public UserDTO register(UserDTO userDTO) throws Exception {
 		Address address = new Address(userDTO.getAddress().getState(), userDTO.getAddress().getCity(),
 				userDTO.getAddress().getStreet(), userDTO.getAddress().getNumber(), userDTO.getAddress().getPostalCode());
 		
-		User user = new User(userDTO.getName(), userDTO.getSurname(), userDTO.getEmail(), userDTO.getPassword(), address, userDTO.getUserType(),true, userDTO.getPhone());
-		user = this.userRepository.save(user);
-		return new UserDTO (user);
+		if(userRepository.findByEmail(userDTO.getEmail()).orElse(null) == null) {
+			User user = new User(userDTO.getName(), userDTO.getSurname(), userDTO.getEmail(), userDTO.getPassword(), address, userDTO.getUserType(),true, userDTO.getPhone());
+			user = this.userRepository.save(user);
+			return new UserDTO (user);
+		}
+			return null;
 	}
 
 	@Override
@@ -181,12 +187,13 @@ public class UserService implements IUserService {
 		
 		
 	}
-
+	
+	@Transactional
 	@Override
 	public void respondToComplaint(ComplaintDTO comp) {
 		// TODO Auto-generated method stub
 		System.out.println(comp);
-		Complaint c = complaintRepository.getById(comp.getId());
+		Complaint c = complaintRepository.getComplaintforReply(comp.getId());
 		SystemAdmin sysAdm = systemAdminRepository.findById(comp.getAdmId()).get();
 		Set<Complaint> cmps = sysAdm.getComplaints();
 		cmps.add(c);
