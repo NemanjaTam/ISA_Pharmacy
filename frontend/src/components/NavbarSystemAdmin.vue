@@ -33,7 +33,7 @@
                         </b-nav-item>
 
                         <b-nav-item>
-                           <router-link to="" v-if="userType == 'SYSTEM_ADMINISTRATOR'" class="routerlink">Complaints</router-link>
+                           <router-link to="/complaintsAdmin" v-if="userType == 'SYSTEM_ADMINISTRATOR'" class="routerlink">Complaints</router-link>
                         </b-nav-item>
 
                    <b-nav-item>
@@ -94,7 +94,7 @@ export default {
    methods: {
     logout() {
       this.$store.dispatch("logout");
-      this.$router.push("LoginPage");
+      this.$router.push({path:"loginPage"})
       localStorage.setItem("user", null);
     }
   }

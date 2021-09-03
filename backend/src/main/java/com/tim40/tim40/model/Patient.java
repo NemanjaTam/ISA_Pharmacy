@@ -57,8 +57,6 @@ public class Patient extends User {
 	@OneToMany(mappedBy = "patient")
     private Set<PharmacistRating> pharmacistRatings = new HashSet<PharmacistRating>();
 	
-
-	
 	@ManyToMany
     @JoinTable
     (
@@ -71,4 +69,8 @@ public class Patient extends User {
 	@OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 	@JoinColumn(name = "loyalty_type_id", referencedColumnName = "id")
 	private LoyaltyProgram lp;
+
+	@OneToMany(mappedBy = "patient", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private Set<Complaint> complaints = new HashSet<Complaint>();
+
 }

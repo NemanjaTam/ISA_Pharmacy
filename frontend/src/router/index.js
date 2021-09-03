@@ -45,6 +45,11 @@ import Orders from "../components/Orders.vue"
 import Offers from "../components/Offers.vue"
 import OrderId from "../components/OrderId.vue"
 import OfferEdit from "../components/OfferEdit.vue"
+import ComplaintsListUser from "../components/ComplaintsListUser.vue"
+import ComplaintsListAdmin from "../components/ComplaintsListAdmin.vue"
+import OneComplaintUser from "../components/OneComplaintUser.vue"
+import OneComplaintAdmin from "../components/OneComplaintAdmin.vue"
+import SendComplaint from "../components/SendComplaint.vue"
 
 Vue.use(VueRouter);
 
@@ -266,6 +271,30 @@ const routes = [{
         component: OrderId
     },
 
+        path: "/oneComplaint/:id",
+        name: "OneComplaintUser",
+        component: OneComplaintUser,
+    },
+    {
+        path: "/oneComplaintAdmin/:id",
+        name: "OneComplaintAdmin",
+        component: OneComplaintAdmin,
+    },
+    {
+        path: "/sendComplaint",
+        name: "SendComplaint",
+        component: SendComplaint,
+    },
+    {
+        path: "/complaintsUser",
+        name: "ComplaintsListUser",
+        component: ComplaintsListUser,
+    },
+    {
+        path: "/complaintsAdmin",
+        name: "ComplaintsListAdmin",
+        component: ComplaintsListAdmin,
+    },
 ];
 
 export const router = new VueRouter({
