@@ -8,13 +8,22 @@ Open terminal in frontend and type "npm install" ant then "npm run serve"
 
 Open project in Eclipse and start Tim40Application.java
 
-# Student 4 - Jovana Jakovljevic
+# Student 4 - Jovana Jakovljevic RA202/2017
 
-Za testiranje administratora sistema, logujte se pomocu "joksi1@gmail.com" i sifre "joksi".
-Za testiranje pacijenta, logujte se pomocu "antonic21@gmail.com" i sifre "kinzo".
+Za testiranje administratora sistema, logujte se pomocu joksi1@gmail.com i sifre joksi.
 
 Pretraga lekova je moguca po svim kriterijumima koji su dati u kolonama tabele.
 
+Za testiranje pacijenta, logujte se pomocu antonic21@gmail.com i sifre kinzo.
+
+Za testiranje dobavljaca, logujte se pomocu joksi2@gmail.com i sifre joksi.
+Duplim klikom na odredjenu narudzbenicu otvara se stranica za pravljenje nove ponude. Dobavljac moze da vidi sve ponude koje je dao, kao i da ih filtrira po statusu.
+
+Nisam stigla sve u potpunosti da zavrsim, bila sam bolesna i planovi su mi se totalno poremetili. Ovo je jedan od dva poslednja ispita koja su mi ostala do kraja studiranja..
+
+Nadam se da cete uvaziti moje razloge.
+
+Srdacno, Jovana Jakovljevic
 
 # Nikola Antonic
 
