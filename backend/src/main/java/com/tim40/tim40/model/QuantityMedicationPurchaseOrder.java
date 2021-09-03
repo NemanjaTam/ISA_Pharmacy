@@ -14,12 +14,12 @@ public class QuantityMedicationPurchaseOrder {
 	private Long id;
 	
 	@Column(nullable = false)
+	private Long orderId;
+	
+	@Column(nullable = false)
 	private int quantity;
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	private Medication medication;
 	
-	
-	
-
 }

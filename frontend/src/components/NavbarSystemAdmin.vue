@@ -36,19 +36,28 @@
                            <router-link to="/complaintsAdmin" v-if="userType == 'SYSTEM_ADMINISTRATOR'" class="routerlink">Complaints</router-link>
                         </b-nav-item>
 
+                   <b-nav-item>
+                      <router-link to="/orders" v-if="userType == 'SUPPLIER'" class="routerlink">Orders</router-link>
+                  </b-nav-item>
+
+                  <b-nav-item>
+                      <router-link to="/my-offers" v-if="userType == 'SUPPLIER'" class="routerlink">My Offers</router-link>
+                  </b-nav-item>
+
+
                 </b-navbar-nav>
 
                 <b-navbar-nav class="ml-auto">
                    <b-nav-item>
-                     <router-link to="/view-profile" v-if="userType == 'SYSTEM_ADMINISTRATOR'" class="routerlink">Profile</router-link>
+                     <router-link to="/view-profile" v-if="userType == 'SYSTEM_ADMINISTRATOR' || 'SUPPLIER'" class="routerlink">Profile</router-link>
                    </b-nav-item>
 
                     <b-nav-item>
-                        <router-link to="/edit-profile" v-if="userType == 'SYSTEM_ADMINISTRATOR'" class="routerlink">Edit Profile</router-link>
+                        <router-link to="/edit-profile" v-if="userType == 'SYSTEM_ADMINISTRATOR' || 'SUPPLIER'" class="routerlink">Edit Profile</router-link>
                      </b-nav-item>
 
                    <b-nav-item>
-                     <b-button style="background-color:red" v-if="userType == 'SYSTEM_ADMINISTRATOR'" v-on:click="logout">Logout</b-button>
+                     <b-button style="background-color:red" v-if="userType == 'SYSTEM_ADMINISTRATOR' || 'SUPPLIER'" v-on:click="logout">Logout</b-button>
                   </b-nav-item>
                 </b-navbar-nav>
             </b-collapse>

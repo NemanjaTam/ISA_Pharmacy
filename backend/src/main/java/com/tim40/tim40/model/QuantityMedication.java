@@ -25,4 +25,9 @@ public class QuantityMedication {
 	@ManyToOne
     @JoinColumn(name = "pharmacy_id", nullable = false)
 	private Pharmacy pharmacy;
+	
+	public QuantityMedication(int quantity, Medication medication) {
+		this.quantity = quantity;
+		this.medication = medication;
+	}
 }

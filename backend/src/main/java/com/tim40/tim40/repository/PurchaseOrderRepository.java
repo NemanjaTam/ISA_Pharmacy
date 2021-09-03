@@ -1,11 +1,14 @@
 package com.tim40.tim40.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.tim40.tim40.model.PurchaseOrder;
+import com.tim40.tim40.model.enums.PurchaseOrderStatus;
 
 public interface PurchaseOrderRepository extends JpaRepository<PurchaseOrder, Long> {
 	//ne dirati nista
@@ -16,4 +19,5 @@ public interface PurchaseOrderRepository extends JpaRepository<PurchaseOrder, Lo
     @Query(value="delete from purchase_order_list_quantity_medications_purchase as po where po.purchase_order_id = :id",nativeQuery = true)
     void deleteOrderedQuantity(@Param("id") Long id);
 
+    List<PurchaseOrder> findByPurchaseOrderStatus(PurchaseOrderStatus purchaseStatus);
 }

@@ -30,10 +30,10 @@ public interface IPharmacyService {
 	public boolean CreatePurchaseOrder(Pharmacy pharmacy, PurchaseOrderDTO dto);
 	public boolean CreatePurchaseOrderForNewMedication(Pharmacy pharmacy, PurchaseOrderDTO dto);
 	public Set<PurchaseOrder> getAllPurchaseOrders(Long id);
-	public List<Offer> acceptOffer(AcceptOfferDTO dto);
+//	public List<Offer> acceptOffer(AcceptOfferDTO dto);
 	//delete
 	public boolean deleteMedication(Long id,Long medicationId);
-	public boolean deletePurchaseOrder(Long id,Long pharmacyId);
+	//public boolean deletePurchaseOrder(Long id,Long pharmacyId);
 	//absence
 	public Set<AbsenceDetailedDTO> getAllUnapprovedAbsencesByPharmacyId(Long id);
 	public Set<Absence> getAllApprovedAbsencesByPharmacyId(Long id);

@@ -210,7 +210,7 @@ public class PharmacyService implements IPharmacyService {
 		return purchaseOrdersDTO;
 	}
 	
-	@Override
+/*	@Override
 	public List<Offer> acceptOffer(AcceptOfferDTO dto){
 		Pharmacy pharmacy = this.pharmacyRepository.getById(dto.getPharmacyId());
 //		List<QuantityMedicationPurchaseOrder> qmpo = this.
@@ -219,12 +219,12 @@ public class PharmacyService implements IPharmacyService {
 		for (PurchaseOrder purchaseOrders : pharmacy.getPurchaseOrders()) {
 			if(purchaseOrders.getId().equals(dto.getPurchaseOrderId())) {
 				 purchaseOrder.setAdminPharmacy(purchaseOrders.getAdminPharmacy());
-				 purchaseOrder.setEndTime(purchaseOrders.getEndTime());
-				 purchaseOrder.setStartTime(purchaseOrders.getStartTime());
-				 purchaseOrder.setId(purchaseOrders.getId());
+//				 purchaseOrder.setEndTime(purchaseOrders.getEndTime());
+	//			 purchaseOrder.setStartTime(purchaseOrders.getStartTime());
+	//			 purchaseOrder.setId(purchaseOrders.getId());
 				 purchaseOrders.setPurchaseOrderStatus(PurchaseOrderStatus.OBRADJENA);
 				 purchaseOrder.setOffers(purchaseOrders.getOffers());
-				 purchaseOrder.setPharmacy(pharmacy);
+		//		 purchaseOrder.setPharmacy(pharmacy);
 				 purchaseOrder.setPurchaseOrderStatus(purchaseOrders.getPurchaseOrderStatus());
 			     offers = purchaseOrders.getOffers();
 				
@@ -258,10 +258,10 @@ public class PharmacyService implements IPharmacyService {
         
 		this.pharmacyRepository.save(pharmacy);
 		
-		return offers;
-	}
+		return offers;*
+	}*/
 	//ne menjati,koristi se
-	public void setQuantityFromAcceptedOffer(Pharmacy pharmacy,PurchaseOrder purchaseOrder) {
+/*	public void setQuantityFromAcceptedOffer(Pharmacy pharmacy,PurchaseOrder purchaseOrder) {
 	    int quantity = 0;
 		for (QuantityMedication qm : pharmacy.getMedicationQuantity()) {
 			for (QuantityMedicationPurchaseOrder pm : purchaseOrder.getQuantityMedicationsPurchase()) {
@@ -281,7 +281,7 @@ public class PharmacyService implements IPharmacyService {
 		}
 		
 		
-	}
+	}*/
 	//ne menjati
 	@Override
 	public boolean deleteMedication(Long id,Long medicationId) {
@@ -351,21 +351,21 @@ public class PharmacyService implements IPharmacyService {
 		return found;
 	}
 
-	@Override
+/*	@Override
 	public boolean deletePurchaseOrder(Long id, Long pharmacyId) {
 		Pharmacy pharmacy = this.getById(pharmacyId);
 		for(PurchaseOrder po : pharmacy.getPurchaseOrders()) {
 			if(po.getId().equals(id)) {
-				if(po.getOffers().size() > 1) {
-					return false;
-					
+		//		if(po.getOffers().size() > 1) {
+		//			return false;
+		//			
 				}
 			}
 		}
 		this.purchaseOrderRepository.deleteOrderedQuantity(id);
 		this.purchaseOrderRepository.deleteById(id, pharmacyId);
 		return true;
-	}
+	}*/
 
 	@Override
 	public Set<AbsenceDetailedDTO> getAllUnapprovedAbsencesByPharmacyId(Long id) {

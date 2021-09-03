@@ -40,6 +40,11 @@ import RegistrationSupplier from "../components/RegistrationSupplier.vue"
 import RegistrationSystemAdmin from "../components/RegistrationSystemAdmin.vue"
 import AddPharmacy from "../components/AddPharmacy.vue"
 import Pharmacies from "../views/Pharmacies.vue"
+import EditAdmin from "../components/EditAdmin.vue"
+import Orders from "../components/Orders.vue"
+import Offers from "../components/Offers.vue"
+import OrderId from "../components/OrderId.vue"
+import OfferEdit from "../components/OfferEdit.vue"
 import ComplaintsListUser from "../components/ComplaintsListUser.vue"
 import ComplaintsListAdmin from "../components/ComplaintsListAdmin.vue"
 import OneComplaintUser from "../components/OneComplaintUser.vue"
@@ -246,6 +251,26 @@ const routes = [{
         component: Pharmacies
       },
       {
+        path: "/orders",
+        name: "Orders",
+        component: Orders
+    },
+    {
+        path: "/my-offers",
+        name: "Offers",
+        component: Offers
+    },
+    {
+        path:"/edit-offer/:id",
+        name:"OfferEdit",
+        component: OfferEdit
+    },
+    {
+        path: "/orders/:id",
+        name: "OrderId",
+        component: OrderId
+    },
+
         path: "/oneComplaint/:id",
         name: "OneComplaintUser",
         component: OneComplaintUser,
