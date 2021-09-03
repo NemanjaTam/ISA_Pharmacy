@@ -27,4 +27,5 @@ public interface PharmacistRepository extends JpaRepository<Pharmacist, Long> { 
 	
 	@Query("select c from Consultation c where c.pharmacy.id = ?1 and c.patient.id = ?2 and c.isFinished = 'true'")
 	Collection<Consultation> getExaminationsForPatientAndPharmacy(Long idPharm, Long idPacijenta);
+
 }

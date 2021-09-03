@@ -53,4 +53,5 @@ public interface DermatologistRepository extends JpaRepository<Dermatologist, Lo
 	
 	@Query("select a from Appointment a where a.pharmacy.id = ?1 and a.patient.id = ?2 and a.isFinished = 'true'")
 	Collection<Appointment> getExaminationsForPatientAndPharmacy(Long idPharm, Long idPacijenta);
+
 }

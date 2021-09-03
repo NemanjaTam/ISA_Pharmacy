@@ -239,12 +239,9 @@ public class PharmacyController {
 			}
 		
 	}
-	
+
 	@GetMapping(value="/getSubs/{id}")
 	public List<PharmacyDTO> getSubscribePharms(@PathVariable("id") long id) {
 		return pharmacyService.getPharmaciesSub(id);
 	}
-
-	
-
 }

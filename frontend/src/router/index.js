@@ -270,7 +270,6 @@ const routes = [{
         name: "ComplaintsListAdmin",
         component: ComplaintsListAdmin,
     },
-
 ];
 
 export const router = new VueRouter({
