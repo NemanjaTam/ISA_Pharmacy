@@ -37,6 +37,7 @@ to see report page go to Pharmacy->more-> report and generate report :
 3.) This month - no data
 4.) For certain period -> from january 2021 there are some dates
 5.) Pharmacy statistics
+
 ** You can check application to see if messages are sent or you can login to our email and see sent mails(see application properties for credentials) or you can subscribe
 
 
