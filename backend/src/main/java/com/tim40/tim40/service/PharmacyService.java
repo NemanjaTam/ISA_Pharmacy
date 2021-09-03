@@ -15,6 +15,7 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.persistence.LockModeType;
+import javax.persistence.OptimisticLockException;
 
 import org.hibernate.internal.build.AllowSysOut;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -347,14 +348,18 @@ public class PharmacyService implements IPharmacyService {
 //ne menjati
 	@Override
 	@Transactional(propagation =  Propagation.REQUIRES_NEW,isolation = Isolation.REPEATABLE_READ,rollbackFor = Exception.class,readOnly = false)
-	public boolean editMedication(MedicationQuantityDTO dto, Long id) {
+	public Medication editMedication(MedicationQuantityDTO dto, Long id) {
 		Pharmacy pharmacy = this.pharmacyRepository.getById(id);
 		
-		
+		Medication med = new Medication();
 		boolean found = false;
 		for(QuantityMedication qm : pharmacy.getMedicationQuantity()) {
 			if(qm.getMedication().getId().equals(dto.getId())) {
-				Medication med = this.medicationRepository.getById(qm.getMedication().getId());
+			 med = this.medicationRepository.getById(qm.getMedication().getId());
+			 if(dto.getVersion() != med.getVersion()) {
+				   throw new OptimisticLockException();
+				   
+			 }
 				
 				med.setId(qm.getMedication().getId());
 				med.setCode(dto.getCode());
@@ -365,6 +370,9 @@ public class PharmacyService implements IPharmacyService {
 				med.setTypeOfMedication(dto.getTypeOfMedication());
 				med.setPrescriptionRegime(dto.getPrescriptionRegime());
 				med.setContraindications(dto.getContraindications());
+				med.setRecommendedIntake(dto.getRecommendedIntake());
+			
+			
 			System.out.println(med.getName());
 //				qm.getMedication().setCode(dto.getCode());
 //				qm.getMedication().setName(dto.getName());
@@ -381,7 +389,7 @@ public class PharmacyService implements IPharmacyService {
 		}
 		
 //	this.pharmacyRepository.save(pharmacy);
-		return found;
+		return med;
 	}
 
 	@Override

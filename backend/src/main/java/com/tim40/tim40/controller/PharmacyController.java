@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.persistence.OptimisticLockException;
+
 import org.springframework.transaction.annotation.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -168,10 +170,12 @@ public class PharmacyController {
 	 //standardni izolacioni nivo + optimisticko zakljucavanje
 
 	@PostMapping(value = "/edit-medication/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public boolean editMedication(@RequestBody MedicationQuantityDTO dto,@PathVariable("id") Long pharmacyId){
-
+	public Medication editMedication(@RequestBody MedicationQuantityDTO dto,@PathVariable("id") Long pharmacyId){
+    try {
         	return this.pharmacyService.editMedication(dto, pharmacyId);
-
+    }catch(OptimisticLockException e){
+    	return null;
+    }
 		
 		
 	}

@@ -45,6 +45,7 @@ public class MedicationQuantityDTO {
     private Set<MedicationRating> ratings;
 	private List<Medication> replacementMedications = new ArrayList<Medication>();
 	private Long quantity;
+	private Long version;
 	
 	
     

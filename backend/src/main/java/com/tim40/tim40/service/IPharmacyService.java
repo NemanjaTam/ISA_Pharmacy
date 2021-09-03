@@ -25,7 +25,7 @@ public interface IPharmacyService {
 	public List<String> getAllSubscribers(Long pharmacyID);
 	public Long getPharmacyIdByUserId(Long id);
 	// offers i medication
-	public boolean editMedication(MedicationQuantityDTO dto, Long id);
+	public Medication editMedication(MedicationQuantityDTO dto, Long id);
 	public boolean CreatePurchaseOrder(Pharmacy pharmacy, PurchaseOrderDTO dto);
 	public boolean CreatePurchaseOrderForNewMedication(Pharmacy pharmacy, PurchaseOrderDTO dto);
 	public Set<PurchaseOrder> getAllPurchaseOrders(Long id);
