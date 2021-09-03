@@ -148,7 +148,7 @@ public class PharmacyController {
 	//ne menjati
 	@PostMapping(value = "/accept-offer",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.OK)
-@Transactional()
+	@Transactional(propagation =  Propagation.REQUIRES_NEW,isolation = Isolation.REPEATABLE_READ,rollbackFor = Exception.class,readOnly = false)
 	 //ovde je transakcija jer sta ako se desi da se ne apdejtuje purchase order status?! ->nekonzistentno
 	public List<Offer> acceptAndDeclineOffers(@RequestBody AcceptOfferDTO acceptOffer){
 		List<Offer> offers = this.pharmacyService.acceptOffer(acceptOffer);
