@@ -102,19 +102,6 @@ insert into medication_quantity (quantity, medication_id,pharmacy_id) values (10
 insert into medication_quantity (quantity, medication_id,pharmacy_id) values (10, 3,1)
 insert into medication_quantity (quantity, medication_id,pharmacy_id) values (10, 4,2)
 
-
-insert into patient_allerged_on_medications(patient_id, medication_id) values (21, 1)
-insert into patient_allerged_on_medications(patient_id, medication_id) values (21, 2)
-insert into patient_allerged_on_medications(patient_id, medication_id) values (21, 3)
-insert into patient_allerged_on_medications(patient_id, medication_id) values (21, 4)
-insert into patient_allerged_on_medications(patient_id, medication_id) values (22, 5)
-insert into patient_allerged_on_medications(patient_id, medication_id) values (22, 6)
-insert into patient_allerged_on_medications(patient_id, medication_id) values (22, 7)
-insert into patient_allerged_on_medications(patient_id, medication_id) values (22, 8)
-insert into patient_allerged_on_medications(patient_id, medication_id) values (23, 9)
-insert into patient_allerged_on_medications(patient_id, medication_id) values (23, 10)
-insert into patient_allerged_on_medications(patient_id, medication_id) values (23, 11)
-insert into patient_allerged_on_medications(patient_id, medication_id) values (23, 12)
 insert into patient_allerged_on_medications(patient_id, medication_id) values (24, 13)
 insert into patient_allerged_on_medications(patient_id, medication_id) values (24, 14)
 insert into patient_allerged_on_medications(patient_id, medication_id) values (24, 15)
@@ -343,9 +330,6 @@ insert into medications_replacement_medications (medication_id, replacement_medi
 --insert into replacement_medications (medication_id, replacement_medication_id) values (19,18)
 --insert into replacement_medications (medication_id, replacement_medication_id) values (19,5)
 
-insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, 'SN1345', '2021-06-30 00:00:00-08', '2021-06-01 00:00:00-08', 1,21,1)
-insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, 'SN1315', '2021-06-30 00:00:00-08', '2021-06-01 00:00:00-08', 2,22,1)
-insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, 'SN1245', '2021-06-09 00:00:00-08', '2021-06-03 00:00:00-08', 3,23,1)
 insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, 'SN1465', '2021-06-05 00:00:00-08', '2021-06-03 00:00:00-08', 4,24,1)
 insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, 'SN1465', '2021-06-05 00:00:00-08', '2021-06-03 00:00:00-08', 1,24,1)
 
@@ -399,16 +383,10 @@ insert into workdays (endtime, starttime, user_id) values ('2021-07-13 14:00:00-
 --insert into workdays (endtime, starttime, user_id) values ('2021-06-13 14:00:00-08', '2021-06-13 22:00:00-08', 19)
 --insert into workdays (endtime, starttime, user_id) values ('2021-06-13 14:00:00-08', '2021-06-13 22:00:00-08', 20)
 
-
-
-insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (false, true, '2021-06-13 10:00:00-08', '2021-06-13 09:30:00-08', '', 1, 21, 1)
-insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (false, true, '2021-06-13 10:30:00-08', '2021-06-13 10:00:00-08', '', 1, 22, 1)
-insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (false, true, '2021-06-13 11:00:00-08', '2021-06-13 10:30:00-08', '', 1, 23, 1)
 insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (false, true, '2021-06-13 11:30:00-08', '2021-06-13 11:00:00-08', '', 1, 24, 1)
 insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (false, true, '2021-06-13 12:00:00-08', '2021-06-13 11:30:00-08', '', 1, 25, 1)
 insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (false, true, '2021-06-13 12:30:00-08', '2021-06-13 12:00:00-08', '', 1, 26, 1)
 insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (false, true, '2021-06-13 13:00:00-08', '2021-06-13 12:30:00-08', '', 1, 27, 1)
-insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (false, true, '2021-06-13 13:30:00-08', '2021-06-13 13:00:00-08', '', 1, 21, 1)
 
 insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (false, false, '2021-06-13 10:00:00-08', '2021-06-13 09:30:00-08', '', null, null, 1)
 insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (false, false, '2021-06-13 10:30:00-08', '2021-06-13 10:00:00-08', '', null, null, 1)
@@ -420,18 +398,11 @@ insert into appointments (is_finished, is_taken, endtime, starttime, report, der
 insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (false, false, '2021-08-13 13:30:00-08', '2021-08-13 13:00:00-08', '', null, null, 1)
 
 
-
-
-insert into consultations (is_finished, is_taken, endtime, starttime, report, patient_id, pharmacist_id, pharmacy_id) values (false, false, '2021-06-13 10:00:00-08', '2021-06-13 09:30:00-08', '', 22, 11, 1)
-insert into consultations (is_finished, is_taken, endtime, starttime, report, patient_id, pharmacist_id, pharmacy_id) values (false, false, '2021-06-13 10:30:00-08', '2021-06-13 10:00:00-08', '', 23, 11, 1)
 insert into consultations (is_finished, is_taken, endtime, starttime, report, patient_id, pharmacist_id, pharmacy_id) values (false, false, '2021-06-13 11:00:00-08', '2021-06-13 10:30:00-08', '', 24, 11, 1)
 insert into consultations (is_finished, is_taken, endtime, starttime, report, patient_id, pharmacist_id, pharmacy_id) values (false, false, '2021-06-13 11:30:00-08', '2021-06-13 11:00:00-08', '', 25, 11, 1)
 insert into consultations (is_finished, is_taken, endtime, starttime, report, patient_id, pharmacist_id, pharmacy_id) values (false, false, '2021-06-13 12:00:00-08', '2021-06-13 11:30:00-08', '', 26, 11, 1)
 insert into consultations (is_finished, is_taken, endtime, starttime, report, patient_id, pharmacist_id, pharmacy_id) values (false, false, '2021-06-13 12:30:00-08', '2021-06-13 12:00:00-08', '', 27, 11, 1)
 insert into consultations (is_finished, is_taken, endtime, starttime, report, patient_id, pharmacist_id, pharmacy_id) values (false, false, '2021-06-13 13:00:00-08', '2021-06-13 12:30:00-08', '', 28, 11, 1)
-insert into consultations (is_finished, is_taken, endtime, starttime, report, patient_id, pharmacist_id, pharmacy_id) values (false, false, '2021-06-13 13:30:00-08', '2021-06-13 13:00:00-08', '', 29, 11, 1)
-insert into consultations (is_finished, is_taken, endtime, starttime, report, patient_id, pharmacist_id, pharmacy_id) values (false, false, '2021-06-13 14:00:00-08', '2021-06-13 13:30:00-08', '', 22, 11, 1)
-
 
 insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Pharmacy_admin', 'Novi Sad', '23', 21242, 'Srbija', 'Stefana Nemanje1', 'pjevalica@gmail.com', true, 'Bojana', 'bobi','+381613238240', 'Pjevalica', 'PHARMACY_ADMINISTRATOR', null, 1)
 insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Pharmacy_admin', 'Novi Sad', '23', 21245, 'Srbija', 'Stefana Nemanje1', 'sara@gmail.com', true, 'Sara', 'admin','+381613238249', 'Jovic', 'PHARMACY_ADMINISTRATOR', null, 1)
