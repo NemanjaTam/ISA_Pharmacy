@@ -33,8 +33,8 @@ set to INACTIVE. If you choose date and time in the future new price list status
 MAPS & REPORT: Map is displayed on pharmacy page (see 3.8) 
 to see report page go to Pharmacy->more-> report and generate report :
 1.) From current date to one year ago
-2.) From current date to four months ago - no data
-3.) This month
+2.) From current date to four months ago 
+3.) This month - no data
 4.) For certain period -> from january 2021 there are some dates
 5.) Pharmacy statistics
 
