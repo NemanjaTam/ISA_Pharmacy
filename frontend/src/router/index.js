@@ -206,7 +206,12 @@ const routes = [
         path:'patient-home',
         name: 'PatientHomePage',
         component: PatientHome,
-      }
+      },
+      {
+        path: "/list",
+        name: "listPatient",
+        component: SearchListFilter,
+      },
 ];
 
 export const router = new VueRouter({

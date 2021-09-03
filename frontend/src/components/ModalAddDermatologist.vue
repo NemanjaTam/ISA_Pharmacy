@@ -2,7 +2,7 @@
   <!-- MODALNI DIJALOG ZA LEKOVE - BOJANA -->
 
   <div>
-    <b-button @click="onshow(selected)" variant="success">Add</b-button>
+    <b-button @click="onshow(selected)" variant="success" v-if="type == 'PHARMACY_ADMINISTRATOR'">Add</b-button>
     <b-modal v-model="show" ref="modal" title="Add dermatologist" hide-footer>
       <b-list-group
         v-for="(listItem, index) in dermatologists"

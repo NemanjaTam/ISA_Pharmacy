@@ -2,7 +2,7 @@
   <!-- MODALNI DIJALOG ZA LEKOVE - BOJANA -->
 
   <div>
-    <b-button variant="warning" @click="onshow(selected)"
+    <b-button variant="warning" @click="onshow(selected)" v-if="type == 'PHARMACY_ADMINISTRATOR'"
       >APPOINTMENTS</b-button
     >
     <b-modal v-model="show" ref="modal" title="Edit user" hide-footer>

@@ -22,6 +22,7 @@ import org.springframework.stereotype.Service;
 import com.tim40.tim40.dto.DermatologistDTO;
 import com.tim40.tim40.dto.DermatologistDetailsDTO;
 import com.tim40.tim40.dto.DermatologistRatingDTO;
+import com.tim40.tim40.dto.dermDTO;
 import com.tim40.tim40.model.Absence;
 import com.tim40.tim40.model.Appointment;
 import com.tim40.tim40.model.Consultation;
@@ -88,25 +89,53 @@ public class DermatologistService implements IDermatologistService {
 			
 		}
 	//ne menjati,metoda koja vraca dermatologe i sve apoteke u kojima rade
-	public ResponseEntity<List<DermatologistDetailsDTO>> GetDermatologistsAndPharmacyNames(){
+	public ResponseEntity<List<DermatologistRatingDTO>> GetDermatologistsAndPharmacyNames(){
 		List<Dermatologist> dermatologists = dermatologistRepository.findAll();
-		List<DermatologistDetailsDTO> dtoList = new ArrayList<DermatologistDetailsDTO>();
-		for (int i = 0;i < dermatologists.size();i++) {
-			DermatologistDetailsDTO derm = new DermatologistDetailsDTO();
-			derm.setId(dermatologists.get(i).getId());
-			derm.setEmail(dermatologists.get(i).getEmail());
-			derm.setName(dermatologists.get(i).getName());
-			derm.setSurname(dermatologists.get(i).getSurname());
-   		 	List<String> names = new ArrayList<String>();
-   		 	for(Pharmacy pharm: dermatologists.get(i).getPharmacies()) {
-   		 	 names.add(pharm.getName());
-   		 	}
-   		 	derm.setNames(names);
-   		 	dtoList.add(derm);
-
-   		 	
+		List<dermDTO> listDTO = new ArrayList<dermDTO>();
+		for (Dermatologist dermatologist : dermatologists) {
+			List<Integer> pharmacyId = this.dermatologistRepository.getPharmacies(dermatologist.getId());
+			dermDTO derm = new dermDTO();
+			derm.setId(dermatologist.getId());
+			derm.setEmail(dermatologist.getEmail());
+			derm.setName(dermatologist.getName());
+			derm.setSurname(dermatologist.getSurname());
+			for (Integer pharm : pharmacyId) {
+				if(derm.getPharmacyNames() == null) {
+					derm.setPharmacyNames(this.pharmacyRepository.getById(Long.valueOf(pharm)).getName());
+				}else {
+				derm.setPharmacyNames(this.pharmacyRepository.getById(Long.valueOf(pharm)).getName() + " " + derm.getPharmacyNames());
+				}
+			}
+			listDTO.add(derm);
 		}
-	return new ResponseEntity<List<DermatologistDetailsDTO>>(dtoList, HttpStatus.OK);
+		
+		List<DermatologistRatingDTO> dermatologistsWithRatings = new ArrayList<DermatologistRatingDTO>();
+		List<DermatologistRating> ratings = this.dermatologistRatingRepository.findAll();
+		for (dermDTO dermatologistProjection : listDTO) {
+			int rated = 0;
+			int size = 0;
+			for (DermatologistRating dermatologistRating : ratings) {
+				if(dermatologistRating.getDermatologist().getId() == dermatologistProjection.getId()) {
+					
+					rated = rated + dermatologistRating.getRating();
+				
+					size = size + 1;				
+				}
+			}
+	    System.out.println(rated);
+		double avg = Double.valueOf(rated) / Double.valueOf(size);
+		System.out.println(avg);
+		System.out.println(size);
+		DermatologistRatingDTO dto = new DermatologistRatingDTO(dermatologistProjection.getName(), dermatologistProjection.getSurname(), avg,dermatologistProjection.getEmail(),dermatologistProjection.getPharmacyNames());
+			dermatologistsWithRatings.add(dto);
+		}
+		
+		
+		
+		
+		
+
+	return new ResponseEntity<List<DermatologistRatingDTO>>(dermatologistsWithRatings, HttpStatus.OK);
 	}
 	public List<DermatologistRatingDTO> getRatingsForDermatologists(Long id){
 		List<DermatologistRatingDTO> dermatologistsWithRatings = new ArrayList<DermatologistRatingDTO>();
@@ -131,6 +160,31 @@ public class DermatologistService implements IDermatologistService {
 		}
 		return dermatologistsWithRatings;
 	}
+	
+	
+//	public List<DermatologistRatingDTO> getRatingsForDermatologistsForAll(){
+//		List<DermatologistRatingDTO> dermatologistsWithRatings = new ArrayList<DermatologistRatingDTO>();
+//		List<DermatologistRating> ratings = this.dermatologistRatingRepository.findAll();
+//		for (DermatologistDetailsProjection dermatologistProjection : this.dermatologistRepository.getDummy()) {
+//			int rated = 0;
+//			int size = 0;
+//			for (DermatologistRating dermatologistRating : ratings) {
+//				if(dermatologistRating.getDermatologist().getId() == dermatologistProjection.getId()) {
+//					
+//					rated = rated + dermatologistRating.getRating();
+//				
+//					size = size + 1;				
+//				}
+//			}
+//	    System.out.println(rated);
+//		double avg = Double.valueOf(rated) / Double.valueOf(size);
+//		System.out.println(avg);
+//		System.out.println(size);
+//		DermatologistRatingDTO dto = new DermatologistRatingDTO(dermatologistProjection.getName(), dermatologistProjection.getSurname(), avg,dermatologistProjection.getEmail(),dermatologistProjection.getPharmacyName());
+//			dermatologistsWithRatings.add(dto);
+//		}
+//		return dermatologistsWithRatings;
+//	}
 	
 	public Integer removeDermatologist(Long pharmacyId,String email) {
 	
