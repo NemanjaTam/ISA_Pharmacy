@@ -342,7 +342,24 @@ export default {
           }else{
             alert("User exists!");
           }
-          })
+          }).then((response) => response.json())
+          .then(function(data) {
+          
+            return fetch(
+              `http://localhost:9005/api/pharmacist/get-pharmacist-rating/${vm.id}`,
+              {
+                headers: {
+                  Accept: "application/json",
+                  "Content-Type": "application/json",
+                  usertype: vm.type,
+                },
+                method: "GET",
+              }
+            );
+          }) .then((response) => response.json())
+          .then((data) => {  vm.$emit('updateparentPharmacist', data)})
+          .catch();
+         
     },
   },
 };

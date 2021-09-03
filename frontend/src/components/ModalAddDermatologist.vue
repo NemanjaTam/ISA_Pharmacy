@@ -212,6 +212,7 @@ export default {
       )
          }).then((response) => response.json())
           .then(function(data) {
+            vm.respons = data
          
             return fetch(
               `http://localhost:9005/api/dermatologist/get-dermatologist-rating/${vm.id}`,
@@ -225,7 +226,7 @@ export default {
               }
             );
           }) .then((response) => response.json())
-          .then((data) => {   vm.$emit('updateparent', data)})
+          .then((data) => { if(vm.respons){alert("Dermatologist is working!");}  vm.$emit('updateparent', data)})
           .catch();
          
          

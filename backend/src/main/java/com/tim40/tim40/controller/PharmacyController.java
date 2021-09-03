@@ -153,7 +153,7 @@ public class PharmacyController {
 
 	@RequestMapping(method = RequestMethod.POST, path = "/delete-medication/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	@Transactional(propagation = Propagation.REQUIRES_NEW,isolation = Isolation.READ_UNCOMMITTED,rollbackFor = Exception.class)
+	@Transactional(propagation = Propagation.REQUIRES_NEW,isolation = Isolation.REPEATABLE_READ,rollbackFor = Exception.class)
 	public boolean deleteMedication(@RequestBody Long medicationId,@PathVariable("id") Long id){
 		 System.out.println(id + " " + "PHARMACY ID");
 		Pharmacy pharmacy = this.pharmacyService.getById(id);

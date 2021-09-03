@@ -110,7 +110,7 @@ public class UserService implements IUserService {
 		Pharmacy pharm = this.pharmacyRepository.getById(pharmacyId);
 		user.setAddress(address);
 		user.setEmail(userDTO.getEmail());
-		user.setName(userDTO.getEmail());
+		user.setName(userDTO.getName());
 		user.setSurname(userDTO.getSurname());
 		user.setFirstTimeLogging(true);
 		user.setPassword(userDTO.getPassword());

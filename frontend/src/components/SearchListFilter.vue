@@ -49,7 +49,7 @@
             v-if="userType == 'PHARMACY_ADMINISTRATOR'"
             >DELETE</b-button
           >
-          <ModalAddAppointment :selected="selectedDerm[0]" :id="Pharmacy" :type="userType"></ModalAddAppointment>
+          <ModalAddAppointment :selected="selectedDerm[0]" :id="Pharmacy" :type="userType" @updateparentPharmacist="changeParentPharmacist($event)"></ModalAddAppointment>
           <ModalAddDermatologist :selected="selectedDerm[0]" :id="Pharmacy" :type="userType" :list="dermatologists" @updateparent="changeParent($event)"></ModalAddDermatologist>
            <!-- <ModalAddWorker :selected="selectedDerm[0]" :id="Pharmacy" :workerType="'DERMATOLOGIST'"></ModalAddWorker> -->
            <!-- <ModalEditPharmacist :selected="selectedDerm[0]" :id="Pharmacy"></ModalEditPharmacist> -->
@@ -265,6 +265,9 @@ export default {
   methods: {
  changeParent(variable) {
         this.dermatologists = variable
+    },
+     changeParentPharmacist(variable) {
+        this.pharmacists = variable
     },
     deletePharmacist(selected) {
       var vm = this;
