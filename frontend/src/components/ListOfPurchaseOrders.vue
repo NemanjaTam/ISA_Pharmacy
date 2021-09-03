@@ -88,7 +88,7 @@ export default {
           sortable: true,
         },
         "delete",
-        "edit",
+       
         "offer",
       ],
       filter: "",

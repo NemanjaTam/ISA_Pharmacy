@@ -1,5 +1,13 @@
 <template>
   <div class="info">
+    <label> Name</label>
+    <b-input disabled v-model="User.name"></b-input>
+    <br/>
+    <label>Surname</label>
+     <b-input disabled v-model="User.surname"></b-input>
+     <br/>
+     <label>Role</label>
+     <b-input disabled v-model="userType"></b-input>
     <!-- <ul style="list-style-type:none;">
       <li>Name</li>
       <li>
@@ -22,6 +30,10 @@ export default {
     userType() {
       return this.$store.getters.getUserType;
     },
+        User() {
+            return this.$store.getters.getUser
+        },
+
   },
   components: {},
   mounted(){
@@ -43,9 +55,8 @@ export default {
 
 .info {
   background: white;
-  border-radius: 25px;
-  border: 5px solid #343a40;
-  padding: 20px;
+
+  /* padding: 20px; */
 }
 
 * {

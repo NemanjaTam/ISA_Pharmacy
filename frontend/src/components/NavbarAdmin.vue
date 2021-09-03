@@ -11,9 +11,6 @@
         <!-- Navbar dropdowns -->
         <b-nav-item-dropdown class="dropdaun" text="Pharmacy" left>
           <b-dropdown-item class="dropdaun" href="#"
-            >Appointments</b-dropdown-item
-          >
-          <b-dropdown-item class="dropdaun" href="#"
             ><router-link to="/pharmacyAdminPage/list" class="routerlink"
               >Workers</router-link
             ></b-dropdown-item

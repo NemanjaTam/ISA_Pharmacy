@@ -48,15 +48,13 @@ public class PharmacistController {
 	}
 	
 	//authorization:PHARMACY ADMINISTRATOR AND REGISTERED USER ne menjati nista
-	@RequestMapping(value={"/getallpharmacists","/getallpharmacists/{id}"}, method = RequestMethod.GET)
-	public ResponseEntity<List<PharmacistDetailsProjection>> getAllPharmacist(@PathVariable(required = false) Long id,@RequestHeader("usertype") String type){
-		if("PHARMACY_ADMINISTRATOR".equals(type)){
-		return pharmacistService.getAllPharamcistsById(id);
-		}
-		else if("PATIENT".equals(type)) {
+	@RequestMapping(value="/getallpharmacists", method = RequestMethod.GET)
+	public ResponseEntity<List<PharmacistRatingDTO>> getAllPharmacist(@RequestHeader("usertype") String type){
+		if("PATIENT".equals(type)){
 			return pharmacistService.getAllPharamcists();
-		}else {
-			return new ResponseEntity<List<PharmacistDetailsProjection>>(HttpStatus.UNAUTHORIZED);
+		}
+		else {
+			return new ResponseEntity<List<PharmacistRatingDTO>>(HttpStatus.UNAUTHORIZED);
 		}
 	}
 	

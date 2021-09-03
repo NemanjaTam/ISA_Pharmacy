@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tim40.tim40.dto.DermatologistDTO;
 import com.tim40.tim40.dto.DermatologistDetailsDTO;
 import com.tim40.tim40.dto.DermatologistRatingDTO;
+import com.tim40.tim40.dto.dermDTO;
 import com.tim40.tim40.model.*;
 import com.tim40.tim40.projections.DermatologistDetailsProjection;
 import com.tim40.tim40.projections.DermatologistProjection;
@@ -49,18 +50,18 @@ public class DermatologistController {
 	 return dermatologistService.getAllDermatologists(id);
 	}
 	//ne menjati, cyberpoetry17
-		@RequestMapping(value="/getalldermatologist2/{id}", method = RequestMethod.GET)
+		@RequestMapping(value="/getalldermatologist2", method = RequestMethod.GET)
 		public ResponseEntity<List<DermatologistDetailsProjection>> getAllByPharmacyID2(){
 		 return dermatologistService.getAllDermatologistsForAllPharmacies();
 		}
 		//AUTORIZACIJA/AUTENTIKACIJA
 		@RequestMapping(value="/getdermatologistsandpharmacynames/", method = RequestMethod.GET)
-		public  ResponseEntity<List<DermatologistDetailsDTO>> GetDermatologistsAndPharmacyNames(@RequestHeader("usertype") String type){
-			if("PHARMACY_ADMINISTRATOR".equals(type)){
+		public  ResponseEntity<List<DermatologistRatingDTO>> GetDermatologistsAndPharmacyNames(@RequestHeader("usertype") String type){
+			if("PATIENT".equals(type)){
 				return dermatologistService.GetDermatologistsAndPharmacyNames();
 				}
 				else {
-					return new ResponseEntity<List<DermatologistDetailsDTO>>(HttpStatus.UNAUTHORIZED);
+					return new ResponseEntity<List<DermatologistRatingDTO>>(HttpStatus.UNAUTHORIZED);
 				}
 			
 		}
@@ -76,6 +77,20 @@ public class DermatologistController {
 				}
 			
 		}
+		
+		
+//		@RequestMapping(value="/get-dermatologist-rating-for-all/{id}", method = RequestMethod.GET)
+//		public  ResponseEntity<List<DermatologistRatingDTO>> GetAllDermatologistsRatings(@RequestHeader("usertype") String type){
+//			if("PHARMACY_ADMINISTRATOR".equals(type)){
+//				return new ResponseEntity<List<DermatologistRatingDTO>>( dermatologistService.getAllDermatologistsForAllPharmacies(id),HttpStatus.OK);
+//				}
+//				else {
+//					return new ResponseEntity<List<DermatologistRatingDTO>>(HttpStatus.UNAUTHORIZED);
+//				}
+//			
+//		}
+		
+		
 		@Transactional()
 		@RequestMapping(value="/remove-dermatologist/{id}", method = RequestMethod.POST)
 		public  ResponseEntity<Integer> removeDermatologist(@PathVariable("id") Long id ,@RequestHeader("usertype") String type,@RequestBody String email){

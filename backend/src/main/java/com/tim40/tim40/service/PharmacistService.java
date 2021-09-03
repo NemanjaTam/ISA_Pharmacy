@@ -73,8 +73,28 @@ public class PharmacistService implements IPharmacistService {
 	}
 	//vraca sve farmaceute: ne menjati
 	@Override
-	public ResponseEntity<List<PharmacistDetailsProjection>> getAllPharamcists() {
-		return new ResponseEntity<List<PharmacistDetailsProjection>>(pharmacistRepository.getAllPharmacist("PHARMACIST"), HttpStatus.OK);
+	public ResponseEntity<List<PharmacistRatingDTO>> getAllPharamcists() {
+		List<PharmacistRatingDTO> dermatologistsWithRatings = new ArrayList<PharmacistRatingDTO>();
+		List<PharmacistRating> ratings = this.pharmacistRatingRepository.findAll();
+		for (PharmacistDetailsProjection dermatologistProjection : this.pharmacistRepository.getAllPharmacist("PHARMACIST")) {
+			int rated = 0;
+			int size = 0;
+			for (PharmacistRating dermatologistRating : ratings) {
+				if(dermatologistRating.getPharmacist().getId() == dermatologistProjection.getId()) {
+					
+					rated = rated + dermatologistRating.getRating();
+				
+					size = size + 1;				
+				}
+			}
+	    System.out.println(rated);
+		double avg = Double.valueOf(rated) / Double.valueOf(size);
+
+		PharmacistRatingDTO dto = new PharmacistRatingDTO(dermatologistProjection.getName(), dermatologistProjection.getSurname(), avg,dermatologistProjection.getEmail(),dermatologistProjection.getPharmacyName());
+			dermatologistsWithRatings.add(dto);
+		}
+		
+		return new ResponseEntity<List<PharmacistRatingDTO>>(dermatologistsWithRatings, HttpStatus.OK);
 	}
 	
 	

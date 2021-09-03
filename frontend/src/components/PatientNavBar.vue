@@ -13,7 +13,7 @@
         </b-navbar-nav>
         <b-navbar-nav>
           <b-nav-item>
-            <router-link to="/allClients" class="routerlink"
+            <router-link to="/list" class="routerlink"
               >DERMATOLOGIST & PHARMACIST</router-link
             >
           </b-nav-item>
@@ -33,6 +33,7 @@
 </template>
 
 <script>
+
 export default {
   name: "TopMenuForPD",
   computed: {
@@ -45,10 +46,11 @@ export default {
   },
   methods: {
     logout() {
-          this.$router.push("/LoginPage").catch(()=>{});
-      this.$store.dispatch("logout");
+    this.$store.dispatch("logout");
     
       localStorage.setItem("user", null);
+      this.$router.push("/LoginPage").catch(()=>{});
+
     },
   },
 };

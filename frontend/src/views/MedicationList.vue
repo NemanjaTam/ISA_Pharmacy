@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="background-list-medss">
     <b-input v-model="filter" placeholder="Search"></b-input>
     <div>
       <b-table
@@ -18,12 +18,15 @@
           'medicationForm',
         ]"
       >
-        <template #cell(show_details)="row">
+        <template #cell(delete)="row">
           <b-button size="sm" @click="removeItem(row.item)" class="mr-2">
             Delete
           </b-button>
-          <Modal :selected="row.item" :id="Pharmacy"></Modal>
-        </template>
+          </template>
+        
+         <template #cell(edit)="row">
+             <Modal :selected="row.item" :id="Pharmacy"></Modal>
+         </template>
         <div></div>
       </b-table>
     </div>
@@ -74,7 +77,7 @@ export default {
           sortable: true,
         },
 
-        "show_details",
+        "delete",
         "edit",
       ],
       search: "",
@@ -201,3 +204,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+.background-list-medss{
+  background-color: white;
+}
+</style>

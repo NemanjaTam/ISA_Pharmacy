@@ -9,5 +9,6 @@ import com.tim40.tim40.model.Medication;
 
 public interface MedicationRepository extends JpaRepository<Medication, Long>{
 
+
 }
  

@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div v-if="isRegisteredUser">
-      <Navbar />
+    <div v-if="this.userType=='PATIENT'">
+     <PatientNavBar/>
     </div>
     <b-card no-body>
       <b-tabs card>
@@ -44,6 +44,7 @@
         </b-tab>
         <b-tab title="Dermatologists" active>
            <b-button
+          
             variant="danger"
             @click="deleteDermatologist(selectedDerm)"
             v-if="userType == 'PHARMACY_ADMINISTRATOR'"
@@ -80,9 +81,10 @@ import ModalEditPharmacist from "../components/ModalEditPharmacist.vue"
 import ModalAddAppointment from "../components/ModalAddAppointments.vue"
 import ModalAddWorker from "../components/ModalAddWorker.vue"
 import ModalAddDermatologist from "../components/ModalAddDermatologist.vue"
+import PatientNavBar from "../components/PatientNavBar.vue"
 export default {
   name: "SearchListFilter",
-  components:{ModalEditPharmacist,ModalAddAppointment,ModalAddWorker,ModalAddDermatologist},
+  components:{ModalEditPharmacist,ModalAddAppointment,ModalAddWorker,ModalAddDermatologist,PatientNavBar},
   computed: {
     User() {
       this.$store.getters.getUser;
@@ -376,7 +378,7 @@ export default {
           .then((response) => response.json())
           .then((data) => (this.pharmacists = data));
       } else if (this.userType == "PATIENT") {
-        fetch(`http://localhost:9005/api/pharmacist/getallpharmacists/`, {
+        fetch(`http://localhost:9005/api/pharmacist/getallpharmacists`, {
           headers,
         })
           .then((response) => response.json())
