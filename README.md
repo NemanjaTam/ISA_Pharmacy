@@ -14,7 +14,7 @@ to test pharmacy page please login with antonic34@gmail.com/kinzo  (3.8)
 
 3.12 Pharmacy-> workers -> appointments
 Select dermatologist and click appointments,choose from  working days and select time and duration. You cannot create 2 appointments on same date/time/duration.
- Dermatologist can work from 7am to 22pm!
+ Dermatologist can work from 7am to 22pm! Dermatologist Ana Kesic is working in other Pharmacy for date 16.sept 2021
 
 3.22 Create action/promotion - insert text and set dates. All subscribers should receive message from pharmacy email ursaminor1777@gmail.com
 
@@ -33,9 +33,9 @@ set to INACTIVE. If you choose date and time in the future new price list status
 MAPS & REPORT: Map is displayed on pharmacy page (see 3.8) 
 to see report page go to Pharmacy->more-> report and generate report :
 1.) From current date to one year ago
-2.) From current date to four months ago
+2.) From current date to four months ago - no data
 3.) This month
-4.) For certain period
+4.) For certain period -> from january 2021 there are some dates
 5.) Pharmacy statistics
 
 
