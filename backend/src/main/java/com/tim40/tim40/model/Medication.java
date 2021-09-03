@@ -1,6 +1,7 @@
 package com.tim40.tim40.model;
 
 import java.util.ArrayList;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -18,6 +19,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -40,15 +42,17 @@ public class Medication {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; 
+	@Version
+	private Long version;
 
-    @Column(nullable = false)
+    @Column()
     private String name;
 
 
-    @Column(nullable = false)
+    @Column()
     private String description;
 
-    @Column(nullable = false)
+    @Column()
     private String manufacturer; //moze biti entitet ali komplikujemo
 
 	 @Column(name = "medication_form", nullable = false)
@@ -59,20 +63,20 @@ public class Medication {
     @Enumerated(EnumType.STRING)
     private PrescriptionRegime prescriptionRegime;
 
-	@Column (nullable = false)
+	@Column ()
     private String code;
 	
 	@Column(name = "medication_type", nullable = false)
 	@Enumerated(EnumType.STRING)
     private TypeOfMedication typeOfMedication;		// antibiotik, anestetik, antihistaminik..
 	
-    @Column(nullable = false)
+    @Column()
     private String structure; //ne znam sta je ovo?
     
-    @Column (nullable = false)
+    @Column ()
     private String contraindications;
     
-    @Column (nullable = false)
+    @Column ()
     private String recommendedIntake;  // preporučeni unos terapije na dnevnom nivou
 
 //    @ManyToOne

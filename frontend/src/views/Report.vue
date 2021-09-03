@@ -35,7 +35,9 @@
         ></LineChart>
       </div>
       <br />
-      <b-button variant="success" @click="showReportMedication">MEDICATION DATA</b-button>
+      <b-button variant="success" @click="showReportMedication"
+        >MEDICATION DATA</b-button
+      >
       <div class="div-color-report" v-if="showMedication">
         <label>Medication data</label>
         <BarChart
@@ -66,10 +68,39 @@
           :chartColors="monthlyColors"
         ></BarChart>
       </div>
-      <br/>
-      <br>
-      <b-button variant="success" @click="showPharmacyData">RATINGS DATA</b-button>
-      <br/>
+      <div>
+        <label> insert period</label>
+        <b-form-datepicker
+          class="mb-2 datepicker_b"
+         
+          v-model="datepicker_1"
+          :format="'dd-MM-yyyy'"
+        ></b-form-datepicker>
+        <b-form-datepicker
+          :format="'dd-MM-yyyy'"
+          :min="datepicker_1"
+          class="datepicker_b"
+          v-model="datepicker_2"
+        ></b-form-datepicker>
+        <b-button variant="success" @click="showReportForPeriod">PERIOD DATA</b-button>
+        <div v-if="showPeriod" class="div-color-report">
+            <LineChart
+          v-if="loadedPeriod"
+          class="chart-size"
+          :chartData="periodIncome"
+          :dates="periodDates"
+          :options="chartOptions"
+          :label="labelPeriod"
+          :chartColors="monthlyColors"
+        ></LineChart>
+        </div>
+      </div>
+      <br />
+      <br />
+      <b-button variant="success" @click="showPharmacyData"
+        >RATINGS DATA</b-button
+      >
+      <br />
       <div v-if="showRating">
         <div class="div-color-report">
           <label>Pharmacy</label>
@@ -121,6 +152,7 @@
 import LineChart from "../components/Line.vue";
 import PieChart from "../components/Pie.vue";
 import BarChart from "../components/Bar.vue";
+const moment = require("moment");
 export default {
   name: "Report",
   components: { LineChart, PieChart, BarChart },
@@ -133,7 +165,13 @@ export default {
     },
   },
   data() {
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const minDate = new Date(today);
     return {
+      datepicker_1: new Date(),
+      datepicker_2: new Date(),
+      showPeriod: false,
       pharmacyRating: [],
       dermatologists: [],
       pharmacists: [],
@@ -170,6 +208,11 @@ export default {
       monthlyDatesMedication: [],
       loadedMonthlyMedication: false,
       labelMonthlyMedication: "Medication usage by current month",
+
+      periodIncome:[],
+      periodDates:[],
+      loadedPeriod:false,
+      labelPeriod:"Income for period",
 
       chartOptions: {
         responsive: true,
@@ -407,6 +450,14 @@ export default {
         this.show = false;
       }
     },
+    showReportForPeriod() {
+      if (!this.showPeriod) {
+        this.showPeriod = true;
+        this.getPeriodData()
+      }else{
+        this.showPeriod = false;
+      }
+    },
     showReportMedication() {
       if (!this.showMedication) {
         this.showMedication = true;
@@ -426,6 +477,37 @@ export default {
       } else {
         this.showRating = false;
       }
+    },
+    getPeriodData(){
+      var vm = this;
+           var startTimeDate = moment(this.datepicker_1).format()
+          var new_string = startTimeDate.slice(0, 19);
+                     var endTimeDate= moment(this.datepicker_1).format()
+          var new_string2 = endTimeDate.slice(0, 19);
+        var dto ={
+          startTime:new_string,
+          endTime: new_string2,
+        }
+            fetch(
+        `http://localhost:9005/api/pharmacy/get-report-period/${this.Pharmacy}`,
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            usertype: this.userType,
+          },
+          method: "POST",
+          body: JSON.stringify(dto),
+        }
+      )
+        .then((response) => response.json())
+        .then((data) => {
+              var map = data;
+          vm.periodDates = Object.keys(map);
+          vm.periodIncome = Object.values(map);
+          vm.loadedPeriod = true;
+        })
+        .catch();
     },
     getPharmacyRatings() {
       fetch(
@@ -485,11 +567,11 @@ export default {
   },
 
   async created() {},
-  mounted(){
-         if(this.userType != "PHARMACY_ADMINISTRATOR"){
-       this.$router.push("/LoginPage").catch(()=>{});
+  mounted() {
+    if (this.userType != "PHARMACY_ADMINISTRATOR") {
+      this.$router.push("/LoginPage").catch(() => {});
     }
-  }
+  },
 };
 </script>
 <style scoped>

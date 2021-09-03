@@ -17,4 +17,5 @@ public interface QuantityMedicationRepository extends JpaRepository<QuantityMedi
     @Query(value="update medication_quantity set quantity=:quantity where medication_id=:medicationId and pharmacy_id=:pharmacyId ",nativeQuery= true)
     void update(@Param("quantity") Integer quantity,@Param("pharmacyId") Long pharmacyId,@Param("medicationId") Long medicationId);
     
+    
 }

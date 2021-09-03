@@ -2,10 +2,10 @@
 
 
 
-insert into pharmacies(city, number, postalcode, state, street, avg_rating, name,version) values ('Novi Sad', '6', 21000, 'Srbija', 'Trg Dositeja Obradovića', 9, 'Pharmacy 1',1)
-insert into pharmacies(city, number, postalcode, state, street, avg_rating, name,version) values ('Sabac', '5', 21000, 'Srbija', 'Trg Dositeja Obradovića', 9, 'Pharmacy 2',1)
-insert into pharmacies(city, number, postalcode, state, street, avg_rating, name,version) values ('Nis', '7', 21000, 'Srbija', 'Trg Dositeja Obradovića', 9, 'Pharmacy 3',1)
-insert into pharmacies(city, number, postalcode, state, street, avg_rating, name,version) values ('Beograd', '8', 21000, 'Srbija', 'Trg Dositeja Obradovića', 9, 'Pharmacy 4',1)
+insert into pharmacies(city, number, postalcode, state, street, avg_rating, name,version) values ('Novi Sad', '6', 21000, 'Srbija', 'Trg Dositeja Obradovića', 9, 'Pharmacy 1',0)
+insert into pharmacies(city, number, postalcode, state, street, avg_rating, name,version) values ('Sabac', '5', 21000, 'Srbija', 'Trg Dositeja Obradovića', 9, 'Pharmacy 2',0)
+insert into pharmacies(city, number, postalcode, state, street, avg_rating, name,version) values ('Nis', '7', 21000, 'Srbija', 'Trg Dositeja Obradovića', 9, 'Pharmacy 3',0)
+insert into pharmacies(city, number, postalcode, state, street, avg_rating, name,version) values ('Beograd', '8', 21000, 'Srbija', 'Trg Dositeja Obradovića', 9, 'Pharmacy 4',0)
 
 
 insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Dermatologist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic1@gmail.com', true, 'Nikola', 'kinzo','+381613238249', 'Antonic', 'DERMATOLOGIST', null, null)
@@ -71,61 +71,61 @@ insert into users(dtype, city, number, postalcode, state, street, email, is_firs
 insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Patient', 'Novi Sad', '23', 11444,'Srbija', 'Stefana Nemanje', 'sweetbee0071@gmail.com', true, 'Bole', 'boki','+381613238249', 'Pj', 'PATIENT', 0, null)
 
 
-insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('', '', '', 'MedbayTech', 'PRASAK', 'Brufen', 'NA_RECEPT', '', '', 'ANTIPYRETIC')
-insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('', '', '', 'MedbayTech', 'PRASAK', 'Panklav', 'NA_RECEPT', '', '', 'ANTIPYRETIC')
-insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('', '', '', 'MedbayTech', 'PRASAK', 'Phlebodia', 'NA_RECEPT', '', '', 'ANTIPYRETIC')
-insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('', '', '', 'MedbayTech', 'PRASAK', 'Synthroid', 'NA_RECEPT', '', '', 'ANTIPYRETIC')
-insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('', '', '', 'MedbayTech', 'PRASAK', 'Crestor', 'NA_RECEPT', '', '', 'ANTIPYRETIC')
-insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('', '', '', 'MedbayTech', 'PRASAK', 'Nexium', 'NA_RECEPT', '', '', 'ANTIPYRETIC')
-insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('', '', '', 'MedbayTech', 'PRASAK', 'Abilify', 'NA_RECEPT', '', '', 'ANTIPYRETIC')
-insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('', '', '', 'MedbayTech', 'PRASAK', 'Crestor', 'NA_RECEPT', '', '', 'ANTIPYRETIC')
-insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('', '', '', 'MedbayTech', 'PRASAK', 'Lantus Solostar', 'NA_RECEPT', '', '', 'ANTIPYRETIC')
-insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('', '', '', 'MedbayTech', 'PRASAK', 'Advair Diskus', 'NA_RECEPT', '', '', 'ANTIPYRETIC')
-insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('', '', '', 'MedbayTech', 'PRASAK', 'Remicade', 'NA_RECEPT', '', '', 'ANTIPYRETIC')
-insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('', '', '', 'MedbayTech', 'PRASAK', 'Lisinopril', 'NA_RECEPT', '', '', 'ANTIPYRETIC')
-insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('', '', '', 'MedbayTech', 'PRASAK', 'Levothyroxine', 'NA_RECEPT', '', '', 'ANTIPYRETIC')
-insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('', '', '', 'MedbayTech', 'PRASAK', 'Metoprolol', 'NA_RECEPT', '', '', 'ANTIPYRETIC')
-insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('', '', '', 'MedbayTech', 'PRASAK', 'Omeprazole', 'NA_RECEPT', '', '', 'ANTIPYRETIC')
-insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('', '', '', 'MedbayTech', 'PRASAK', 'Simvastatin', 'NA_RECEPT', '', '', 'ANTIPYRETIC')
-insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('', '', '', 'MedbayTech', 'PRASAK', 'Losartan', 'NA_RECEPT', '', '', 'ANTIPYRETIC')
-insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('', '', '', 'MedbayTech', 'PRASAK', 'Albuterol', 'NA_RECEPT', '', '', 'ANTIPYRETIC')
-insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('', '', '', 'MedbayTech', 'PRASAK', 'Sirup', 'NA_RECEPT', '', '', 'ANTIPYRETIC')
-insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('', '', '', 'MedbayTech', 'PRASAK', 'Panklav2', 'NA_RECEPT', '', '', 'ANTIPYRETIC')
+insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type,version) values ('', '', '', 'MedbayTech', 'PRASAK', 'Brufen', 'NA_RECEPT', '', '', 'ANTIPYRETIC',0)
+insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type,version) values ('', '', '', 'MedbayTech', 'PRASAK', 'Panklav', 'NA_RECEPT', '', '', 'ANTIPYRETIC',0)
+insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type,version) values ('', '', '', 'MedbayTech', 'PRASAK', 'Phlebodia', 'NA_RECEPT', '', '', 'ANTIPYRETIC',0)
+insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type,version) values ('', '', '', 'MedbayTech', 'PRASAK', 'Synthroid', 'NA_RECEPT', '', '', 'ANTIPYRETIC',0)
+insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type,version) values ('', '', '', 'MedbayTech', 'PRASAK', 'Crestor', 'NA_RECEPT', '', '', 'ANTIPYRETIC',0)
+insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type,version) values ('', '', '', 'MedbayTech', 'PRASAK', 'Nexium', 'NA_RECEPT', '', '', 'ANTIPYRETIC',0)
+insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type,version) values ('', '', '', 'MedbayTech', 'PRASAK', 'Abilify', 'NA_RECEPT', '', '', 'ANTIPYRETIC',0)
+insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type,version) values ('', '', '', 'MedbayTech', 'PRASAK', 'Crestor', 'NA_RECEPT', '', '', 'ANTIPYRETIC',0)
+insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type,version) values ('', '', '', 'MedbayTech', 'PRASAK', 'Lantus Solostar', 'NA_RECEPT', '', '', 'ANTIPYRETIC',0)
+insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type,version) values ('', '', '', 'MedbayTech', 'PRASAK', 'Advair Diskus', 'NA_RECEPT', '', '', 'ANTIPYRETIC',0)
+insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type,version) values ('', '', '', 'MedbayTech', 'PRASAK', 'Remicade', 'NA_RECEPT', '', '', 'ANTIPYRETIC',0)
+insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type,version) values ('', '', '', 'MedbayTech', 'PRASAK', 'Lisinopril', 'NA_RECEPT', '', '', 'ANTIPYRETIC',0)
+insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type,version) values ('', '', '', 'MedbayTech', 'PRASAK', 'Levothyroxine', 'NA_RECEPT', '', '', 'ANTIPYRETIC',0)
+insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type,version) values ('', '', '', 'MedbayTech', 'PRASAK', 'Metoprolol', 'NA_RECEPT', '', '', 'ANTIPYRETIC',0)
+insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type,version) values ('', '', '', 'MedbayTech', 'PRASAK', 'Omeprazole', 'NA_RECEPT', '', '', 'ANTIPYRETIC',0)
+insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type,version) values ('', '', '', 'MedbayTech', 'PRASAK', 'Simvastatin', 'NA_RECEPT', '', '', 'ANTIPYRETIC',0)
+insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type,version) values ('', '', '', 'MedbayTech', 'PRASAK', 'Losartan', 'NA_RECEPT', '', '', 'ANTIPYRETIC',0)
+insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type,version) values ('', '', '', 'MedbayTech', 'PRASAK', 'Albuterol', 'NA_RECEPT', '', '', 'ANTIPYRETIC',0)
+insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type,version) values ('', '', '', 'MedbayTech', 'PRASAK', 'Sirup', 'NA_RECEPT', '', '', 'ANTIPYRETIC',0)
+insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type,version) values ('', '', '', 'MedbayTech', 'PRASAK', 'Panklav2', 'NA_RECEPT', '', '', 'ANTIPYRETIC',0)
 
 
-insert into medication_quantity (quantity, medication_id,pharmacy_id) values (10, 1,1)
-insert into medication_quantity (quantity, medication_id,pharmacy_id) values (20, 5,1)
-insert into medication_quantity (quantity, medication_id,pharmacy_id) values (10, 6,1)
-insert into medication_quantity (quantity, medication_id,pharmacy_id) values (10, 4,1)
-insert into medication_quantity (quantity, medication_id,pharmacy_id) values (10, 2,1)
-insert into medication_quantity (quantity, medication_id,pharmacy_id) values (10, 3,1)
-
-
-
-insert into medication_quantity (quantity, medication_id,pharmacy_id) values (10, 1,2)
-insert into medication_quantity (quantity, medication_id,pharmacy_id) values (20, 5,2)
-insert into medication_quantity (quantity, medication_id,pharmacy_id) values (10, 6,2)
-insert into medication_quantity (quantity, medication_id,pharmacy_id) values (10, 4,2)
-insert into medication_quantity (quantity, medication_id,pharmacy_id) values (10, 2,2)
-insert into medication_quantity (quantity, medication_id,pharmacy_id) values (10, 3,2)
+insert into medication_quantity (quantity, medication_id,pharmacy_id,version) values (10, 1,1,0)
+insert into medication_quantity (quantity, medication_id,pharmacy_id,version) values (20, 5,1,0)
+insert into medication_quantity (quantity, medication_id,pharmacy_id,version) values (10, 6,1,0)
+insert into medication_quantity (quantity, medication_id,pharmacy_id,version) values (10, 4,1,0)
+insert into medication_quantity (quantity, medication_id,pharmacy_id,version) values (10, 2,1,0)
+insert into medication_quantity (quantity, medication_id,pharmacy_id,version) values (10, 3,1,0)
 
 
 
-insert into medication_quantity (quantity, medication_id,pharmacy_id) values (10, 1,3)
-insert into medication_quantity (quantity, medication_id,pharmacy_id) values (20, 5,3)
-insert into medication_quantity (quantity, medication_id,pharmacy_id) values (10, 6,3)
-insert into medication_quantity (quantity, medication_id,pharmacy_id) values (10, 4,3)
-insert into medication_quantity (quantity, medication_id,pharmacy_id) values (10, 2,3)
-insert into medication_quantity (quantity, medication_id,pharmacy_id) values (10, 3,3)
+insert into medication_quantity (quantity, medication_id,pharmacy_id,version) values (10, 1,2,0)
+insert into medication_quantity (quantity, medication_id,pharmacy_id,version) values (20, 5,2,0)
+insert into medication_quantity (quantity, medication_id,pharmacy_id,version) values (10, 6,2,0)
+insert into medication_quantity (quantity, medication_id,pharmacy_id,version) values (10, 4,2,0)
+insert into medication_quantity (quantity, medication_id,pharmacy_id,version) values (10, 2,2,0)
+insert into medication_quantity (quantity, medication_id,pharmacy_id,version) values (10, 3,2,0)
 
 
 
-insert into medication_quantity (quantity, medication_id,pharmacy_id) values (10, 1,4)
-insert into medication_quantity (quantity, medication_id,pharmacy_id) values (20, 5,4)
-insert into medication_quantity (quantity, medication_id,pharmacy_id) values (10, 6,4)
-insert into medication_quantity (quantity, medication_id,pharmacy_id) values (10, 4,4)
-insert into medication_quantity (quantity, medication_id,pharmacy_id) values (10, 2,4)
-insert into medication_quantity (quantity, medication_id,pharmacy_id) values (10, 3,4)
+insert into medication_quantity (quantity, medication_id,pharmacy_id,version) values (10, 1,3,0)
+insert into medication_quantity (quantity, medication_id,pharmacy_id,version) values (20, 5,3,0)
+insert into medication_quantity (quantity, medication_id,pharmacy_id,version) values (10, 6,3,0)
+insert into medication_quantity (quantity, medication_id,pharmacy_id,version) values (10, 4,3,0)
+insert into medication_quantity (quantity, medication_id,pharmacy_id,version) values (10, 2,3,0)
+insert into medication_quantity (quantity, medication_id,pharmacy_id,version) values (10, 3,3,0)
+
+
+
+insert into medication_quantity (quantity, medication_id,pharmacy_id,version) values (10, 1,4,0)
+insert into medication_quantity (quantity, medication_id,pharmacy_id,version) values (20, 5,4,0)
+insert into medication_quantity (quantity, medication_id,pharmacy_id,version) values (10, 6,4,0)
+insert into medication_quantity (quantity, medication_id,pharmacy_id,version) values (10, 4,4,0)
+insert into medication_quantity (quantity, medication_id,pharmacy_id,version) values (10, 2,4,0)
+insert into medication_quantity (quantity, medication_id,pharmacy_id,version) values (10, 3,4,0)
 
 
 
