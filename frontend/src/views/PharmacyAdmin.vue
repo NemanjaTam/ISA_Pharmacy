@@ -9,7 +9,7 @@
         <div class="left"></div>
         <div class="middle"><router-view></router-view></div>
         <div class="right">
-          <div class="info">
+          <!-- <div class="info"> -->
             <!-- <ul style="list-style-type:none;">
               <li>Name</li>
               <li>
@@ -22,7 +22,7 @@
               <li>Date Of Birth</li>
               <li><label></label></li>
             </ul> -->
-          </div>
+          <!-- </div> -->
         </div>
 
         <!-- <div class="footer">
