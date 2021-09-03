@@ -173,8 +173,9 @@ public class WorkDayService implements IWorkDayService {
 						
 						newWorkDay.setPharmacy(pharm);
 						
-						workDaysDerm.add(newWorkDay);}
-					this.workDayRepository.save(newWorkDay);
+						workDaysDerm.add(newWorkDay);
+						this.workDayRepository.save(newWorkDay);}
+					
 					
 			}
 			if(workDaysDerm.size() < 1) {

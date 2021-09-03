@@ -41,6 +41,7 @@ import com.tim40.tim40.model.Appointment;
 import com.tim40.tim40.model.Consultation;
 import com.tim40.tim40.model.Dermatologist;
 import com.tim40.tim40.model.Medication;
+import com.tim40.tim40.model.MissingQuantity;
 import com.tim40.tim40.model.Offer;
 import com.tim40.tim40.model.Patient;
 import com.tim40.tim40.model.PharmacistRating;
@@ -59,6 +60,7 @@ import com.tim40.tim40.model.enums.PurchaseOrderStatus;
 import com.tim40.tim40.repository.AppointmentRepository;
 import com.tim40.tim40.repository.ConsultationRepository;
 import com.tim40.tim40.repository.MedicationRepository;
+import com.tim40.tim40.repository.MissingQuantityRepository;
 import com.tim40.tim40.repository.PharmacyRatingRepository;
 import com.tim40.tim40.repository.PharmacyRepository;
 import com.tim40.tim40.repository.PriceListMedicationRepository;
@@ -80,11 +82,12 @@ public class PharmacyService implements IPharmacyService {
 	private AppointmentRepository appointmentRepository;
 	private ConsultationRepository consultationRepository;
 	private PriceListMedicationRepository priceListRepository;
+	private MissingQuantityRepository missingQuantityRepository;
 
 	@Autowired
 	public PharmacyService(PharmacyRepository pharmacyRepository,MedicationRepository medicationRepository,QuantityMedicationRepository quantityRepository,ReservationRepository reservationRepository,
 			 PurchaseOrderRepository purchaseOrderRepository,PharmacyRatingRepository ratingPharmacyRepository,AppointmentRepository appointmentRepository
-			 ,ConsultationRepository consultationRepository) {
+			 ,ConsultationRepository consultationRepository,MissingQuantityRepository missingQuantityRepository) {
 		this.pharmacyRepository = pharmacyRepository;
 		this.medicationRepository = medicationRepository;
 		this.quantityRepository = quantityRepository;
@@ -93,6 +96,7 @@ public class PharmacyService implements IPharmacyService {
 		this.ratingPharmacyRepository = ratingPharmacyRepository;
 		this.appointmentRepository = appointmentRepository;
 		this.consultationRepository = consultationRepository;
+		this.missingQuantityRepository = missingQuantityRepository;
 	}
 	
 	public PharmacyDTO createPharmacy (PharmacyDTO pharmacyDTO) {
@@ -342,6 +346,17 @@ public class PharmacyService implements IPharmacyService {
 		}	
 		return exist;	
 		
+	}
+	
+	public List<MissingQuantity> getQuantities(Long id){
+		List<MissingQuantity> missig  = missingQuantityRepository.findAll();
+		List<MissingQuantity> missingnew = new ArrayList<MissingQuantity>();
+		for (MissingQuantity missingQuantity : missig) {
+			if(missingQuantity.getPharmacyId() == id) {
+				missingnew.add(missingQuantity);
+			}
+		}
+		return missingnew;
 	}
 	
 	

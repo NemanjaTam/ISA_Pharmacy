@@ -99,6 +99,7 @@ insert into medication_quantity (quantity, medication_id,pharmacy_id,version) va
 insert into medication_quantity (quantity, medication_id,pharmacy_id,version) values (10, 4,1,0)
 insert into medication_quantity (quantity, medication_id,pharmacy_id,version) values (10, 2,1,0)
 insert into medication_quantity (quantity, medication_id,pharmacy_id,version) values (10, 3,1,0)
+insert into medication_quantity (quantity, medication_id,pharmacy_id,version) values (0, 15,1,0)
 
 
 
@@ -640,4 +641,6 @@ insert into pharmacy_rating(rating,patient_id,pharmacy_id) values (5,25,1)
 insert into pharmacy_rating(rating,patient_id,pharmacy_id) values (5,24,2)
 insert into pharmacy_rating(rating,patient_id,pharmacy_id) values (4,23,2)
 insert into pharmacy_rating(rating,patient_id,pharmacy_id) values (5,25,2)
+
+insert into missing_quantities(medication_id,pharmacy_id,name) values(15,1,'Omeprazole')
 

@@ -44,6 +44,7 @@ import com.tim40.tim40.dto.PurchaseOrderDTO;
 import com.tim40.tim40.dto.RejectedAcceptedDTO;
 import com.tim40.tim40.model.Absence;
 import com.tim40.tim40.model.Medication;
+import com.tim40.tim40.model.MissingQuantity;
 import com.tim40.tim40.model.Offer;
 import com.tim40.tim40.model.Pharmacy;
 import com.tim40.tim40.model.PurchaseOrder;
@@ -148,7 +149,7 @@ public class PharmacyController {
 	//ne menjati
 	@PostMapping(value = "/accept-offer",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.OK)
-	@Transactional(propagation =  Propagation.REQUIRES_NEW,isolation = Isolation.REPEATABLE_READ,rollbackFor = Exception.class,readOnly = false)
+	
 	 //ovde je transakcija jer sta ako se desi da se ne apdejtuje purchase order status?! ->nekonzistentno
 	public List<Offer> acceptAndDeclineOffers(@RequestBody AcceptOfferDTO acceptOffer){
 		List<Offer> offers = this.pharmacyService.acceptOffer(acceptOffer);
@@ -246,6 +247,10 @@ public class PharmacyController {
 		
 	}
 	
+	@GetMapping(value="/get-missing/{id}",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public List<MissingQuantity> getMissingQuantities(@PathVariable("id") Long id){
+		return this.pharmacyService.getQuantities(id);
+	}
 	
 
 }

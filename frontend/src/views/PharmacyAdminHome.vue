@@ -2,12 +2,26 @@
   <div class="info">
     <label> Name</label>
     <b-input disabled v-model="User.name"></b-input>
-    <br/>
+    <br />
     <label>Surname</label>
-     <b-input disabled v-model="User.surname"></b-input>
-     <br/>
-     <label>Role</label>
-     <b-input disabled v-model="userType"></b-input>
+    <b-input disabled v-model="User.surname"></b-input>
+    <br />
+    <label>Role</label>
+    <b-input disabled v-model="userType"></b-input>
+
+    <label>Medication requests:</label>
+    <div>
+        <b-list-group
+                v-for="(listItem, index) in missing"
+                v-bind:key="index"
+                class="medication_list_scrollable"
+              >
+                <b-list-group-item >
+                  {{ listItem.name }}
+               </b-list-group-item
+                >
+              </b-list-group>
+    </div>
     <!-- <ul style="list-style-type:none;">
       <li>Name</li>
       <li>
@@ -26,21 +40,57 @@
 import NavbarAdmin from "../components/NavbarAdmin.vue";
 export default {
   name: "PharmacyAdminHome",
-  computed:{
+  computed: {
     userType() {
       return this.$store.getters.getUserType;
     },
-        User() {
-            return this.$store.getters.getUser
-        },
-
+    User() {
+      return this.$store.getters.getUser;
+    },
+    Pharmacy() {
+      return this.$store.getters.getPharmacy;
+    },
   },
   components: {},
-  mounted(){
-       if(this.userType != "PHARMACY_ADMINISTRATOR"){
-       this.$router.push("/LoginPage").catch(()=>{});
+  data() {
+    return {
+      missing: [],
+    };
+  },
+  methods: {
+    getQuantities() {
+      // value="/get-missing/{id}"
+      fetch(
+        `http://localhost:9005/api/pharmacy/get-missing/${this.Pharmacy}`,
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          method: "GET",
+        }
+      )
+        .then(function(response) {
+          if (response.ok) {
+            return response.json();
+          } else {
+            return Promise.reject(response);
+          }
+        })
+        .then((data) => {
+         this.missing = data;
+        })
+        .catch(function(error) {
+          console.warn(error);
+        });
+    },
+  },
+  mounted() {
+    if (this.userType != "PHARMACY_ADMINISTRATOR") {
+      this.$router.push("/LoginPage").catch(() => {});
     }
-  }
+    this.getQuantities()
+  },
 };
 </script>
 <style scoped>

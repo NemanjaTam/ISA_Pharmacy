@@ -19,7 +19,7 @@
             >EDIT</b-button
           > -->
          
-          <ModalAddWorker :selected="selectedDerm[0]" :id="Pharmacy" :workerType="'PHARMACIST'" :type="userType"></ModalAddWorker>
+          <ModalAddWorker :selected="selectedDerm[0]" :id="Pharmacy" :workerType="'PHARMACIST'" :type="userType"  @updateparentPharmacist="changeParentPharmacist($event)"></ModalAddWorker>
            <!-- <ModalEditPharmacist :selected="selected[0]" :id="Pharmacy"></ModalEditPharmacist> -->
           <div>
             <b-table
@@ -50,7 +50,7 @@
             v-if="userType == 'PHARMACY_ADMINISTRATOR'"
             >DELETE</b-button
           >
-          <ModalAddAppointment :selected="selectedDerm[0]" :id="Pharmacy" :type="userType" @updateparentPharmacist="changeParentPharmacist($event)"></ModalAddAppointment>
+          <ModalAddAppointment :selected="selectedDerm[0]" :id="Pharmacy" :type="userType"></ModalAddAppointment>
           <ModalAddDermatologist :selected="selectedDerm[0]" :id="Pharmacy" :type="userType" :list="dermatologists" @updateparent="changeParent($event)"></ModalAddDermatologist>
            <!-- <ModalAddWorker :selected="selectedDerm[0]" :id="Pharmacy" :workerType="'DERMATOLOGIST'"></ModalAddWorker> -->
            <!-- <ModalEditPharmacist :selected="selectedDerm[0]" :id="Pharmacy"></ModalEditPharmacist> -->
@@ -268,7 +268,7 @@ export default {
  changeParent(variable) {
         this.dermatologists = variable
     },
-     changeParentPharmacist(variable) {
+    changeParentPharmacist(variable) {
         this.pharmacists = variable
     },
     deletePharmacist(selected) {
