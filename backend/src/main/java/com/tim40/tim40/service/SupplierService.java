@@ -1,9 +1,11 @@
 package com.tim40.tim40.service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,9 +19,12 @@ import com.tim40.tim40.model.Pharmacy;
 import com.tim40.tim40.model.PurchaseOrder;
 import com.tim40.tim40.model.PurchaseOrderOffer;
 import com.tim40.tim40.model.QuantityMedication;
+import com.tim40.tim40.model.QuantityMedicationPurchaseOrder;
 import com.tim40.tim40.model.Supplier;
+import com.tim40.tim40.model.enums.PurchaseOrderStatus;
 import com.tim40.tim40.repository.PurchaseOrderOfferRepository;
 import com.tim40.tim40.repository.PurchaseOrderRepository;
+import com.tim40.tim40.repository.QuantityMedicationPurchaseOrderRepository;
 import com.tim40.tim40.repository.SupplierRepository;
 
 @Service
@@ -28,12 +33,15 @@ public class SupplierService implements ISupplierService {
 	private SupplierRepository supplierRepository;
     private PurchaseOrderRepository purchaseOrderRepository;
     private PurchaseOrderOfferRepository purchaseOrderOfferRepository;
+    private QuantityMedicationPurchaseOrderRepository medQuantRepository;
 
 	@Autowired
-	public SupplierService(SupplierRepository supplierRepository, PurchaseOrderRepository purchaseOrderRepository, PurchaseOrderOfferRepository purchaseOrderOfferRepository) {
+	public SupplierService(SupplierRepository supplierRepository, PurchaseOrderRepository purchaseOrderRepository, PurchaseOrderOfferRepository purchaseOrderOfferRepository,
+			QuantityMedicationPurchaseOrderRepository medQuantRepository) {
 		this.supplierRepository = supplierRepository;
 		this.purchaseOrderRepository = purchaseOrderRepository;
 		this.purchaseOrderOfferRepository = purchaseOrderOfferRepository;
+		this.medQuantRepository = medQuantRepository;
 	}
 
 	@Override
@@ -144,6 +152,43 @@ public class SupplierService implements ISupplierService {
 		}
 
 		return new ResponseEntity<List<OfferDTO>>(offers, HttpStatus.OK);
+	}
+	
+	public ResponseEntity<List<PurchaseOrder>> getOrdersOnHold(){
+		List<PurchaseOrder> orders = purchaseOrderRepository.findByPurchaseOrderStatus(PurchaseOrderStatus.CEKA_PONUDE);
+		for (PurchaseOrder purchaseOrder : orders) {
+			Set<QuantityMedication> listOfMed = new HashSet<QuantityMedication>();
+			Set<QuantityMedicationPurchaseOrder> listOfMed2 = medQuantRepository.findByOrderId(purchaseOrder.getId());
+			for (QuantityMedicationPurchaseOrder medQuant : listOfMed2) {
+				QuantityMedication qm = new QuantityMedication(medQuant.getQuantity(), medQuant.getMedication());
+				listOfMed.add(qm);
+			}
+			purchaseOrder.setQuantityMedications(listOfMed);
+		}
+		List<PurchaseOrder> retVal = orders.stream().filter(po -> po.getPeriod().getEndTime().isBefore(LocalDateTime.now())).collect(Collectors.toList());
+		return new ResponseEntity<List<PurchaseOrder>>(retVal, HttpStatus.OK);
+	}
+	public ResponseEntity<List<QuantityMedication>> getPairs(Long id){
+		List<QuantityMedication> retVal = new ArrayList<QuantityMedication>();
+		Set<QuantityMedicationPurchaseOrder> listOfMed2 = medQuantRepository.findByOrderId(id);
+		for (QuantityMedicationPurchaseOrder medQuant : listOfMed2) {
+			QuantityMedication qm = new QuantityMedication(medQuant.getQuantity(), medQuant.getMedication());
+			retVal.add(qm);
+		}
+		return new ResponseEntity<List<QuantityMedication>>(retVal, HttpStatus.OK);
+	}
+
+	public ResponseEntity<List<PurchaseOrderOfferDTO>> getPurchaseOrderOffersFiltered(List<String> optionsSelected,
+			Long id) {
+		Set<PurchaseOrderOffer> lista = (Set<PurchaseOrderOffer>) supplierRepository.getById(id).getPurchaseOrderOffers();
+		List<PurchaseOrderOfferDTO> lista2 = new ArrayList<>();
+
+		for(PurchaseOrderOffer p : lista) {
+			if(optionsSelected.contains(p.getStatus()))
+				lista2.add(new PurchaseOrderOfferDTO(p));
+		}
+		return new ResponseEntity<List<PurchaseOrderOfferDTO>>(lista2, HttpStatus.OK);
+		
 	}
 
 }

@@ -27,7 +27,7 @@ public class PurchaseOrder {
 	private Long id;
 
 	@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-	private final Set<QuantityMedication> quantityMedications= new HashSet<QuantityMedication>();
+	private Set<QuantityMedication> quantityMedications= new HashSet<QuantityMedication>();
 	
 	@ManyToOne
 	@JoinColumn(name = "pharmacy_administrator_id", nullable = false)
@@ -43,8 +43,10 @@ public class PurchaseOrder {
 	@Embedded
 	private Period period;
 	
-//	@Embedded
-//	private Period period;
+	public void setQuantityMedications(Set<QuantityMedication> quantityMedications) {
+		this.quantityMedications = quantityMedications;
+	}
+
 	//@JsonDeserialize(using = UnixToLocalDateTimeConverter.class)
 /*	@Column(name = "starttime", nullable = true)
 	private LocalDate startTime;

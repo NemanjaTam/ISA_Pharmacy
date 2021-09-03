@@ -22,8 +22,12 @@ public class QuantityMedication {
 	@OneToOne(cascade = CascadeType.ALL)
 	private Medication medication;
 	
-	
 	@ManyToOne
     @JoinColumn(name = "pharmacy_id", nullable = false)
 	private Pharmacy pharmacy;
+	
+	public QuantityMedication(int quantity, Medication medication) {
+		this.quantity = quantity;
+		this.medication = medication;
+	}
 }

@@ -626,3 +626,9 @@ insert into users(dtype, city, number, postalcode, state, street, email, is_firs
 insert into pharmacy_suppliers(pharmacy_id, supplier_id) values (1,47)
 
 insert into purchase_order_list(endtime, starttime, purchase_status, pharmacy_administrator_id) values ('2021-06-13 14:00:00-08', '2021-06-13 07:00:00-08', 'CEKA_PONUDE', 43)
+
+insert into purchase_order_list(endtime, purchase_status, starttime, pharmacy_administrator_id) values ('2021-11-11', 'CEKA_PONUDE', '2021-02-02', 44)
+insert into medication_quantity_of_purchase_order(order_id, quantity, medication_id) values (1, 40, 1)
+insert into medication_quantity_of_purchase_order(order_id, quantity, medication_id) values (1, 40, 2)
+insert into medication_quantity_of_purchase_order(order_id, quantity, medication_id) values (1, 40, 3)
+

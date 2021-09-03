@@ -41,6 +41,10 @@ import RegistrationSystemAdmin from "../components/RegistrationSystemAdmin.vue"
 import AddPharmacy from "../components/AddPharmacy.vue"
 import Pharmacies from "../views/Pharmacies.vue"
 import EditAdmin from "../components/EditAdmin.vue"
+import Orders from "../components/Orders.vue"
+import Offers from "../components/Offers.vue"
+import OrderId from "../components/OrderId.vue"
+import OfferEdit from "../components/OfferEdit.vue"
 
 Vue.use(VueRouter);
 
@@ -240,7 +244,27 @@ const routes = [{
         path: '/pharmacies',
         name: 'Pharmacies',
         component: Pharmacies
-      }
+      },
+      {
+        path: "/orders",
+        name: "Orders",
+        component: Orders
+    },
+    {
+        path: "/my-offers",
+        name: "Offers",
+        component: Offers
+    },
+    {
+        path:"/edit-offer/:id",
+        name:"OfferEdit",
+        component: OfferEdit
+    },
+    {
+        path: "/orders/:id",
+        name: "OrderId",
+        component: OrderId
+    },
 
 ];
 

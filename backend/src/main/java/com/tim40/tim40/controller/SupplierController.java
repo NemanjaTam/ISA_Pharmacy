@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tim40.tim40.dto.OfferDTO;
 import com.tim40.tim40.dto.OfferFilterDTO;
 import com.tim40.tim40.dto.PurchaseOrderOfferDTO;
+import com.tim40.tim40.model.PurchaseOrder;
+import com.tim40.tim40.model.QuantityMedication;
 import com.tim40.tim40.service.SupplierService;
 
 @RestController
@@ -45,5 +47,20 @@ public class SupplierController {
 	@PostMapping(value = "/update-offer", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<PurchaseOrderOfferDTO> updatePurchaseOrderOffer(@RequestBody PurchaseOrderOfferDTO purchaseOrderOfferDTO) throws Exception{
 		return supplierService.updatePurchaseOrderOffer(purchaseOrderOfferDTO);
+	}
+	
+	@GetMapping(value = "/orders-on-hold", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<PurchaseOrder>> getAllOrders(){
+		return supplierService.getOrdersOnHold();
+	}
+	
+	@GetMapping(value="/pairs/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<QuantityMedication>> getPairs(@PathVariable("id") Long id){
+		return supplierService.getPairs(id);
+	}
+	
+	@PostMapping(value="/filtered-offers/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<PurchaseOrderOfferDTO>> getPurchaseOrderOffersFiltered(@RequestBody List<String> optionsSelected, @PathVariable("id") Long id) throws Exception{
+		return supplierService.getPurchaseOrderOffersFiltered(optionsSelected, id);
 	}
 }
