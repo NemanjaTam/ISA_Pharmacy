@@ -20,3 +20,10 @@ Dermatologist is on holiday between 10.07.2021 and 20.07.2021
 When testing scheduling for dermatologist keep in mind that termins are predefinied. See data.sql, all termins where is_taken = false are free.
 
 When testing scheduling for pharmacist keep in mind that only taken consultations are in database, free termins are generating in real time.
+
+# Student 4 - Jovana Jakovljevic
+
+Za testiranje administratora sistema, logujte se pomocu "joksi1@gmail.com" i sifre "joksi".
+Za testiranje pacijenta, logujte se pomocu "antonic21@gmail.com" i sifre "kinzo".
+
+Pretraga lekova je moguca po svim kriterijumima koji su dati u kolonama tabele.
