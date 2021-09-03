@@ -22,6 +22,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 import javax.persistence.JoinColumn;
 
 @Entity
@@ -39,11 +40,12 @@ public class Pharmacy {
     @Column(nullable = false)
     private String name;
 
-    @Embedded
-    private Address address;
+	@Embedded
+	private Address address;
 
-    @Column(name = "avg_rating", nullable = false)
+    @Column(name = "avg_rating")
     private double avgRating;
+    
 
 //    @ManyToMany
 //    @JoinTable
@@ -93,8 +95,8 @@ public class Pharmacy {
 //    @OneToMany(fetch = FetchType.LAZY,mappedBy="pharmacy")
 //   	private final Set<Sale> sales = new HashSet<Sale>();
 //    
-    @OneToMany(fetch = FetchType.LAZY)
-    private final Set<User> subscribers = new HashSet<User>();
+    @ManyToMany
+    private Set<User> subscribers = new HashSet<User>();
     
     @ManyToMany
     @JoinTable

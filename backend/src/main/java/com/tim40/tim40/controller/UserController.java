@@ -11,11 +11,13 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tim40.tim40.dto.ComplaintDTO;
 import com.tim40.tim40.dto.LoginDTO;
 import com.tim40.tim40.dto.UserDTO;
 import com.tim40.tim40.model.User;
@@ -65,6 +67,38 @@ public class UserController {
 	@RequestMapping(value = "/check-email/{email}", method = RequestMethod.GET)
 	public ResponseEntity<String> checkIsEmailTaken(@PathVariable("email") String email) {
 		return userService.checkIsEmailTaken(email);
+	}
+	
+	@GetMapping(value ="/complainable/{id}")
+	public List<String> testing(@PathVariable("id") Long id) {
+		return userService.getComplainable(id);
+	}
+	
+	@PostMapping(value = "/sendComplaint", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public String sendComplaint(@RequestBody ComplaintDTO complaintDTO) throws Exception{
+		userService.sendComplaint(complaintDTO);
+		return "OK";
+	}
+	
+	@CrossOrigin(origins = "http://localhost:8081")
+	@PutMapping(value = "/answerComplaint", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public String answerComplaint(@RequestBody ComplaintDTO complaintDTO) throws Exception{
+		userService.respondToComplaint(complaintDTO);
+		return "OK";
+	}
+	
+	@GetMapping(value = "/getComplaint/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<ComplaintDTO> getComplaints(@PathVariable("id") Long id) throws Exception{
+		return userService.complaintsForUser(id);
+	}
+	@GetMapping(value = "/getAdminComplaint/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<ComplaintDTO> getAdminComplaints(@PathVariable("id") Long id) throws Exception{
+		return userService.complaintsForAdmin(id);
+	}
+	
+	@GetMapping(value = "/getOneComplaint/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ComplaintDTO getOneComplaints(@PathVariable("id") Long id) throws Exception{
+		return userService.getOneComplaint(id);
 	}
 	
 	

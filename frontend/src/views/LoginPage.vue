@@ -24,7 +24,6 @@
                 style="font-style:italic"
                 required
               />
-              <a class="forgot text-muted" href="#">Forgot password?</a>
               <br />
               <label v-if="show" style="color: red;">{{ message }}</label>
               <label v-else style="color: green;">{{ message }}</label>
@@ -102,6 +101,15 @@ export default {
               } else {
                 this.$store.dispatch("updateUser", user);
                 this.$router.push({ name: "SystemAdminHome" });
+              }
+            } 
+              else if (user.userType == "PATIENT") {
+              if (user.firstTimeLogging) {
+                this.$store.dispatch("updateUser", user);
+                this.$router.push({ name: "FirstTimeLogging" });
+              } else {
+                this.$store.dispatch("updateUser", user);
+                this.$router.push({ name: "HomePage" });
               }
             } 
             else {

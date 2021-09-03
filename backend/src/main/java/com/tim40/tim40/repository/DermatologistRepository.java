@@ -1,5 +1,6 @@
 package com.tim40.tim40.repository;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,6 +12,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 
 import com.tim40.tim40.dto.DermatologistDTO;
+import com.tim40.tim40.model.Appointment;
 import com.tim40.tim40.model.Dermatologist;
 import com.tim40.tim40.projections.DermatologistDetailsProjection;
 import com.tim40.tim40.projections.DermatologistProjection;
@@ -45,4 +47,11 @@ public interface DermatologistRepository extends JpaRepository<Dermatologist, Lo
 	@Query(value ="SELECT PHARMACIES.name as pharmaciesNames,u.id as id,u.name as name,u.email as email,u.surname as surname FROM PHARMACIES,DERMATOLOGIST_PHARMACY,USERS AS u LEFT JOIN USERS as h on u.id != h.id AND u.email = h.email WHERE PHARMACIES.id = DERMATOLOGIST_PHARMACY.pharmacy_id "
 			+ "AND u .id = DERMATOLOGIST_PHARMACY.dermatologist_id ",nativeQuery = true)
 	public List<DermatologistDetailsProjection> getDummy();
+	
+	@Query("select a from Appointment a where a.dermatologist.id = ?1 and a.patient.id = ?2 and a.isFinished = 'true'")
+	Collection<Appointment> getExaminationsForPatientAndDermatologist(Long idDermatologa, Long idPacijenta);
+	
+	@Query("select a from Appointment a where a.pharmacy.id = ?1 and a.patient.id = ?2 and a.isFinished = 'true'")
+	Collection<Appointment> getExaminationsForPatientAndPharmacy(Long idPharm, Long idPacijenta);
+
 }

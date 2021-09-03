@@ -1,12 +1,8 @@
 
-
-
-
-insert into pharmacies(city, number, postalcode, state, street, avg_rating, name) values ('Novi Sad', '6', 21000, 'Srbija', 'Trg Dositeja Obradovića', 9, 'Pharmacy 1')
-insert into pharmacies(city, number, postalcode, state, street, avg_rating, name) values ('Sabac', '5', 21000, 'Srbija', 'Trg Dositeja Obradovića', 9, 'Pharmacy 2')
-insert into pharmacies(city, number, postalcode, state, street, avg_rating, name) values ('Nis', '7', 21000, 'Srbija', 'Trg Dositeja Obradovića', 9, 'Pharmacy 3')
-insert into pharmacies(city, number, postalcode, state, street, avg_rating, name) values ('Beograd', '8', 21000, 'Srbija', 'Trg Dositeja Obradovića', 9, 'Pharmacy 4')
-
+insert into pharmacies(city, number, postalcode, state, street, avg_rating, name) values ('Novi Sad', '10', 21000, 'Srbija', 'Dragomira Radukina', 9, 'Pharmacy 1')
+insert into pharmacies(city, number, postalcode, state, street, avg_rating, name) values ('Sabac', '11', 21241, 'Srbija', 'Stefana Nemanje', 9, 'Pharmacy 2')
+insert into pharmacies(city, number, postalcode, state, street, avg_rating, name) values ('Nis', '8', 25000, 'Srbija', 'Nikole Tesle', 9, 'Pharmacy 3')
+insert into pharmacies(city, number, postalcode, state, street, avg_rating, name) values ('Beograd', '1', 23220, 'Srbija', 'Stefana Nemanje', 9, 'Pharmacy 4')
 
 insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Dermatologist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic1@gmail.com', true, 'Nikola', 'kinzo','+381613238249', 'Antonic', 'DERMATOLOGIST', null, null)
 insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Dermatologist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic2@gmail.com', true, 'Nemanja', 'kinzo','+381613238249', 'Tamic', 'DERMATOLOGIST', null, null)
@@ -18,6 +14,8 @@ insert into users(dtype, city, number, postalcode, state, street, email, is_firs
 insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Dermatologist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic8@gmail.com', true, 'Mirjana', 'kinzo','+381613238249', 'Loncar', 'DERMATOLOGIST', null, null)
 insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Dermatologist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic9@gmail.com', true, 'Jovan', 'kinzo','+381613238249', 'Vulin', 'DERMATOLOGIST', null, null)
 insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Dermatologist', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic10@gmail.com', true, 'Mirko', 'kinzo','+381613238249', 'Milinkovic', 'DERMATOLOGIST', null, null)
+
+insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('System_admin', 'Novi Sad', '23', 21000, 'Srbija', 'Stefana Nemanje', 'joksi1@gmail.com', true, 'Jovana', 'joksi','+381613238249', 'Jakovljevic', 'SYSTEM_ADMINISTRATOR', null, null)
 
 insert into dermatologist_pharmacy(pharmacy_id, dermatologist_id) values (1,1)
 insert into dermatologist_pharmacy(pharmacy_id, dermatologist_id) values (1,2)
@@ -71,26 +69,26 @@ insert into users(dtype, city, number, postalcode, state, street, email, is_firs
 insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Patient', 'Novi Sad', '23', 11444,'Srbija', 'Stefana Nemanje', 'sweetbee0071@gmail.com', true, 'Bole', 'boki','+381613238249', 'Pj', 'PATIENT', 0, null)
 
 
-insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('', '', '', 'MedbayTech', 'PRASAK', 'Brufen', 'NA_RECEPT', '', '', 'ANTIPYRETIC')
-insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('', '', '', 'MedbayTech', 'PRASAK', 'Panklav', 'NA_RECEPT', '', '', 'ANTIPYRETIC')
-insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('', '', '', 'MedbayTech', 'PRASAK', 'Phlebodia', 'NA_RECEPT', '', '', 'ANTIPYRETIC')
-insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('', '', '', 'MedbayTech', 'PRASAK', 'Synthroid', 'NA_RECEPT', '', '', 'ANTIPYRETIC')
-insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('', '', '', 'MedbayTech', 'PRASAK', 'Crestor', 'NA_RECEPT', '', '', 'ANTIPYRETIC')
-insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('', '', '', 'MedbayTech', 'PRASAK', 'Nexium', 'NA_RECEPT', '', '', 'ANTIPYRETIC')
-insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('', '', '', 'MedbayTech', 'PRASAK', 'Abilify', 'NA_RECEPT', '', '', 'ANTIPYRETIC')
-insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('', '', '', 'MedbayTech', 'PRASAK', 'Crestor', 'NA_RECEPT', '', '', 'ANTIPYRETIC')
-insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('', '', '', 'MedbayTech', 'PRASAK', 'Lantus Solostar', 'NA_RECEPT', '', '', 'ANTIPYRETIC')
-insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('', '', '', 'MedbayTech', 'PRASAK', 'Advair Diskus', 'NA_RECEPT', '', '', 'ANTIPYRETIC')
-insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('', '', '', 'MedbayTech', 'PRASAK', 'Remicade', 'NA_RECEPT', '', '', 'ANTIPYRETIC')
-insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('', '', '', 'MedbayTech', 'PRASAK', 'Lisinopril', 'NA_RECEPT', '', '', 'ANTIPYRETIC')
-insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('', '', '', 'MedbayTech', 'PRASAK', 'Levothyroxine', 'NA_RECEPT', '', '', 'ANTIPYRETIC')
-insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('', '', '', 'MedbayTech', 'PRASAK', 'Metoprolol', 'NA_RECEPT', '', '', 'ANTIPYRETIC')
-insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('', '', '', 'MedbayTech', 'PRASAK', 'Omeprazole', 'NA_RECEPT', '', '', 'ANTIPYRETIC')
-insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('', '', '', 'MedbayTech', 'PRASAK', 'Simvastatin', 'NA_RECEPT', '', '', 'ANTIPYRETIC')
-insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('', '', '', 'MedbayTech', 'PRASAK', 'Losartan', 'NA_RECEPT', '', '', 'ANTIPYRETIC')
-insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('', '', '', 'MedbayTech', 'PRASAK', 'Albuterol', 'NA_RECEPT', '', '', 'ANTIPYRETIC')
-insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('', '', '', 'MedbayTech', 'PRASAK', 'Sirup', 'NA_RECEPT', '', '', 'ANTIPYRETIC')
-insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('', '', '', 'MedbayTech', 'PRASAK', 'Panklav2', 'NA_RECEPT', '', '', 'ANTIPYRETIC')
+insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('1002', 'Moguca pojava mucnine.', 'Lek je namenjen za osobe starije od 12god.', 'MedbayTech', 'TABLETA', 'Brufen', 'NA_RECEPT', '3x1', 'Magnezijum-stearat; saharoza; talk', 'ANTIPYRETIC')
+insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('1003', 'Moguca pojava mucnine.', 'Lek nije namenjen za trudnice.', 'MedbayTech', 'PRASAK', 'Panklav', 'BEZ_RECEPTA', '3x1', 'Paracetamol; kofein', 'HORMONE')
+insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('1004', 'Nema.', 'Za decu.', 'IrisPharm', 'KAPSULA', 'Phlebodia', 'BEZ_RECEPTA', '3x1', 'diklofenak-kalijum', 'PROBIOTIC')
+insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('1005', 'Moguca pojava mucnine.', 'Lek je namenjen za osobe starije od 12god.', 'Biopharma', 'PRASAK', 'Synthroid', 'NA_RECEPT', '3x1', 'Magnezijum-stearat; saharoza; talk', 'ANTIPYRETIC')
+insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('1006', 'Moguca pojava mucnine.', 'Lek nije namenjen za trudnice.', 'MedbayTech', 'SIRUP', 'Crestor', 'NA_RECEPT', '3x1', 'diklofenak-kalijum', 'TRANQUILIZER')
+insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('1007', 'Moguca pojava mucnine.', 'Lek je namenjen za osobe starije od 12god.', 'Biopharma', 'TABLETA', 'Nexium', 'NA_RECEPT', '3x1', 'Paracetamol; kofein; saharoza; talk', 'PROBIOTIC')
+insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('1008', 'Nema.', 'Lek nije namenjen za trudnice.', 'MedbayTech', 'KAPSULA', 'Abilify', 'NA_RECEPT', '3x1', 'Magnezijum-stearat; saharoza; talk', 'ANTIPYRETIC')
+insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('1009', 'Nema.', 'Lek je namenjen za osobe starije od 12god.', 'IrisPharm', 'SIRUP', 'Crestor', 'NA_RECEPT', '3x1', 'Magnezijum-stearat; saharoza; talk', 'HORMONE')
+insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('1010', 'Nema.', 'Lek je namenjen za osobe starije od 12god.', 'Biopharma', 'PRASAK', 'Lantus Solostar', 'NA_RECEPT', '3x1', 'Magnezijum-stearat; saharoza; talk', 'TRANQUILIZER')
+insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('1011', 'Moguca pojava mucnine.', 'Lek je namenjen za osobe starije od 12god.', 'IrisPharm', 'PRASAK', 'Advair Diskus', 'NA_RECEPT', '3x1', 'Paracetamol; kofein', 'PROBIOTIC')
+insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('1012', 'Moguca pojava mucnine.', 'Lek je namenjen za osobe starije od 12god.', 'MedbayTech', 'TABLETA', 'Remicade', 'BEZ_RECEPTA', '3x1', 'Magnezijum-stearat; saharoza; talk', 'HORMONE')
+insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('1013', 'Moguca pojava mucnine.', 'Za decu.', 'MedbayTech', 'KAPSULA', 'Lisinopril', 'NA_RECEPT', '3x1', 'Magnezijum-stearat; saharoza; talk', 'ANTIPYRETIC')
+insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('1014', 'Moguca pojava mucnine.', 'Lek je namenjen za osobe starije od 12god.', 'IrisPharm', 'PRASAK', 'Levothyroxine', 'NA_RECEPT', '3x1', 'Paracetamol; kofein', 'ANTIPYRETIC')
+insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('1015', 'Moguca pojava mucnine.', 'Lek je namenjen za osobe starije od 12god.', 'MedbayTech', 'SIRUP', 'Metoprolol', 'BEZ_RECEPTA', '3x1', 'Magnezijum-stearat', 'HORMONE')
+insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('1016', 'Moguca pojava mucnine.', 'Za decu.', 'MedbayTech', 'PRASAK', 'Omeprazole', 'NA_RECEPT', '3x1', 'diklofenak-kalijum', 'PROBIOTIC')
+insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('1017', 'Moguca pojava mucnine.', 'Lek je namenjen za osobe starije od 12god.', 'Biopharma', 'TABLETA', 'Simvastatin', 'NA_RECEPT', '3x1', 'diklofenak-kalijum', 'TRANQUILIZER')
+insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('1018', 'Moguca pojava mucnine.', 'Lek je namenjen za osobe starije od 12god.', 'MedbayTech', 'KAPSULA', 'Losartan', 'BEZ_RECEPTA', '3x1', 'Paracetamol; kofein', 'HORMONE')
+insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('1019', 'Moguca pojava mucnine.', 'Za decu.', 'Biopharma', 'TABLETA', 'Albuterol', 'NA_RECEPT', '3x1', 'Paracetamol; kofein', 'ANTIPYRETIC')
+insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('1020', 'Moguca pojava mucnine.', 'Lek je namenjen za osobe starije od 12god.', 'MedbayTech', 'PRASAK', 'Sirup', 'BEZ_RECEPTA', '3x1', 'Magnezijum-stearat; saharoza; talk', 'PROBIOTIC')
+insert into medications (code, contraindications, description, manufacturer, medication_form, name, prescription_regime, recommended_intake, structure, medication_type) values ('1021', 'Moguca pojava mucnine.', 'Lek je namenjen za osobe starije od 12god.', 'IrisPharm', 'SIRUP', 'Panklav2', 'NA_RECEPT', '3x1', 'diklofenak-kalijum', 'TRANQUILIZER')
 
 
 insert into medication_quantity (quantity, medication_id,pharmacy_id) values (10, 1,1)
@@ -128,11 +126,6 @@ insert into medication_quantity (quantity, medication_id,pharmacy_id) values (10
 insert into medication_quantity (quantity, medication_id,pharmacy_id) values (10, 3,4)
 
 
-
-insert into patient_allerged_on_medications(patient_id, medication_id) values (21, 1)
-insert into patient_allerged_on_medications(patient_id, medication_id) values (21, 2)
-insert into patient_allerged_on_medications(patient_id, medication_id) values (21, 3)
-insert into patient_allerged_on_medications(patient_id, medication_id) values (21, 4)
 insert into patient_allerged_on_medications(patient_id, medication_id) values (22, 5)
 insert into patient_allerged_on_medications(patient_id, medication_id) values (22, 6)
 insert into patient_allerged_on_medications(patient_id, medication_id) values (22, 7)
@@ -369,50 +362,60 @@ insert into medications_replacement_medications (medication_id, replacement_medi
 --insert into replacement_medications (medication_id, replacement_medication_id) values (19,18)
 --insert into replacement_medications (medication_id, replacement_medication_id) values (19,5)
 
-insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-06-30 00:00:00-08', '2021-06-01 00:00:00-08', 1,21,1)
 insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1315', '2021-06-30 00:00:00-08', '2021-06-01 00:00:00-08', 2,22,1)
 insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1245', '2021-06-09 00:00:00-08', '2021-06-03 00:00:00-08', 3,23,1)
 insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1465', '2021-06-05 00:00:00-08', '2021-06-03 00:00:00-08', 4,24,1)
 insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (false, 'SN1465', '2021-06-05 00:00:00-08', '2021-06-03 00:00:00-08', 6,24,1)
 
-insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-08-01 00:00:00-08', '2021-09-01 00:00:00-08', 1,21,2)
-insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-08-01 00:00:00-08', '2021-09-01 00:00:00-08', 1,21,3)
-insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-08-01 00:00:00-08', '2021-09-01 00:00:00-08', 1,21,4)
+insert into workdays (endtime, starttime, user_id) values ('2021-06-13 14:00:00-08', '2021-06-13 07:00:00-08', 1)
+insert into workdays (endtime, starttime, user_id) values ('2021-06-14 14:00:00-08', '2021-06-14 07:00:00-08', 1)
+insert into workdays (endtime, starttime, user_id) values ('2021-06-15 14:00:00-08', '2021-06-15 07:00:00-08', 1)
+insert into workdays (endtime, starttime, user_id) values ('2021-06-16 14:00:00-08', '2021-06-16 07:00:00-08', 1)
+insert into workdays (endtime, starttime, user_id) values ('2021-06-17 14:00:00-08', '2021-06-17 07:00:00-08', 1)
+insert into workdays (endtime, starttime, user_id) values ('2021-06-18 22:00:00-08', '2021-06-18 14:00:00-08', 1)
+insert into workdays (endtime, starttime, user_id) values ('2021-06-19 22:00:00-08', '2021-06-19 14:00:00-08', 1)
+insert into workdays (endtime, starttime, user_id) values ('2021-06-20 22:00:00-08', '2021-06-20 14:00:00-08', 1)
+insert into workdays (endtime, starttime, user_id) values ('2021-06-21 22:00:00-08', '2021-06-21 14:00:00-08', 1)
+insert into workdays (endtime, starttime, user_id) values ('2021-06-22 22:00:00-08', '2021-06-22 14:00:00-08', 1)
+insert into workdays (endtime, starttime, user_id) values ('2021-07-13 14:00:00-08', '2021-07-13 07:00:00-08', 1)
 
+insert into workdays (endtime, starttime, user_id) values ('2021-06-13 14:00:00-08', '2021-06-13 07:00:00-08', 11)
+insert into workdays (endtime, starttime, user_id) values ('2021-06-14 14:00:00-08', '2021-06-14 07:00:00-08', 11)
+insert into workdays (endtime, starttime, user_id) values ('2021-06-15 14:00:00-08', '2021-06-15 07:00:00-08', 11)
+insert into workdays (endtime, starttime, user_id) values ('2021-06-16 14:00:00-08', '2021-06-16 07:00:00-08', 11)
+insert into workdays (endtime, starttime, user_id) values ('2021-06-17 14:00:00-08', '2021-06-17 07:00:00-08', 11)
+insert into workdays (endtime, starttime, user_id) values ('2021-06-18 22:00:00-08', '2021-06-18 14:00:00-08', 11)
+insert into workdays (endtime, starttime, user_id) values ('2021-06-19 22:00:00-08', '2021-06-19 14:00:00-08', 11)
+insert into workdays (endtime, starttime, user_id) values ('2021-06-20 22:00:00-08', '2021-06-20 14:00:00-08', 11)
+insert into workdays (endtime, starttime, user_id) values ('2021-06-21 22:00:00-08', '2021-06-21 14:00:00-08', 11)
+insert into workdays (endtime, starttime, user_id) values ('2021-06-22 22:00:00-08', '2021-06-22 14:00:00-08', 11)
+insert into workdays (endtime, starttime, user_id) values ('2021-07-13 14:00:00-08', '2021-07-13 07:00:00-08', 11)
 
-insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-02-01 00:00:00-08', '2021-02-01 00:00:00-08', 1,21,2)
-insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-02-01 00:00:00-08', '2021-02-01 00:00:00-08', 1,21,3)
-insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-02-01 00:00:00-08', '2021-02-01 00:00:00-08', 1,21,4)
+--insert into workdays (endtime, starttime, user_id) values ('2021-06-13 07:00:00-08', '2021-06-13 14:00:00-08', 11)
+--insert into workdays (endtime, starttime, user_id) values ('2021-06-13 07:00:00-08', '2021-06-13 14:00:00-08', 12)
+--insert into workdays (endtime, starttime, user_id) values ('2021-06-13 07:00:00-08', '2021-06-13 14:00:00-08', 13)
+--insert into workdays (endtime, starttime, user_id) values ('2021-06-13 07:00:00-08', '2021-06-13 14:00:00-08', 14)
+--insert into workdays (endtime, starttime, user_id) values ('2021-06-13 07:00:00-08', '2021-06-13 14:00:00-08', 15)
+--insert into workdays (endtime, starttime, user_id) values ('2021-06-13 14:00:00-08', '2021-06-13 22:00:00-08', 16)
+--insert into workdays (endtime, starttime, user_id) values ('2021-06-13 14:00:00-08', '2021-06-13 22:00:00-08', 17)
+--insert into workdays (endtime, starttime, user_id) values ('2021-06-13 14:00:00-08', '2021-06-13 22:00:00-08', 18)
+--insert into workdays (endtime, starttime, user_id) values ('2021-06-13 14:00:00-08', '2021-06-13 22:00:00-08', 19)
+--insert into workdays (endtime, starttime, user_id) values ('2021-06-13 14:00:00-08', '2021-06-13 22:00:00-08', 20)
 
+insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-08-01 00:00:00-08', '2021-08-01 00:00:00-08', 1,22,2)
+insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-08-01 00:00:00-08', '2021-08-01 00:00:00-08', 1,22,3)
+insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-08-01 00:00:00-08', '2021-08-01 00:00:00-08', 1,22,4)
 
-insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-07-01 00:00:00-08', '2021-07-01 00:00:00-08', 1,21,2)
-insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-07-01 00:00:00-08', '2021-07-01 00:00:00-08', 1,21,3)
-insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-07-01 00:00:00-08', '2021-07-01 00:00:00-08', 1,21,4)
+insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-09-01 00:00:00-08', '2021-09-01 00:00:00-08', 1,22,2)
+insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-09-01 00:00:00-08', '2021-09-01 00:00:00-08', 1,22,3)
+insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-09-01 00:00:00-08', '2021-09-01 00:00:00-08', 1,22,4)
 
-insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-07-01 00:00:00-08', '2021-07-01 00:00:00-08', 1,21,2)
-
-
-insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-07-01 00:00:00-08', '2021-07-01 00:00:00-08', 1,21,3)
-
-
-insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-07-01 00:00:00-08', '2021-07-01 00:00:00-08', 1,21,4)
-
-insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-08-01 00:00:00-08', '2021-08-01 00:00:00-08', 1,21,2)
-insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-08-01 00:00:00-08', '2021-08-01 00:00:00-08', 1,21,3)
-insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-08-01 00:00:00-08', '2021-08-01 00:00:00-08', 1,21,4)
-
-insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-09-01 00:00:00-08', '2021-09-01 00:00:00-08', 1,21,2)
-insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-09-01 00:00:00-08', '2021-09-01 00:00:00-08', 1,21,3)
-insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-09-01 00:00:00-08', '2021-09-01 00:00:00-08', 1,21,4)
-
-insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-02-01 00:00:00-08', '2021-02-01 00:00:00-08', 1,21,2)
-insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-02-01 00:00:00-08', '2021-02-01 00:00:00-08', 1,21,3)
-insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-02-01 00:00:00-08', '2021-02-01 00:00:00-08', 1,21,4)
-insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-07-01 00:00:00-08', '2021-07-01 00:00:00-08', 1,21,2)
-insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-07-01 00:00:00-08', '2021-07-01 00:00:00-08', 1,21,3)
-insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-07-01 00:00:00-08', '2021-07-01 00:00:00-08', 1,21,4)
-
-
+insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-02-01 00:00:00-08', '2021-02-01 00:00:00-08', 1,22,2)
+insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-02-01 00:00:00-08', '2021-02-01 00:00:00-08', 1,22,3)
+insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-02-01 00:00:00-08', '2021-02-01 00:00:00-08', 1,22,4)
+insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-07-01 00:00:00-08', '2021-07-01 00:00:00-08', 1,22,2)
+insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-07-01 00:00:00-08', '2021-07-01 00:00:00-08', 1,22,3)
+insert into reservations (is_done, serialnumber, endtime, starttime, medication_id, patient_id, pharmacy_id) values (true, 'SN1345', '2021-07-01 00:00:00-08', '2021-07-01 00:00:00-08', 1,22,4)
 
 insert into workdays (endtime, starttime, user_id) values ('2021-06-13 14:00:00-08', '2021-06-13 07:00:00-08', 1)
 insert into workdays (endtime, starttime, user_id) values ('2021-06-14 14:00:00-08', '2021-06-14 07:00:00-08', 1)
@@ -450,48 +453,10 @@ insert into workdays (endtime, starttime, user_id) values ('2021-07-13 14:00:00-
 --insert into workdays (endtime, starttime, user_id) values ('2021-06-13 14:00:00-08', '2021-06-13 22:00:00-08', 20)
 
 
-
-insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (false, true, '2021-06-13 10:00:00-08', '2021-06-13 09:30:00-08', '', 1, 21, 1)
-insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (true, true, '2021-05-13 10:00:00-08', '2021-05-13 09:30:00-08', '', 1, 21, 1)
-insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (true, true, '2021-05-13 10:00:00-08', '2021-05-13 09:30:00-08', '', 10, 21, 4)
-insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (true, true, '2021-04-13 10:00:00-08', '2021-04-13 09:30:00-08', '', 1, 21, 1)
-insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (false, true, '2021-06-13 10:30:00-08', '2021-06-13 10:00:00-08', '', 1, 22, 1)
-insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (false, true, '2021-06-13 11:00:00-08', '2021-06-13 10:30:00-08', '', 1, 23, 1)
-insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (false, true, '2021-06-13 11:30:00-08', '2021-06-13 11:00:00-08', '', 1, 24, 1)
 insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (false, true, '2021-06-13 12:00:00-08', '2021-06-13 11:30:00-08', '', 1, 25, 1)
 insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (false, true, '2021-06-13 12:30:00-08', '2021-06-13 12:00:00-08', '', 1, 26, 1)
 insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (false, true, '2021-06-13 13:00:00-08', '2021-06-13 12:30:00-08', '', 1, 27, 1)
 insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (true, true, '2021-01-13 13:00:00-08', '2021-01-13 12:30:00-08', '', 2, 27, 1)
-insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (false, true, '2021-06-13 13:30:00-08', '2021-06-13 13:00:00-08', '', 1, 21, 1)
-
-
-
-insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (true, true, '2021-04-13 13:30:00-08', '2021-04-13 13:00:00-08', '', 1, 21, 1)
-insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (true, true, '2021-05-10 13:30:00-08', '2021-05-10 13:00:00-08', '', 1, 21, 1)
-insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (true, true, '2021-06-10 13:30:00-08', '2021-06-10 13:00:00-08', '', 1, 21, 1)
-
-
-insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (true, true, '2021-02-13 13:30:00-08', '2021-02-13 13:00:00-08', '', 1, 21, 1)
-insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (true, true, '2021-03-10 13:30:00-08', '2021-03-10 13:00:00-08', '', 1, 21, 1)
-insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (true, true, '2021-04-10 13:30:00-08', '2021-04-10 13:00:00-08', '', 1, 21, 1)
-
-
-insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (true, true, '2021-05-13 13:30:00-08', '2021-05-13 13:00:00-08', '', 1, 21, 1)
-insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (true, true, '2021-06-12 13:30:00-08', '2021-06-12 13:00:00-08', '', 1, 21, 1)
-insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (true, true, '2021-09-10 13:30:00-08', '2021-09-10 13:00:00-08', '', 1, 21, 1)
-
-
-insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (true, true, '2021-04-13 13:30:00-08', '2021-04-13 13:00:00-08', '', 2, 21, 2)
-insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (true, true, '2021-05-10 13:30:00-08', '2021-05-10 13:00:00-08', '', 2, 21, 2)
-insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (true, true, '2021-06-10 13:30:00-08', '2021-06-10 13:00:00-08', '', 2, 21, 2)
-
-insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (true, true, '2021-04-13 13:30:00-08', '2021-04-13 13:00:00-08', '', 7, 21, 3)
-insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (true, true, '2021-05-10 13:30:00-08', '2021-05-10 13:00:00-08', '', 7, 21, 3)
-insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (true, true, '2021-06-10 13:30:00-08', '2021-06-10 13:00:00-08', '', 7, 21, 3)
-
-
-
-
 
 insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (false, false, '2021-06-13 10:00:00-08', '2021-06-13 09:30:00-08', '', null, null, 1)
 insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (false, false, '2021-06-13 10:30:00-08', '2021-06-13 10:00:00-08', '', null, null, 1)
@@ -503,17 +468,15 @@ insert into appointments (is_finished, is_taken, endtime, starttime, report, der
 insert into appointments (is_finished, is_taken, endtime, starttime, report, dermatologist_id, patient_id, pharmacy_id) values (false, false, '2021-08-13 13:30:00-08', '2021-08-13 13:00:00-08', '', null, null, 1)
 
 
-
-
-insert into consultations (is_finished, is_taken, endtime, starttime, report, patient_id, pharmacist_id, pharmacy_id) values (false, false, '2021-06-13 10:00:00-08', '2021-06-13 09:30:00-08', '', 22, 11, 1)
-insert into consultations (is_finished, is_taken, endtime, starttime, report, patient_id, pharmacist_id, pharmacy_id) values (false, false, '2021-06-13 10:30:00-08', '2021-06-13 10:00:00-08', '', 23, 11, 1)
-insert into consultations (is_finished, is_taken, endtime, starttime, report, patient_id, pharmacist_id, pharmacy_id) values (false, false, '2021-06-13 11:00:00-08', '2021-06-13 10:30:00-08', '', 24, 11, 1)
-insert into consultations (is_finished, is_taken, endtime, starttime, report, patient_id, pharmacist_id, pharmacy_id) values (false, false, '2021-06-13 11:30:00-08', '2021-06-13 11:00:00-08', '', 25, 11, 1)
-insert into consultations (is_finished, is_taken, endtime, starttime, report, patient_id, pharmacist_id, pharmacy_id) values (false, false, '2021-06-13 12:00:00-08', '2021-06-13 11:30:00-08', '', 26, 11, 1)
-insert into consultations (is_finished, is_taken, endtime, starttime, report, patient_id, pharmacist_id, pharmacy_id) values (false, false, '2021-06-13 12:30:00-08', '2021-06-13 12:00:00-08', '', 27, 11, 1)
-insert into consultations (is_finished, is_taken, endtime, starttime, report, patient_id, pharmacist_id, pharmacy_id) values (false, false, '2021-06-13 13:00:00-08', '2021-06-13 12:30:00-08', '', 28, 11, 1)
-insert into consultations (is_finished, is_taken, endtime, starttime, report, patient_id, pharmacist_id, pharmacy_id) values (false, false, '2021-06-13 13:30:00-08', '2021-06-13 13:00:00-08', '', 29, 11, 1)
-insert into consultations (is_finished, is_taken, endtime, starttime, report, patient_id, pharmacist_id, pharmacy_id) values (false, false, '2021-06-13 14:00:00-08', '2021-06-13 13:30:00-08', '', 22, 11, 1)
+insert into consultations (is_finished, is_taken, endtime, starttime, report, patient_id, pharmacist_id, pharmacy_id) values (false, false, '2021-06-13 10:00:00-08', '2021-06-13 09:30:00-08', '', 22, 12, 1)
+insert into consultations (is_finished, is_taken, endtime, starttime, report, patient_id, pharmacist_id, pharmacy_id) values (false, false, '2021-06-13 10:30:00-08', '2021-06-13 10:00:00-08', '', 23, 12, 1)
+insert into consultations (is_finished, is_taken, endtime, starttime, report, patient_id, pharmacist_id, pharmacy_id) values (false, false, '2021-06-13 11:00:00-08', '2021-06-13 10:30:00-08', '', 24, 12, 1)
+insert into consultations (is_finished, is_taken, endtime, starttime, report, patient_id, pharmacist_id, pharmacy_id) values (false, false, '2021-06-13 11:30:00-08', '2021-06-13 11:00:00-08', '', 25, 12, 1)
+insert into consultations (is_finished, is_taken, endtime, starttime, report, patient_id, pharmacist_id, pharmacy_id) values (false, false, '2021-06-13 12:00:00-08', '2021-06-13 11:30:00-08', '', 26, 12, 1)
+insert into consultations (is_finished, is_taken, endtime, starttime, report, patient_id, pharmacist_id, pharmacy_id) values (false, false, '2021-06-13 12:30:00-08', '2021-06-13 12:00:00-08', '', 27, 12, 1)
+insert into consultations (is_finished, is_taken, endtime, starttime, report, patient_id, pharmacist_id, pharmacy_id) values (false, false, '2021-06-13 13:00:00-08', '2021-06-13 12:30:00-08', '', 28, 12, 1)
+insert into consultations (is_finished, is_taken, endtime, starttime, report, patient_id, pharmacist_id, pharmacy_id) values (false, false, '2021-06-13 13:30:00-08', '2021-06-13 13:00:00-08', '', 29, 12, 1)
+insert into consultations (is_finished, is_taken, endtime, starttime, report, patient_id, pharmacist_id, pharmacy_id) values (false, false, '2021-06-13 14:00:00-08', '2021-06-13 13:30:00-08', '', 22, 12, 1)
 
 
 insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Pharmacy_admin', 'Novi Sad', '23', 21242, 'Srbija', 'Stefana Nemanje1', 'pjevalica@gmail.com', true, 'Bojana', 'bobi','+381613238240', 'Pjevalica', 'PHARMACY_ADMINISTRATOR', null, 1)
@@ -521,12 +484,10 @@ insert into users(dtype, city, number, postalcode, state, street, email, is_firs
 insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Pharmacy_admin', 'Novi Sad', '23', 21249, 'Srbija', 'Stefana Nemanje1', 'jovan@gmail.com', true, 'Jovan', 'admin','+381613238243', 'Jovic', 'PHARMACY_ADMINISTRATOR', null, 1)
 
 insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('System_admin', 'Novi Sad', '1', 21000, 'Srbija', 'Dragomira Radukina', 'joksi1@gmail.com', true, 'Jovana', 'joksi','+381613238240', 'Jakovljevic', 'SYSTEM_ADMINISTRATOR', null, 1)
-insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('System_admin', 'Novi Sad', '2', 21000, 'Srbija', 'Dragomira Radukina', 'joksi2@gmail.com', true, 'Jana', 'joksi','+381613238249', 'Jovic', 'SYSTEM_ADMINISTRATOR', null, 1)
-insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('System_admin', 'Novi Sad', '3', 21000, 'Srbija', 'Dragomira Radukina', 'joksi3@gmail.com', true, 'Janko', 'joksi','+381613238243', 'Janjic', 'SYSTEM_ADMINISTRATOR', null, 1)
 
-insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Supplier', 'Novi Sad', '1', 21000, 'Srbija', 'Dragomira Radukina', 'joksi4@gmail.com', true, 'Jovana', 'joksi','+381613238240', 'Jakovljevic', 'SUPPLIER', null, 1)
-insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Supplier', 'Novi Sad', '2', 21000, 'Srbija', 'Dragomira Radukina', 'joksi5@gmail.com', true, 'Jana', 'joksi','+381613238249', 'Jovic', 'SUPPLIER', null, 2)
-insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Supplier', 'Novi Sad', '3', 21000, 'Srbija', 'Dragomira Radukina', 'joksi6@gmail.com', true, 'Janko', 'joksi','+381613238243', 'Janjic', 'SUPPLIER', null, 3)
+insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Supplier', 'Novi Sad', '1', 21000, 'Srbija', 'Dragomira Radukina', 'joksi2@gmail.com', true, 'Jovana', 'joksi','+381613238240', 'Jakovljevic', 'SUPPLIER', null, 1)
+insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Supplier', 'Novi Sad', '2', 21000, 'Srbija', 'Dragomira Radukina', 'joksi3@gmail.com', true, 'Jana', 'joksi','+381613238249', 'Jovic', 'SUPPLIER', null, 2)
+insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id) values ('Supplier', 'Novi Sad', '3', 21000, 'Srbija', 'Dragomira Radukina', 'joksi4@gmail.com', true, 'Janko', 'joksi','+381613238243', 'Janjic', 'SUPPLIER', null, 3)
 
 insert into pharmacies_subscribers(pharmacy_id,subscribers_id) values(1,41)
 insert into absences( endtime,is_approved,is_finished, starttime,type,pharmacy_id ,user_id) values ( '2021-08-08',true, false, '2021-11-08','APPROVED', 1,11)
@@ -539,7 +500,7 @@ insert into absences( endtime,is_approved,is_finished, starttime,type,pharmacy_i
 insert into absences( endtime,is_approved,is_finished, starttime,type,pharmacy_id ,user_id) values ( '2021-08-08',false, false, '2021-08-08','PROCESSING',4,20)
 
 
-insert into purchase_order_list(endtime,purchase_status,starttime,pharmacy_administrator_id,pharmacy_id) values('2021-08-08','CEKA_PONUDE','2021-01-01',42,1)
+insert into purchase_order_list(endtime,purchase_status,starttime,pharmacy_administrator_id,pharmacy_id) values('2021-08-08','CEKA_PONUDE','2021-01-01',43,1)
 insert into medication_quantity_of_purchase_order(quantity,medication_id) values (10,1)
 insert into purchase_order_list_quantity_medications_purchase(purchase_order_id,quantity_medications_purchase_id) values(1,1)
 
@@ -618,10 +579,6 @@ insert into dermatologist_rating(rating,dermatologist_id,patient_id) values (4,9
 insert into dermatologist_rating(rating,dermatologist_id,patient_id) values (3,9,24)
 insert into dermatologist_rating(rating,dermatologist_id,patient_id) values (5,10,24)
 
-
-insert into pharmacist_ratings(rating,patient_id,pharmacist_id) values(5,24,11)
-
-insert into pharmacist_ratings(rating,patient_id,pharmacist_id) values(4,24,11)
 insert into pharmacist_ratings(rating,patient_id,pharmacist_id) values(5,24,12)
 insert into pharmacist_ratings(rating,patient_id,pharmacist_id) values(3,24,12)
 insert into pharmacist_ratings(rating,patient_id,pharmacist_id) values(5,24,13)
@@ -643,9 +600,11 @@ insert into pharmacy_rating(rating,patient_id,pharmacy_id) values (5,25,2)
 
 insert into loyalty_program(bodovi, naziv, popust) values (30, 'Neki naziv', 23.4)
 
-insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id, loyalty_type_id, points) values ('Patient', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic21@gmail.com', true, 'Nikola', 'kinzo','+381613238249', 'Antonic', 'PATIENT', 0, null, 1, 5) 
+insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id, loyalty_type_id, points) values ('Patient', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic51@gmail.com', true, 'Nikola', 'kinzo','+381613238249', 'Antonic', 'PATIENT', 0, null, 1, 5) 
 
-insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id, loyalty_type_id, points) values ('Patient', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic21@gmail.com', true, 'Milos', 'kinzo','+381613238249', 'Antonic', 'PATIENT', 0, null, 1, 40) 
+insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id, loyalty_type_id, points) values ('Patient', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic52@gmail.com', true, 'Milos', 'kinzo','+381613238249', 'Antonic', 'PATIENT', 0, null, 1, 40) 
+
+insert into complaints(reply, text, patient_id, system_admin_id) values('', 'Prva zalba', 41, null)
 
 --insert into loyalty_category(type, min_points) values ('REGULAR', 10)
 --insert into loyalty_category(type, min_points) values ('SILVER', 20)
