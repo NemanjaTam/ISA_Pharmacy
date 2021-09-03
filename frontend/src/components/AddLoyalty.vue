@@ -133,35 +133,18 @@ export default {
     };
   },
   methods: {
-    onSubmit(event) {
-      event.preventDefault();
-      const replacementMedicationsStr = this.medication.replacementMedicationsIDs.split(",");
-      const replacementMedications = replacementMedicationsStr.map(rm => +rm);
-      const medicationForSend = {
-              name: this.medication.name,
-              code: this.medication.code,
-              typeOfMedication: this.medication.typeOfMedication,
-              prescriptionRegime: this.medication.prescriptionRegime,
-              structure: this.medication.structure,
-              contraindications: this.medication.contraindications,
-              recommendedIntake: this.medication.recommendedIntake,
-              medicationForm: this.medication.medicationForm,
-              manufacturer: this.medication.manufacturer,
-              replacementMedicationsIDs: replacementMedications,
-              description: this.medication.description
-              };
-      axios.post("http://localhost:9005/api/medication/add", medicationForSend).then(res => {
-        console.log(res);
-         this.$store.dispatch('setMedications', res);
-      });
-      this.$router.push({path:'medications'})
-     },
-     addType() {
+    addType() {
          console.log(parseInt(this.loyalty.bodovi) + " " + this.loyalty.naziv);
          axios.post("http://localhost:9005/api/loyaltyCategory/add", this.loyalty)
          .then(res => {
              console.log(res);
          })
+         this.loyalty = {
+              bodovi:0,
+              naziv:"",
+              popust:0.0
+         }
+         alert("Loyalty is successfully added!")
      }
     
   }, 
