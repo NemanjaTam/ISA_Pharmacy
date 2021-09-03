@@ -627,6 +627,8 @@ insert into users(dtype, city, number, postalcode, state, street, email, is_firs
 
 insert into users(dtype, city, number, postalcode, state, street, email, is_first_time_logging, name, password, phone, surname, usertype, penalties, pharmacy_id, loyalty_type_id, points) values ('Patient', 'Novi Sad', '23', 21241, 'Srbija', 'Stefana Nemanje', 'antonic21@gmail.com', true, 'Milos', 'kinzo','+381613238249', 'Antonic', 'PATIENT', 0, null, 1, 40) 
 
+insert into complaints(reply, text, patient_id, system_admin_id) values('', 'Prva zalba', 41, null)
+
 --insert into loyalty_category(type, min_points) values ('REGULAR', 10)
 --insert into loyalty_category(type, min_points) values ('SILVER', 20)
 --insert into loyalty_category(type, min_points) values ('GOLD', 30)

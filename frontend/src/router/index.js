@@ -40,7 +40,11 @@ import RegistrationSupplier from "../components/RegistrationSupplier.vue"
 import RegistrationSystemAdmin from "../components/RegistrationSystemAdmin.vue"
 import AddPharmacy from "../components/AddPharmacy.vue"
 import Pharmacies from "../views/Pharmacies.vue"
-import EditAdmin from "../components/EditAdmin.vue"
+import ComplaintsListUser from "../components/ComplaintsListUser.vue"
+import ComplaintsListAdmin from "../components/ComplaintsListAdmin.vue"
+import OneComplaintUser from "../components/OneComplaintUser.vue"
+import OneComplaintAdmin from "../components/OneComplaintAdmin.vue"
+import SendComplaint from "../components/SendComplaint.vue"
 
 Vue.use(VueRouter);
 
@@ -240,7 +244,32 @@ const routes = [{
         path: '/pharmacies',
         name: 'Pharmacies',
         component: Pharmacies
-      }
+      },
+      {
+        path: "/oneComplaint/:id",
+        name: "OneComplaintUser",
+        component: OneComplaintUser,
+    },
+    {
+        path: "/oneComplaintAdmin/:id",
+        name: "OneComplaintAdmin",
+        component: OneComplaintAdmin,
+    },
+    {
+        path: "/sendComplaint",
+        name: "SendComplaint",
+        component: SendComplaint,
+    },
+    {
+        path: "/complaintsUser",
+        name: "ComplaintsListUser",
+        component: ComplaintsListUser,
+    },
+    {
+        path: "/complaintsAdmin",
+        name: "ComplaintsListAdmin",
+        component: ComplaintsListAdmin,
+    },
 
 ];
 

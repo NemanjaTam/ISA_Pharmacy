@@ -33,7 +33,7 @@
                         </b-nav-item>
 
                         <b-nav-item>
-                           <router-link to="" v-if="userType == 'SYSTEM_ADMINISTRATOR'" class="routerlink">Complaints</router-link>
+                           <router-link to="/complaintsAdmin" v-if="userType == 'SYSTEM_ADMINISTRATOR'" class="routerlink">Complaints</router-link>
                         </b-nav-item>
 
                 </b-navbar-nav>
