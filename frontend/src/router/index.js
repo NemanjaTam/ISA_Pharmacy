@@ -270,7 +270,7 @@ const routes = [{
         name: "OrderId",
         component: OrderId
     },
-
+    {
         path: "/oneComplaint/:id",
         name: "OneComplaintUser",
         component: OneComplaintUser,

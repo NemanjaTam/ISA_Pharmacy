@@ -21,7 +21,6 @@
                           <b-form-input type="text" v-model="user.address.city" placeholder="enter city" style="font-style:italic" required/>
                           <b-form-input type="text" v-model="user.address.postalCode" placeholder="enter postal code" style="font-style:italic" required/>
                           <b-form-input type="text" v-model="user.address.street" placeholder="enter street" style="font-style:italic" required/>
-                          <b-form-input type="text" v-model="user.address.state" placeholder="enter state" style="font-style:italic" required/>
                           <b-form-input type="text" v-model="user.address.number" placeholder="enter number of house/building" style="font-style:italic" required/>
                           <b-form-input type="text" v-model="user.phone" placeholder="enter phone number" style="font-style:italic" required/>
                           <input type="submit" @click="onSubmit" style="color: white" name="" value="Register" href="#">
@@ -78,8 +77,8 @@ export default {
             alert("User with same email already exists!")
           }
         }
-      )
-
+      );
+      
     },
     onReset(event) {
       event.preventDefault();
