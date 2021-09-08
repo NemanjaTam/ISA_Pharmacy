@@ -19,12 +19,6 @@ Za testiranje pacijenta, logujte se pomocu antonic21@gmail.com i sifre kinzo.
 Za testiranje dobavljaca, logujte se pomocu joksi2@gmail.com i sifre joksi.
 Duplim klikom na odredjenu narudzbenicu otvara se stranica za pravljenje nove ponude. Dobavljac moze da vidi sve ponude koje je dao, kao i da ih filtrira po statusu.
 
-Nisam stigla sve u potpunosti da zavrsim, bila sam bolesna i planovi su mi se totalno poremetili. Ovo je jedan od dva poslednja ispita koja su mi ostala do kraja studiranja..
-
-Nadam se da cete uvaziti moje razloge.
-
-Srdacno, Jovana Jakovljevic
-
 # Nikola Antonic
 
 If you want to test dermatologist login with antonic1@gmail.com/kinzo
